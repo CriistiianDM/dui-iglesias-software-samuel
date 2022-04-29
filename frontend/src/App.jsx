@@ -6,6 +6,8 @@ import {
   Route
 } from 'react-router-dom';
 
+
+
 //librery or import of components
 import { Home } from './components/pages/Home';
 
@@ -13,7 +15,7 @@ import { Home } from './components/pages/Home';
 //librery or import of styles of css
 import home_style from './css/home_style.css';
 
-
+import json from './json/state_components.json';
 
 
 /**
@@ -28,7 +30,7 @@ export function App() {
 
     <Router basename='/dui-iglesias-software-samuel'>
       <Routes>
-        <Route path="/" element={<Home />}></Route>
+        <Route path="/" element={<Home properties={json} />} />
       </Routes>
     </Router>
 
