@@ -1,5 +1,7 @@
+//libreary or imports
 import React from "react";
-
+import { Button } from '@material-ui/core';
+import header_home from '../../css/header_home.css'
 
 /**
   *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
@@ -13,7 +15,7 @@ export function Header(props) {
         <>
 
          <header className={state_header['cls-1']}>
-             Hola mundo y sebastian
+             <Button> click </Button>
          </header>
 
         </>
