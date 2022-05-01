@@ -1,17 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+/**
+ *  @decs import libs
+*/
+ import React from 'react';
+ import { App } from './App.jsx';
+ import { createRoot } from 'react-dom/client';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+/**
+  *  @author : juan sebastian camino <juan.camino@correounivalle.edu.co>
+  *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
+  *  @decs render the app
+*/
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+ // create container
+ const container = document.getElementById('root');
+
+ // create root
+ const root = createRoot(container);
+
+ // render app 
+ root.render(<App />);
+
+
+
