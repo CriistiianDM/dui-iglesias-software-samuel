@@ -33,7 +33,9 @@
             "cls-3": "logo-iglesia-box",
             "cls-4": "conteiner-textBox",
             "cls-5": "textBox1",
-            "cls-6": "textBox2"
+            "cls-6": "textBox2",
+            "cls-7": "textBox3",
+            "cls-8": "textBox4"
         }
     }
 
