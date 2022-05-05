@@ -25,5 +25,18 @@
         "1": {
             "cls-1": ""
         }
+    },
+    "state_login":{
+        "0":{
+            "cls-1": "box-header-login-element",
+            "cls-2": "box-img-element",
+            "cls-3": "logo-iglesia-box",
+            "cls-4": "conteiner-textBox",
+            "cls-5": "textBox1",
+            "cls-6": "textBox2",
+            "cls-7": "textBox3",
+            "cls-8": "textBox4"
+        }
     }
+
 }
