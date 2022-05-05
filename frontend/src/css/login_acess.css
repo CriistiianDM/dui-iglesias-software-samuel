@@ -1,0 +1,30 @@
+
+.box-login-element {
+    display: grid;
+    grid-auto-rows: minmax(15em, auto);
+    gap: 0.5em;
+    grid-template-columns: repeat(auto-fit, minmax( min(100%, 15em), 1fr)); 
+    width: 100%;
+    height: auto;
+    background-color: transparent;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.219);
+    overflow: hidden;
+    z-index: 3;
+}
+
+
+.box-circle-element {
+    justify-self: center;
+    align-self: center;
+    display: grid;
+    grid-template-rows: 100%;
+    grid-template-columns: 100%;
+    width: 13.5em;
+    height: 13.5em;
+    background-color: rgb(175, 169, 169);
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.5);
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    overflow: hidden;
+}
