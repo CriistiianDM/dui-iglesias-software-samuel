@@ -5,9 +5,6 @@
     grid-gap: 0.5em;
     grid-auto-flow: dense;
     grid-template-columns: repeat(auto-fit, minmax( min(100%, 15em), 1fr));
-    position: absolute;
-    bottom: 0;
-    right: 0;
     width: 100%;
     height: auto;
     background:  linear-gradient(70deg, rgb(255, 255, 255), rgb(0, 51, 141,1));
