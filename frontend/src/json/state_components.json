@@ -10,7 +10,10 @@
             
         },
         "1": {
-            "cls-1": ""
+            "cls-1": "box-header-element",
+            "cls-2": "box-img-element",
+            "cls-3": "logo-iglesia-box",
+            "cls-4": "box-img-account-header"
         }
     },
     "state_footer": {
