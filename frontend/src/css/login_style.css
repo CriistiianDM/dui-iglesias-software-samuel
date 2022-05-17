@@ -12,39 +12,20 @@
     z-index: 4;
 }
 .conteiner-textBox {
-    display: grid;
     grid-auto-rows: minmax(10em, auto);
     grid-template-rows:50% 50%;
-    gap: 0.5em;
     grid-template-columns: repeat(auto-fit, minmax( min(100%, 7em), 1fr));
     width: 100%;
-    max-height: 5.5em;
+    max-height: 8.5em;
     overflow: hidden;
 }
 .textBox1{
-    display: grid;
-    text-align: center;  
-    grid-column: 1;
-    grid-row: 1;
+    margin-top: 20; 
+    margin-bottom: 20;
+    display: block;
 }
 .textBox2{
-    display: grid;
-    grid-column: 1;
-    grid-row: 2;
-    text-align:center;
-
-}
-.textBox3{
-    display: grid;
-    grid-row: 1;
-    text-align: center;
-    grid-column: 1;
-    
-}
-.textBox4{
-    display: grid;
-    grid-row: 2;
-    text-align: center;
-    grid-column: 1;
-    
+    margin-top: 20; 
+    margin-bottom: 20;
+    display: block;
 }
