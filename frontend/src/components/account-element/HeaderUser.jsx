@@ -2,6 +2,7 @@
 import React from 'react';
 import logoIglesia  from '../../images/imagesHome/logo_iglesia.png';
 import headerUserAccounts from '../../css/header-user-account.css';
+import { Avatar, Button } from '@material-ui/core';
 
 /**
   *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
@@ -19,11 +20,7 @@ export function HeaderUser(props) {
              <img className={state_header_user['cls-3']} alt="" src={logoIglesia} /> 
           </div>
 
-          
-          
-          <div className={state_header_user['cls-4']}>
-              Account de la aplicacion
-          </div>
+          <Button className={state_header_user['cls-4']}>  <Avatar className={state_header_user['cls-5']}> C </Avatar> </Button>
 
        </div>
 
