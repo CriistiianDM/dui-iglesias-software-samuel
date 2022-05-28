@@ -1,40 +1,68 @@
 
 .box-avatar-setting {
     display: grid;
-    grid-auto-rows: 7em;
-    grid-template-columns: repeat(auto-fit, minmax( min(100%, 7em), 1fr));
+    grid-auto-rows: auto;
+    grid-template-columns: repeat(auto-fit, minmax( min(100%, 25em), 1fr));
     grid-gap: 0.5em;
     grid-auto-flow: dense;
     justify-items: center;
     align-items: center;
     width: 100%;
-    height: auto;
     overflow: hidden;
 }
 
 .box-setting-element-account {
-    display: grid !important;
-    grid-template-rows: 100%;
-    grid-template-columns: repeat(auto-fit, minmax( min(100%, 3.5em), 1fr));
-    grid-gap: 0.5em;
-    grid-auto-flow: dense;
-    width: 70% !important;
-    height: auto !important;
-    background-color: gray !important;
+    width: 80%;
+    height: auto;
+    max-height: 90%;
+    background-color: #bdbdbd !important;
     box-shadow: 0 0.2em 0.7em 0 rgba(0, 0, 0, 0.2);
     overflow: hidden;
 }
 
+
 .box-icon-element-avatar { 
     display: grid;
     grid-template-rows: 100%;
+    grid-template-columns: 30% 70%;
+    grid-gap: 0.5em;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+
+.box-icon-style-avatar {
+    justify-self: center;
+    align-self: center;
+    font-size: 3.5em !important;
+    color: white !important;
+    width: 100% !important;
+}
+
+.box-elements-setting-account {
+    display: grid;
+    grid-auto-rows: auto;
     grid-template-columns: 100%;
-    grid-column-start: 1;
+    grid-gap: 0.5em;
     width: 100%;
     height: 100%;
     overflow: hidden;
 }
 
-.box-icon-style-avatar {
-    font-size: xx-large !important;
+.box-title-element-setting {
+    color: white;
+    font-size: 1.5em !important; 
+    font-weight: 500;
+    text-align: center;
+    hyphens: auto;
+    word-break: break-all;
+}
+
+.box-contend-element-setting {
+    color: white;
+    font-size: 0.9em !important;
+    font-weight: 500;
+    text-align: center;
+    padding: 0.5em 0.5em !important;
 }
