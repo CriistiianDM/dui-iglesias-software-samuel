@@ -1,6 +1,8 @@
 import React from "react";
 import { Headerlogin } from "../login-element/Headerlogin";
-import { TextBoxs } from "../login-element/TextBoxs";
+import { Loginbody } from "../login-element/Loginbody";
+import { Button } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 
 export function Login(props){
 
@@ -9,7 +11,7 @@ export function Login(props){
     return(
         <>
             <Headerlogin properties={state_headerlogin}/>
-            <TextBoxs properties={state_textboxs} />
+            <Loginbody properties={state_textboxs} />
         </>
     );
 
