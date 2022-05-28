@@ -116,27 +116,27 @@
                 {
                     "firstName": "Eduardo",
                     "lastName": "de la Cruz",
-                    "id": "1234567891"
+                    "id": "12345674591"
                 },
                 {
                     "firstName": "Sebastian",
                     "lastName": "quiroga",
-                    "id": "1234567891"
+                    "id": "1234535891"
                 },
                 {
                     "firstName": "Wendy",
                     "lastName": "Perez",
-                    "id": "1234567891"
+                    "id": "1238767891"
                 },
                 {
                     "firstName": "laura",
                     "lastName": "Perez",
-                    "id": "1234567891"
+                    "id": "1234569891"
                 },
                 {
                     "firstName": "Pedro",
                     "lastName": "Perez",
-                    "id": "1123456789"
+                    "id": "1123346789"
                 }
             ],
             "cls-1": "box-user-content-element",
@@ -145,7 +145,12 @@
             "cls-4": "box-search-element-user",
             "cls-5": "box-search-input-element-user",
             "cls-6": "box-element-info-user",
-            "cls-7": "title-info-user-table"
+            "cls-7": "title-info-user-table",
+            "cls-8": "box-footer-table-element"
+        },
+        "4": {
+            "cls-1": "box-footer-account-element",
+            "cls-2": "box-icon-element-footer"
         }
     }
 

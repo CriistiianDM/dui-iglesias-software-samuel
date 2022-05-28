@@ -7,9 +7,8 @@ import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEye';
 export function UserList(props) {
 
     let state_user_list = props.properties;
-    let index = 0
+    
 
-    console.log((state_user_list['usuarios']).map((user) => (user.id)));
     return (
 
         <div className={state_user_list['cls-1']}>
@@ -40,7 +39,7 @@ export function UserList(props) {
 
                 (state_user_list['usuarios']).map((user) => (
 
-                    <div className={state_user_list['cls-6']}>
+                    <div  key={user.id} className={state_user_list['cls-6']}>
 
                         <IconButton>
                             <RemoveRedEyeIcon className={state_user_list['cls-7']} />
@@ -53,6 +52,12 @@ export function UserList(props) {
                 ))
 
             }
+
+            <div className={state_user_list['cls-8']}>
+                <div className={state_user_list['cls-7']}> 6 registros </div>
+                <IconButton> <Icon className={state_user_list['cls-7']}>keyboard_arrow_left</Icon> </IconButton>
+                <IconButton> <Icon className={state_user_list['cls-7']}>keyboard_arrow_right</Icon></IconButton>
+            </div>
 
         </div>
 

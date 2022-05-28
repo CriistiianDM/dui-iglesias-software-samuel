@@ -89,8 +89,35 @@
     color: white;
 }
 
+.box-footer-table-element {
+    justify-self: end;
+    align-self: center;
+    display: grid;
+    grid-template-rows: 100%;
+    grid-template-columns: 70% 15% 15%;
+    grid-gap: 0.5em;
+    width: 30%;
+    margin-right: 2em;
+}
 
+.box-footer-account-element {
+    display: grid;
+    grid-auto-rows: 4em;
+    grid-template-columns: repeat(auto-fit, minmax( min(100%, 25em), 1fr));
+    grid-gap: 0.5em;
+    width: 100%;
+    height: auto;
+    justify-items: center;
+    align-items: center;
+    background-color: #2c2c2c;
+    overflow: hidden;
+}
 
+.box-icon-element-footer {
+    color: white;
+    width: 2em !important;
+    height: 2em !important;
+}
 
 @media screen and (max-width: 600px) {
  
