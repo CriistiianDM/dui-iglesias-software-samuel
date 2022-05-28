@@ -105,6 +105,47 @@
             "cls-5": "box-elements-setting-account",
             "cls-6": "box-title-element-setting",
             "cls-7": "box-contend-element-setting"
+        },
+        "3": {
+            "usuarios": [
+                {
+                   "firstName": "Juan",
+                   "lastName": "Perez",
+                   "id": "1123456789"
+                },
+                {
+                    "firstName": "Eduardo",
+                    "lastName": "de la Cruz",
+                    "id": "1234567891"
+                },
+                {
+                    "firstName": "Sebastian",
+                    "lastName": "quiroga",
+                    "id": "1234567891"
+                },
+                {
+                    "firstName": "Wendy",
+                    "lastName": "Perez",
+                    "id": "1234567891"
+                },
+                {
+                    "firstName": "laura",
+                    "lastName": "Perez",
+                    "id": "1234567891"
+                },
+                {
+                    "firstName": "Pedro",
+                    "lastName": "Perez",
+                    "id": "1123456789"
+                }
+            ],
+            "cls-1": "box-user-content-element",
+            "cls-2": "box-header-table-element",
+            "cls-3": "box-title-element-setting title-table-element-header",
+            "cls-4": "box-search-element-user",
+            "cls-5": "box-search-input-element-user",
+            "cls-6": "box-element-info-user",
+            "cls-7": "title-info-user-table"
         }
     }
 
