@@ -151,6 +151,15 @@
         "4": {
             "cls-1": "box-footer-account-element",
             "cls-2": "box-icon-element-footer"
+        },
+        "5": {
+            "cls-1": "box-avatar-principal",
+            "cls-2": "box-avatar-element",
+            "cls-3": "box-title-element-avatar",
+            "cls-4": "content-welcome-element content-text-acess",
+            "cls-5": "box-aux-bottom-element",
+            "cls-6": "box-aux-change-avatar"
+            
         }
     }
 
