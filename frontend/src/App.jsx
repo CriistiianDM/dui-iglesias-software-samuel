@@ -13,7 +13,7 @@ import { Home } from './components/pages/Home';
 import { Account } from './components/pages/Account';
 import { Login } from './components/pages/Login';
 import { UserInfo } from './components/pages/UserInfo';
-
+import { PersonNormal } from './components/pages/PersonNormal';
 
 //librery or import of styles of css
 import home_style from './css/home_style.css';
@@ -37,6 +37,7 @@ export function App() {
         <Route path="/account" element={<Account properties={json} />} />
         <Route path="/login" element = {<Login properties={json} />} />
         <Route path="/userinfo" element = {<UserInfo properties={json} />} />
+        <Route path="/personnormal" element = {<PersonNormal properties={json} />} />
       </Routes>
     </Router>
 
