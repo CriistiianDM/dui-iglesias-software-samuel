@@ -82,7 +82,7 @@ export function Footer(props) {
             <ul style={{ listStyle: 'none' }}> 
             <li  style={{ textAlign: 'center' }}>Cristian Duvan Machado</li>
             <li  style={{ textAlign: 'center' }}>Juan Sebastian Camino Muños</li>
-            <li  style={{ textAlign: 'center' }}>Juan Felipe osorio</li>
+            <li  style={{ textAlign: 'center' }}>Juan Felipe Osorio Zapata</li>
             </ul>
           </Typography>
 
