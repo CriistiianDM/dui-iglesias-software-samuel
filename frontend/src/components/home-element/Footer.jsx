@@ -3,7 +3,7 @@ import React from "react";
 import { Button, IconButton } from '@material-ui/core';
 import footer_home from '../../css/footer_home.css';
 import logoIglesia from '../../images/imagesHome/logo_iglesia.png';
-import logoMapa  from '../../images/imagesHome/footer-mundo.jpg';
+import logoMapa  from '../../images/imagesHome/footer-mundo.png';
 import Typography from "@material-ui/core/Typography";
 import MenuIcon from '@material-ui/icons/Menu';
 import FacebookIcon from '@material-ui/icons/Facebook';

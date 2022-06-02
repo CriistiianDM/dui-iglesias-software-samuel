@@ -1,0 +1,45 @@
+
+.box-welcome-element {
+    display: grid;
+    grid-auto-rows: minmax(10em, auto);
+    grid-template-columns: 100%;
+    gap: 0.5em;
+    height: auto;
+    background-color: transparent;
+    text-align: center;
+    overflow: hidden;
+    padding: 0.5em 0.5em ;
+    z-index: 3;
+}
+
+.box-title-element {
+    justify-self: center;
+    align-self: center;
+    color: rgb(94, 93, 93);
+    font-weight: 500 !important;
+    font-size: 4em !important;
+    hyphens: auto;
+    word-break: break-word;
+}
+
+.content-welcome-element {
+    justify-self: center;
+    align-self: center;
+    color: rgb(94, 93, 93);
+    font-weight: 400 !important;
+    font-size: 1em !important;
+    hyphens: auto;
+    word-break: break-word;
+}
+
+.box-button-element {
+    background:  linear-gradient(90deg, rgb(233, 233, 238), rgb(136, 153, 228));;
+}
+
+
+@media screen and (max-width: 768px) {
+    .box-title-element {
+        font-size: 2.5em !important;
+    }
+}
+
