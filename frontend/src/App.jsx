@@ -10,6 +10,8 @@ import {
 
 //librery or import of components
 import { Home } from './components/pages/Home';
+import { Categorias } from './components/pages/Categorias'; 
+import { Cargo } from './components/pages/Cargo'; 
 import { Account } from './components/pages/Account';
 import { Login } from './components/pages/Login';
 
@@ -33,6 +35,8 @@ export function App() {
     <Router basename='/dui-iglesias-software-samuel'>
       <Routes>
         <Route path="/" element={<Home properties={json} />} />
+        <Route path="/categorias" element={<Categorias properties={json}/>} />
+        <Route path= "/cargo" element={<Cargo properties={json}/>} />
         <Route path="/account" element={<Account properties={json} />} />
         <Route path="/login" element = {<Login properties={json} />} />
       </Routes>
