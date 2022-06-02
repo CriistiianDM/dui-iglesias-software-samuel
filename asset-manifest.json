@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/dui-iglesias-software-samuel/static/css/main.485a736b.css",
+    "main.js": "/dui-iglesias-software-samuel/static/js/main.8fc6b631.js",
+    "static/media/footer-mundo.png": "/dui-iglesias-software-samuel/static/media/footer-mundo.ba373a92139a061e03a9.png",
+    "index.html": "/dui-iglesias-software-samuel/index.html",
+    "main.485a736b.css.map": "/dui-iglesias-software-samuel/static/css/main.485a736b.css.map",
+    "main.8fc6b631.js.map": "/dui-iglesias-software-samuel/static/js/main.8fc6b631.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.485a736b.css",
+    "static/js/main.8fc6b631.js"
+  ]
+}
