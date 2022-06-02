@@ -13,8 +13,8 @@ const theme = createTheme({
     typography: {
       // In Chinese and Japanese the characters are usually larger,
       // so a smaller fontsize may be appropriate.
-      fontFamily: 'Raleway, Arial',
-      fontSize: 12,
+      fontFamily: 'Raleway, Arial'
+     
     },
   });
   
@@ -28,19 +28,47 @@ const useStyles = makeStyles((theme) => ({
   formControl: {
     display: Grid, 
     margin: theme.spacing(1),
-    minWidth: 120,
+    width: '20em',
+    '@media screen and (max-width:280px)': {
+      width: '12em'
+    }
   },
   paperContainer: {
-    height: 1800,
-    width: 900,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    background: 'linear-gradient(70deg, rgb(255, 255, 255), rgb(0, 51, 141,1))',      
-    margin: -20, 
-    padding: 90
-},
-}));
+    height: 'auto',
+    width: '100%',
+    background: 'white',      
+    padding: '0.5em 0.5em', 
+    display: 'grid', 
+    gridTemplateRows: '100%', 
+    gridTemplateColumns: '100%',
+    justifyItems: 'center',
+    alignItems: 'center', 
+    overflow: 'hidden' /* un objeto se pasa del limite del grid 100%, lo que hace es que lo desaparece para que no se muestre. */
 
+},
+styleTitleCargo: {
+  fontFamily: 'Raleway, Arial',
+  color: 'gray',
+  fontSize: '3.3em !important',
+  textAlign: 'center', 
+  padding: '0.4em 0.4em', /* para centrar profundizar los textos, reduciendo los espacios. */ 
+  /*hyphens: 'auto', */
+  /* wordBreak: 'break-all' esta es para responsive pero con las letras quedando a la mitad y lo demás se pone en la siguiente linea, como un salto.  */
+  '@media screen and (max-width:600px)': {
+    fontSize: '2em !important'
+  }
+
+}, 
+styleTextChoose: {
+  fontFamily: 'Raleway, Arial', 
+  color: 'black', 
+  fontSize: '1.5em !important', 
+  textAlign: 'center', 
+  '@media screen and (max-width:600px)': {
+    fontSize: '1em !important'
+  }
+}
+}));
 
 /**
  * The Cargo function is used to select the user's role in the church
@@ -104,13 +132,14 @@ export function Cargo(props) {
    */
   const handleOpen = (event) => {
     setOpen(true);
-    alert("eres:" + event); 
   };
 
   return (
+    <>
+    <Typography className={classes.styleTitleCargo} variant="h3">Iglesia pentecostal Colombia</Typography>
+    <Typography className={classes.styleTextChoose} variant="h5">Elige el cargo por el cual deseas ingresar:</Typography>
     <div className= {classes.paperContainer}>
-        <Typography variant="h3">Iglesia pentecostal Colombia</Typography>
-        <Typography variant="h5">Elige el cargo por el cual deseas ingresar:</Typography>
+
 
       <FormControl className={classes.formControl}>
         <InputLabel htmlFor="user-native-simple">Cargo</InputLabel>
@@ -135,5 +164,6 @@ export function Cargo(props) {
         <FormHelperText id="my-helper-text">I can do everything in God.</FormHelperText>
       </FormControl>
     </div>
+    </>
   );
 }
