@@ -13,7 +13,6 @@ import Input from '@material-ui/core/Input';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import { Header } from '../home-element/Header';
 import { Footer } from '../home-element/Footer';
-import Image from '../../images/imagesCategorias/imagen.jpg'; // Import using relative path
 
 
 /* A constant that is used to define the style of the component. */
