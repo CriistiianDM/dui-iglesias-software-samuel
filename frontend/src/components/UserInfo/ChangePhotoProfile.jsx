@@ -23,7 +23,7 @@ export function ChangePhotoProfile(props) {
             </Button>
 
             <div className={state_avatar_account['cls-6']}>
-                <Icon>add_a_photo</Icon>
+                <Icon className={state_avatar_account['cls-7']}>add_a_photo</Icon>
             </div>
 
 
