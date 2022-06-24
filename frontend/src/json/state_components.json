@@ -259,6 +259,18 @@
             "cls-9": "box-style-input-element-profile",
             "cls-10": "box-setting-element-account-profile aux-box-setting-element-profile"
         }
+    },
+    "personal-information": {
+        "0": {
+            "cls-1": "box-personal-information-group",
+            "cls-2": "box-personal-group",
+            "cls-3": "box-personal-group-img",
+            "cls-4": "img-group-personal",
+            "cls-5": "box-personal-group-info",
+            "cls-6": "box-personal-group-info-title",
+            "cls-7": "box-personal-group-info-content",
+            "cls-8": "box-text-group-botton"
+        }
     }
 
 }
