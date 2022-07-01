@@ -296,6 +296,10 @@ CREATE TABLE person_eclesial (
   FOREIGN KEY (id_church_now) REFERENCES church(id)
 )
 
+-- tener en cuenta siempre para cosntruir las diferentes consultas
+-- dado que usamos el borrado logico solo los datos de ese campo que el false
+-- seran los datos que se muestran en la base de datos
+-- AND logical_erase = false
 
 -- Table kinship
 CREATE TABLE kinship (
