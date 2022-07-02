@@ -476,28 +476,7 @@ CREATE TABLE img_url_notice (
 )
 
 -- Inserts
-
--- insert data random in table user_account 10 person
-INSERT INTO user_account (id, doc, passwd, logical_erase) VALUES
-(nextval('user_seq'), '123456789', '123456789', false),
-(nextval('user_seq'), '123456729', '123456789', false),
-(nextval('user_seq'), '123456349', '123456789', false),
-(nextval('user_seq'), '123456456', '123456789', false),
-(nextval('user_seq'), '123456776', '123456789', false),
-(nextval('user_seq'), '123456789', '123456789', false),
-(nextval('user_seq'), '123456905', '123456789', false),
-(nextval('user_seq'), '123456493', '123456789', false),
-(nextval('user_seq'), '123456092', '123456789', false),
-(nextval('user_seq'), '123456412', '123456789', false);
-
-
--- insert data random in table person 10 person
-INSERT INTO person ( id, doc , doc_type , doc_from , first_name , 
-                     last_name, birth_date ,email ,phone_1,phone_2,gender,type_person,
-                     id_user,id_city_direction,place_birth,logical_erase) VALUES
-
--- insertar datos 
-(nextval('person_seq'), '123456789','CC','Colombia','ce','assss' , '10/02/2022','aaa','123456789','123456789','M','Lector',nextval('user_seq'),1,1,false),
+-- Nota: los datos la mayoria son fiticios para el desarrollo de la aplicacion
 
 
 -- insertar datos de nombres de paises minimo 200 mas conocidos a la tabla country
@@ -585,29 +564,47 @@ INSER INTO country (id, name,  logical_erase) VALUES
 (nextval('country_seq'), 'Ireland', false);
 
 
--- insertar datos de nombres de las regiones de los paises minimo 81 mas conocidos a la tabla region
-INSERT INTO region (id, name, id_country, logical_erase) VALUES
-(nextval('region_seq'), 'Africa', 1, false),
-(nextval('region_seq'), 'Asia', 1, false),
-(nextval('region_seq'), 'Europe', 1, false),
-(nextval('region_seq'), 'North America', 1, false),
-(nextval('region_seq'), 'North America', 1, false),
-(nextval('region_seq'), 'North America', 1, false),
-(nextval('region_seq'), 'North America', 1, false),
-(nextval('region_seq'), 'North America', 1, false),
-(nextval('region_seq'), 'North America', 1, false)
-
-
-
+-- insertar datos de la region
+INSERT INTO region (id, name, country_id, logical_erase) VALUES
+(nextval('region_seq'), 'Caribe', 37, false),
+(nextval('region_seq'), 'Pacifico', 37, false),
+(nextval('region_seq'), 'Orinoquia', 37, false),
+(nextval('region_seq'), 'Amazonia', 37, false),
+(nextval('region_seq'), 'Zona Andina', 37, false),
+(nextval('region_seq'), 'Zona Insular', 37, false)
 
 
 -- insertar datos de nombres de regiones en la tabla city
-INSERT INTO city (id, name, id_region, logical_erase) VALUES
-(nextval('city_seq'), 'Africa', 1, false),
-(nextval('city_seq'), 'Asia', 1, false),
-(nextval('city_seq'), 'Europe', 1, false),
-(nextval('city_seq'), 'North America', 1, false)
+INSERT INTO city (id, name, region_id, logical_erase) VALUES
+(nextval('city_seq'), 'Cali', 5, false)
 
+
+-- insert data random in table user_account
+INSERT INTO user_account (id, doc, passwd, logical_erase) VALUES
+(nextval('user_seq'), '123456789', '123456789', false),
+(nextval('user_seq'), '123456729', '123456789', false),
+(nextval('user_seq'), '123456349', '123456789', false)
+
+
+-- insert data random in table person 
+INSERT INTO person ( id, doc , doc_type , doc_from , first_name , second_name , 
+                     first_last_name , second_last_name, birth_date , email , phone_1 , phone_2 , gender , type_person ,
+                     id_user , id_city_direction , place_birth , logical_erase) VALUES 
+(nextval('person_seq'), '123456789','CC','Colombia','alma','marcela', 'gozo' , 'lopez', '10/02/2022','aaa','123456789',
+'123456789','M','Lector',1,1,1,false),
+(nextval('person_seq'), '123456729','CC','Colombia','cesar','camino', 'perez' ,'hoy', '12/02/2022','aaa','123456789',
+'123456789','M','Lector',2,1,1,false),
+(nextval('person_seq'), '123456349','CC','Colombia','felipe','montez' , 'yae', 'hoy',  '11/02/2022','aaa','123456789',
+'123456789','M','Lector',3,1,1,false)
+
+-- insert data to position_librarian
+INSERT INTO position_librarian (id, name, description , logical_erase ) VALUES
+(nextval('position_seq'), 'persona normal', 'Podran ver los grupos a los que pertenecen y ver su informacion pesonal', false),
+(nextval('position_seq'), 'Administrador', 'Podran ver los grupos a los que pertenecen y ver su informacion pesonal', false)
+
+-- insert data to periodo
+INSERT INTO periodo (id, name, date_init, date_end, status ,logical_erase) VALUES
+(nextval('periodo_seq'), 'periodo 1', '01/01/2022', '01/03/2022', 'A', false)
 
 
 -- function
