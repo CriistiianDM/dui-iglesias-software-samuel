@@ -389,13 +389,14 @@ CREATE TABLE person_position (
   person_id INTEGER NOT NULL,
   position_id INTEGER NOT NULL,
   period_id INTEGER NOT NULL,
-  id_group INTEGER NOT NULL,
+  id_group INTEGER NULL,
   logical_erase BOOL NOT NULL DEFAULT false,
   FOREIGN KEY (person_id) REFERENCES person(id),
   FOREIGN KEY (position_id) REFERENCES position_librarian(id),
   FOREIGN KEY (period_id) REFERENCES periodo(id),
   FOREIGN KEY (id_group) REFERENCES groups_eclesial(id)
 )
+
 
 -- Table person_group
 CREATE TABLE person_group (
@@ -605,6 +606,15 @@ INSERT INTO position_librarian (id, name, description , logical_erase ) VALUES
 -- insert data to periodo
 INSERT INTO periodo (id, name, date_init, date_end, status ,logical_erase) VALUES
 (nextval('periodo_seq'), 'periodo 1', '01/01/2022', '01/03/2022', 'A', false)
+
+-- insert data to person_position 
+INSERT INTO person_position (id, name , person_id , position_id, period_id , id_group ,logical_erase) VALUES
+(nextval('person_position_seq'), 'persona normal', 1, 1, 1,NULL, false),
+(nextval('person_position_seq'), 'Administrador', 2, 2, 1,NULL, false),
+(nextval('person_position_seq'), 'persona normal', 2, 2, 1,NULL, false),
+(nextval('person_position_seq'), 'persona normal', 3, 1, 1,NULL, false)
+
+
 
 
 -- function
