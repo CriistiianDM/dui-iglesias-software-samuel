@@ -1,9 +1,9 @@
 //librery or import
 import React  from 'react';
 import { HeaderUser } from '../account-element/HeaderUser';
-import { ChangePhotoProfile } from '../userInfo/ChangePhotoProfile';
+import { ChangePhotoProfile } from '../UserInfo/ChangePhotoProfile';
 import { WelcomeAccount } from '../account-element/WelcomeAccount';
-import { OptionMenuProfile } from '../userInfo/OptionMenuProfile';
+import { OptionMenuProfile } from '../UserInfo/OptionMenuProfile';
 import { FooterAccount } from '../account-element/FooterAccount';
 
 
