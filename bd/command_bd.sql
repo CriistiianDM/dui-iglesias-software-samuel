@@ -191,7 +191,7 @@ CREATE TABLE organizacion (
   name VARCHAR(155) NOT NULL,
   resolucion VARCHAR(255) NOT NULL,
   descripcion VARCHAR(255),
-  logical_erase BOOL NOT NULL DEFAULT false,
+  logical_erase BOOL NOT NULL DEFAULT false
 )
 
 
@@ -226,17 +226,17 @@ CREATE TABLE social_church (
   social VARCHAR(255) NOT NULL,
   social_url VARCHAR(255),
   church_id INTEGER NOT NULL,
-  user VARCHAR(50) NOT NULL UNIQUE CHECK (length(passwd) > 5),
+  user_account VARCHAR(50) NOT NULL UNIQUE CHECK (length(passwd) > 5),
   passwd VARCHAR(35) NOT NULL CHECK (length(passwd) > 8),
   logical_erase BOOL NOT NULL DEFAULT false,
   FOREIGN KEY (church_id) REFERENCES church(id)
 )
 
 -- Table user
-CREATE TABLE user (
+CREATE TABLE user_account (
   id INTEGER PRIMARY KEY NOT NULL,
   doc VARCHAR(15) NOT NULL UNIQUE CHECK (length(doc) > 5),
-  passwd VARCHAR(35) NOT NULL CHECK (length(passwd) > 8)
+  passwd VARCHAR(35) NOT NULL CHECK (length(passwd) > 8),
   logical_erase BOOL NOT NULL DEFAULT false
 )
 
@@ -252,13 +252,13 @@ CREATE TABLE person (
   email VARCHAR(255),
   phone_1 VARCHAR(50),
   phone_2 VARCHAR(50),
-  gender VARCHAR(2) NOT NULL CHECK (gender = 'M' , gender = 'F'),
+  gender VARCHAR(2) NOT NULL CHECK (gender = 'M' OR gender = 'F'),
   type_person VARCHAR(70) NOT NULL,
   id_user INTEGER,
   id_city_direction INTEGER,
   place_birth INTEGER,
   logical_erase BOOL NOT NULL DEFAULT false,
-  FOREIGN KEY (id_user) REFERENCES user(id),
+  FOREIGN KEY (id_user) REFERENCES user_account(id),
   FOREIGN KEY (id_city_direction) REFERENCES city(id),
   FOREIGN KEY (place_birth) REFERENCES city(id)
 )
@@ -350,7 +350,7 @@ CREATE TABLE city (
 )
 
 -- Table position
-CREATE TABLE position (
+CREATE TABLE position_librarian (
   id INTEGER PRIMARY KEY NOT NULL UNIQUE,
   name VARCHAR(155) NOT NULL,
   description VARCHAR(255),
@@ -359,7 +359,7 @@ CREATE TABLE position (
 
 
 -- Table groups
-CREATE TABLE groups (
+CREATE TABLE groups_eclesial (
   id INTEGER PRIMARY KEY NOT NULL UNIQUE,
   name VARCHAR(155) NOT NULL,
   description VARCHAR(255),
@@ -390,9 +390,9 @@ CREATE TABLE person_position (
   id_group INTEGER NOT NULL,
   logical_erase BOOL NOT NULL DEFAULT false,
   FOREIGN KEY (person_id) REFERENCES person(id),
-  FOREIGN KEY (position_id) REFERENCES position(id),
+  FOREIGN KEY (position_id) REFERENCES position_librarian(id),
   FOREIGN KEY (period_id) REFERENCES periodo(id),
-  FOREIGN KEY (id_group) REFERENCES groups(id)
+  FOREIGN KEY (id_group) REFERENCES groups_eclesial(id)
 )
 
 -- Table person_group
@@ -404,8 +404,8 @@ CREATE TABLE person_group (
   status VARCHAR(50),
   logical_erase BOOL NOT NULL DEFAULT false,
   FOREIGN KEY (person_id) REFERENCES person(id),
-  FOREIGN KEY (groups_id) REFERENCES groups(id),
-  FOREIGN KEY (position_id) REFERENCES position(id)
+  FOREIGN KEY (groups_id) REFERENCES groups_eclesial(id),
+  FOREIGN KEY (position_id) REFERENCES position_librarian(id)
 )
 
 -- Table knowledge_area
@@ -454,8 +454,7 @@ CREATE TABLE attendence (
   woman INTEGER NOT NULL,
   kid INTEGER NOT NULL,
   vist INTEGER NOT NULL,
-  logical_erase BOOL NOT NULL DEFAULT false,
-  FOREIGN KEY (person_id) REFERENCES person(id)
+  logical_erase BOOL NOT NULL DEFAULT false
 )
 
 -- Table img_url_name
