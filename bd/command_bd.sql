@@ -231,6 +231,30 @@ CREATE TABLE social_church (
   logical_erase BOOL NOT NULL DEFAULT false,
   FOREIGN KEY (church_id) REFERENCES church(id)
 )
+-- Table country
+CREATE TABLE country (
+  id INTEGER PRIMARY KEY NOT NULL UNIQUE,
+  name VARCHAR(255) NOT NULL,
+  logical_erase BOOL NOT NULL DEFAULT false
+)
+
+-- Table region
+CREATE TABLE region (
+  id INTEGER PRIMARY KEY NOT NULL UNIQUE,
+  name VARCHAR(255) NOT NULL,
+  country_id INTEGER NOT NULL,
+  logical_erase BOOL NOT NULL DEFAULT false,
+  FOREIGN KEY (country_id) REFERENCES country(id)
+)
+
+-- Table city
+CREATE TABLE city (
+  id INTEGER PRIMARY KEY NOT NULL UNIQUE,
+  name VARCHAR(255) NOT NULL,
+  region_id INTEGER NOT NULL,
+  logical_erase BOOL NOT NULL DEFAULT false,
+  FOREIGN KEY (region_id) REFERENCES region(id)
+)
 
 -- Table user
 CREATE TABLE user_account (
@@ -247,7 +271,9 @@ CREATE TABLE person (
   doc_type VARCHAR(2) NOT NULL CHECK (doc_type = 'CC' OR doc_type = 'CE' OR doc_type = 'TI' OR doc_type = 'PS' OR doc_type = 'RC'),
   doc_from VARCHAR(155),
   first_name VARCHAR(50) NOT NULL,
-  last_name VARCHAR(50) NOT NULL,
+  second_name VARCHAR(50),
+  first_last_name VARCHAR(50) NOT NULL,
+  second_last_name VARCHAR(50),
   birth_date DATE NOT NULL,
   email VARCHAR(255),
   phone_1 VARCHAR(50),
@@ -324,30 +350,6 @@ CREATE TABLE person_kinship (
   FOREIGN KEY (kinship_id) REFERENCES kinship(id)
 )
 
--- Table country
-CREATE TABLE country (
-  id INTEGER PRIMARY KEY NOT NULL UNIQUE,
-  name VARCHAR(255) NOT NULL,
-  logical_erase BOOL NOT NULL DEFAULT false
-)
-
--- Table region
-CREATE TABLE region (
-  id INTEGER PRIMARY KEY NOT NULL UNIQUE,
-  name VARCHAR(255) NOT NULL,
-  country_id INTEGER NOT NULL,
-  logical_erase BOOL NOT NULL DEFAULT false,
-  FOREIGN KEY (country_id) REFERENCES country(id)
-)
-
--- Table city
-CREATE TABLE city (
-  id INTEGER PRIMARY KEY NOT NULL UNIQUE,
-  name VARCHAR(255) NOT NULL,
-  region_id INTEGER NOT NULL,
-  logical_erase BOOL NOT NULL DEFAULT false,
-  FOREIGN KEY (region_id) REFERENCES region(id)
-)
 
 -- Table position
 CREATE TABLE position_librarian (
@@ -475,6 +477,136 @@ CREATE TABLE img_url_notice (
 
 -- Inserts
 
+-- insert data random in table user_account 10 person
+INSERT INTO user_account (id, doc, passwd, logical_erase) VALUES
+(nextval('user_seq'), '123456789', '123456789', false),
+(nextval('user_seq'), '123456729', '123456789', false),
+(nextval('user_seq'), '123456349', '123456789', false),
+(nextval('user_seq'), '123456456', '123456789', false),
+(nextval('user_seq'), '123456776', '123456789', false),
+(nextval('user_seq'), '123456789', '123456789', false),
+(nextval('user_seq'), '123456905', '123456789', false),
+(nextval('user_seq'), '123456493', '123456789', false),
+(nextval('user_seq'), '123456092', '123456789', false),
+(nextval('user_seq'), '123456412', '123456789', false);
+
+
+-- insert data random in table person 10 person
+INSERT INTO person ( id, doc , doc_type , doc_from , first_name , 
+                     last_name, birth_date ,email ,phone_1,phone_2,gender,type_person,
+                     id_user,id_city_direction,place_birth,logical_erase) VALUES
+
+-- insertar datos 
+(nextval('person_seq'), '123456789','CC','Colombia','ce','assss' , '10/02/2022','aaa','123456789','123456789','M','Lector',nextval('user_seq'),1,1,false),
+
+
+-- insertar datos de nombres de paises minimo 200 mas conocidos a la tabla country
+INSER INTO country (id, name,  logical_erase) VALUES
+(nextval('country_seq'), 'Afghanistan', false),
+(nextval('country_seq'), 'Albania', false),
+(nextval('country_seq'), 'Algeria', false),
+(nextval('country_seq'), 'Andorra', false),
+(nextval('country_seq'), 'Angola', false),
+(nextval('country_seq'), 'Antigua and Barbuda', false),
+(nextval('country_seq'), 'Argentina', false),
+(nextval('country_seq'), 'Armenia', false),
+(nextval('country_seq'), 'Australia', false),
+(nextval('country_seq'), 'Austria', false),
+(nextval('country_seq'), 'Azerbaijan', false),
+(nextval('country_seq'), 'Bahamas', false),
+(nextval('country_seq'), 'Bahrain', false),
+(nextval('country_seq'), 'Bangladesh', false),
+(nextval('country_seq'), 'Barbados', false),
+(nextval('country_seq'), 'Belarus', false),
+(nextval('country_seq'), 'Belgium', false),
+(nextval('country_seq'), 'Belize', false),
+(nextval('country_seq'), 'Benin', false),
+(nextval('country_seq'), 'Bhutan', false),
+(nextval('country_seq'), 'Bolivia', false),
+(nextval('country_seq'), 'Bosnia and Herzegovina', false),
+(nextval('country_seq'), 'Botswana', false),
+(nextval('country_seq'), 'Brazil', false),
+(nextval('country_seq'), 'Brunei', false),
+(nextval('country_seq'), 'Bulgaria', false),
+(nextval('country_seq'), 'Burkina Faso', false),
+(nextval('country_seq'), 'Burundi', false),
+(nextval('country_seq'), 'Cambodia', false),
+(nextval('country_seq'), 'Cameroon', false),
+(nextval('country_seq'), 'Canada', false),
+(nextval('country_seq'), 'Cape Verde', false),
+(nextval('country_seq'), 'Central African Republic', false),
+(nextval('country_seq'), 'Chad', false),
+(nextval('country_seq'), 'Chile', false),
+(nextval('country_seq'), 'China', false),
+(nextval('country_seq'), 'Colombia', false),
+(nextval('country_seq'), 'Comoros', false),
+(nextval('country_seq'), 'Congo', false),
+(nextval('country_seq'), 'Costa Rica', false),
+(nextval('country_seq'), 'Cote d\Ivoire', false),
+(nextval('country_seq'), 'Croatia', false),
+(nextval('country_seq'), 'Cuba', false),
+(nextval('country_seq'), 'Cyprus', false),
+(nextval('country_seq'), 'Czech Republic', false),
+(nextval('country_seq'), 'Denmark', false),
+(nextval('country_seq'), 'Djibouti', false),
+(nextval('country_seq'), 'Dominica', false),
+(nextval('country_seq'), 'Dominican Republic', false),
+(nextval('country_seq'), 'East Timor', false),
+(nextval('country_seq'), 'Ecuador', false),
+(nextval('country_seq'), 'Egypt', false),
+(nextval('country_seq'), 'El Salvador', false),
+(nextval('country_seq'), 'Equatorial Guinea', false),
+(nextval('country_seq'), 'Eritrea', false),
+(nextval('country_seq'), 'Estonia', false),
+(nextval('country_seq'), 'Ethiopia', false),
+(nextval('country_seq'), 'Fiji', false),
+(nextval('country_seq'), 'Finland', false),
+(nextval('country_seq'), 'France', false),
+(nextval('country_seq'), 'Gabon', false),
+(nextval('country_seq'), 'Gambia', false),
+(nextval('country_seq'), 'Georgia', false),
+(nextval('country_seq'), 'Germany', false),
+(nextval('country_seq'), 'Ghana', false),
+(nextval('country_seq'), 'Greece', false),
+(nextval('country_seq'), 'Grenada', false),
+(nextval('country_seq'), 'Guatemala', false),
+(nextval('country_seq'), 'Guinea', false),
+(nextval('country_seq'), 'Guinea-Bissau', false),
+(nextval('country_seq'), 'Guyana', false),
+(nextval('country_seq'), 'Haiti', false),
+(nextval('country_seq'), 'Honduras', false),
+(nextval('country_seq'), 'Hong Kong', false),
+(nextval('country_seq'), 'Hungary', false),
+(nextval('country_seq'), 'Iceland', false),
+(nextval('country_seq'), 'India', false),
+(nextval('country_seq'), 'Indonesia', false),
+(nextval('country_seq'), 'Iran', false),
+(nextval('country_seq'), 'Iraq', false),
+(nextval('country_seq'), 'Ireland', false);
+
+
+-- insertar datos de nombres de las regiones de los paises minimo 81 mas conocidos a la tabla region
+INSERT INTO region (id, name, id_country, logical_erase) VALUES
+(nextval('region_seq'), 'Africa', 1, false),
+(nextval('region_seq'), 'Asia', 1, false),
+(nextval('region_seq'), 'Europe', 1, false),
+(nextval('region_seq'), 'North America', 1, false),
+(nextval('region_seq'), 'North America', 1, false),
+(nextval('region_seq'), 'North America', 1, false),
+(nextval('region_seq'), 'North America', 1, false),
+(nextval('region_seq'), 'North America', 1, false),
+(nextval('region_seq'), 'North America', 1, false)
+
+
+
+
+
+-- insertar datos de nombres de regiones en la tabla city
+INSERT INTO city (id, name, id_region, logical_erase) VALUES
+(nextval('city_seq'), 'Africa', 1, false),
+(nextval('city_seq'), 'Asia', 1, false),
+(nextval('city_seq'), 'Europe', 1, false),
+(nextval('city_seq'), 'North America', 1, false)
 
 
 
