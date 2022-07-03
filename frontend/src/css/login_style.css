@@ -5,52 +5,33 @@
     grid-gap: 0.5em;
     background: linear-gradient(90deg, rgb(255, 255, 255), rgb(233, 228, 228));
     box-shadow: 0 0 7px rgba(0, 0, 0, 0.5);
-    position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
     height: auto;
     max-height: 4.5em;
-    padding: 0.5em 0.5em;
     overflow: hidden;
     z-index: 4;
 }
+.title-style{
+    justify-self: center;
+    text-align: center;
+}
 .conteiner-textBox {
     display: grid;
-    top: 15em;
-    grid-template-rows: 100%;
-    grid-template-columns: repeat(auto-fit, minmax( min(100%, 7em), 1fr));
-    grid-gap: 0.5em;
-    position: relative;
-    width: 100%;
+    display: grid;
+    grid-auto-rows: auto;
+    gap: 0.6em;
+    width: 80%;
     height: auto;
-    max-height: 4.5em;
-    overflow: hidden;
+    grid-template-columns:100%;
+    justify-items:center;
+    justify-self: center;
+   
 }
 .textBox1{
-    display: grid;
-    grid-row: 1;
-    text-align: center;
-    grid-column: 1;
-    
+   width: 49%; 
 }
-.textBox2{
-    display: grid;
-    text-align:center;
-    grid-row: 2;
-    grid-column: 1;
-}
-.textBox3{
-    display: grid;
-    grid-row: 2;
-    text-align: center;
-    grid-column: 1;
-    
-}
-.textBox4{
-    display: grid;
-    grid-row: 2;
-    text-align: center;
-    grid-column: 2;
-    
+
+.button-style{
+    justify-self: center;
+    width: 30%;
 }
