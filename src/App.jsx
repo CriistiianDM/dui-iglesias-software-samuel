@@ -35,7 +35,7 @@ export function App() {
   //return the component
   return (
 
-    <Router basename='/dui-iglesias-software-samuel'>
+    <Router>
       <Routes>
         <Route path="/" element={<Home properties={json} />} />
         <Route path= "/cargo" element={<Cargo properties={json}/>} />
