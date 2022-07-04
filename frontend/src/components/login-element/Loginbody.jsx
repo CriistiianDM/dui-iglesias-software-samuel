@@ -4,6 +4,7 @@ import login_style from '../../css/login_style.css';
 import TextField from '@material-ui/core/TextField';
 import { CircularProgress, Typography , Dialog , DialogActions , DialogTitle , DialogContent , DialogContentText} from "@material-ui/core";
 import { Button } from "@material-ui/core";
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -28,7 +29,7 @@ export function Loginbody(props) {
        error_message_password: 'Solo letras y numeros de 8 a 35 digitos'
     });
 
-
+    const navigate = useNavigate();
     let state_textboxs  = props.properties;
 
     let handle_dialog_open = () => {
@@ -40,7 +41,7 @@ export function Loginbody(props) {
     }
 
     let handleSubmit = (event) => {
-      validate_data_all(user_valid_data, setUserValid);
+      validate_data_all(user_valid_data, setUserValid,navigate);
     }
 
     return (
@@ -149,7 +150,7 @@ function validate_data_info(element, user_valid_data, setUserValid) {
   *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
   *  @decs  : validar si ambos campos estan llenos y si no estan llenos mostrar un mensaje de error
 */
-function validate_data_all(user_valid_data, setUserValid) {
+function validate_data_all(user_valid_data, setUserValid,navigate) {
 
   //poner el loadin en true
   //setUserValid({...user_valid_data, loading: true});
@@ -157,7 +158,7 @@ function validate_data_all(user_valid_data, setUserValid) {
   if (!user_valid_data.error_user && !user_valid_data.error_password
      && user_valid_data.user_login.length > 0 && user_valid_data.password_login.length > 0) {
 
-       fetch_data_login(user_valid_data, setUserValid);
+       fetch_data_login(user_valid_data, setUserValid,navigate);
   }
   else {
      setUserValid({
@@ -178,7 +179,7 @@ function validate_data_all(user_valid_data, setUserValid) {
   *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
   *  @decs  : fecht de la ruta /zlgz/:doc/:passwd para verificar el usuario y contraseña
 */
-async function fetch_data_login(user_valid_data, setUserValid) {
+async function fetch_data_login(user_valid_data, setUserValid,navigate) {
 
    try {
       setUserValid({...user_valid_data, loading: true});
@@ -189,7 +190,21 @@ async function fetch_data_login(user_valid_data, setUserValid) {
       if (data[0] !== undefined) {
        console.log(data, 'el usuario existe');
 
-       setUserValid({...user_valid_data, loading: false});
+       //fetch
+        const response_fetch = await fetch(`http://localhost:4500/zcvg/${user_valid_data.user_login}`);
+        const data_fetch = await response_fetch.json();
+
+        if (JSON.stringify(data_fetch).split(',').length > 1) {
+          console.log(data_fetch, 'el usuario existe');
+          navigate('/cargo')
+        }
+        else {
+          console.log(data_fetch, 'el usuario no existe');
+          navigate('/personnormal')
+        }
+
+        //console.log( data_fetch , 'data_fetch');
+        setUserValid({...user_valid_data, loading: false});
       }
       else {
         console.log(data, 'el usuario no existe');
