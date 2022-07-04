@@ -21,7 +21,8 @@
     gap: 0.5em;
     width: 90%;
     height: auto;
-    background:  linear-gradient(120deg, rgb(245, 245, 247), rgba(91, 111, 202, 0.767));
+    /*background:  linear-gradient(120deg, rgb(245, 245, 247), rgba(91, 111, 202, 0.767));*/
+    background-color: #3f51b5d5;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.219);
     padding: 0.9em 0.5em;
     border-radius: 1em;
@@ -66,4 +67,8 @@
 .content-text-acess {
    padding: 0.5em 0.5em;
    font-weight: 600 !important;
+}
+
+.color_new_acess {
+    color: #ffffff !important;
 }

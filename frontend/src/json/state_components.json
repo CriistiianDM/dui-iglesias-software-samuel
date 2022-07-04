@@ -38,8 +38,8 @@
             "title-icon-login-acess": "style-icon-title-acess",
             "cls-1": "box-login-element",
             "cls-2": "box-circle-element",
-            "cls-3": "box-title-element",
-            "cls-4": "content-welcome-element content-text-acess"
+            "cls-3": "box-title-element color_new_acess ",
+            "cls-4": "content-welcome-element content-text-acess color_new_acess "
         }
     },
     "welcome-home": {

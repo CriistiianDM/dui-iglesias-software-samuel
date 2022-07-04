@@ -10,12 +10,14 @@ import {
 
 //librery or import of components
 import { Home } from './components/pages/Home';
-import { Categorias } from './components/pages/Categorias'; 
 import { Cargo } from './components/pages/Cargo'; 
 import { Account } from './components/pages/Account';
 import { Login } from './components/pages/Login';
 import { UserInfo } from './components/pages/UserInfo';
 import { PersonNormal } from './components/pages/PersonNormal';
+import { A404 } from './components/pages/A404';
+
+
 
 //librery or import of styles of css
 import home_style from './css/home_style.css';
@@ -36,12 +38,12 @@ export function App() {
     <Router basename='/dui-iglesias-software-samuel'>
       <Routes>
         <Route path="/" element={<Home properties={json} />} />
-        <Route path="/categorias" element={<Categorias properties={json}/>} />
         <Route path= "/cargo" element={<Cargo properties={json}/>} />
         <Route path="/account" element={<Account properties={json} />} />
         <Route path="/login" element = {<Login properties={json} />} />
         <Route path="/userinfo" element = {<UserInfo properties={json} />} />
         <Route path="/personnormal" element = {<PersonNormal properties={json} />} />
+        <Route path="*" element = {<A404 />} />
       </Routes>
     </Router>
 
