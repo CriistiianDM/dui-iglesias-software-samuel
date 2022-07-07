@@ -12,14 +12,14 @@ import { FooterAccount } from '../account-element/FooterAccount';
   *  @decs  : Account de la aplicacion /account
 */
 export function Account(props) {
-    
+   
      let state_header_user = Object.values(Object.values(Object.entries(props)[0][1])[0])[1];
      let state_avatar_account = Object.values(Object.values(Object.entries(props)[0][1])[5])[0];
      let state_Welcome_account = Object.values(Object.values(Object.entries(props)[0][1])[5])[1];
      let state_Setting_accounts = Object.values(Object.values(Object.entries(props)[0][1])[5])[2];
      let state_user_accounts = Object.values(Object.values(Object.entries(props)[0][1])[5])[3];
      let state_footer_accounts = Object.values(Object.values(Object.entries(props)[0][1])[5])[4];
-      
+     
 
     return (
        <>
