@@ -2,7 +2,7 @@
 import React from 'react';
 import WelcomeStyle from '../../css/welcome-home.css'
 import { Typography , Button } from '@material-ui/core';
-
+import { Link } from 'react-router-dom';
 
 /**
   *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
@@ -26,7 +26,7 @@ export function Welcome(props) {
                     Bienvenido a la iglesia Pentecostal Unida de Colombia, Para interactuar
                     con la iglesia, por favor inicia sesion.
 
-                    <p> <Button className={state_welcome['cls-4']} > Inicia sesion!!!</Button> </p>
+                    <p> <Link to='/login'><Button className={state_welcome['cls-4']} > Inicia sesion!!!</Button></Link> </p>
 
                 </Typography>
 
