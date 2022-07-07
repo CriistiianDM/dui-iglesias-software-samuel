@@ -7,7 +7,6 @@ import {
 } from 'react-router-dom';
 
 
-
 //librery or import of components
 import { Home } from './components/pages/Home';
 import { Categorias } from './components/pages/Categorias'; 

@@ -137,6 +137,7 @@ export function Cargo(props) {
   return (
     <>
     <Typography className={classes.styleTitleCargo} variant="h3">Iglesia pentecostal Colombia</Typography>
+    
     <Typography className={classes.styleTextChoose} variant="h5">Elige el cargo por el cual deseas ingresar:</Typography>
     <div className= {classes.paperContainer}>
 
