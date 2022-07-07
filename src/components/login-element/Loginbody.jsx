@@ -194,8 +194,13 @@ async function fetch_data_login(user_valid_data, setUserValid,navigate) {
         const response_fetch = await fetch(`http://localhost:4500/zcvg/${user_valid_data.user_login}`);
         const data_fetch = await response_fetch.json();
 
+      // guardar el usuario en el localstorage
+      localStorage.setItem('user_login', user_valid_data.user_login);
+
         if (JSON.stringify(data_fetch).split(',').length > 1) {
           console.log(data_fetch, 'el usuario existe');
+                //guardar el data_fetch en el localstorage
+          localStorage.setItem('cargo', JSON.stringify(data_fetch));
           navigate('/cargo')
         }
         else {
@@ -211,7 +216,7 @@ async function fetch_data_login(user_valid_data, setUserValid,navigate) {
         setUserValid({...user_valid_data, loading: false, dialog_open: true});
       }
 
-      
+     
    } catch (error) {
      console.log(error);
    }
