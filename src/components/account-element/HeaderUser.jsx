@@ -11,6 +11,7 @@ import { Avatar, Button } from '@material-ui/core';
 export function HeaderUser(props) {
 
     let state_header_user = props.properties;
+    let first_letter = localStorage.getItem('user_name').substring(0,1).toUpperCase();
 
     return (
 
@@ -20,7 +21,7 @@ export function HeaderUser(props) {
              <img className={state_header_user['cls-3']} alt="" src={logoIglesia} /> 
           </div>
 
-          <Button className={state_header_user['cls-4']}>  <Avatar className={state_header_user['cls-5']}> C </Avatar> </Button>
+          <Button className={state_header_user['cls-4']}>  <Avatar className={state_header_user['cls-5']}> {first_letter} </Avatar> </Button>
 
        </div>
 

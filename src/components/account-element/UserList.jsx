@@ -7,7 +7,7 @@ import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEye';
 export function UserList(props) {
 
     let state_user_list = props.properties;
-    
+   
 
     return (
 
