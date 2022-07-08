@@ -6,8 +6,13 @@ import welcomeAccountStyle from '../../css/welcomeAccount.css';
 
 export function WelcomeAccount(props) {
 
+    //estados boleanos para validar los campos
+    const [user_valid_data, setUserValid] = React.useState({
+         user_name: localStorage.getItem('user_name'),
+    });
+
     let state_Welcome_account = props.properties;
-    let welcome_name =  `${(state_Welcome_account['estado'])? 'Bienvenido' : ''} Cristian Camino Osorio`;
+    let welcome_name =  `${(state_Welcome_account['estado'])? 'Bienvenido' : ''} ${user_valid_data.user_name}`;
 
     return (
 
@@ -19,3 +24,7 @@ export function WelcomeAccount(props) {
 
     )
 }
+
+
+
+

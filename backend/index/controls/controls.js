@@ -78,7 +78,7 @@ const petitions_get_cargo_vigigentes = async (req, res) => {
                     //consulta para obtener el nombre del cargo
                     categoria_vigente += `${(answer4.rows[0]).name},` ;
                 }
-                else if (Number(year_end[2]) == Number(year_now[2])) {
+                else if (Number(year_end[2]) === Number(year_now[2])) {
 
                     //verificar el mes
                     if (Number(year_end[1]) > Number(year_now[1])) {
@@ -86,7 +86,7 @@ const petitions_get_cargo_vigigentes = async (req, res) => {
                         console.log('no entro papa');
                         categoria_vigente += (`${(answer4.rows[0]).name},`) ;
                     }
-                    else if (Number(year_end[1]) == Number(year_now[1])) {
+                    else if (Number(year_end[1]) === Number(year_now[1])) {
 
                         //verificar el dia
                         if (Number(year_end[0]) > Number(year_now[0])) {
@@ -112,7 +112,7 @@ const petitions_get_cargo_vigigentes = async (req, res) => {
                 }
 
 
-                if (index == (index_answer2 - 1)) {
+                if (index === (index_answer2 - 1)) {
                     categoria_vigente = `${categoria_vigente.substring(0, categoria_vigente.length - 1)}`;
                     res.json(categoria_vigente);
                 }
@@ -188,11 +188,34 @@ const petitions_put_periodo = async (req, res) => {
 
 }
 
+/**
+  *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
+  *  @decs  : get para obtener el primer nombre y apellido de un usuario
+*/
+const petitions_get_user = async (req, res) => {
+    
+        //try catch para capturar errores
+        try {
+            //variables para capturar los parametros
+            const { doc } = req.params;
+            //consulta
+            const answer = await pool.query('SELECT first_name ,  first_last_name FROM person WHERE doc = $1 AND logical_erase = false', [doc]);
+            console.log('req.body', answer);
+            //retonar la respuesta
+            res.json(answer.rows);
+        } catch (error) {
+            console.log(error, 'error');
+        }
+    
+}
+
+
 module.exports = {
     petitions_get,
     petitions_get_login,
     petitions_get_cargo_vigigentes,
-    petitions_put_periodo
+    petitions_put_periodo,
+    petitions_get_user
 }
 
 

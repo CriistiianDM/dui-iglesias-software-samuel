@@ -3,9 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import { createTheme, Grid} from '@material-ui/core';
+import { Button, createTheme, Grid} from '@material-ui/core';
 import Typography from "@material-ui/core/Typography";
 import FormHelperText from '@material-ui/core/FormHelperText';
+import { Link } from 'react-router-dom';
 
 
   
@@ -82,6 +83,9 @@ export function Cargo(props) {
   const [Cargo, setCargo] = React.useState('');
   const [open, setOpen] = React.useState(false);
 
+  //capturar el valor del cargo del localStorage
+  const cargo = localStorage.getItem('cargo').split(',');
+  console.log(cargo,'cargo');
 
   theme.typography.h4 = {
     fontSize: '0rem',
@@ -154,16 +158,26 @@ export function Cargo(props) {
           }}
         >
           <option aria-label="None" value="" />
-          <option>Sistemas</option>
+          {cargo.map((cargo, index) => (
+            <option key={index} value={cargo}>{cargo.replace('"','')}</option>
+          ))}
+        </Select>
+        <FormHelperText id="my-helper-text">I can do everything in God.</FormHelperText>
+      </FormControl>
+    </div>
+    <Button><Link to="/account">Entrar</Link></Button>
+    </>
+  );
+}
+
+
+
+/*dejo guardado para despues los cargos*/
+/*
+  <option>Sistemas</option>
           <option>Administrativo</option>
           <option>Asistente Administrativo</option>
           <option>Pastor local</option>
           <option>Cómite</option>
           <option>Creyente</option>
-        </Select>
-        <FormHelperText id="my-helper-text">I can do everything in God.</FormHelperText>
-      </FormControl>
-    </div>
-    </>
-  );
-}
+*/
