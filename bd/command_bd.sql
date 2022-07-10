@@ -369,7 +369,7 @@ CREATE TABLE groups_eclesial (
   url_img VARCHAR(255),
   logical_erase BOOL NOT NULL DEFAULT false 
 )
-
+-- id grupo superior a la tabla groups_eclesial
 
 -- Table period
 CREATE TABLE periodo (
@@ -380,6 +380,8 @@ CREATE TABLE periodo (
   status VARCHAR(2) NOT NULL CHECK (status = 'A' OR status = 'I'),
   logical_erase BOOL NOT NULL DEFAULT false
 )
+-- id congregation_id INTEGER NOT NULL,
+-- colocar campo url en la tabla person-groups
 
 
 -- Table person_position

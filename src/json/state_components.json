@@ -79,7 +79,7 @@
                 {
                     "id": "btn-1",
                     "icon": "person_add",
-                    "title": "Crear Usuario",
+                    "title": "Usuarios",
                     "content": "Esta opcion permite crear un nuevo usuario"
                 },
                 {   "id": "btn-2",
@@ -89,7 +89,7 @@
                 },
                 {   "id": "btn-3",
                     "icon": "workspaces",
-                    "title": "Crear Grupo",
+                    "title": "Grupos",
                     "content": "Esta opcion permite crear un nuevo grupo"
                 },
                 {   "id": "btn-4",

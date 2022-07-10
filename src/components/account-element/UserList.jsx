@@ -7,6 +7,13 @@ import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEye';
 export function UserList(props) {
 
     let state_user_list = props.properties;
+
+    //set data to view
+    let [data, setData] = React.useState([]);
+
+    React.useEffect(() => {
+
+    }, []);
    
 
     return (
@@ -68,20 +75,23 @@ export function UserList(props) {
 
 // FUNCTIONAL COMPONENT
 
+
+
 /**
  * @author cristian duvan machado <cristian.machado@correounivalle.edu.co>
  * @description : enviar los datos de la consulta a la vista
  * @param {Object} data 
  */
-function create_data_user(data) {
+async function create_data_user(data) {
 
-    return {
-        id: data.id,
-        name: data.name,
-        lastname: data.lastname,
-        email: data.email,
-        phone: data.phone,
-    }
+   try {
+      //fetch data from server
+      let response = await fetch('http://localhost:4500/zaup');
+      let data = await response.json();
+    
+   } catch (error) {
+       console.log(error);
+   }
 
 
 }
