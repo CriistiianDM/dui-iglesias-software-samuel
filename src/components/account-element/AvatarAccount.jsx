@@ -19,7 +19,8 @@ export function AvatarAccount(props) {
 
     //useEffect para cargar la imagen de perfil
     React.useEffect(() => {
-         get_user_name(localStorage.getItem('user_login'), user ,setUser);
+      update_user_name(user, setUser)
+      console.log(user, 'user salidad 21');
     } , []);
 
 
@@ -41,20 +42,34 @@ export function AvatarAccount(props) {
 
 /**
   *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
-  *  @decs  : fecht de la ruta znlp/:doc y retorna el nombre y apellido del usuario
+  *  @decs  : actualizar nombre de usuario con timer
 */
-async function get_user_name(user_id, user, setUser) {
-     
-      try {
+function update_user_name(user, setUser) {
 
-        //fetch de la ruta znlp/:doc
-        let response = await fetch(`http://localhost:4500/znlp/${user_id}`);
-        let data = await response.json();
-        console.log(data, 'data');
-        localStorage.setItem('user_name', `${data[0].first_name} ${data[0].first_last_name}`);
-        setUser({...user, first_letter: localStorage.getItem('user_name').substring(0,1).toUpperCase()});
-      } catch (error) {
-        console.log(error);
-      }
-     
+  let letter_before = '';
+  let letter_after = '';
+
+  const timer = setInterval(() => {
+
+
+    setUser({...user, first_letter: localStorage.getItem('user_name').substring(0,1).toUpperCase()});
+    console.log(user, 'setUser');
+    
+    letter_before = (user.first_letter).substring(0, 1).toUpperCase();
+    letter_after = localStorage.getItem('user_name').substring(0, 1).toUpperCase();
+    console.log(letter_before, letter_after, 'salida before after avatar');
+
+
+    if (letter_before !== letter_after) {
+      clearInterval(timer);
+    }
+    else if (letter_before === letter_after) {
+      clearInterval(timer);
+    }
+
+
+  }, 100);
+
+  return timer;
+
 }
