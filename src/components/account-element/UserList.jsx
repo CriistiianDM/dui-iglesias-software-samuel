@@ -45,10 +45,10 @@ export function UserList(props) {
 
 
             <div className={state_user_list['cls-6']}>
-                <div className={state_user_list['cls-7']}>Editar</div>
                 <div className={state_user_list['cls-7']}>P.Nombre</div>
                 <div className={state_user_list['cls-7']}>P.Apellido</div>
                 <div className={state_user_list['cls-7']} >Identificacion</div>
+                <div className={state_user_list['cls-7']}>Editar</div>
             </div>
 
 
@@ -73,7 +73,7 @@ export function UserList(props) {
             }
 
             <div className={state_user_list['cls-8']}>
-                <div className={state_user_list['cls-7']}> 6 registros </div>
+                <div className={state_user_list['cls-7']}> 3 registros </div>
                 <IconButton> <Icon className={state_user_list['cls-7']}>keyboard_arrow_left</Icon> </IconButton>
                 <IconButton> <Icon className={state_user_list['cls-7']}>keyboard_arrow_right</Icon></IconButton>
             </div>
