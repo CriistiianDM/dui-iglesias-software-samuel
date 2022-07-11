@@ -43,7 +43,6 @@ export function UserList(props) {
 
             </div>
 
-
             <div className={state_user_list['cls-6']}>
                 <div className={state_user_list['cls-7']}>P.Nombre</div>
                 <div className={state_user_list['cls-7']}>P.Apellido</div>
