@@ -3,6 +3,12 @@ import { Avatar, Typography } from '@material-ui/core';
 import React from 'react';
 import avatarStyle from '../../css/avatarStyle.css';
 
+
+
+/**
+  *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
+  *  @decs  : Avatar de la aplicacion /account
+*/
 export function AvatarAccount(props) {
 
    let state_avatar_account = props.properties;

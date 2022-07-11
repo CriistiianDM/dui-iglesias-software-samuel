@@ -4,6 +4,10 @@ import React, { useEffect } from 'react';
 import welcomeAccountStyle from '../../css/welcomeAccount.css';
 
 
+/**
+  *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
+  *  @decs  : WelcomeAccount Component
+*/
 export function WelcomeAccount(props) {
 
 
