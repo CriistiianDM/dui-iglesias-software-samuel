@@ -13,3 +13,13 @@ body,html {
     height: auto;
     overflow-x: hidden;
 }
+
+
+/*quitar los botones del type number de los jtextfield*/
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[type=number] { -moz-appearance:textfield; }
