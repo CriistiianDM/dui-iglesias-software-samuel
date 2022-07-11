@@ -1,7 +1,7 @@
 //librery or import of reacr
 import React from 'react';
 import userList from '../../css/user_list.css';
-import { Icon, IconButton, TextField } from '@material-ui/core';
+import { Icon, IconButton, TextField,CircularProgress } from '@material-ui/core';
 import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEye';
 
 export function UserList(props) {
@@ -10,9 +10,12 @@ export function UserList(props) {
 
     //set data to view
     let [data, setData] = React.useState([]);
+    let [data_array, setdata_array] = React.useState({
+        loading: true
+    });
 
     React.useEffect(() => {
-          create_data_user(data, setData);
+          create_data_user(data, setData , data_array, setdata_array);
     }, []);
    
 
@@ -43,7 +46,10 @@ export function UserList(props) {
 
 
             {
-                
+                (data_array.loading)? (<CircularProgress
+            size={24}
+            color="inherit"
+          /> ):
                 (data).map((user) => (
 
                     <div  key={user.id} className={state_user_list['cls-6']}>
@@ -81,14 +87,16 @@ export function UserList(props) {
  * @description : enviar los datos de la consulta a la vista
  * @param {Object} data 
  */
-async function create_data_user(data, setData) {
+async function create_data_user(data, setData,data_array, setdata_array) {
 
    try {
       //fetch data from server
       let response = await fetch('http://localhost:4500/zaup');
       let data = await response.json();
+
       console.log(data);
       setData(data);
+      setdata_array({...data_array, loading: false});
    } catch (error) {
        console.log(error);
    }
