@@ -80,31 +80,37 @@
                     "id": "btn-1",
                     "icon": "person_add",
                     "title": "Usuarios",
+                    "to": "/createuser",
                     "content": "Esta opcion permite crear un nuevo usuario"
                 },
                 {   "id": "btn-2",
                     "icon": "calendar_today",
                     "title": "Asistencia",
+                    "to": "/account",
                     "content": "Esta opcion permite registrar la asistencia de los usuarios"
                 },
                 {   "id": "btn-3",
                     "icon": "workspaces",
                     "title": "Grupos",
+                    "to": "/account",
                     "content": "Esta opcion permite crear un nuevo grupo"
                 },
                 {   "id": "btn-4",
                     "icon": "newspaper",
                     "title": "Banner Noticias",
+                    "to": "/account",
                     "content": "Esta opcion permite modificar el banner"
                 },
                 {   "id": "btn-5",
                     "icon": "celebration",
                     "title": "Cumpleaños",
+                    "to": "/account",
                     "content": "Esta opcion muestra los cumpleaños de los usuarios de este mes"
                 },
                 {   "id": "btn-6",
                     "icon": "church",
                     "title": "Congregacion",
+                    "to": "/account",
                     "content": "Esta opcion permite modificar la informacion de la congregacion"
                 }
                 
