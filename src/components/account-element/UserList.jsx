@@ -12,7 +12,7 @@ export function UserList(props) {
     let [data, setData] = React.useState([]);
 
     React.useEffect(() => {
-
+          create_data_user(data, setData);
     }, []);
    
 
@@ -43,17 +43,16 @@ export function UserList(props) {
 
 
             {
-
-                (state_user_list['usuarios']).map((user) => (
+                
+                (data).map((user) => (
 
                     <div  key={user.id} className={state_user_list['cls-6']}>
-
+                        <div className={state_user_list['cls-7']}>{user.first_name}</div>
+                        <div className={state_user_list['cls-7']}>{user.first_last_name}</div>
+                        <div className={state_user_list['cls-7']}>{user.doc}</div>
                         <IconButton>
                             <RemoveRedEyeIcon className={state_user_list['cls-7']} />
                         </IconButton>
-                        <div className={state_user_list['cls-7']}>{user.firstName}</div>
-                        <div className={state_user_list['cls-7']}>{user.lastName}</div>
-                        <div className={state_user_list['cls-7']}>{user.id}</div>
                     </div>
 
                 ))
@@ -82,13 +81,14 @@ export function UserList(props) {
  * @description : enviar los datos de la consulta a la vista
  * @param {Object} data 
  */
-async function create_data_user(data) {
+async function create_data_user(data, setData) {
 
    try {
       //fetch data from server
       let response = await fetch('http://localhost:4500/zaup');
       let data = await response.json();
-    
+      console.log(data);
+      setData(data);
    } catch (error) {
        console.log(error);
    }

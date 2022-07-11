@@ -218,7 +218,7 @@ const petitions_get_all_user_active = async (req, res) => {
     //try catch para capturar errores
     try {
         //consulta
-        const answer = await pool.query('SELECT first_name ,  first_last_name , doc FROM person WHERE logical_erase = false ');
+        const answer = await pool.query('SELECT id , first_name ,  first_last_name , doc FROM person WHERE logical_erase = false ');
         console.log('req.body', answer);
         //retonar la respuesta
         res.json(answer.rows);
