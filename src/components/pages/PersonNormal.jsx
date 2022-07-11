@@ -8,30 +8,38 @@ import { Groups } from '../person-normal/Groups';
 
 export function PersonNormal(props) {
 
-    //useEffect para obtener el nombre y apellido del usuario
-     React.useEffect(() => {
-        get_user_name(localStorage.getItem('user_login'));
-     }, []);
-   
-    //variable de estado
-    let state_header_user = Object.values(Object.values(Object.entries(props)[0][1])[0])[1];
-    let state_avatar_account = Object.values(Object.values(Object.entries(props)[0][1])[5])[0];
-    let state_Welcome_account = Object.values(Object.values(Object.entries(props)[0][1])[5])[1];
-    let state_footer_accounts = Object.values(Object.values(Object.entries(props)[0][1])[5])[4];
-    let state_group = Object.values(Object.values(Object.entries(props)[0][1])[7])[0];
+  //useEffect para obtener el nombre y apellido del usuario
+  React.useEffect(() => {
+    get_user_name(localStorage.getItem('user_login'));
+  }, []);
 
-    return (
 
-        <>
-            <HeaderUser properties={state_header_user} />
-            <div className={state_header_user['cls-6']}></div>
-            <AvatarAccount  properties={state_avatar_account} />
-            <WelcomeAccount properties={state_Welcome_account} />
-            <Groups properties={state_group} />
-            <FooterAccount properties={state_footer_accounts} />
-        </>
+  //variable de estado
+  let state_header_user = Object.values(Object.values(Object.entries(props)[0][1])[0])[1];
+  let state_avatar_account = Object.values(Object.values(Object.entries(props)[0][1])[5])[0];
+  let state_Welcome_account = Object.values(Object.values(Object.entries(props)[0][1])[5])[1];
+  let state_footer_accounts = Object.values(Object.values(Object.entries(props)[0][1])[5])[4];
+  let state_group = Object.values(Object.values(Object.entries(props)[0][1])[7])[0];
 
-    )
+
+  //useEstado
+  const [header_user, setHeaderUser] = React.useState({
+    state_header_user: Object.values(Object.values(Object.entries(props)[0][1])[0])[1],
+    nombre_persona: localStorage.getItem('user_name'),
+  });
+
+  return (
+
+    <>
+      <HeaderUser properties={header_user} />
+      <div className={state_header_user['cls-6']}></div>
+      <AvatarAccount properties={state_avatar_account} />
+      <WelcomeAccount properties={state_Welcome_account} />
+      <Groups properties={state_group} />
+      <FooterAccount properties={state_footer_accounts} />
+    </>
+
+  )
 
 }
 
@@ -41,17 +49,17 @@ export function PersonNormal(props) {
   *  @decs  : fecht de la ruta znlp/:doc y retorna el nombre y apellido del usuario
 */
 async function get_user_name(user_id) {
-     
-      try {
 
-        //fetch de la ruta znlp/:doc
-        let response = await fetch(`http://localhost:4500/znlp/${user_id}`);
-        let data = await response.json();
-        console.log(data, 'data');
-        localStorage.setItem('user_name', `${data[0].first_name} ${data[0].first_last_name}`);
-    
-      } catch (error) {
-        console.log(error);
-      }
-     
+  try {
+
+    //fetch de la ruta znlp/:doc
+    let response = await fetch(`http://localhost:4500/znlp/${user_id}`);
+    let data = await response.json();
+    console.log(data, 'data');
+    localStorage.setItem('user_name', `${data[0].first_name} ${data[0].first_last_name}`);
+
+  } catch (error) {
+    console.log(error);
+  }
+
 }
