@@ -16,6 +16,7 @@ import { Login } from './components/pages/Login';
 import { UserInfo } from './components/pages/UserInfo';
 import { PersonNormal } from './components/pages/PersonNormal';
 import { A404 } from './components/pages/A404';
+import { CreateUser } from './components/pages/CreateUser';
 
 
 
@@ -43,6 +44,7 @@ export function App() {
         <Route path="/login" element = {<Login properties={json} />} />
         <Route path="/userinfo" element = {<UserInfo properties={json} />} />
         <Route path="/personnormal" element = {<PersonNormal properties={json} />} />
+        <Route path="/createuser" element = {<CreateUser properties={json} />} />
         <Route path="*" element = {<A404 />} />
       </Routes>
     </Router>

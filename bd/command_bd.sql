@@ -310,7 +310,7 @@ CREATE TABLE person_eclesial (
   person_id INTEGER NOT NULL,
   baptism_date DATE,
   baptism_place_id INTEGER,
-  baptism_city_id INTEGER,
+  --baptism_city_id INTEGER,
   holy_spirit_date DATE,
   date_init_church DATE,
   experience_json JSON,
