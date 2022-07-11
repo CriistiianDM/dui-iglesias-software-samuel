@@ -4,6 +4,13 @@ import userList from '../../css/user_list.css';
 import { Icon, IconButton, TextField,CircularProgress } from '@material-ui/core';
 import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEye';
 
+
+
+
+/**
+  *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
+  *  @decs  : user list component
+*/
 export function UserList(props) {
 
     let state_user_list = props.properties;
