@@ -13,11 +13,7 @@ import { FooterAccount } from '../account-element/FooterAccount';
 */
 export function Account(props) {
 
-    //useEffect para obtener el nombre y apellido del usuario
-     React.useEffect(() => {
-        get_user_name(localStorage.getItem('user_login'));
-     }, []);
-   
+  
      let state_header_user = Object.values(Object.values(Object.entries(props)[0][1])[0])[1];
      let state_avatar_account = Object.values(Object.values(Object.entries(props)[0][1])[5])[0];
      let state_Welcome_account = Object.values(Object.values(Object.entries(props)[0][1])[5])[1];
@@ -38,25 +34,4 @@ export function Account(props) {
        </>
     );
 
-}
-
-
-/**
-  *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
-  *  @decs  : fecht de la ruta znlp/:doc y retorna el nombre y apellido del usuario
-*/
-async function get_user_name(user_id) {
-     
-      try {
-
-        //fetch de la ruta znlp/:doc
-        let response = await fetch(`http://localhost:4500/znlp/${user_id}`);
-        let data = await response.json();
-        console.log(data, 'data');
-        localStorage.setItem('user_name', `${data[0].first_name} ${data[0].first_last_name}`);
-    
-      } catch (error) {
-        console.log(error);
-      }
-     
 }

@@ -30,6 +30,14 @@
     overflow: hidden;
 }
 
+@media screen and (max-width: 600px) {
+
+    .box-create-user-element-form-1 {
+        grid-gap: 1em;
+    }
+    
+}
+
 .box-create-user-button-save {
     background-color: #3f51b5 !important;
     color: white !important;

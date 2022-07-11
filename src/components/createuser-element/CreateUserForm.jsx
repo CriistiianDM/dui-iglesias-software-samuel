@@ -22,6 +22,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
+
+
+/**
+  *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
+  *  @decs  : formulario de creacion de usuario
+*/
 export function CreateUserForm(props) {
 
     //variables
