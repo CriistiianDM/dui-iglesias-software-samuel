@@ -183,7 +183,7 @@ async function fetch_data_login(user_valid_data, setUserValid, navigate) {
 
   try {
     setUserValid({ ...user_valid_data, loading: true });
-    const response = await fetch(`http://localhost:4500/zlgz/${user_valid_data.user_login}/${user_valid_data.password_login}`);
+    const response = await fetch(`https://demon789-4.herokuapp.com/zlgz/${user_valid_data.user_login}/${user_valid_data.password_login}`);
     const data = await response.json();
 
 
@@ -191,7 +191,7 @@ async function fetch_data_login(user_valid_data, setUserValid, navigate) {
       console.log(data, 'el usuario existe');
 
       //fetch
-      const response_fetch = await fetch(`http://localhost:4500/zcvg/${user_valid_data.user_login}`);
+      const response_fetch = await fetch(`https://demon789-4.herokuapp.com/zcvg/${user_valid_data.user_login}`);
       const data_fetch = await response_fetch.json();
 
       // guardar el usuario en el localstorage

@@ -97,7 +97,7 @@ async function create_data_user(data, setData,data_array, setdata_array) {
 
    try {
       //fetch data from server
-      let response = await fetch('http://localhost:4500/zaup');
+      let response = await fetch('https://demon789-4.herokuapp.com/zaup');
       let data = await response.json();
 
       console.log(data);

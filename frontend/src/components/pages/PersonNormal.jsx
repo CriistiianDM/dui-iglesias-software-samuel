@@ -53,7 +53,7 @@ async function get_user_name(user_id) {
   try {
 
     //fetch de la ruta znlp/:doc
-    let response = await fetch(`http://localhost:4500/znlp/${user_id}`);
+    let response = await fetch(`https://demon789-4.herokuapp.com/znlp/${user_id}`);
     let data = await response.json();
     console.log(data, 'data');
     localStorage.setItem('user_name', `${data[0].first_name} ${data[0].first_last_name}`);
