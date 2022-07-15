@@ -281,6 +281,8 @@
         "0": {
             "cls-1": "box-create-user-element",
             "cls-2": "box-create-user-element-form-1",
+            "cls-10": "box-create-user-title",
+            "cls-11": "box-create-user-title-element",
             "cls-12": "box-create-user-button-save"
         }
     }

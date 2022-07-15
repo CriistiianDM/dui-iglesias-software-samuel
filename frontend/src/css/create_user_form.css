@@ -30,16 +30,35 @@
     overflow: hidden;
 }
 
-@media screen and (max-width: 600px) {
-
-    .box-create-user-element-form-1 {
-        grid-gap: 1em;
-    }
-    
-}
 
 .box-create-user-button-save {
     background-color: #3f51b5 !important;
     color: white !important;
     font-size: 1.2em !important;
+}
+
+
+.box-create-user-title-element {
+    text-align: center;
+    font-size: 3.5em !important;
+    font-weight: 800 !important;
+    color: #6c6c6d !important;
+    padding: 0.5em 0.5em;
+}
+
+.box-create-user-title {
+    width: 80%;
+    height: auto;
+}
+
+
+@media screen and (max-width: 600px) {
+
+    .box-create-user-element-form-1 {
+        grid-gap: 1em;
+    }
+    .box-create-user-title-element {
+        font-size: 2.3em !important;
+    }
+    
 }

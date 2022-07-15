@@ -5,7 +5,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import {
     Button, TextField, Select,
     InputLabel, FormControl,
-    FormHelperText
+    FormHelperText,
+    Typography
 } from '@material-ui/core';
 
 //estilos de material-ui
@@ -40,9 +41,12 @@ export function CreateUserForm(props) {
 
         <div className={state_user_form['cls-1']}>
 
+            <div className={state_user_form['cls-10']}> 
+                <Typography  className={state_user_form['cls-11']}> Creacion de usuario </Typography>
+            </div>
             <form className={state_user_form['cls-2']} noValidate autoComplete="off">
                 <TextField type='number' label="Identificacion" variant="filled" />
-                <TextField type='text' label="Primer Nombre" variant="filled" />
+                <TextField type='file' label="Primer Nombre" variant="filled" />
                 <TextField label="Segundo Nombre" variant="filled" />
                 <TextField label="Primer Apellido" variant="filled" />
                 <TextField label="Segundo Apellido" variant="filled" />
