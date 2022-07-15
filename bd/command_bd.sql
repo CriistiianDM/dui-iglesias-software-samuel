@@ -310,7 +310,7 @@ CREATE TABLE person_eclesial (
   person_id INTEGER NOT NULL,
   baptism_date DATE,
   baptism_place_id INTEGER,
-  baptism_city_id INTEGER,
+  --baptism_city_id INTEGER,
   holy_spirit_date DATE,
   date_init_church DATE,
   experience_json JSON,
@@ -369,7 +369,7 @@ CREATE TABLE groups_eclesial (
   url_img VARCHAR(255),
   logical_erase BOOL NOT NULL DEFAULT false 
 )
-
+-- id grupo superior a la tabla groups_eclesial
 
 -- Table period
 CREATE TABLE periodo (
@@ -380,6 +380,8 @@ CREATE TABLE periodo (
   status VARCHAR(2) NOT NULL CHECK (status = 'A' OR status = 'I'),
   logical_erase BOOL NOT NULL DEFAULT false
 )
+-- id congregation_id INTEGER NOT NULL,
+-- colocar campo url en la tabla person-groups
 
 
 -- Table person_position

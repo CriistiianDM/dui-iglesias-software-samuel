@@ -1,0 +1,45 @@
+
+
+.box-create-user-element {
+    display: grid;
+    grid-auto-rows: auto;
+    grid-auto-columns: 100%;
+    grid-gap: 2em;
+    align-items: center;
+    justify-items: center;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+
+.box-create-user-element-form-1 {
+    display: grid;
+    grid-auto-rows: auto;
+    grid-template-columns:  repeat(auto-fit, minmax( min(100%, 18em), 1fr));
+    grid-gap: 0.5em;
+    justify-items: center;
+    align-items: center;
+    width: 90%;
+    height: auto;
+    background-color: white;
+    box-shadow: 0 0.2em 0.7em 0 rgba(0, 0, 0, 0.2);
+    border-radius: 0.23em;
+    margin-top: 1em;
+    padding: 1.5em 0;
+    overflow: hidden;
+}
+
+@media screen and (max-width: 600px) {
+
+    .box-create-user-element-form-1 {
+        grid-gap: 1em;
+    }
+    
+}
+
+.box-create-user-button-save {
+    background-color: #3f51b5 !important;
+    color: white !important;
+    font-size: 1.2em !important;
+}

@@ -1,0 +1,54 @@
+
+
+.box-header-element {
+    display: grid;
+    grid-template-rows: 100%;
+    grid-template-columns: repeat(auto-fit, minmax( min(100%, 7em), 1fr));
+    grid-gap: 0.5em;
+    background: linear-gradient(90deg, rgb(255, 255, 255), rgb(233, 228, 228));
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.5);
+    position: fixed;
+    width: 100%;
+    height: auto;
+    max-height: 4.5em;
+    padding: 0.5em 0.5em;
+    overflow: hidden;
+    z-index: 4;
+}
+
+.box-img-element {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+    align-self: center;
+    width: auto;
+    height: auto;
+    max-width: 90%;
+    max-height: 90%;
+    overflow: hidden;
+}
+
+.logo-iglesia-box {
+   width: auto;
+   height: 4.5em;
+}
+
+.logo-iglesia-box img {
+    height: 100%;
+}
+
+.box-icon-menu-header {
+    grid-row: 1;
+    justify-self: end;
+    align-self: center;
+    margin-right: 1em !important;
+    width: auto;
+    height: auto;
+    max-height: 70%;
+    max-width: 70%;
+    overflow: hidden;
+}
+
+.box-aux-header {
+    height: 4.5em;
+}
