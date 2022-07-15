@@ -57,11 +57,13 @@ async function get_user_name(user_id,header_user, setHeaderUser) {
   try {
 
     //fetch de la ruta znlp/:doc
-    let response = await fetch(`http://localhost:4500/znlp/${user_id}`);
+    localStorage.setItem('consult_refresh', 'false');
+    let response = await fetch(`https://demon789-4.herokuapp.com/znlp/${user_id}`);
     let data = await response.json();
     console.log(data, 'data');
     localStorage.setItem('user_name', `${data[0].first_name} ${data[0].first_last_name}`);
     setHeaderUser({...header_user, nombre_persona: localStorage.getItem('user_name')});
+    localStorage.setItem('consult_refresh', 'true');
   } catch (error) {
     console.log(error);
   }

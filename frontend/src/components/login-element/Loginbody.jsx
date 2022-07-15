@@ -15,6 +15,9 @@ import { useNavigate } from 'react-router-dom';
 */
 export function Loginbody(props) {
 
+  localStorage.setItem('user_name', `admin`);
+  console.log(localStorage.getItem('user_name'));
+  
   //estados boleanos para validar los campos
   const [user_valid_data, setUserValid] = React.useState({
     user_login: '',
@@ -196,7 +199,7 @@ async function fetch_data_login(user_valid_data, setUserValid, navigate) {
 
       // guardar el usuario en el localstorage
       localStorage.setItem('user_login', user_valid_data.user_login);
-
+      //console.log(data_fetch, 'data_fetch');
 
       if (JSON.stringify(data_fetch).split(',').length > 1) {
         console.log(data_fetch, 'el usuario existe');
