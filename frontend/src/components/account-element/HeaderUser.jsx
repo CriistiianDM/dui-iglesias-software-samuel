@@ -61,10 +61,8 @@ function update_user_name(user, setUser) {
     console.log(letter_before, letter_after, 'salida before after');
 
 
-    if (letter_before !== letter_after) {
-      clearInterval(timer);
-    }
-    else if (letter_before === letter_after) {
+    if (localStorage.getItem('consult_refresh') === 'true') {
+      console.log('consult_refresh true');
       clearInterval(timer);
     }
 

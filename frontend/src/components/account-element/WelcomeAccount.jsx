@@ -56,14 +56,19 @@ function update_user_name(user, setUser) {
     letter_after = localStorage.getItem('user_name').substring(0, 1).toUpperCase();
     console.log(letter_before, letter_after, 'salida before after welcome');
 
+    if (localStorage.getItem('consult_refresh') === 'true') {
+      console.log('consult_refresh true');
+      clearInterval(timer);
+    }
 
+/*
     if (letter_before !== letter_after) {
       clearInterval(timer);
     }
     else if (letter_before === letter_after) {
       clearInterval(timer);
     }
-
+*/
 
   }, 100);
 
