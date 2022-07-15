@@ -72,6 +72,7 @@ styleTextChoose: {
 
 /**
  * The Cargo function is used to select the user's role in the church
+ * @author: @juan.felipe.osorio@correounivalle.edu.co <JFOZ1010>
  * @param props - The props that are passed to the component.
  * @returns The return is a form control with a select and a label.
  */

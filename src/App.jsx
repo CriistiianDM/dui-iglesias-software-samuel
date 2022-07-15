@@ -15,6 +15,14 @@ import { Login } from './components/pages/Login';
 import { UserInfo } from './components/pages/UserInfo';
 import { PersonNormal } from './components/pages/PersonNormal';
 import { A404 } from './components/pages/A404';
+import { Grupos } from './components/pages/Grupos.js';
+import { Sistemas } from './components/pages/Sistemas.js'; 
+import { Administrativo } from './components/pages/Administrativo.js';
+import { AsisAdmin } from './components/pages/AsisAdmin.js';
+import { PastorLocal } from './components/pages/PastorLocal.js';
+import { Comite } from './components/pages/Comite.js';
+import { Creyente } from './components/pages/Creyente.js';
+
 
 
 
@@ -42,6 +50,7 @@ export function App() {
         <Route path="/login" element = {<Login properties={json} />} />
         <Route path="/userinfo" element = {<UserInfo properties={json} />} />
         <Route path="/personnormal" element = {<PersonNormal properties={json} />} />
+        <Route path="/grupos" element={<Grupos/>}></Route>
         <Route path="*" element = {<A404 />} />
       </Routes>
     </Router>
