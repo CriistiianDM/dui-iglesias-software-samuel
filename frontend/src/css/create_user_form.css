@@ -4,11 +4,28 @@
     display: grid;
     grid-auto-rows: auto;
     grid-auto-columns: 100%;
-    grid-gap: 2em;
+    grid-gap: 1em;
     align-items: center;
     justify-items: center;
     width: 100%;
     height: auto;
+    overflow: hidden;
+}
+
+
+.box-create-user-element-all-form {
+    display: grid;
+    grid-auto-rows: auto;
+    grid-template-columns: 100%;
+    grid-gap: 1em;
+    align-items: center;
+    justify-items: center;
+    width: 90%;
+    height: auto;
+    border-radius: 0.23em;
+    background-color: white;
+    box-shadow: 0 0.2em 0.7em 0 rgba(0, 0, 0, 0.2);
+    margin-top: 3em;
     overflow: hidden;
 }
 
@@ -22,14 +39,16 @@
     align-items: center;
     width: 90%;
     height: auto;
-    background-color: white;
-    box-shadow: 0 0.2em 0.7em 0 rgba(0, 0, 0, 0.2);
-    border-radius: 0.23em;
-    margin-top: 1em;
     padding: 1.5em 0;
     overflow: hidden;
 }
 
+.box-create-user-title-label {
+    font-size: 1.5em !important;
+    font-weight: 800 !important;
+    color: #6c6c6d !important;
+    padding: 0.5em 0.5em;
+}
 
 .box-create-user-button-save {
     background-color: #3f51b5 !important;
@@ -47,18 +66,23 @@
 }
 
 .box-create-user-title {
-    width: 80%;
-    height: auto;
+    width: 90%;
 }
 
+.aux-box-width-cr {
+    width: 80% !important;
+}
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 711px) {
 
     .box-create-user-element-form-1 {
         grid-gap: 1em;
     }
     .box-create-user-title-element {
         font-size: 2.3em !important;
+    }
+    .box-create-user-title-label {
+        text-align: center;
     }
     
 }

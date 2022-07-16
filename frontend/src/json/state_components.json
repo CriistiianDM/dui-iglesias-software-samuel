@@ -281,6 +281,9 @@
         "0": {
             "cls-1": "box-create-user-element",
             "cls-2": "box-create-user-element-form-1",
+            "cls-7": "box-create-user-title aux-box-width-cr",
+            "cls-8": "box-create-user-title-label",
+            "cls-9": "box-create-user-element-all-form",
             "cls-10": "box-create-user-title",
             "cls-11": "box-create-user-title-element",
             "cls-12": "box-create-user-button-save"

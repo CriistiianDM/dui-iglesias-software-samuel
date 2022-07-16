@@ -1,5 +1,5 @@
 //librery or import
-import React  from 'react';
+import React from 'react';
 import { HeaderUser } from '../account-element/HeaderUser';
 import { ChangePhotoProfile } from '../UserInfo/ChangePhotoProfile';
 import { WelcomeAccount } from '../account-element/WelcomeAccount';
@@ -16,16 +16,22 @@ export function UserInfo(props) {
     let state_Setting_accounts = Object.values(Object.values(Object.entries(props)[0][1])[6])[0];
     let state_footer_accounts = Object.values(Object.values(Object.entries(props)[0][1])[5])[4];
 
+    //useEstado
+    const [header_user, setHeaderUser] = React.useState({
+        state_header_user: Object.values(Object.values(Object.entries(props)[0][1])[0])[1],
+        nombre_persona: localStorage.getItem('user_name'),
+    });
+
     return (
- 
-         <>
-          <HeaderUser properties={state_header_user} />
-          <div className={state_header_user['cls-6']}></div>
-          <ChangePhotoProfile properties={state_avatar_account} />
-          <WelcomeAccount properties={state_Welcome_account} />
-          <OptionMenuProfile properties={state_Setting_accounts} />
-          <FooterAccount properties={state_footer_accounts} />
-         </>
+
+        <>
+            <HeaderUser properties={header_user} />
+            <div className={state_header_user['cls-6']}></div>
+            <ChangePhotoProfile properties={state_avatar_account} />
+            <WelcomeAccount properties={state_Welcome_account} />
+            <OptionMenuProfile properties={state_Setting_accounts} />
+            <FooterAccount properties={state_footer_accounts} />
+        </>
     )
-    
+
 }

@@ -41,12 +41,19 @@ export function CreateUserForm(props) {
 
         <div className={state_user_form['cls-1']}>
 
+            <div className={state_user_form['cls-9']}>
+
             <div className={state_user_form['cls-10']}> 
-                <Typography  className={state_user_form['cls-11']}> Creacion de usuario </Typography>
+                <Typography  className={state_user_form['cls-11']}> Creacion De Usuario </Typography>
             </div>
+
+            <div className={state_user_form['cls-7']}> 
+                <Typography  className={state_user_form['cls-8']}> Informacion Personal </Typography>
+            </div>
+
             <form className={state_user_form['cls-2']} noValidate autoComplete="off">
                 <TextField type='number' label="Identificacion" variant="filled" />
-                <TextField type='file' label="Primer Nombre" variant="filled" />
+                <TextField type='text' label="Primer Nombre" variant="filled" />
                 <TextField label="Segundo Nombre" variant="filled" />
                 <TextField label="Primer Apellido" variant="filled" />
                 <TextField label="Segundo Apellido" variant="filled" />
@@ -80,33 +87,45 @@ export function CreateUserForm(props) {
                         <option value="F">Femenino</option>
                     </Select>
                 </FormControl>
-                <FormControl variant="filled" className={classes.formControl}>
-                    <InputLabel htmlFor="">Lugar De Nacimiento</InputLabel>
-                    <Select label="Tipo de Documento" variant="filled" native>
+                <TextField type='text' label="Direccion" variant="filled" />
+            </form>
+
+            <div className={state_user_form['cls-7']}> 
+                <Typography  className={state_user_form['cls-8']}> Lugar de Nacimiento </Typography>
+            </div>
+
+            <form className={state_user_form['cls-2']} noValidate autoComplete="off">
+            <FormControl variant="filled" className={classes.formControl}>
+                    <InputLabel htmlFor="wer">Pais</InputLabel>
+                    <Select label="Tipo de Documento" variant="filled" native labelId="wer">
                         <option aria-label="None" value="" />
-                        <option value="M">Cali</option>
-                        <option value="F">Bogota</option>
+                        <option value="M">Masculino</option>
+                        <option value="F">Femenino</option>
                     </Select>
-                    <FormHelperText>Selecione la cuidad</FormHelperText>
-                </FormControl>
-                <FormControl variant="filled" className={classes.formControl}>
-                    <InputLabel htmlFor="">Direccion</InputLabel>
-                    <Select label="Tipo de Documento" variant="filled" native>
+                </FormControl>       
+            <FormControl variant="filled" className={classes.formControl}>
+                    <InputLabel htmlFor="wer">Region</InputLabel>
+                    <Select label="Tipo de Documento" variant="filled" native labelId="wer">
                         <option aria-label="None" value="" />
-                        <option value="M">Cali</option>
-                        <option value="F">Bogota</option>
+                        <option value="M">Masculino</option>
+                        <option value="F">Femenino</option>
                     </Select>
-                    <FormHelperText>Selecione la cuidad</FormHelperText>
-                </FormControl>
-                <FormControl variant="filled" className={classes.formControl}>
-                    <InputLabel htmlFor="">lugar de bautismo</InputLabel>
-                    <Select label="Tipo de Documento" variant="filled" native>
+                </FormControl>       
+            <FormControl variant="filled" className={classes.formControl}>
+                    <InputLabel htmlFor="wer">Cuidad</InputLabel>
+                    <Select label="Tipo de Documento" variant="filled" native labelId="wer">
                         <option aria-label="None" value="" />
-                        <option value="M">Cali</option>
-                        <option value="F">Bogota</option>
+                        <option value="M">Masculino</option>
+                        <option value="F">Femenino</option>
                     </Select>
-                    <FormHelperText>Selecione la cuidad</FormHelperText>
-                </FormControl>
+                </FormControl>       
+            </form>
+
+            <div className={state_user_form['cls-7']}> 
+                <Typography  className={state_user_form['cls-8']}> Informacion Eclesial </Typography>
+            </div>
+
+            <form className={state_user_form['cls-2']} noValidate autoComplete="off">
                 <TextField
                     id="date"
                     label="Fecha de Bautizmo"
@@ -138,8 +157,43 @@ export function CreateUserForm(props) {
                     id="date"
                     label="Habilidades - JSON"
                     type='text'
+                    className={classes.textField}
                 />
             </form>
+
+            <div className={state_user_form['cls-7']}> 
+                <Typography  className={state_user_form['cls-8']}> Lugar de Bautizmo </Typography>
+            </div>
+
+            <form className={state_user_form['cls-2']} noValidate autoComplete="off">
+            <FormControl variant="filled" className={classes.formControl}>
+                    <InputLabel htmlFor="wer">Pais</InputLabel>
+                    <Select label="Tipo de Documento" variant="filled" native labelId="wer">
+                        <option aria-label="None" value="" />
+                        <option value="M">Masculino</option>
+                        <option value="F">Femenino</option>
+                    </Select>
+                </FormControl>       
+            <FormControl variant="filled" className={classes.formControl}>
+                    <InputLabel htmlFor="wer">Region</InputLabel>
+                    <Select label="Tipo de Documento" variant="filled" native labelId="wer">
+                        <option aria-label="None" value="" />
+                        <option value="M">Masculino</option>
+                        <option value="F">Femenino</option>
+                    </Select>
+                </FormControl>       
+            <FormControl variant="filled" className={classes.formControl}>
+                    <InputLabel htmlFor="wer">Cuidad</InputLabel>
+                    <Select label="Tipo de Documento" variant="filled" native labelId="wer">
+                        <option aria-label="None" value="" />
+                        <option value="M">Masculino</option>
+                        <option value="F">Femenino</option>
+                    </Select>
+                </FormControl>   
+            </form>
+
+
+            </div>
 
             <Button className={state_user_form['cls-12']} >Guardar</Button>
 
