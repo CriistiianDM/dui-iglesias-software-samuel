@@ -57,32 +57,34 @@ export function CreateUserForm(props) {
         error_band_18: false,
         error_band_19: false,
         error_band_20: false,
-        message_band_0: '',
-        message_band_1: '',
-        message_band_2: '',
-        message_band_3: '',
-        message_band_4: '',
-        message_band_5: '',
+        error_band_21: false,
+        message_band_0: 'solo Numeros de 9 a 15 caracteres',
+        message_band_1: 'solo Letras de 3 a 50 caracteres',
+        message_band_2: 'solo Letras de 3 a 50 caracteres',
+        message_band_3: 'solo Letras de 3 a 50 caracteres',
+        message_band_4: 'solo Letras de 3 a 50 caracteres',
+        message_band_5: 'seleciona una opcion',
         message_band_6: '',
-        message_band_7: '',
-        message_band_8: '',
-        message_band_9: '',
+        message_band_7: 'verificar si email esta bien escrito',
+        message_band_8: 'solo numeros de 9 a 15 caracteres',
+        message_band_9: 'solo numeros de 9 a 15 caracteres',
         message_band_10: '',
-        message_band_11: '',
+        message_band_11: 'verificar si la direccion esta bien escrita',
         message_band_12: '',
         message_band_13: '',
         message_band_14: '',
         message_band_15: '',
         message_band_16: '',
         message_band_17: '',
-        message_band_18: '',
+        message_band_18: 'formato json incorrecto',
         message_band_19: '',
         message_band_20: '',
+        message_band_21: ''
     });
 
     //handle change
     const handleChange = (event) => {
-        validateForm(event,0);
+        validateForm(event, data_array , setdata_array);
     }
 
 
@@ -103,14 +105,14 @@ export function CreateUserForm(props) {
             </div>
 
             <form className={state_user_form['cls-2']} noValidate autoComplete="off">
-                <TextField  error={true} helperText={''} onBlur={handleChange} id='i-p-0'  type='number' label="Identificacion" variant="filled" />
-                <TextField onChange={handleChange} id='first-name-1' type='text' label="Primer Nombre" variant="filled" />
-                <TextField onChange={handleChange} id='second-name-1' label="Segundo Nombre" variant="filled" />
-                <TextField onChange={handleChange} id='last-name-1' label="Primer Apellido" variant="filled" />
-                <TextField onChange={handleChange} id='second-name-1' label="Segundo Apellido" variant="filled" />
-                <FormControl  variant="filled">
+                <TextField  error={data_array.error_band_0} helperText={(data_array.error_band_0)? data_array.message_band_0 : ''} onBlur={handleChange} id='i-p-0-0'  type='number' label="Identificacion" variant="filled" />
+                <TextField error={data_array.error_band_1} helperText={(data_array.error_band_1)? data_array.message_band_1 : ''} onChange={handleChange} id='first-name-1-1' type='text' label="Primer Nombre" variant="filled" />
+                <TextField error={data_array.error_band_2} helperText={(data_array.error_band_2)? data_array.message_band_2 : ''} onChange={handleChange} id='second-name-1-2' label="Segundo Nombre" variant="filled" />
+                <TextField error={data_array.error_band_3} helperText={(data_array.error_band_3)? data_array.message_band_3 : ''} onChange={handleChange} id='last-name-1-3' label="Primer Apellido" variant="filled" />
+                <TextField error={data_array.error_band_4} helperText={(data_array.error_band_4)? data_array.message_band_4 : ''} onChange={handleChange} id='second-name-1-4' label="Segundo Apellido" variant="filled" />
+                <FormControl error={data_array.error_band_5}  variant="filled">
                     <InputLabel htmlFor="">Tipo De Identificacion</InputLabel>
-                    <Select onClick={handleChange} id='tipo-identificacion-2' label="Tipo de Documento" variant="filled" native>
+                    <Select  onChange={handleChange} id='tipo-identificacion-2-5' label="Tipo de Documento" variant="filled" native>
                         <option aria-label="None" value="" />
                         <option value="CC">Cedula de Ciudadania</option>
                         <option value="CE">Cedula de Extranjeria</option>
@@ -119,27 +121,29 @@ export function CreateUserForm(props) {
                     </Select>
                 </FormControl>
                 <TextField
-                    id="date-f-3"
+                    id="date-f-3-6"
                     label="Fecha de Nacimiento"
                     onChange={handleChange}
+                    error={data_array.error_band_6} 
+                    helperText={(data_array.error_band_6)? data_array.message_band_6 : ''}
                     type="date"
                     className={classes.textField}
                     InputLabelProps={{
                         shrink: true,
                     }}
                 />
-                <TextField onChange={handleChange} id='tipo-email-4' type='email' label="Email" variant="filled" />
-                <TextField onChange={handleChange} id='tipo-tel1-0' type='number' label="Telefono 1" variant="filled" />
-                <TextField onChange={handleChange} id='tipo-tel2-0' type='number' label="Telefono 2" variant="filled" />
-                <FormControl variant="filled" className={classes.formControl}>
+                <TextField error={data_array.error_band_7} helperText={(data_array.error_band_7)? data_array.message_band_7 : ''} onChange={handleChange} id='tipo-email-4-7' type='email' label="Email" variant="filled" />
+                <TextField error={data_array.error_band_8} helperText={(data_array.error_band_8)? data_array.message_band_8 : ''} onChange={handleChange} id='tipo-tel1-0-8' type='number' label="Telefono 1" variant="filled" />
+                <TextField error={data_array.error_band_9} helperText={(data_array.error_band_9)? data_array.message_band_9 : ''} onChange={handleChange} id='tipo-tel2-0-9' type='number' label="Telefono 2" variant="filled" />
+                <FormControl error={data_array.error_band_10}  variant="filled" className={classes.formControl}>
                     <InputLabel htmlFor="wer">Genero</InputLabel>
-                    <Select onClick={handleChange} id='tipo-genero-5' label="Tipo de Documento" variant="filled" native labelId="wer">
+                    <Select onClick={handleChange} id='tipo-genero-5-10' label="Tipo de Documento" variant="filled" native labelId="wer">
                         <option aria-label="None" value="" />
                         <option value="M">Masculino</option>
                         <option value="F">Femenino</option>
                     </Select>
                 </FormControl>
-                <TextField onChange={handleChange} id='tipo-direccion-6' type='text' label="Direccion" variant="filled" />
+                <TextField error={data_array.error_band_11} helperText={(data_array.error_band_11)? data_array.message_band_11 : ''} onChange={handleChange} id='tipo-direccion-6-11' type='text' label="Direccion" variant="filled" />
             </form>
 
             <div className={state_user_form['cls-7']}> 
@@ -147,25 +151,25 @@ export function CreateUserForm(props) {
             </div>
 
             <form className={state_user_form['cls-2']} noValidate autoComplete="off">
-            <FormControl variant="filled" className={classes.formControl}>
+            <FormControl error={data_array.error_band_12}  variant="filled" className={classes.formControl}>
                     <InputLabel htmlFor="wer">Pais</InputLabel>
-                    <Select onChange={handleChange} id='tipo-pais1-7' label="Tipo de Documento" variant="filled" native labelId="wer">
+                    <Select onChange={handleChange} id='tipo-pais1-7-12' label="Tipo de Documento" variant="filled" native labelId="wer">
                         <option aria-label="None" value="" />
                         <option value="M">Masculino</option>
                         <option value="F">Femenino</option>
                     </Select>
                 </FormControl>       
-            <FormControl variant="filled" className={classes.formControl}>
+            <FormControl error={data_array.error_band_13}  variant="filled" className={classes.formControl}>
                     <InputLabel htmlFor="wer">Region</InputLabel>
-                    <Select onChange={handleChange} id='tipo-region1-7' label="Tipo de Documento" variant="filled" native labelId="wer">
+                    <Select onChange={handleChange} id='tipo-region1-7-13' label="Tipo de Documento" variant="filled" native labelId="wer">
                         <option aria-label="None" value="" />
                         <option value="M">Masculino</option>
                         <option value="F">Femenino</option>
                     </Select>
                 </FormControl>       
-            <FormControl variant="filled" className={classes.formControl}>
+            <FormControl error={data_array.error_band_14}  variant="filled" className={classes.formControl}>
                     <InputLabel htmlFor="wer">Cuidad</InputLabel>
-                    <Select onChange={handleChange} id='tipo-cali1-7' label="Tipo de Documento" variant="filled" native labelId="wer">
+                    <Select onChange={handleChange} id='tipo-cali1-7-14' label="Tipo de Documento" variant="filled" native labelId="wer">
                         <option aria-label="None" value="" />
                         <option value="M">Masculino</option>
                         <option value="F">Femenino</option>
@@ -179,9 +183,11 @@ export function CreateUserForm(props) {
 
             <form className={state_user_form['cls-2']} noValidate autoComplete="off">
                 <TextField
-                    id="date-bautizo-3"
+                    id="date-bautizo-3-15"
                     label="Fecha de Bautizmo"
                     type="date"
+                    error={data_array.error_band_15}
+                    helperText={(data_array.error_band_15)? data_array.message_band_15 : ''}
                     onChange={handleChange}
                     className={classes.textField}
                     InputLabelProps={{
@@ -189,8 +195,10 @@ export function CreateUserForm(props) {
                     }}
                 />
                 <TextField
-                    id="date-iglesia-3"
+                    id="date-iglesia-3-16"
                     label="Ingreso a la iglesia"
+                    error={data_array.error_band_16}
+                    helperText={(data_array.error_band_16)? data_array.message_band_16 : ''}
                     type="date"
                     onChange={handleChange}
                     className={classes.textField}
@@ -199,8 +207,10 @@ export function CreateUserForm(props) {
                     }}
                 />
                 <TextField
-                    id="date-santo-3"
+                    id="date-santo-3-17"
                     label="FECHA RECEPCIÓN ESPÍRITU SANTO"
+                    error={data_array.error_band_17} 
+                    helperText={(data_array.error_band_17)? data_array.message_band_17 : ''}
                     type="date"
                     onChange={handleChange}
                     className={classes.textField}
@@ -209,9 +219,11 @@ export function CreateUserForm(props) {
                     }}
                 />
                 <TextField
-                    id="date-fQQ-8"
+                    id="date-fQQ-8-18"
                     onChange={handleChange}
                     label="Habilidades - JSON"
+                    error={data_array.error_band_18} 
+                    helperText={(data_array.error_band_18)? data_array.message_band_18 : ''}
                     type='text'
                     className={classes.textField}
                 />
@@ -222,25 +234,25 @@ export function CreateUserForm(props) {
             </div>
 
             <form className={state_user_form['cls-2']} noValidate autoComplete="off">
-            <FormControl variant="filled" className={classes.formControl}>
+            <FormControl error={data_array.error_band_19}  variant="filled" className={classes.formControl}>
                     <InputLabel htmlFor="wer">Pais</InputLabel>
-                    <Select onChange={handleChange} id='tipo-pais2-7' label="Tipo de Documento" variant="filled" native labelId="wer">
+                    <Select onChange={handleChange} id='tipo-pais2-7-19' label="Tipo de Documento" variant="filled" native labelId="wer">
                         <option aria-label="None" value="" />
                         <option value="M">Masculino</option>
                         <option value="F">Femenino</option>
                     </Select>
                 </FormControl>       
-            <FormControl variant="filled" className={classes.formControl}>
+            <FormControl error={data_array.error_band_20}  variant="filled" className={classes.formControl}>
                     <InputLabel htmlFor="wer">Region</InputLabel>
-                    <Select onChange={handleChange} id='tipo-region2-7' label="Tipo de Documento" variant="filled" native labelId="wer">
+                    <Select onChange={handleChange} id='tipo-region2-7-20' label="Tipo de Documento" variant="filled" native labelId="wer">
                         <option aria-label="None" value="" />
                         <option value="M">Masculino</option>
                         <option value="F">Femenino</option>
                     </Select>
                 </FormControl>       
-            <FormControl variant="filled" className={classes.formControl}>
+            <FormControl error={data_array.error_band_21}  variant="filled" className={classes.formControl}>
                     <InputLabel htmlFor="wer">Cuidad</InputLabel>
-                    <Select onChange={handleChange} id='tipo-cuidad2-7' label="Tipo de Documento" variant="filled" native labelId="wer">
+                    <Select onChange={handleChange} id='tipo-cuidad2-7-21' label="Tipo de Documento" variant="filled" native labelId="wer">
                         <option aria-label="None" value="" />
                         <option value="M">Masculino</option>
                         <option value="F">Femenino</option>
@@ -263,18 +275,23 @@ export function CreateUserForm(props) {
   *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
   *  @decs  : Validar el formulario de creacion de usuario
 */
-function validateForm(e) {
+function validateForm(e, data_array , setdata_array) {
 
    let type = (e.target.id).split('-')[2];
+   let error = `error_band_${(e.target.id).split('-')[3]}`;
 
    //expresssion regular 
    console.log(e.target.value, e.target.id ,validateFormate(e, type));
 
-    if(validateFormate(e, type)){
+    if ( (e.target.value) === null || (e.target.value).length === 0 ) {
+        setdata_array({...data_array, [error]: false});
+    }
+    else if(validateFormate(e, type)){
         console.log('valido');
+        setdata_array({...data_array, [error]: false});
     }
     else {
-        console.log('invalido');
+        setdata_array({...data_array, [error]: true});
     }
 
 }
@@ -294,7 +311,7 @@ function validateFormate(e, type) {
         '3': /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/,
         '4': /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
         '5': /^[a-zA-Z]$/,
-        '6': /^[0-9-a-zA-Z#\-]{10,255}$/,
+        '6': /^[0-9-a-zA-Z\s#\-]{10,255}$/,
         '7': /^[0-9]{1,5}$/,
         '8': /^{[0-9-aA-zZ:,'"]+}$/,
    }         
