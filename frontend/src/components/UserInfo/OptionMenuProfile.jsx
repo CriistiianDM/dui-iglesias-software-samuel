@@ -1,11 +1,15 @@
 //librery or import of react
-import { IconButton, Icon, Typography, Button } from '@material-ui/core';
+import { IconButton, Icon, Typography, Button, Dialog, DialogActions, DialogTitle, DialogContent, DialogContentText} from '@material-ui/core';
 import React from 'react';
 import option_menu_profile from '../../css/option_menu_profile.css';
 
 export function OptionMenuProfile(props) {
 
     let state_option_menu_profile = props.properties;
+
+    let handle_dialog_open = () => {
+         var cargos_Interface = false; 
+      }
 
     return (
 
@@ -19,6 +23,15 @@ export function OptionMenuProfile(props) {
                         <Icon className={state_option_menu_profile['cls-6']}>edit</Icon>
 
                         <Typography className={state_option_menu_profile['cls-5']}>Modificar Info</Typography>
+                    </div>
+
+                </Button>
+                <Button onClick={() => { alert('clicked');}}className={state_option_menu_profile['cls-3']}>
+
+                    <div className={state_option_menu_profile['cls-4']}>
+                        <Icon className={state_option_menu_profile['cls-6']}>assignment</Icon>
+        
+                        <Typography className={state_option_menu_profile['cls-5']}>Cargos</Typography>
                     </div>
 
                 </Button>
@@ -54,6 +67,26 @@ export function OptionMenuProfile(props) {
                 </Button>
 
 
+            </div>
+
+            <div>
+                <Dialog
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">{"Error al inciar sesion"}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            El usuario o la contraseña son incorrectos, si el problema persiste comuniquese con el administrador
+                            juan.camino@correounivalle.edu.co con ASUNTO: Error al iniciar sesion Iglesia digital
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                    <Button onClick={handle_dialog_open} color="primary">
+                     Cerrar
+                    </Button>
+                    </DialogActions>
+                </Dialog>
             </div>
 
             <div className={state_option_menu_profile['cls-7']}>
