@@ -350,6 +350,7 @@ CREATE TABLE person_kinship (
 )
 
 
+
 -- Table position
 CREATE TABLE position_librarian (
   id INTEGER PRIMARY KEY NOT NULL UNIQUE,

@@ -92,7 +92,7 @@
                 {   "id": "btn-3",
                     "icon": "workspaces",
                     "title": "Grupos",
-                    "to": "/account",
+                    "to": "/grupo",
                     "content": "Esta opcion permite crear un nuevo grupo"
                 },
                 {   "id": "btn-4",
