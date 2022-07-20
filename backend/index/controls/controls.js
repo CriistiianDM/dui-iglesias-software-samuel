@@ -51,7 +51,7 @@ const petitions_get_cargo_vigigentes = async (req, res) => {
 
         //conseguir el id de la persona de la tabla person atreves de su documento
         const answer = await pool.query('SELECT id FROM person WHERE doc = $1 AND logical_erase = false', [doc]);
-
+        //res.json(answer.rows);
         if ((answer.rows[0]) !== undefined) {
 
             id_person = answer.rows[0].id;
@@ -70,7 +70,7 @@ const petitions_get_cargo_vigigentes = async (req, res) => {
                 const answer4 = await pool.query('SELECT name FROM position_librarian WHERE id = $1 AND logical_erase = false', [element.position_id]);
                 const year_end = ((((answer3.rows[0]).date_end)).toLocaleDateString()).split('/');
                 const year_now = (date_js.toLocaleDateString()).split('/');
-
+                console.log('year_end', year_end, year_now);
 
                 //comparar la fecha de fin de vigencia con la fecha actual
                 if (Number(year_end[2]) > Number(year_now[2])) {
@@ -81,15 +81,15 @@ const petitions_get_cargo_vigigentes = async (req, res) => {
                 else if (Number(year_end[2]) === Number(year_now[2])) {
 
                     //verificar el mes
-                    if (Number(year_end[1]) > Number(year_now[1])) {
+                    if (Number(year_end[0]) > Number(year_now[0])) {
                         // tiene viginte el cargo pero proximo a vencer
                         console.log('no entro papa');
                         categoria_vigente += (`${(answer4.rows[0]).name},`);
                     }
-                    else if (Number(year_end[1]) === Number(year_now[1])) {
+                    else if (Number(year_end[0]) === Number(year_now[0])) {
 
                         //verificar el dia
-                        if (Number(year_end[0]) > Number(year_now[0])) {
+                        if (Number(year_end[1]) > Number(year_now[1])) {
                             //tiene viginte el cargo pero proximo a vencer
                             categoria_vigente += `${(answer4.rows[0]).name},`
                         }

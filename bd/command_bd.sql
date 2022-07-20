@@ -279,13 +279,12 @@ CREATE TABLE person (
   phone_1 VARCHAR(50),
   phone_2 VARCHAR(50),
   gender VARCHAR(2) NOT NULL CHECK (gender = 'M' OR gender = 'F'),
+  diretion VARCHAR(255),
   type_person VARCHAR(70) NOT NULL,
   id_user INTEGER,
-  id_city_direction INTEGER,
   place_birth INTEGER,
   logical_erase BOOL NOT NULL DEFAULT false,
   FOREIGN KEY (id_user) REFERENCES user_account(id),
-  FOREIGN KEY (id_city_direction) REFERENCES city(id),
   FOREIGN KEY (place_birth) REFERENCES city(id)
 )
 
