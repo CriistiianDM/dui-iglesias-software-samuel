@@ -80,6 +80,7 @@ export function CreateUserForm(props) {
         error_band_20: false,
         error_band_21: false,
         disabled_0: false,
+        disabled_1: false,
         message_band_0: 'solo Numeros de 9 a 15 caracteres',
         message_band_1: 'solo Letras de 3 a 50 caracteres',
         message_band_2: 'solo Letras de 3 a 50 caracteres',
@@ -143,7 +144,7 @@ export function CreateUserForm(props) {
                             shrink: true,
                         }}
                     />
-                    <TextField error={data_array.error_band_7} helperText={(data_array.error_band_7) ? data_array.message_band_7 : ''} onChange={handleChange} id='tipo-email-4-7' type='email' label="Email" variant="filled" />
+                    <TextField disabled={data_array.disabled_1} error={data_array.error_band_7} helperText={(data_array.error_band_7) ? data_array.message_band_7 : ''} onChange={handleChange} id='tipo-email-4-7' type='email' label="Email" variant="filled" />
                     <TextField error={data_array.error_band_8} helperText={(data_array.error_band_8) ? data_array.message_band_8 : ''} onChange={handleChange} id='tipo-tel1-0-8' type='number' label="Telefono 1" variant="filled" />
                     <TextField error={data_array.error_band_9} helperText={(data_array.error_band_9) ? data_array.message_band_9 : ''} onChange={handleChange} id='tipo-tel2-0-9' type='number' label="Telefono 2" variant="filled" />
                     <FormControl error={data_array.error_band_10} variant="filled" className={classes.formControl}>
@@ -343,32 +344,33 @@ function validateFormate(e, type) {
 
 /**
   *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
-  *  @decs  : Validar si el documento ya existe
+  *  @decs  : Validar si el documento o email ya existe
 */
 async function validateDocument(e, data_array, setdata_array, error) {
 
     try {
 
-        if (e.target.id === 'i-p-0-0') {
-            setdata_array({ ...data_array, disabled_0: true });
-            let response = await fetch(`https://demon789-4.herokuapp.com/zsdcr/${e.target.value}`);
+        if (e.target.id === 'i-p-0-0' || e.target.id === 'tipo-email-4-7') {
+            setdata_array({ ...data_array, [`${(e.target.id === 'i-p-0-0')? 'disabled_0': 'disabled_1'}`]: true });
+            let response = await fetch(`https://demon789-4.herokuapp.com/${(e.target.id === 'i-p-0-0')? 'zsdcr':'zsdemp' }/${e.target.value}`);
             let data = await response.json();
 
             if (data[0] === undefined) {
 
                 setdata_array({ ...data_array, 
-                                disabled_0: false, 
+                                [`${(e.target.id === 'i-p-0-0')? 'disabled_0': 'disabled_1'}`]: false, 
                                 [error]: false,
                                 [getNameState((e.target.id).split('-')[3])]: e.target.value
                             });
 
             }
             else {
-                setdata_array({ ...data_array, disabled_0: false ,[error]: true});
+                setdata_array({ ...data_array, [`${(e.target.id === 'i-p-0-0')? 'disabled_0': 'disabled_1'}`]: false ,[error]: true});
             }
             //alert('validar');
             
         }
+       
 
     } catch (error) {
         console.log(error);
