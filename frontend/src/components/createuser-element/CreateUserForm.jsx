@@ -38,7 +38,7 @@ export function CreateUserForm(props) {
 
     const [data_array, setdata_array] = React.useState({
         doc: '',
-        doc_from: '',
+        doc_from: 'colombia',
         doc_type: '',
         first_name: '',
         second_name: '',
@@ -57,7 +57,7 @@ export function CreateUserForm(props) {
         holy_spirit_date: '',
         date_init_church: '',
         experience_json: '',
-        id_church_now: '',
+        id_church_now: '1',
         error_band_0: false,
         error_band_1: false,
         error_band_2: false,
@@ -103,7 +103,8 @@ export function CreateUserForm(props) {
         message_band_8: 'solo numeros de 9 a 15 caracteres',
         message_band_9: 'solo numeros de 9 a 15 caracteres',
         message_band_11: 'verificar si la direccion esta bien escrita',
-        message_band_18: 'formato json incorrecto'
+        message_band_18: 'formato json incorrecto',
+        doc_from_aux: ''
     });
 
     React.useEffect(() => {
@@ -362,7 +363,7 @@ function validateForm(e, data_array, setdata_array) {
         });
         validateDocument(e, data_array, setdata_array, error);
         validate_country_region_city(e, data_array, setdata_array);
-
+        validate_button_register(e, data_array, setdata_array);
     }
     else {
         setdata_array({ ...data_array, [error]: true });
@@ -503,13 +504,14 @@ async function validate_country_region_city(e, data_array, setdata_array) {
         //Cristiank -- "vamos campeon,que no son tiempos de estres, 
         //              son tiempos demostar nuestra voluntad inquenbrantable
         //              de sacar nuestra familia adelante"
-
+        console.log('test', data_array.country_data[(e.target.value) - 1]);
         //get para obtener las regiones de un pais
         let response = await fetch(`https://demon789-4.herokuapp.com/zcrcp/2/${e.target.value}`);
         let data = await response.json();
         console.log('validar', data);
         setdata_array({
             ...data_array,
+            [(e.target.id === 'tipo-pais1-7-12') ? 'doc_from' : 'doc_from_aux']: (data_array.country_data[(e.target.value) - 1]).name,
             [(e.target.id === 'tipo-pais1-7-12') ? 'region_data_0' : 'region_data_1']: data,
             [(e.target.id === 'tipo-pais1-7-12') ? 'region_band_0' : 'region_band_1']: false,
         });
@@ -531,8 +533,43 @@ async function validate_country_region_city(e, data_array, setdata_array) {
 }
 
 
+/**
+  *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
+  *  @decs  : Validar si puede dar click en el boton de registrar
+*/
+function validate_button_register(e, data_array, setdata_array) {
 
+    //for each para validar que todos los campos esten llenos
+    let index = 0;
+    let campos_validos_llenos = 0;
 
+    for ( const data in data_array ) {
+
+        if (index <= 20) {
+
+        if (data !== 'second_name' && data !== 'second_last_name' && data !== 'phone_2') {
+
+            if (data_array[data] !== '') {
+                campos_validos_llenos++;
+                console.log(campos_validos_llenos,data, data_array[data]);
+            }
+
+        }
+
+        }
+        else {
+            break;
+        }
+
+       index++;
+    }
+
+    if (campos_validos_llenos === 17) {
+        console.log('entro a con 18');
+        setdata_array({ ...data_array, diabled_submit: false });
+        campos_validos_llenos = null;
+    }
+}
 
 
 
