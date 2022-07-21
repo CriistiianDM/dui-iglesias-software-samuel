@@ -6,7 +6,8 @@ import {
     Button, TextField, Select,
     InputLabel, FormControl,
     FormHelperText,
-    Typography
+    Typography,
+    CircularProgress
 } from '@material-ui/core';
 
 //estilos de material-ui
@@ -33,8 +34,8 @@ export function CreateUserForm(props) {
 
     //variables
     let state_user_form = props.properties;
+   
 
-    //useStates
     const [data_array, setdata_array] = React.useState({
         doc: '',
         doc_from: '',
@@ -81,6 +82,8 @@ export function CreateUserForm(props) {
         error_band_21: false,
         disabled_0: false,
         disabled_1: false,
+        loading: false,
+        country_data: '',
         message_band_0: 'solo Numeros de 9 a 15 caracteres',
         message_band_1: 'solo Letras de 3 a 50 caracteres',
         message_band_2: 'solo Letras de 3 a 50 caracteres',
@@ -93,6 +96,10 @@ export function CreateUserForm(props) {
         message_band_11: 'verificar si la direccion esta bien escrita',
         message_band_18: 'formato json incorrecto'
     });
+
+    React.useEffect(() => {
+        timer_consult_verify(data_array, setdata_array)
+      }, []);
 
     //handle change
     const handleChange = (event) => {
@@ -167,8 +174,16 @@ export function CreateUserForm(props) {
                         <InputLabel htmlFor="wer">Pais</InputLabel>
                         <Select onChange={handleChange} id='tipo-pais1-7-12' label="Tipo de Documento" variant="filled" native labelId="wer">
                             <option aria-label="None" value="" />
-                            <option value="M">Masculino</option>
-                            <option value="F">Femenino</option>
+                            { 
+
+                               (!data_array.loading)? 
+                               (<></>):                            
+                              (data_array.country_data).map((item, index) => (
+                                (
+                                    <option key={index} value={item.id}>{item.name}</option>
+                                )
+                              ))
+                            }
                         </Select>
                     </FormControl>
                     <FormControl error={data_array.error_band_13} variant="filled" className={classes.formControl}>
@@ -342,6 +357,7 @@ function validateFormate(e, type) {
 
 }
 
+
 /**
   *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
   *  @decs  : Validar si el documento o email ya existe
@@ -412,6 +428,26 @@ function getNameState(index) {
 
 }
 
+
+/**
+  *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
+  *  @decs  : verficar con timer que se haya termiando la comsulta
+*/
+function timer_consult_verify(data_array, setdata_array) {
+
+
+    const timer = setInterval(() => {
+
+        if (localStorage.getItem('countries_band') === 'false') {
+         console.log('termino');
+         setdata_array({ ...data_array, loading: true , country_data: JSON.parse(localStorage.getItem('countries'))});
+         clearInterval(timer);
+        }
+
+    }, 1000);
+
+    return timer;
+}
 
 
 /*

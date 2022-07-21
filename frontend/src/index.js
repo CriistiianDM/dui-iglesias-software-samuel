@@ -12,12 +12,12 @@
 */
 
 
-//evento cuando se cieera la pagina
+/*evento cuando se cieera la pagina
 window.onbeforeunload = function() {
   //limpiar la cache de la pagina y limpiar el localStorage
   localStorage.clear();
   window.sessionStorage.clear();
-}
+}*/
 
 
  // create container
