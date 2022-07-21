@@ -79,6 +79,7 @@ export function CreateUserForm(props) {
         error_band_19: false,
         error_band_20: false,
         error_band_21: false,
+        disabled_0: false,
         message_band_0: 'solo Numeros de 9 a 15 caracteres',
         message_band_1: 'solo Letras de 3 a 50 caracteres',
         message_band_2: 'solo Letras de 3 a 50 caracteres',
@@ -115,7 +116,7 @@ export function CreateUserForm(props) {
                 </div>
 
                 <form className={state_user_form['cls-2']} noValidate autoComplete="off">
-                    <TextField error={data_array.error_band_0} helperText={(data_array.error_band_0) ? data_array.message_band_0 : ''} onBlur={handleChange} id='i-p-0-0' type='number' label="Identificacion" variant="filled" />
+                    <TextField disabled={data_array.disabled_0} error={data_array.error_band_0} helperText={(data_array.error_band_0) ? data_array.message_band_0 : ''} onBlur={handleChange} id='i-p-0-0' type='number' label="Identificacion" variant="filled" />
                     <TextField error={data_array.error_band_1} helperText={(data_array.error_band_1) ? data_array.message_band_1 : ''} onChange={handleChange} id='first-name-1-1' type='text' label="Primer Nombre" variant="filled" />
                     <TextField error={data_array.error_band_2} helperText={(data_array.error_band_2) ? data_array.message_band_2 : ''} onChange={handleChange} id='second-name-1-2' label="Segundo Nombre" variant="filled" />
                     <TextField error={data_array.error_band_3} helperText={(data_array.error_band_3) ? data_array.message_band_3 : ''} onChange={handleChange} id='last-name-1-3' label="Primer Apellido" variant="filled" />
@@ -289,18 +290,20 @@ function validateForm(e, data_array, setdata_array) {
 
     let type = (e.target.id).split('-')[2];
     let error = `error_band_${(e.target.id).split('-')[3]}`;
-     console.log(data_array,'data_array');
+    console.log(data_array, 'data_array');
     //expresssion regular 
     console.log(e.target.value, e.target.id, validateFormate(e, type));
 
     if ((e.target.value) === null || (e.target.value).length === 0) {
-        setdata_array({ ...data_array, [error]: false  });
+        setdata_array({ ...data_array, [error]: false });
     }
     else if (validateFormate(e, type)) {
         console.log('valido');
-        setdata_array({ ...data_array, [error]: false , 
-                     [getNameState((e.target.id).split('-')[3])]: e.target.value  
-                    });
+        setdata_array({
+            ...data_array, [error]: false,
+            [getNameState((e.target.id).split('-')[3])]: e.target.value
+        });
+        validateDocument(e, data_array, setdata_array , error );
     }
     else {
         setdata_array({ ...data_array, [error]: true });
@@ -342,7 +345,36 @@ function validateFormate(e, type) {
   *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
   *  @decs  : Validar si el documento ya existe
 */
-async function validateDocument(e, data_array, setdata_array) {
+async function validateDocument(e, data_array, setdata_array, error) {
+
+    try {
+
+        if (e.target.id === 'i-p-0-0') {
+            setdata_array({ ...data_array, disabled_0: true });
+            let response = await fetch(`https://demon789-4.herokuapp.com/zsdcr/${e.target.value}`);
+            let data = await response.json();
+
+            if (data[0] === undefined) {
+
+                setdata_array({ ...data_array, 
+                                disabled_0: false, 
+                                [error]: false,
+                                [getNameState((e.target.id).split('-')[3])]: e.target.value
+                            });
+
+            }
+            else {
+                setdata_array({ ...data_array, disabled_0: false ,[error]: true});
+            }
+            //alert('validar');
+            
+        }
+
+    } catch (error) {
+        console.log(error);
+    }
+
+
 
 }
 
