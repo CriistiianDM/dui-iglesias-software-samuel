@@ -33,7 +33,6 @@ import json from './json/state_components.json';
 */
 export function App() {
 
-  localStorage.setItem('countries', '{nengine: "react"}');
   
   React.useEffect(() => {
     getCountries();

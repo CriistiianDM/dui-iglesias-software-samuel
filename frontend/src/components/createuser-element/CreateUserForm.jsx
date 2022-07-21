@@ -34,7 +34,7 @@ export function CreateUserForm(props) {
 
     //variables
     let state_user_form = props.properties;
-   
+
 
     const [data_array, setdata_array] = React.useState({
         doc: '',
@@ -83,7 +83,16 @@ export function CreateUserForm(props) {
         disabled_0: false,
         disabled_1: false,
         loading: false,
+        region_band_0: true, //13
+        region_band_1: true, //20
+        city_band_0: true,//14
+        city_band_1: true,//21
+        diabled_submit: true,
         country_data: '',
+        region_data_0: '',
+        region_data_1: '',
+        city_data_0: '',
+        city_data_1: '',
         message_band_0: 'solo Numeros de 9 a 15 caracteres',
         message_band_1: 'solo Letras de 3 a 50 caracteres',
         message_band_2: 'solo Letras de 3 a 50 caracteres',
@@ -99,7 +108,7 @@ export function CreateUserForm(props) {
 
     React.useEffect(() => {
         timer_consult_verify(data_array, setdata_array)
-      }, []);
+    }, []);
 
     //handle change
     const handleChange = (event) => {
@@ -170,36 +179,48 @@ export function CreateUserForm(props) {
                 </div>
 
                 <form className={state_user_form['cls-2']} noValidate autoComplete="off">
-                    <FormControl error={data_array.error_band_12} variant="filled" className={classes.formControl}>
+                    <FormControl disabled={!data_array.loading} error={data_array.error_band_12} variant="filled" className={classes.formControl}>
                         <InputLabel htmlFor="wer">Pais</InputLabel>
                         <Select onChange={handleChange} id='tipo-pais1-7-12' label="Tipo de Documento" variant="filled" native labelId="wer">
                             <option aria-label="None" value="" />
-                            { 
+                            {
 
-                               (!data_array.loading)? 
-                               (<></>):                            
-                              (data_array.country_data).map((item, index) => (
-                                (
-                                    <option key={index} value={item.id}>{item.name}</option>
-                                )
-                              ))
+                                (!data_array.loading) ?
+                                    (<></>) :
+                                    (data_array.country_data).map((item, index) => (
+                                        (
+                                            <option key={index} value={item.id}>{item.name}</option>
+                                        )
+                                    ))
                             }
                         </Select>
                     </FormControl>
-                    <FormControl error={data_array.error_band_13} variant="filled" className={classes.formControl}>
+                    <FormControl disabled={data_array.region_band_0} error={data_array.error_band_13} variant="filled" className={classes.formControl}>
                         <InputLabel htmlFor="wer">Region</InputLabel>
                         <Select onChange={handleChange} id='tipo-region1-7-13' label="Tipo de Documento" variant="filled" native labelId="wer">
                             <option aria-label="None" value="" />
-                            <option value="M">Masculino</option>
-                            <option value="F">Femenino</option>
+                            {
+                                (data_array.region_band_0) ?
+                                    (<></>) :
+                                    (data_array.region_data_0).map((item, index) => (
+                                        (
+                                            <option key={index} value={item.id}>{item.name}</option>
+                                        )))
+                            }
                         </Select>
                     </FormControl>
-                    <FormControl error={data_array.error_band_14} variant="filled" className={classes.formControl}>
+                    <FormControl disabled={data_array.city_band_0} error={data_array.error_band_14} variant="filled" className={classes.formControl}>
                         <InputLabel htmlFor="wer">Cuidad</InputLabel>
                         <Select onChange={handleChange} id='tipo-cali1-7-14' label="Tipo de Documento" variant="filled" native labelId="wer">
                             <option aria-label="None" value="" />
-                            <option value="M">Masculino</option>
-                            <option value="F">Femenino</option>
+                            {
+                                (data_array.city_band_0) ?
+                                    (<></>) :
+                                    (data_array.city_data_0).map((item, index) => (
+                                        (
+                                            <option key={index} value={item.id}>{item.name}</option>
+                                        )))
+                            }
                         </Select>
                     </FormControl>
                 </form>
@@ -261,28 +282,48 @@ export function CreateUserForm(props) {
                 </div>
 
                 <form className={state_user_form['cls-2']} noValidate autoComplete="off">
-                    <FormControl error={data_array.error_band_19} variant="filled" className={classes.formControl}>
+                    <FormControl disabled={!data_array.loading} error={data_array.error_band_19} variant="filled" className={classes.formControl}>
                         <InputLabel htmlFor="wer">Pais</InputLabel>
                         <Select onChange={handleChange} id='tipo-pais2-7-19' label="Tipo de Documento" variant="filled" native labelId="wer">
                             <option aria-label="None" value="" />
-                            <option value="M">Masculino</option>
-                            <option value="F">Femenino</option>
+                            {
+
+                                (!data_array.loading) ?
+                                    (<></>) :
+                                    (data_array.country_data).map((item, index) => (
+                                        (
+                                            <option key={index} value={item.id}>{item.name}</option>
+                                        )
+                                    ))
+                            }
                         </Select>
                     </FormControl>
-                    <FormControl error={data_array.error_band_20} variant="filled" className={classes.formControl}>
+                    <FormControl disabled={data_array.region_band_1} error={data_array.error_band_20} variant="filled" className={classes.formControl}>
                         <InputLabel htmlFor="wer">Region</InputLabel>
                         <Select onChange={handleChange} id='tipo-region2-7-20' label="Tipo de Documento" variant="filled" native labelId="wer">
                             <option aria-label="None" value="" />
-                            <option value="M">Masculino</option>
-                            <option value="F">Femenino</option>
+                            {
+                                (data_array.region_band_1) ?
+                                    (<></>) :
+                                    (data_array.region_data_1).map((item, index) => (
+                                        (
+                                            <option key={index} value={item.id}>{item.name}</option>
+                                        )))
+                            }
                         </Select>
                     </FormControl>
-                    <FormControl error={data_array.error_band_21} variant="filled" className={classes.formControl}>
+                    <FormControl disabled={data_array.city_band_1} error={data_array.error_band_21} variant="filled" className={classes.formControl}>
                         <InputLabel htmlFor="wer">Cuidad</InputLabel>
                         <Select onChange={handleChange} id='tipo-cuidad2-7-21' label="Tipo de Documento" variant="filled" native labelId="wer">
                             <option aria-label="None" value="" />
-                            <option value="M">Masculino</option>
-                            <option value="F">Femenino</option>
+                           {
+                                (data_array.city_band_1) ?
+                                    (<></>) :
+                                    (data_array.city_data_1).map((item, index) => (
+                                        (
+                                            <option key={index} value={item.id}>{item.name}</option>
+                                        )))
+                           }
                         </Select>
                     </FormControl>
                 </form>
@@ -290,7 +331,7 @@ export function CreateUserForm(props) {
 
             </div>
 
-            <Button className={state_user_form['cls-12']} >Guardar</Button>
+            <Button disabled={data_array.diabled_submit} className={state_user_form['cls-12']} >Guardar</Button>
 
         </div>
     );
@@ -319,7 +360,9 @@ function validateForm(e, data_array, setdata_array) {
             ...data_array, [error]: false,
             [getNameState((e.target.id).split('-')[3])]: e.target.value
         });
-        validateDocument(e, data_array, setdata_array , error );
+        validateDocument(e, data_array, setdata_array, error);
+        validate_country_region_city(e, data_array, setdata_array);
+
     }
     else {
         setdata_array({ ...data_array, [error]: true });
@@ -367,26 +410,27 @@ async function validateDocument(e, data_array, setdata_array, error) {
     try {
 
         if (e.target.id === 'i-p-0-0' || e.target.id === 'tipo-email-4-7') {
-            setdata_array({ ...data_array, [`${(e.target.id === 'i-p-0-0')? 'disabled_0': 'disabled_1'}`]: true });
-            let response = await fetch(`https://demon789-4.herokuapp.com/${(e.target.id === 'i-p-0-0')? 'zsdcr':'zsdemp' }/${e.target.value}`);
+            setdata_array({ ...data_array, [`${(e.target.id === 'i-p-0-0') ? 'disabled_0' : 'disabled_1'}`]: true });
+            let response = await fetch(`https://demon789-4.herokuapp.com/${(e.target.id === 'i-p-0-0') ? 'zsdcr' : 'zsdemp'}/${e.target.value}`);
             let data = await response.json();
 
             if (data[0] === undefined) {
 
-                setdata_array({ ...data_array, 
-                                [`${(e.target.id === 'i-p-0-0')? 'disabled_0': 'disabled_1'}`]: false, 
-                                [error]: false,
-                                [getNameState((e.target.id).split('-')[3])]: e.target.value
-                            });
+                setdata_array({
+                    ...data_array,
+                    [`${(e.target.id === 'i-p-0-0') ? 'disabled_0' : 'disabled_1'}`]: false,
+                    [error]: false,
+                    [getNameState((e.target.id).split('-')[3])]: e.target.value
+                });
 
             }
             else {
-                setdata_array({ ...data_array, [`${(e.target.id === 'i-p-0-0')? 'disabled_0': 'disabled_1'}`]: false ,[error]: true});
+                setdata_array({ ...data_array, [`${(e.target.id === 'i-p-0-0') ? 'disabled_0' : 'disabled_1'}`]: false, [error]: true });
             }
             //alert('validar');
-            
+
         }
-       
+
 
     } catch (error) {
         console.log(error);
@@ -439,15 +483,58 @@ function timer_consult_verify(data_array, setdata_array) {
     const timer = setInterval(() => {
 
         if (localStorage.getItem('countries_band') === 'false') {
-         console.log('termino');
-         setdata_array({ ...data_array, loading: true , country_data: JSON.parse(localStorage.getItem('countries'))});
-         clearInterval(timer);
+            console.log('termino');
+            setdata_array({ ...data_array, loading: true, country_data: JSON.parse(localStorage.getItem('countries')) });
+            clearInterval(timer);
         }
 
     }, 1000);
 
     return timer;
 }
+
+/**
+  *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
+  *  @decs  : Validar que si selciono un pais activar el campo de region y luego ciduad
+*/
+async function validate_country_region_city(e, data_array, setdata_array) {
+
+    if (e.target.id === 'tipo-pais1-7-12' || e.target.id === 'tipo-pais2-7-19') {
+        //Cristiank -- "vamos campeon,que no son tiempos de estres, 
+        //              son tiempos demostar nuestra voluntad inquenbrantable
+        //              de sacar nuestra familia adelante"
+
+        //get para obtener las regiones de un pais
+        let response = await fetch(`https://demon789-4.herokuapp.com/zcrcp/2/${e.target.value}`);
+        let data = await response.json();
+        console.log('validar', data);
+        setdata_array({
+            ...data_array,
+            [(e.target.id === 'tipo-pais1-7-12') ? 'region_data_0' : 'region_data_1']: data,
+            [(e.target.id === 'tipo-pais1-7-12') ? 'region_band_0' : 'region_band_1']: false,
+        });
+    }
+
+    //cuidades de una region
+    if (e.target.id === 'tipo-region1-7-13' || e.target.id === 'tipo-region2-7-20') {
+        //get para obtener las ciudades de una region
+        let response = await fetch(`https://demon789-4.herokuapp.com/zcrcp/3/${e.target.value}`);
+        let data = await response.json();
+        console.log('validar city', data);
+        setdata_array({
+            ...data_array,
+            [(e.target.id === 'tipo-region1-7-13') ? 'city_data_0' : 'city_data_1']: data,
+            [(e.target.id === 'tipo-region1-7-13') ? 'place_birth' : 'baptism_place_id']: e.target.value,
+            [(e.target.id === 'tipo-region1-7-13') ? 'city_band_0' : 'city_band_1']: false,
+        });
+    }
+}
+
+
+
+
+
+
 
 
 /*
