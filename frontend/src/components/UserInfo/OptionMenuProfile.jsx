@@ -1,15 +1,15 @@
 //librery or import of react
 import { IconButton, Icon, Typography, Button, Dialog, DialogActions, DialogTitle, DialogContent, DialogContentText} from '@material-ui/core';
 import React from 'react';
+import { useState } from 'react';
 import option_menu_profile from '../../css/option_menu_profile.css';
 
 export function OptionMenuProfile(props) {
 
     let state_option_menu_profile = props.properties;
 
-    let handle_dialog_open = () => {
-         var cargos_Interface = false; 
-      }
+    const [openCargos,setOpenCargos] = useState(false);
+    const [openConfig,setOpenConfig] = useState(false);
 
     return (
 
@@ -26,7 +26,7 @@ export function OptionMenuProfile(props) {
                     </div>
 
                 </Button>
-                <Button onClick={() => { alert('clicked');}}className={state_option_menu_profile['cls-3']}>
+                <Button onClick={() => setOpenCargos(true)}className={state_option_menu_profile['cls-3']}>
 
                     <div className={state_option_menu_profile['cls-4']}>
                         <Icon className={state_option_menu_profile['cls-6']}>assignment</Icon>
@@ -56,7 +56,7 @@ export function OptionMenuProfile(props) {
 
                 </Button>
 
-                <Button className={state_option_menu_profile['cls-3']}>
+                <Button onClick={() => setOpenConfig(true)} className={state_option_menu_profile['cls-3']}>
 
                     <div className={state_option_menu_profile['cls-4']}>
                         <Icon className={state_option_menu_profile['cls-6']}>settings</Icon>
@@ -71,24 +71,50 @@ export function OptionMenuProfile(props) {
 
             <div>
                 <Dialog
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
+                open={openCargos}
+                onClose={() =>setOpenCargos(false)}
+                aria-labelledby="dialog-title"
+                aria-describedby="dialog-description"
                 >
-                    <DialogTitle id="alert-dialog-title">{"Error al inciar sesion"}</DialogTitle>
+                    <DialogTitle id="dialog-title">{"Gestion de Cargos"}</DialogTitle>
                     <DialogContent>
-                        <DialogContentText id="alert-dialog-description">
-                            El usuario o la contraseña son incorrectos, si el problema persiste comuniquese con el administrador
-                            juan.camino@correounivalle.edu.co con ASUNTO: Error al iniciar sesion Iglesia digital
+                        <DialogContentText id="dialog-description">
+                            Aqui veras los cargos de este usuario y podras añadirle otros mas
                         </DialogContentText>
+                        <DialogActions>
+                            <Button onClick={() =>setOpenCargos(false)} color="primary">
+                            Añadir Cargo
+                            </Button>
+                        </DialogActions>
                     </DialogContent>
                     <DialogActions>
-                    <Button onClick={handle_dialog_open} color="primary">
+                    <Button onClick={() =>setOpenCargos(false)} color="primary">
                      Cerrar
                     </Button>
                     </DialogActions>
                 </Dialog>
             </div>
-
+            <div>
+                <Dialog
+                open={openConfig}
+                onClose={() =>setOpenConfig(false)}
+                aria-labelledby="dialog-title"
+                aria-describedby="dialog-description"
+                >
+                    <DialogTitle id="dialog-title">{"Gestion de Cargos"}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="dialog-description">
+                            Configuraciones
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                    <Button onClick={() =>setOpenConfig(false)} color="primary">
+                     Cerrar
+                    </Button>
+                    </DialogActions>
+                </Dialog>
+            </div>
+            
             <div className={state_option_menu_profile['cls-7']}>
 
                 <Typography className={state_option_menu_profile['cls-5']}>INFORMACION PERSONAL</Typography>
