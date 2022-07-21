@@ -1,7 +1,7 @@
 //librery or import of reacr
 import React from 'react';
 import userList from '../../css/user_list.css';
-import { Icon, IconButton, TextField,CircularProgress } from '@material-ui/core';
+import { Icon, IconButton, TextField, CircularProgress } from '@material-ui/core';
 import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEye';
 
 
@@ -22,9 +22,9 @@ export function UserList(props) {
     });
 
     React.useEffect(() => {
-          create_data_user(data, setData , data_array, setdata_array);
+        create_data_user(data, setData, data_array, setdata_array);
     }, []);
-   
+
 
     return (
 
@@ -52,22 +52,22 @@ export function UserList(props) {
 
 
             {
-                (data_array.loading)? (<CircularProgress
-            size={24}
-            color="inherit"
-          /> ):
-                (data).map((user) => (
+                (data_array.loading) ? (<CircularProgress
+                    size={24}
+                    color="inherit"
+                />) :
+                    (data).map((user) => (
 
-                    <div  key={user.id} className={state_user_list['cls-6']}>
-                        <div className={state_user_list['cls-7']}>{user.first_name}</div>
-                        <div className={state_user_list['cls-7']}>{user.first_last_name}</div>
-                        <div className={state_user_list['cls-7']}>{user.doc}</div>
-                        <IconButton>
-                            <RemoveRedEyeIcon className={state_user_list['cls-7']} />
-                        </IconButton>
-                    </div>
+                        <div key={user.id} className={state_user_list['cls-6']}>
+                            <div className={state_user_list['cls-7']}>{user.first_name}</div>
+                            <div className={state_user_list['cls-7']}>{user.first_last_name}</div>
+                            <div className={state_user_list['cls-7']}>{user.doc}</div>
+                            <IconButton>
+                                <RemoveRedEyeIcon className={state_user_list['cls-7']} />
+                            </IconButton>
+                        </div>
 
-                ))
+                    ))
 
             }
 
@@ -93,19 +93,19 @@ export function UserList(props) {
  * @description : enviar los datos de la consulta a la vista
  * @param {Object} data 
  */
-async function create_data_user(data, setData,data_array, setdata_array) {
+async function create_data_user(data, setData, data_array, setdata_array) {
 
-   try {
-      //fetch data from server
-      let response = await fetch('https://demon789-4.herokuapp.com/zaup');
-      let data = await response.json();
+    try {
+        //fetch data from server
+        let response = await fetch('https://demon789-4.herokuapp.com/zaup');
+        let data = await response.json();
 
-      console.log(data);
-      setData(data);
-      setdata_array({...data_array, loading: false});
-   } catch (error) {
-       console.log(error);
-   }
+        console.log(data);
+        setData(data);
+        setdata_array({ ...data_array, loading: false });
+    } catch (error) {
+        console.log(error);
+    }
 
 
 }
