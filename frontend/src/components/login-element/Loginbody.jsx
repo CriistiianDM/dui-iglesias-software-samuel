@@ -209,7 +209,7 @@ async function fetch_data_login(user_valid_data, setUserValid, navigate) {
       }
       else {
         console.log(data_fetch, 'el usuario no existe');
-        navigate('/personnormal')
+        navigate('/creyente')
       }
 
       //console.log( data_fetch , 'data_fetch');

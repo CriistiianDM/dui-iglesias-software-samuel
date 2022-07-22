@@ -33,6 +33,7 @@ const petitions_get_login = async (req, res) => {
 
 }
 
+
 /**
   *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
   *  @decs  : verificar cuantos cargos tiene vigentes el usuario

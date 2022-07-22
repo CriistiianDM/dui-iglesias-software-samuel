@@ -127,8 +127,8 @@ export function Cargo(props) {
     if (name === 'Administrador') {
       navigate('/account');
     }
-    else if (name === 'persona normal') {
-      navigate('/personnormal');
+    else if (name === 'creyente') {
+      navigate('/creyente');
     }
 
   };
