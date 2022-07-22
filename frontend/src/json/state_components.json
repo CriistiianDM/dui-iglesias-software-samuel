@@ -190,67 +190,67 @@
             "info-personal": [
                 {
                     "title": "P. Nombre",
-                    "content": "cristian"
+                    "content": ""
                 },
                 {
                     "title": "S. Nombre",
-                    "content": "Juan"
+                    "content": ""
                 },
                 {
                     "title": "P. Apellido",
-                    "content": "Camino"
+                    "content": ""
                 },
                 {
                     "title": "S. Apellido",
-                    "content": "Osorio"
+                    "content": ""
                 },
                 {
                     "title": "Correo",
-                    "content": "camino.osorio@gmail.com"
+                    "content": ""
                 },
                 {
                     "title": "Edad",
-                    "content": "89"
+                    "content": ""
                 }
             ],
             "info-eclesiastica": [
                 {
                     "title": "Fecha de Bautizo",
-                    "content": "12/12/12"
+                    "content": ""
                 },
                 {
                     "title": "Fecha de Confirmacion",
-                    "content": "12/12/12"
+                    "content": ""
                 },
                 {
                     "title": "Primera Comunion",
-                    "content": "12/12/12"
+                    "content": ""
                 },
                 {
                     "title": "Fecha de Matrimonio",
-                    "content": "12/12/12"
+                    "content": ""
                 }
             ],
             "info-ocupacional": [
                  {
                     "title": "Ocupacion",
-                    "content": "Estudiante"
+                    "content": ""
                 },
                     {
                         "title": "Empresa",
-                        "content": "Universidad"
+                        "content": ""
                     },
                     {
                         "title": "Cargo",
-                        "content": "Estudiante"
+                        "content": ""
                     },
                     {
                         "title": "Telefono",
-                        "content": "123456789"
+                        "content": ""
                     },
                     {
                         "title": "Celular",
-                        "content": "123456789"
+                        "content": ""
                     }
             ],
             "cls-1": "box-option-menu-element",
