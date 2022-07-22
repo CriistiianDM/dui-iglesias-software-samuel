@@ -14,16 +14,21 @@ export function WelcomeAccount(props) {
     //estados boleanos para validar los campos
     const [user_valid_data, setUserValid] = React.useState({
          user_name: localStorage.getItem('user_name'),
+         loading: false,
+         data: []
     });
 
     //useEffect para obtener el nombre y apellido del usuario 
     useEffect(() => {
       update_user_name(user_valid_data, setUserValid);
+      getData(user_valid_data, setUserValid);
     } , []);
  
 
     let state_Welcome_account = props.properties;
-    let welcome_name =  `${(state_Welcome_account['estado'])? 'Bienvenido' : ''} ${user_valid_data.user_name}`;
+    let welcome_name =  `${(state_Welcome_account['estado'])? 'Bienvenido' : ''} 
+                         ${(state_Welcome_account['estadoName'])? user_valid_data.user_name : 
+                           (!user_valid_data.loading)? 'Cargando...': `${(user_valid_data.data)['first_name']} ${(user_valid_data.data)['first_last_name']}`} `;
 
 
     return (
@@ -71,6 +76,34 @@ function update_user_name(user, setUser) {
 */
 
   }, 100);
+
+  return timer;
+
+}
+
+
+
+/**
+  *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
+  *  @decs  : get data from local storage
+*/
+function getData(data_array, set_data_array) {
+
+    
+  const timer = setInterval(() => {
+
+  let data = localStorage.getItem('user_info_eye');
+
+  if (data != null) {
+      clearInterval(timer);
+      console.log( Object.entries(JSON.parse(data)).forEach((value) => {
+          console.log(value);
+      }));
+      set_data_array({...data_array, loading: true, data: JSON.parse(data)});
+  } 
+
+  console.log('get data');
+  }, 1000);
 
   return timer;
 
