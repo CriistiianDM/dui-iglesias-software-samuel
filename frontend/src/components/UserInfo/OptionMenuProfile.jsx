@@ -10,7 +10,7 @@ export function OptionMenuProfile(props) {
 
     const [openCargos,setOpenCargos] = useState(false);
     const [openConfig,setOpenConfig] = useState(false);
-    
+    const [vectorCargos,setCargos] = useState([])
 
     let handleCargos = (event) => {
          setOpenCargos(true);
@@ -26,6 +26,7 @@ export function OptionMenuProfile(props) {
         const data_fetch = await response_fetch.json();
         searchCargos= data_fetch;
         vectCargos = searchCargos.split(',')
+        setCargos(vectCargos)
         console.log(searchCargos)
         console.log( vectCargos)
     }
@@ -41,16 +42,17 @@ export function OptionMenuProfile(props) {
         };
       
         return (
-          <Dialog onClose={handleClose} open={open}>
-            <DialogTitle>Set backup account</DialogTitle>
+
             <List sx={{ pt: 0 }}>
-              {vectCargos.map((vectCargo) => (
+              {vectorCargos ?  vectorCargos.map((vectCargo) => {
+                console.log(vectCargo)
+               return(
                 <ListItem button onClick={() => handleListItemClick(vectCargo)} key={vectCargo}>
                   <ListItemText primary={vectCargo} />
                 </ListItem>
-              ))}
+                );
+              }):'vector vacio'}
             </List>
-          </Dialog>
         );
       }
 
@@ -113,15 +115,29 @@ export function OptionMenuProfile(props) {
             </div>
 
             <div>
-                <Dialog
+            <Dialog
                 open={openCargos}
                 onClose={() =>setOpenCargos(false)}
+                aria-labelledby="dialog-title"
+                aria-describedby="dialog-description"
                 >
-                    <SimpleDialog></SimpleDialog>
+                    <DialogTitle id="dialog-title">{"Gestion de Cargos"}</DialogTitle>
+
+                    <DialogContent>
+                        <DialogContentText id="dialog-description">
+                            <SimpleDialog></SimpleDialog>
+                            
+                        </DialogContentText>
                     <DialogActions>
-                    <Button onClick={() =>setOpenCargos(false)} color="primary">
-                     Cerrar
-                    </Button>
+                        <Button onClick={() =>setOpenCargos(false)} color="primary">
+                         añadir cargo
+                        </Button>
+                    </DialogActions>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={() =>setOpenCargos(false)} color="primary">
+                        Cerrar
+                        </Button>
                     </DialogActions>
                 </Dialog>
             </div>
