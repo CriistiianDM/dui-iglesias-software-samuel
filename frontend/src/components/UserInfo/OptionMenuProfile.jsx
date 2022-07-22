@@ -31,15 +31,6 @@ export function OptionMenuProfile(props) {
         console.log( vectCargos)
     }
     function SimpleDialog(props) {
-        const { onClose, selectedValue, open } = props;
-      
-        const handleClose = () => {
-          onClose(selectedValue);
-        };
-      
-        const handleListItemClick = (value) => {
-          onClose(value);
-        };
       
         return (
 
@@ -47,7 +38,7 @@ export function OptionMenuProfile(props) {
               {vectorCargos ?  vectorCargos.map((vectCargo) => {
                 console.log(vectCargo)
                return(
-                <ListItem button onClick={() => handleListItemClick(vectCargo)} key={vectCargo}>
+                <ListItem button key={vectCargo}>
                   <ListItemText primary={vectCargo} />
                 </ListItem>
                 );
@@ -123,11 +114,8 @@ export function OptionMenuProfile(props) {
                 >
                     <DialogTitle id="dialog-title">{"Gestion de Cargos"}</DialogTitle>
 
-                    <DialogContent>
-                        <DialogContentText id="dialog-description">
-                            <SimpleDialog></SimpleDialog>
-                            
-                        </DialogContentText>
+                    <DialogContent>       
+                            <SimpleDialog></SimpleDialog>    
                     <DialogActions>
                         <Button onClick={() =>setOpenCargos(false)} color="primary">
                          añadir cargo

@@ -2,7 +2,8 @@
 import React from 'react';
 import logoIglesia from '../../images/imagesHome/logo_iglesia.png';
 import headerUserAccounts from '../../css/header-user-account.css';
-import { Avatar, Button } from '@material-ui/core';
+import { useState } from 'react';
+import { Avatar, Button, Menu, MenuItem } from '@material-ui/core'
 
 
 
@@ -13,6 +14,9 @@ import { Avatar, Button } from '@material-ui/core';
 export function HeaderUser(props) {
 
   let state_header_user = (props.properties).state_header_user;
+
+  
+
   let [user, setUser] = React.useState({
     first_letter: (props.properties).nombre_persona,
   });
@@ -24,6 +28,20 @@ export function HeaderUser(props) {
     console.log(user, 'user salidad 21');
   }, []);
 
+
+  const [userButton,setUserButton] = useState([false])
+
+  let handle_user_IconMenu = (event) => {
+    setUserButton(true);
+ }
+ const [anchorEl, setAnchorEl] = React.useState(null);
+ const open = Boolean(anchorEl);
+ let handleClick = (event) => {
+   setAnchorEl(event.currentTarget);
+ };
+ let handleClose = () => {
+   setAnchorEl(null);
+ };
   return (
 
     <div className={state_header_user['cls-1']}>
@@ -32,8 +50,26 @@ export function HeaderUser(props) {
         <img className={state_header_user['cls-3']} alt="" src={logoIglesia} />
       </div>
 
-      <Button className={state_header_user['cls-4']}>  <Avatar className={state_header_user['cls-5']}> {user.first_letter} </Avatar> </Button>
-
+      <Button
+      id="basic-button"
+      aria-controls={open ? 'basic-menu' : undefined}
+      aria-haspopup="true"
+      aria-expanded={open ? 'true' : undefined}
+      onClick={handleClick} 
+      className={state_header_user['cls-4']}>  <Avatar className={state_header_user['cls-5']}> {user.first_letter} </Avatar> </Button>
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+      >
+        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <MenuItem onClick={handleClose}>My account</MenuItem>
+        <MenuItem onClick={handleClose}>Logout</MenuItem>
+      </Menu>
     </div>
 
   );
