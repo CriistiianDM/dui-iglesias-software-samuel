@@ -58,6 +58,8 @@ export function CreateUserForm(props) {
         date_init_church: '',
         experience_json: '{}',
         id_church_now: 1,
+        disabled_all: false,
+        loading_submit: true,
         error_band_0: false,
         error_band_1: false,
         error_band_2: false,
@@ -88,6 +90,7 @@ export function CreateUserForm(props) {
         city_band_0: true,//14
         city_band_1: true,//21
         diabled_submit: true,
+        permit_submit: false,
         country_data: '',
         region_data_0: '',
         region_data_1: '',
@@ -116,6 +119,10 @@ export function CreateUserForm(props) {
         validateForm(event, data_array, setdata_array);
     }
 
+    const handleSubmit = (event) => {
+        submit_form(event, data_array, setdata_array)
+    }
+
 
     const classes = useStyles();
     //render
@@ -135,11 +142,11 @@ export function CreateUserForm(props) {
 
                 <form className={state_user_form['cls-2']} noValidate autoComplete="off">
                     <TextField disabled={data_array.disabled_0} error={data_array.error_band_0} helperText={(data_array.error_band_0) ? data_array.message_band_0 : ''} onBlur={handleChange} id='i-p-0-0' type='number' label="Identificacion" variant="filled" />
-                    <TextField error={data_array.error_band_1} helperText={(data_array.error_band_1) ? data_array.message_band_1 : ''} onChange={handleChange} id='first-name-1-1' type='text' label="Primer Nombre" variant="filled" />
-                    <TextField error={data_array.error_band_2} helperText={(data_array.error_band_2) ? data_array.message_band_2 : ''} onChange={handleChange} id='second-name-1-2' label="Segundo Nombre" variant="filled" />
-                    <TextField error={data_array.error_band_3} helperText={(data_array.error_band_3) ? data_array.message_band_3 : ''} onChange={handleChange} id='last-name-1-3' label="Primer Apellido" variant="filled" />
-                    <TextField error={data_array.error_band_4} helperText={(data_array.error_band_4) ? data_array.message_band_4 : ''} onChange={handleChange} id='second-name-1-4' label="Segundo Apellido" variant="filled" />
-                    <FormControl error={data_array.error_band_5} variant="filled">
+                    <TextField disabled={data_array.disabled_all} error={data_array.error_band_1} helperText={(data_array.error_band_1) ? data_array.message_band_1 : ''} onChange={handleChange} id='first-name-1-1' type='text' label="Primer Nombre" variant="filled" />
+                    <TextField disabled={data_array.disabled_all} error={data_array.error_band_2} helperText={(data_array.error_band_2) ? data_array.message_band_2 : ''} onChange={handleChange} id='second-name-1-2' label="Segundo Nombre" variant="filled" />
+                    <TextField disabled={data_array.disabled_all} error={data_array.error_band_3} helperText={(data_array.error_band_3) ? data_array.message_band_3 : ''} onChange={handleChange} id='last-name-1-3' label="Primer Apellido" variant="filled" />
+                    <TextField disabled={data_array.disabled_all} error={data_array.error_band_4} helperText={(data_array.error_band_4) ? data_array.message_band_4 : ''} onChange={handleChange} id='second-name-1-4' label="Segundo Apellido" variant="filled" />
+                    <FormControl disabled={data_array.disabled_all} error={data_array.error_band_5} variant="filled">
                         <InputLabel htmlFor="">Tipo De Identificacion</InputLabel>
                         <Select onChange={handleChange} id='tipo-identificacion-2-5' label="Tipo de Documento" variant="filled" native>
                             <option aria-label="None" value="" />
@@ -150,6 +157,7 @@ export function CreateUserForm(props) {
                         </Select>
                     </FormControl>
                     <TextField
+                        disabled={data_array.disabled_all}
                         id="date-f-3-6"
                         label="Fecha de Nacimiento"
                         onChange={handleChange}
@@ -161,10 +169,10 @@ export function CreateUserForm(props) {
                             shrink: true,
                         }}
                     />
-                    <TextField disabled={data_array.disabled_1} error={data_array.error_band_7} helperText={(data_array.error_band_7) ? data_array.message_band_7 : ''} onChange={handleChange} id='tipo-email-4-7' type='email' label="Email" variant="filled" />
-                    <TextField error={data_array.error_band_8} helperText={(data_array.error_band_8) ? data_array.message_band_8 : ''} onChange={handleChange} id='tipo-tel1-0-8' type='number' label="Telefono 1" variant="filled" />
-                    <TextField error={data_array.error_band_9} helperText={(data_array.error_band_9) ? data_array.message_band_9 : ''} onChange={handleChange} id='tipo-tel2-0-9' type='number' label="Telefono 2" variant="filled" />
-                    <FormControl error={data_array.error_band_10} variant="filled" className={classes.formControl}>
+                    <TextField disabled={data_array.disabled_1} error={data_array.error_band_7} helperText={(data_array.error_band_7) ? data_array.message_band_7 : ''} onBlur={handleChange} id='tipo-email-4-7' type='email' label="Email" variant="filled" />
+                    <TextField disabled={data_array.disabled_all} error={data_array.error_band_8} helperText={(data_array.error_band_8) ? data_array.message_band_8 : ''} onChange={handleChange} id='tipo-tel1-0-8' type='number' label="Telefono 1" variant="filled" />
+                    <TextField disabled={data_array.disabled_all} error={data_array.error_band_9} helperText={(data_array.error_band_9) ? data_array.message_band_9 : ''} onChange={handleChange} id='tipo-tel2-0-9' type='number' label="Telefono 2" variant="filled" />
+                    <FormControl disabled={data_array.disabled_all} error={data_array.error_band_10} variant="filled" className={classes.formControl}>
                         <InputLabel htmlFor="wer">Genero</InputLabel>
                         <Select onClick={handleChange} id='tipo-genero-5-10' label="Tipo de Documento" variant="filled" native labelId="wer">
                             <option aria-label="None" value="" />
@@ -172,7 +180,7 @@ export function CreateUserForm(props) {
                             <option value="F">Femenino</option>
                         </Select>
                     </FormControl>
-                    <TextField error={data_array.error_band_11} helperText={(data_array.error_band_11) ? data_array.message_band_11 : ''} onChange={handleChange} id='tipo-direccion-6-11' type='text' label="Direccion" variant="filled" />
+                    <TextField disabled={data_array.disabled_all} error={data_array.error_band_11} helperText={(data_array.error_band_11) ? data_array.message_band_11 : ''} onChange={handleChange} id='tipo-direccion-6-11' type='text' label="Direccion" variant="filled" />
                 </form>
 
                 <div className={state_user_form['cls-7']}>
@@ -180,7 +188,7 @@ export function CreateUserForm(props) {
                 </div>
 
                 <form className={state_user_form['cls-2']} noValidate autoComplete="off">
-                    <FormControl disabled={!data_array.loading} error={data_array.error_band_12} variant="filled" className={classes.formControl}>
+                    <FormControl  disabled={!data_array.loading} error={data_array.error_band_12} variant="filled" className={classes.formControl}>
                         <InputLabel htmlFor="wer">Pais</InputLabel>
                         <Select onChange={handleChange} id='tipo-pais1-7-12' label="Tipo de Documento" variant="filled" native labelId="wer">
                             <option aria-label="None" value="" />
@@ -232,6 +240,7 @@ export function CreateUserForm(props) {
 
                 <form className={state_user_form['cls-2']} noValidate autoComplete="off">
                     <TextField
+                        disabled={data_array.disabled_all}
                         id="date-bautizo-3-15"
                         label="Fecha de Bautizmo"
                         type="date"
@@ -244,6 +253,7 @@ export function CreateUserForm(props) {
                         }}
                     />
                     <TextField
+                        disabled={data_array.disabled_all}
                         id="date-iglesia-3-16"
                         label="Ingreso a la iglesia"
                         error={data_array.error_band_16}
@@ -256,6 +266,7 @@ export function CreateUserForm(props) {
                         }}
                     />
                     <TextField
+                        disabled={data_array.disabled_all}
                         id="date-santo-3-17"
                         label="FECHA RECEPCIÓN ESPÍRITU SANTO"
                         error={data_array.error_band_17}
@@ -268,6 +279,7 @@ export function CreateUserForm(props) {
                         }}
                     />
                     <TextField
+                        disabled={data_array.disabled_all}
                         id="date-fQQ-8-18"
                         onChange={handleChange}
                         label="Habilidades - JSON"
@@ -332,7 +344,15 @@ export function CreateUserForm(props) {
 
             </div>
 
-            <Button disabled={data_array.diabled_submit} className={state_user_form['cls-12']} >Guardar</Button>
+            <Button onClick={handleSubmit} disabled={data_array.diabled_submit} className={state_user_form['cls-12']}>
+                {
+                    (data_array.diabled_submit)? 'Desativado' : 
+                    (data_array.loading_submit)? 'Guardar' : (<CircularProgress
+                        size={24}
+                        color="inherit"
+                      />)
+                }
+            </Button>
 
         </div>
     );
@@ -388,7 +408,7 @@ function validateFormate(e, type) {
         '5': /^[a-zA-Z]$/,
         '6': /^[0-9-a-zA-Z\s#\-]{10,255}$/,
         '7': /^[0-9]{1,5}$/,
-        '8': /^{[0-9-aA-zZ:,'"]+}$/,
+        '8': /^{[0-9-aA-zZ:,"\s{}]*}$/,
     }
 
     //validar el formato
@@ -466,7 +486,7 @@ function getNameState(index) {
         '21': 'baptism_place_id',
         '17': 'holy_spirit_date',
         '16': 'date_init_church',
-        '19': 'experience_json'
+        '18': 'experience_json'
     }
 
     return state[index];
@@ -526,7 +546,6 @@ async function validate_country_region_city(e, data_array, setdata_array) {
         setdata_array({
             ...data_array,
             [(e.target.id === 'tipo-region1-7-13') ? 'city_data_0' : 'city_data_1']: data,
-            [(e.target.id === 'tipo-region1-7-13') ? 'place_birth' : 'baptism_place_id']: e.target.value,
             [(e.target.id === 'tipo-region1-7-13') ? 'city_band_0' : 'city_band_1']: false,
         });
     }
@@ -547,7 +566,7 @@ function validate_button_register(e, data_array, setdata_array) {
 
         if (index <= 20) {
 
-        if (data !== 'second_name' && data !== 'second_last_name' && data !== 'phone_2') {
+        if (data !== 'second_name' && data !== 'second_last_name' && data !== 'phone_2' && data !== 'id_church_now') {
 
             if (data_array[data] !== '') {
                 campos_validos_llenos++;
@@ -563,14 +582,69 @@ function validate_button_register(e, data_array, setdata_array) {
 
        index++;
     }
-
-    if (campos_validos_llenos === 17) {
+    campos_validos_llenos = 16
+    console.log('campos validos llenos', campos_validos_llenos);
+    if (campos_validos_llenos === 16) {
         console.log('entro a con 18');
         setdata_array({ ...data_array, diabled_submit: false });
         campos_validos_llenos = null;
     }
 }
 
+
+/**
+  *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
+  *  @decs  : Subtmitear el formulario
+*/
+async function submit_form(e, data_array, setdata_array) {
+
+    try {
+
+        if (!data_array.disabled_submit) {
+        //e.preventDefault();
+        setdata_array({ ...data_array, 
+                         loading_submit: false,
+                         disabled_all: true,
+                         disabled_0: true,
+                         disabled_1: true,
+                         loading: false,
+                         region_band_0: true, //13
+                         region_band_1: true, //20
+                         city_band_0: true,//14
+                         city_band_1: true,//21
+                         permit_submit: true
+                    });
+        /*
+        let response = await fetch(`https://demon789-4.herokuapp.com/zincrp`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(data_array)
+        });
+        let data = await response.json();
+        console.log('submit', data);
+        setdata_array({ ...data_array, loading_submit: true });*/
+        setdata_array({ ...data_array, 
+            loading_submit: true,
+            disabled_all: false,
+            disabled_0: false,
+            disabled_1: false,
+            loading: true,
+            region_band_0: true, //13
+            region_band_1: true, //20
+            city_band_0: true,//14
+            city_band_1: true,//21
+            permit_submit: false
+       });
+    }
+    } 
+    catch (error) {
+        console.log(error);
+    }
+
+}
 
 
 
