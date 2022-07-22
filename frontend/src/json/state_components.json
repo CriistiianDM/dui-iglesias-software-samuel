@@ -191,68 +191,68 @@
             "info-personal": [
                 {
                     "title": "P. Nombre",
-                    "content": "cristian"
+                    "content": ""
                 },
                 {
                     "title": "S. Nombre",
-                    "content": "Juan"
+                    "content": ""
                 },
                 {
                     "title": "P. Apellido",
-                    "content": "Camino"
+                    "content": ""
                 },
                 {
                     "title": "S. Apellido",
-                    "content": "Osorio"
+                    "content": ""
                 },
                 {
                     "title": "Correo",
-                    "content": "camino.osorio@gmail.com"
+                    "content": ""
                 },
                 {
                     "title": "Edad",
-                    "content": "89"
+                    "content": ""
                 }
             ],
             "info-eclesiastica": [
                 {
                     "title": "Fecha de Bautizo",
-                    "content": "12/12/12"
+                    "content": ""
                 },
                 {
                     "title": "Fecha de Confirmacion",
-                    "content": "12/12/12"
+                    "content": ""
                 },
                 {
                     "title": "Primera Comunion",
-                    "content": "12/12/12"
+                    "content": ""
                 },
                 {
                     "title": "Fecha de Matrimonio",
-                    "content": "12/12/12"
+                    "content": ""
                 }
             ],
             "info-ocupacional": [
                 {
                     "title": "Ocupacion",
-                    "content": "Estudiante"
+                    "content": ""
                 },
-                {
-                    "title": "Empresa",
-                    "content": "Universidad"
-                },
-                {
-                    "title": "Cargo",
-                    "content": "Estudiante"
-                },
-                {
-                    "title": "Telefono",
-                    "content": "123456789"
-                },
-                {
-                    "title": "Celular",
-                    "content": "123456789"
-                }
+                    {
+                        "title": "Empresa",
+                        "content": ""
+                    },
+                    {
+                        "title": "Cargo",
+                        "content": ""
+                    },
+                    {
+                        "title": "Telefono",
+                        "content": ""
+                    },
+                    {
+                        "title": "Celular",
+                        "content": ""
+                    }
             ],
             "cls-1": "box-option-menu-element",
             "cls-2": "box-setting-element-account-profile",
