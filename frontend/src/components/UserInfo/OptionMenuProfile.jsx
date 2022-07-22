@@ -40,13 +40,12 @@ export function OptionMenuProfile(props) {
     let vectCargos
 
     async function fetch_data_cargo(){
-        const response_fetch = await fetch(`https://demon789-4.herokuapp.com/zcvg/123456729`);
+        console.log((data_array.data)['doc'])
+        const response_fetch = await fetch(`https://demon789-4.herokuapp.com/zcvg/${(data_array.data)['doc']}`);
         const data_fetch = await response_fetch.json();
         searchCargos= data_fetch;
         vectCargos = searchCargos.split(',')
-        setCargos(vectCargos)
-        console.log(searchCargos)
-        console.log( vectCargos)
+        setCargos(vectCargos)    
     }
     function SimpleDialog(props) {
       
