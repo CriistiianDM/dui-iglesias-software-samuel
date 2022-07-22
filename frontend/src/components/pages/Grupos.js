@@ -106,7 +106,7 @@ const useStyles = makeStyles((theme) => ({
     justifyItems: 'center', 
   },
   ancho: {
-    display: 'grid !important', 
+    display: 'none !important', 
     width: '12em', 
     '@media screen and (max-width:280px)': {
       width: '12em'
@@ -127,62 +127,33 @@ export function Grupos(props){
 
      //useStates
      const [data_array, setdata_array] = React.useState({
+         name: "",
+         description: "",
+         img_data: "",
          error_band_0: false,
          error_band_1: false,
          error_band_2: false,
          error_band_3: false,
-         error_band_4: false,
-         error_band_5: false,
-         error_band_6: false,
-         error_band_7: false,
-         error_band_8: false,
-         error_band_9: false,
-         error_band_10: false,
-         error_band_11: false,
-         error_band_12: false,
-         error_band_13: false,
-         error_band_14: false,
-         error_band_15: false,
-         error_band_16: false,
-         error_band_17: false,
-         error_band_18: false,
-         error_band_19: false,
-         error_band_20: false,
-         error_band_21: false,
-         prueba: {
-            nombre: 'Hola Cristian',
-         }, 
          message_band_0: 'solo Numeros de 9 a 15 caracteres',
          message_band_1: 'solo Letras de 3 a 50 caracteres',
          message_band_2: 'solo Letras de 3 a 50 caracteres',
          message_band_3: 'solo Letras de 3 a 50 caracteres',
          message_band_4: 'solo Letras de 3 a 50 caracteres',
          message_band_5: 'seleciona una opcion',
-         message_band_6: '',
          message_band_7: 'verificar si email esta bien escrito',
          message_band_8: 'solo numeros de 9 a 15 caracteres',
          message_band_9: 'solo numeros de 9 a 15 caracteres',
-         message_band_10: '',
          message_band_11: 'verificar si la direccion esta bien escrita',
-         message_band_12: '',
-         message_band_13: '',
-         message_band_14: '',
-         message_band_15: '',
-         message_band_16: '',
-         message_band_17: '',
-         message_band_18: 'formato json incorrecto',
-         message_band_19: '',
-         message_band_20: '',
-         message_band_21: ''
+         message_band_18: 'formato json incorrecto'
      });
 
-     console.log(`data Array: ${((data_array).prueba).nombre}`);
+     const [img_data, set_img_data] = React.useState();
 
 
  
      //handle change
      const handleChange = (event) => {
-         validateForm(event, data_array , setdata_array);
+         validateForm(event, data_array , setdata_array, set_img_data);
      }
 
 
@@ -204,10 +175,8 @@ export function Grupos(props){
 
     //función evento para navegar posterior a rellenar datos de grupo. 
     const onClickk = () => {
-
-        //alert("Hola"); 
-        navigate("/cargo"); 
-
+        console.log(data_array);
+        postGrupo(data_array,img_data, setdata_array);
     }
 
 
@@ -231,7 +200,7 @@ export function Grupos(props){
             </div>
 
             <div className={classes.root}>
-            <Input className={classes.archivo} accept="image/*" type="file" id="outlined-required" variant="filled" ></Input>
+            <Input className={classes.archivo} onChange={handleChange} id="outlined-file-10-2" accept="image/*" type="file"  variant="filled" />
             </div>
 
 
@@ -269,7 +238,7 @@ export function Grupos(props){
 
 
 
-function validateForm(e, data_array , setdata_array) {
+function validateForm(e, data_array , setdata_array, set_img_data) {
 
   let type = (e.target.id).split('-')[2];
   let error = `error_band_${(e.target.id).split('-')[3]}`;
@@ -281,14 +250,25 @@ function validateForm(e, data_array , setdata_array) {
        setdata_array({...data_array, [error]: false});
    }
    else if(validateFormate(e, type)){
-       console.log('valido');
-       setdata_array({...data_array, [error]: false});
+
+       if (e.target.id === "outlined-file-10-2") {
+            const fileData = new FormData();
+            fileData.append('file_img', e.target.files[0]);
+            set_img_data(fileData);
+       }
+
+       console.log('valido papa');
+       setdata_array({...data_array, 
+                      [error]: false,
+                      [getNameState((e.target.id).split('-')[3])]: e.target.value
+                    });
    }
    else {
        setdata_array({...data_array, [error]: true});
    }
 
 }
+
 
 function validateFormate(e, type) {
            
@@ -304,6 +284,7 @@ function validateFormate(e, type) {
        '7': /^[0-9]{1,5}$/,
        '8': /^{[0-9-aA-zZ:,'"]+}$/,
        '9': /^[aA-zZ\s]{3,50}$/, //Validar espaciados y textos. 
+       '10': /^[0-9-aA-zZ\s\/:.]+$/, //Validar espaciados y textos.
   }         
  
   //validar el formato
@@ -317,5 +298,51 @@ function validateFormate(e, type) {
 }
 
 
+/**
+  *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
+  *  @decs  : retornar el nombre de state a cambiar
+*/
+function getNameState(index) {
+
+  const state = {
+      '0': 'name',
+      '1': 'description',
+      '2': 'img_data'
+  }
+
+  return state[index];
+
+}
 
 
+
+/**
+  *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
+  *  @decs  : post para enviar la info y crear un nuevo grupo
+*/
+async function postGrupo(data_array, img_data, setdata_array) {
+
+    try {
+    
+      let response = await fetch(`https://demon789-4.herokuapp.com/zfiles`, {
+        method: 'POST',
+        body: img_data,
+        mode: 'cors',
+      });
+      console.log(response);
+      let post_response = await fetch(`https://demon789-4.herokuapp.com/zcrgppipe`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        mode: 'cors',
+        body: JSON.stringify(data_array)
+      });
+      console.log(post_response);
+      
+    } catch (error) {
+      console.log(error);
+    }
+
+}
