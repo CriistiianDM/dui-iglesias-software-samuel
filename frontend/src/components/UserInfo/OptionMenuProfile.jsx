@@ -1,5 +1,5 @@
 //librery or import of react
-import { IconButton, Icon, Typography, Button, Dialog, DialogActions, DialogTitle, DialogContent, DialogContentText} from '@material-ui/core';
+import { IconButton, Icon, Typography, Button, Dialog, DialogActions, DialogTitle, DialogContent, DialogContentText, List, ListItem, ListItemAvatar, ListItemText, PersonIcon, AddIcon, Avatar} from '@material-ui/core';
 import React from 'react';
 import { useState } from 'react';
 import option_menu_profile from '../../css/option_menu_profile.css';
@@ -10,6 +10,49 @@ export function OptionMenuProfile(props) {
 
     const [openCargos,setOpenCargos] = useState(false);
     const [openConfig,setOpenConfig] = useState(false);
+    
+
+    let handleCargos = (event) => {
+         setOpenCargos(true);
+         fetch_data_cargo();
+         console.log(searchCargos)
+      }
+    
+    let searchCargos 
+    let vectCargos
+
+    async function fetch_data_cargo(){
+        const response_fetch = await fetch(`https://demon789-4.herokuapp.com/zcvg/123456729`);
+        const data_fetch = await response_fetch.json();
+        searchCargos= data_fetch;
+        vectCargos = searchCargos.split(',')
+        console.log(searchCargos)
+        console.log( vectCargos)
+    }
+    function SimpleDialog(props) {
+        const { onClose, selectedValue, open } = props;
+      
+        const handleClose = () => {
+          onClose(selectedValue);
+        };
+      
+        const handleListItemClick = (value) => {
+          onClose(value);
+        };
+      
+        return (
+          <Dialog onClose={handleClose} open={open}>
+            <DialogTitle>Set backup account</DialogTitle>
+            <List sx={{ pt: 0 }}>
+              {vectCargos.map((vectCargo) => (
+                <ListItem button onClick={() => handleListItemClick(vectCargo)} key={vectCargo}>
+                  <ListItemText primary={vectCargo} />
+                </ListItem>
+              ))}
+            </List>
+          </Dialog>
+        );
+      }
 
     return (
 
@@ -26,7 +69,7 @@ export function OptionMenuProfile(props) {
                     </div>
 
                 </Button>
-                <Button onClick={() => setOpenCargos(true)}className={state_option_menu_profile['cls-3']}>
+                <Button onClick={handleCargos} className={state_option_menu_profile['cls-3']}>
 
                     <div className={state_option_menu_profile['cls-4']}>
                         <Icon className={state_option_menu_profile['cls-6']}>assignment</Icon>
@@ -73,20 +116,8 @@ export function OptionMenuProfile(props) {
                 <Dialog
                 open={openCargos}
                 onClose={() =>setOpenCargos(false)}
-                aria-labelledby="dialog-title"
-                aria-describedby="dialog-description"
                 >
-                    <DialogTitle id="dialog-title">{"Gestion de Cargos"}</DialogTitle>
-                    <DialogContent>
-                        <DialogContentText id="dialog-description">
-                            Aqui veras los cargos de este usuario y podras añadirle otros mas
-                        </DialogContentText>
-                        <DialogActions>
-                            <Button onClick={() =>setOpenCargos(false)} color="primary">
-                            Añadir Cargo
-                            </Button>
-                        </DialogActions>
-                    </DialogContent>
+                    <SimpleDialog></SimpleDialog>
                     <DialogActions>
                     <Button onClick={() =>setOpenCargos(false)} color="primary">
                      Cerrar
