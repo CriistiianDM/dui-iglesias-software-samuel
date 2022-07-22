@@ -209,7 +209,7 @@ export function OptionMenuProfile(props) {
                         ))
                         :
                         ( Object.entries(data_array.data)).map((value,index) => (
-                            (index > 14 && index !== 24 && index !== 18)? (
+                            (index > 14 && index !== 24 && index !== 18 && index !== 16)? (
                             <div key={index} className={state_option_menu_profile['cls-8']}>
                                 <Typography className={state_option_menu_profile['cls-5']}>{value[0]}</Typography>
                                 <input value={value[1]} disabled className={state_option_menu_profile['cls-9']} />

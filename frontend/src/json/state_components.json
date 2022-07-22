@@ -70,7 +70,8 @@
         "1": {
             "cls-1": "box-avatar-welcome",
             "cls-2": "box-welcome-element-account",
-            "estado": true
+            "estado": true,
+            "estadoName": true
         },
         "2": {
             "botones": [
@@ -183,7 +184,8 @@
         "6": {
             "cls-1": "box-avatar-welcome",
             "cls-2": "box-welcome-element-account",
-            "estado": false
+            "estado": false,
+            "estadoName": false
         }
     },
     "optionMenu": {
