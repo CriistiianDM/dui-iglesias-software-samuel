@@ -10,13 +10,14 @@ import {
 
 //librery or import of components
 import { Home } from './components/pages/Home';
-import { Cargo } from './components/pages/Cargo'; 
+import { Cargo } from './components/pages/Cargo.js'; 
 import { Account } from './components/pages/Account';
 import { Login } from './components/pages/Login';
 import { UserInfo } from './components/pages/UserInfo';
 import { PersonNormal } from './components/pages/PersonNormal';
 import { A404 } from './components/pages/A404';
 import { CreateUser } from './components/pages/CreateUser';
+import { Grupos } from './components/pages/Grupos.js'; 
 
 
 
@@ -50,6 +51,7 @@ export function App() {
         <Route path="/userinfo" element = {<UserInfo properties={json} />} />
         <Route path="/creyente" element = {<PersonNormal properties={json} />} />
         <Route path="/createuser" element = {<CreateUser properties={json} />} />
+        <Route path="/grupo" element={<Grupos properties={json}/>}/>
         <Route path="*" element = {<A404 />} />
       </Routes>
     </Router>

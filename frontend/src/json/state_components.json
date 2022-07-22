@@ -7,7 +7,6 @@
             "cls-3": "logo-iglesia-box",
             "cls-4": "box-icon-menu-header",
             "cls-6": "box-aux-header"
-            
         },
         "1": {
             "cls-1": "box-header-element",
@@ -50,8 +49,8 @@
             "cls-4": "box-button-element"
         }
     },
-    "state_login":{
-        "0":{
+    "state_login": {
+        "0": {
             "cls-1": "box-header-login-element",
             "cls-2": "box-img-element",
             "cls-3": "logo-iglesia-box",
@@ -59,7 +58,6 @@
             "cls-5": "textBox1",
             "cls-6": "title-style",
             "cls-7": "button-style"
-
         }
     },
     "avatarStyle": {
@@ -84,37 +82,41 @@
                     "to": "/createuser",
                     "content": "Esta opcion permite crear un nuevo usuario"
                 },
-                {   "id": "btn-2",
+                {
+                    "id": "btn-2",
                     "icon": "calendar_today",
                     "title": "Asistencia",
                     "to": "/account",
                     "content": "Esta opcion permite registrar la asistencia de los usuarios"
                 },
-                {   "id": "btn-3",
+                {
+                    "id": "btn-3",
                     "icon": "workspaces",
                     "title": "Grupos",
-                    "to": "/account",
+                    "to": "/grupo",
                     "content": "Esta opcion permite crear un nuevo grupo"
                 },
-                {   "id": "btn-4",
+                {
+                    "id": "btn-4",
                     "icon": "newspaper",
                     "title": "Banner Noticias",
                     "to": "/account",
                     "content": "Esta opcion permite modificar el banner"
                 },
-                {   "id": "btn-5",
+                {
+                    "id": "btn-5",
                     "icon": "celebration",
                     "title": "Cumpleaños",
                     "to": "/account",
                     "content": "Esta opcion muestra los cumpleaños de los usuarios de este mes"
                 },
-                {   "id": "btn-6",
+                {
+                    "id": "btn-6",
                     "icon": "church",
                     "title": "Congregacion",
                     "to": "/account",
                     "content": "Esta opcion permite modificar la informacion de la congregacion"
                 }
-                
             ],
             "cls-1": "box-avatar-setting",
             "cls-2": "box-setting-element-account",
@@ -127,9 +129,9 @@
         "3": {
             "usuarios": [
                 {
-                   "firstName": "Juan",
-                   "lastName": "Perez",
-                   "id": "1123456789"
+                    "firstName": "Juan",
+                    "lastName": "Perez",
+                    "id": "1123456789"
                 },
                 {
                     "firstName": "Eduardo",
@@ -178,7 +180,6 @@
             "cls-5": "box-aux-bottom-element",
             "cls-6": "box-aux-change-avatar",
             "cls-7": "box-aux-change-avatar-icon"
-            
         },
         "6": {
             "cls-1": "box-avatar-welcome",
@@ -234,7 +235,7 @@
                 }
             ],
             "info-ocupacional": [
-                 {
+                {
                     "title": "Ocupacion",
                     "content": ""
                 },
@@ -290,6 +291,31 @@
             "cls-11": "box-create-user-title-element",
             "cls-12": "box-create-user-button-save"
         }
+    },
+    "jovenLider": {
+        "0": {
+            "identificacion": [
+                {
+                    "nombre": "Jose",
+                    "apellido": "Morales",
+                    "identificacion": "123456789"
+                },
+                {
+                    "nombre": "Julian",
+                    "apellido": "Cesar",
+                    "identificacion": "34321456"
+                },
+                {
+                    "nombre": "Juan",
+                    "apellido": "Perez",
+                    "identificacion": "2222456"
+                },
+                {
+                    "nombre": "Pedro",
+                    "apellido": "Perez",
+                    "identificacion": "5665345"
+                }
+            ]
+        }
     }
-
 }
