@@ -113,6 +113,7 @@ const useStyles = makeStyles((theme) => ({
     }
   }
 
+
 }));
 
 
@@ -184,6 +185,7 @@ export function Grupos(props){
          validateForm(event, data_array , setdata_array);
      }
 
+
     //Styles. 
     // <TextField type="file" id="outlined-required" variant="outlined"/>
     const classes = useStyles();
@@ -212,6 +214,7 @@ export function Grupos(props){
     return (
 
         <>
+
         <FormControl className={classes.FormControl}>
         <h1 className={classes.styleTitleSistemas}>Grupos</h1>
         </FormControl>
@@ -219,6 +222,7 @@ export function Grupos(props){
         <div className={classes.paperContainer}>
 
             <div className={classes.root}>
+
             <TextField error={data_array.error_band_0} onChange={handleChange} id="outlined-required-9-0" label="Nombre" variant="outlined"/>
             </div>
 
@@ -229,6 +233,7 @@ export function Grupos(props){
             <div className={classes.root}>
             <Input className={classes.archivo} accept="image/*" type="file" id="outlined-required" variant="filled" ></Input>
             </div>
+
 
             <div>
             <FormControl className={classes.ancho} variant="filled">
@@ -261,6 +266,7 @@ export function Grupos(props){
     );
 
 }
+
 
 
 function validateForm(e, data_array , setdata_array) {
@@ -309,7 +315,6 @@ function validateFormate(e, type) {
   }
 
 }
-
 
 
 
