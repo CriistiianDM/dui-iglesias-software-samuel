@@ -2,7 +2,8 @@
 import React from 'react';
 import logoIglesia from '../../images/imagesHome/logo_iglesia.png';
 import headerUserAccounts from '../../css/header-user-account.css';
-import { Avatar, Button } from '@material-ui/core';
+import { Avatar, Button, MenuItem, ListItemIcon, Divider } from '@material-ui/core';
+
 
 
 
@@ -24,6 +25,9 @@ export function HeaderUser(props) {
     console.log(user, 'user salidad 21');
   }, []);
 
+ 
+
+
   return (
 
     <div className={state_header_user['cls-1']}>
@@ -32,7 +36,7 @@ export function HeaderUser(props) {
         <img className={state_header_user['cls-3']} alt="" src={logoIglesia} />
       </div>
 
-      <Button className={state_header_user['cls-4']}>  <Avatar className={state_header_user['cls-5']}> {user.first_letter} </Avatar> </Button>
+      <Button  className={state_header_user['cls-4']}>  <Avatar className={state_header_user['cls-5']}> {user.first_letter} </Avatar> </Button>
 
     </div>
 
