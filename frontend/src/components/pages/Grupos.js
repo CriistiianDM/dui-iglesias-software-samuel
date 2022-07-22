@@ -34,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1.5),
       width: '25ch',
       background: 'auto', 
+      color: 'black',
     },
   },
   styleTitleSistemas: {
@@ -61,7 +62,6 @@ const useStyles = makeStyles((theme) => ({
       }
     },
   formControl: {
-    display: Grid, 
     margin: theme.spacing(1),
     width: '20em',
     '@media screen and (max-width:280px)': {
@@ -69,16 +69,18 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   paperContainer: {
-    height: '190px',
-    width: 'auto',
-    position: 'auto',
+    height: 'auto',
+    width: '80%',
     background: 'auto',
     webkitBoxShadow: '-2px 0px 9px 1px rgba(0,0,0,0.89)', 
     boxShadow: '-1px 0px 10px 2px rgba(0,0,0,0.89);',       
     padding: '0.8em 0.8em', 
     margin: "auto",
-    marginBottom: 'auto',  
-    display: 'flex',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax( min(100%, 12em), 1fr))',
+    gridGap: '0.5em',
+    minHeight: '15em',
+    gridAutoRows: 'auto',
     justifyContent: "space-between",    
     justifyItems: 'center',
     alignItems: 'center', 
@@ -103,12 +105,86 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center', 
     justifyItems: 'center', 
   },
+  ancho: {
+    display: 'grid !important', 
+    width: '12em', 
+    '@media screen and (max-width:280px)': {
+      width: '12em'
+    }
+  }
+
 
 }));
 
 
 
-export function Grupos(){
+export function Grupos(props){
+
+     //variables
+     let state_user_form = props.properties;
+     //hacer un console.log para ver que esta pasando con el state_user_form
+     let busquedaJson = Object.values((state_user_form)["jovenLider"])[0]["identificacion"]; //busquedaJson es el json que se va a buscar en el backend
+
+     //useStates
+     const [data_array, setdata_array] = React.useState({
+         error_band_0: false,
+         error_band_1: false,
+         error_band_2: false,
+         error_band_3: false,
+         error_band_4: false,
+         error_band_5: false,
+         error_band_6: false,
+         error_band_7: false,
+         error_band_8: false,
+         error_band_9: false,
+         error_band_10: false,
+         error_band_11: false,
+         error_band_12: false,
+         error_band_13: false,
+         error_band_14: false,
+         error_band_15: false,
+         error_band_16: false,
+         error_band_17: false,
+         error_band_18: false,
+         error_band_19: false,
+         error_band_20: false,
+         error_band_21: false,
+         prueba: {
+            nombre: 'Hola Cristian',
+         }, 
+         message_band_0: 'solo Numeros de 9 a 15 caracteres',
+         message_band_1: 'solo Letras de 3 a 50 caracteres',
+         message_band_2: 'solo Letras de 3 a 50 caracteres',
+         message_band_3: 'solo Letras de 3 a 50 caracteres',
+         message_band_4: 'solo Letras de 3 a 50 caracteres',
+         message_band_5: 'seleciona una opcion',
+         message_band_6: '',
+         message_band_7: 'verificar si email esta bien escrito',
+         message_band_8: 'solo numeros de 9 a 15 caracteres',
+         message_band_9: 'solo numeros de 9 a 15 caracteres',
+         message_band_10: '',
+         message_band_11: 'verificar si la direccion esta bien escrita',
+         message_band_12: '',
+         message_band_13: '',
+         message_band_14: '',
+         message_band_15: '',
+         message_band_16: '',
+         message_band_17: '',
+         message_band_18: 'formato json incorrecto',
+         message_band_19: '',
+         message_band_20: '',
+         message_band_21: ''
+     });
+
+     console.log(`data Array: ${((data_array).prueba).nombre}`);
+
+
+ 
+     //handle change
+     const handleChange = (event) => {
+         validateForm(event, data_array , setdata_array);
+     }
+
 
     //Styles. 
     // <TextField type="file" id="outlined-required" variant="outlined"/>
@@ -138,33 +214,39 @@ export function Grupos(){
     return (
 
         <>
-        <formControl className={classes.FormControl}>
+
+        <FormControl className={classes.FormControl}>
         <h1 className={classes.styleTitleSistemas}>Grupos</h1>
-        </formControl>
+        </FormControl>
 
         <div className={classes.paperContainer}>
 
             <div className={classes.root}>
-            <TextField id="outlined-required" label="Nombre" variant="outlined"/>
+
+            <TextField error={data_array.error_band_0} onChange={handleChange} id="outlined-required-9-0" label="Nombre" variant="outlined"/>
             </div>
 
             <div className={classes.root}>
-            <TextField id="outlined-multiline-static" label="Descripción" multiline rows={3.5} variant="outlined"/>            
+            <TextField error={data_array.error_band_1} onChange={handleChange} id="outlined-multiline-9-1" required={true} fullWidth={true} maxRows={3} multiline={true} label="Descripción" variant="outlined"/>            
             </div>
 
             <div className={classes.root}>
             <Input className={classes.archivo} accept="image/*" type="file" id="outlined-required" variant="filled" ></Input>
             </div>
 
-            <div className={classes.root}>
-            <FormControl variant="filled">
-                    <InputLabel htmlFor="">Tipo De Identificacion</InputLabel>
-                    <Select label="Tipo de Documento" variant="filled" native>
-                        <option aria-label="None" value="" />
-                        <option value="1">Cedula de Ciudadania</option>
-                        <option value="2">Cedula de Extranjeria</option>
-                        <option value="3">Tarjeta de Identidad</option>
-                        <option value="4">Pasaporte</option>
+
+            <div>
+            <FormControl className={classes.ancho} variant="filled">
+                    <InputLabel htmlFor="">Lider Joven</InputLabel>
+                    <Select  id="joven-lider-0-5" onChange={handleChange} label="Tipo de Documento" variant="filled" native>
+                        {
+                            //un for each para recorrer el json busquedaJson
+                            (busquedaJson).map((key, index) => (
+                                  
+                                  <option key={index} value={key.identificacion}>{key.nombre}</option>                                
+
+                            ))
+                          }
                     </Select>
                 </FormControl>
             </div>
@@ -182,6 +264,55 @@ export function Grupos(){
 
 
     );
+
+}
+
+
+
+function validateForm(e, data_array , setdata_array) {
+
+  let type = (e.target.id).split('-')[2];
+  let error = `error_band_${(e.target.id).split('-')[3]}`;
+
+  //expresssion regular 
+  console.log(e.target.value, e.target.id ,validateFormate(e, type));
+
+   if ( (e.target.value) === null || (e.target.value).length === 0 ) {
+       setdata_array({...data_array, [error]: false});
+   }
+   else if(validateFormate(e, type)){
+       console.log('valido');
+       setdata_array({...data_array, [error]: false});
+   }
+   else {
+       setdata_array({...data_array, [error]: true});
+   }
+
+}
+
+function validateFormate(e, type) {
+           
+  //expresssion regular 
+  var regex = {
+       '0': /^[0-9]{9,15}$/,
+       '1': /^[aA-zZ]{3,50}$/, //validar texto de 3 a 50 caracteres, sin espacios.
+       '2': /^[aA-zZ]{2}$/,
+       '3': /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/,
+       '4': /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
+       '5': /^[a-zA-Z]$/,
+       '6': /^[0-9-a-zA-Z\s#\-]{10,255}$/,
+       '7': /^[0-9]{1,5}$/,
+       '8': /^{[0-9-aA-zZ:,'"]+}$/,
+       '9': /^[aA-zZ\s]{3,50}$/, //Validar espaciados y textos. 
+  }         
+ 
+  //validar el formato
+  if ((regex[type]).exec(e.target.value) != null) {
+       return true;
+  }
+  else {
+       return false;
+  }
 
 }
 
