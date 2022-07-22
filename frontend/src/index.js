@@ -11,6 +11,15 @@
   *  @decs render the app
 */
 
+
+/*evento cuando se cieera la pagina
+window.onbeforeunload = function() {
+  //limpiar la cache de la pagina y limpiar el localStorage
+  localStorage.clear();
+  window.sessionStorage.clear();
+}*/
+
+
  // create container
  const container = document.getElementById('root');
 
@@ -19,6 +28,5 @@
 
  // render app 
  root.render(<App />);
-
 
 

@@ -616,8 +616,23 @@ INSERT INTO person_position (id, name , person_id , position_id, period_id , id_
 (nextval('person_position_seq'), 'persona normal', 3, 1, 1,NULL, false)
 
 
+-- insertar datos a la tabla organization
+INSERT INTO organizacion (id, name, resolucion , descripcion, logical_erase) VALUES
+(nextval('organizacion_seq'), 'Iglesia Pentacostal Unidad De Colombia', '','', false)
 
 
+-- insertar datos a la tabla subdivision
+INSERT INTO subdivision (id, name, organizacion_id, logical_erase) VALUES
+(nextval('subdivision_seq'), 'Iglesia Pentacostal Unidad De Colombia', 1, false)
+
+-- insertar datos a la tabla church
+INSERT INTO church (id, name, dir, latitud , longitud , tel1 , tel2 , date_init , subdivision_id ,logical_erase) VALUES
+(nextval('church_seq'), 'Iglesia Pentacostal Unidad De Colombia', 'Calle 1', '1', '1', '123456789', '123456789', '01/01/2022', 1, false)
+
+
+-- insert tp table person_eclesial
+INSERT INTO person_eclesial (id, person_id, baptism_date , baptism_place_id , holy_spirit_date , date_init_church , experience_json , id_church_now , logical_erase) VALUES
+(nextval('person_eclesial_seq'), 1, '01/01/2022', 1, '01/01/2022', '01/01/2022', '{}', 1, false),
 -- function
 
 
