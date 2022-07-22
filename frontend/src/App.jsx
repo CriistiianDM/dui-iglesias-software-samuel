@@ -35,6 +35,10 @@ import json from './json/state_components.json';
 export function App() {
 
   
+  React.useEffect(() => {
+    getCountries();
+  }, []);
+  
   //return the component
   return (
 
@@ -45,7 +49,7 @@ export function App() {
         <Route path="/account" element={<Account properties={json} />} />
         <Route path="/login" element = {<Login properties={json} />} />
         <Route path="/userinfo" element = {<UserInfo properties={json} />} />
-        <Route path="/personnormal" element = {<PersonNormal properties={json} />} />
+        <Route path="/creyente" element = {<PersonNormal properties={json} />} />
         <Route path="/createuser" element = {<CreateUser properties={json} />} />
         <Route path="/grupo" element={<Grupos properties={json}/>}/>
         <Route path="*" element = {<A404 />} />
@@ -56,3 +60,25 @@ export function App() {
 
 }
 
+/**
+  *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
+  *  @decs  : consulta para traer los nombres de los paises
+*/
+async function getCountries() {
+   try {
+    console.log('entro', localStorage.getItem('countries_band'));
+    if (localStorage.getItem('countries_band') === null) {
+
+    const response = await fetch(`https://demon789-4.herokuapp.com/zcrcp/1/xd`);
+    const data = await response.json();
+    localStorage.setItem('countries', JSON.stringify(data));
+    //return data;
+    localStorage.setItem('countries_band', false);
+    console.log('entro11', localStorage.getItem('countries'));
+    }
+
+   } catch (error) {
+     console.log(error);
+    
+   }
+}
