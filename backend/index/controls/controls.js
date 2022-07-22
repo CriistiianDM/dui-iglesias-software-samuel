@@ -32,6 +32,18 @@ const petitions_get_login = async (req, res) => {
     }
 
 }
+/**
+  *  @author : Juan Sebastian Camino Muñoz <juan.camino@correounivalle.edu.co>
+  *  @decs  : verificar cuantos cargos existen en la Base de datos
+*/
+
+const petitions_get_all_NameCargos = async (req, res)=>{
+    try {
+        const answer = await pool.query('Select name from position_librarian where logical_erase =false')
+    } catch (error) {
+     console.log(error, 'error'); 
+    }
+}
 
 /**
   *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
