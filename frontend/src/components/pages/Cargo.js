@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { Headerlogin } from '../login-element/Headerlogin';
 
 
+
 const theme = createTheme({
   typography: {
     // In Chinese and Japanese the characters are usually larger,
@@ -126,8 +127,8 @@ export function Cargo(props) {
     if (name === 'Administrador') {
       navigate('/account');
     }
-    else if (name === 'persona normal') {
-      navigate('/personnormal');
+    else if (name === 'creyente') {
+      navigate('/creyente');
     }
 
   };
