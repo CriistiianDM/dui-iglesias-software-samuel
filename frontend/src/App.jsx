@@ -47,7 +47,7 @@ export function App() {
         <Route path="/userinfo" element = {<UserInfo properties={json} />} />
         <Route path="/personnormal" element = {<PersonNormal properties={json} />} />
         <Route path="/createuser" element = {<CreateUser properties={json} />} />
-        <Route path="/grupo" element={<Grupos/>}/>
+        <Route path="/grupo" element={<Grupos properties={json}/>}/>
         <Route path="*" element = {<A404 />} />
       </Routes>
     </Router>
