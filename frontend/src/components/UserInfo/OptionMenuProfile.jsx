@@ -1,9 +1,25 @@
 //librery or import of react
-import { IconButton, Icon, Typography, Button, Dialog, DialogActions, DialogTitle, DialogContent, DialogContentText, List, ListItem, ListItemAvatar, ListItemText, PersonIcon, AddIcon, Avatar} from '@material-ui/core';
+import { IconButton, Icon,Select, InputLabel, FormControl, Typography, Button, Dialog, DialogActions, DialogTitle, DialogContent, DialogContentText, List, ListItem, ListItemAvatar, ListItemText, PersonIcon, AddIcon, Avatar} from '@material-ui/core';
 import React from 'react';
 import { useState } from 'react';
 import option_menu_profile from '../../css/option_menu_profile.css';
+import { makeStyles } from '@material-ui/core/styles';
 
+//estilos de material-ui
+const useStyles = makeStyles((theme) => ({
+    textField: {
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+        width: 200,
+    },
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: 200,
+    },
+    ayudad: {
+        display: 'none !important'
+    }
+}));
 
 //18 personal information
 
@@ -14,11 +30,12 @@ import option_menu_profile from '../../css/option_menu_profile.css';
 export function OptionMenuProfile(props) {
 
     let state_option_menu_profile = props.properties;
-
+    const classes = useStyles();
 
     //set data to view
     let [data_array, set_data_array] = React.useState({
         loading: false,
+        disabled_form: true,
         data: []
     });
 
@@ -63,6 +80,16 @@ export function OptionMenuProfile(props) {
             </List>
         );
       }
+
+      //handel open dialog
+      const handleOpenCargos = () => {
+            set_data_array({...data_array, disabled_form: false});
+      }
+
+      //handle para enviar datos
+        const handleSubmit = (event) => {
+            postCargo(data_array, set_data_array,setOpenCargos) //post para enviar el cargo
+        }
 
 
     return (
@@ -133,9 +160,16 @@ export function OptionMenuProfile(props) {
                     <DialogTitle id="dialog-title">{"Gestion de Cargos"}</DialogTitle>
 
                     <DialogContent>       
-                            <SimpleDialog></SimpleDialog>    
+                            <SimpleDialog></SimpleDialog>   
+                            <FormControl  className={(data_array.disabled_form)?  classes.ayudad : classes.formControl} variant="filled" >
+                        <InputLabel htmlFor="wer">Cargos Disponibles</InputLabel>
+                        <Select onChange={handleSubmit} id='tipo-region1-7-13' label="Tipo de Documento" variant="filled" native labelId="w66666er">
+                            <option aria-label="None" value="" />
+                            <option value={4}>Joven Lider</option> 
+                        </Select>
+                        </FormControl>
                     <DialogActions>
-                        <Button onClick={() =>setOpenCargos(false)} color="primary">
+                        <Button onClick={handleOpenCargos} color="primary">
                          añadir cargo
                         </Button>
                     </DialogActions>
@@ -265,5 +299,25 @@ function getData(data_array, set_data_array) {
     }, 1000);
 
     return timer;
+
+}
+
+/**
+  *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
+  *  @decs  : post para enviar el cargo
+*/
+async function postCargo(data_array, set_data_array,setOpenCargos) {
+    
+    let response = await fetch(`https://demon789-4.herokuapp.com/zagcat`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        mode: 'cors',
+        body: JSON.stringify(data_array.data)
+    });
+    alert('Cargo Registrado');
+    setOpenCargos(false)
 
 }
