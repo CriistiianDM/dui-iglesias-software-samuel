@@ -21,7 +21,9 @@ export function WelcomeAccount(props) {
     //useEffect para obtener el nombre y apellido del usuario 
     useEffect(() => {
       update_user_name(user_valid_data, setUserValid);
+      if (!state_Welcome_account['estadoName']) {
       getData(user_valid_data, setUserValid);
+      }
     } , []);
  
 
@@ -55,7 +57,7 @@ function update_user_name(user, setUser) {
 
 
     setUser({...user, user_name: localStorage.getItem('user_name')});
-    console.log(user, 'setUser');
+    console.log(user, 'setUser 12333');
     
     letter_before = (user.user_name).substring(0, 1).toUpperCase();
     letter_after = localStorage.getItem('user_name').substring(0, 1).toUpperCase();
@@ -65,15 +67,6 @@ function update_user_name(user, setUser) {
       console.log('consult_refresh true');
       clearInterval(timer);
     }
-
-/*
-    if (letter_before !== letter_after) {
-      clearInterval(timer);
-    }
-    else if (letter_before === letter_after) {
-      clearInterval(timer);
-    }
-*/
 
   }, 100);
 
@@ -96,9 +89,7 @@ function getData(data_array, set_data_array) {
 
   if (data != null) {
       clearInterval(timer);
-      console.log( Object.entries(JSON.parse(data)).forEach((value) => {
-          console.log(value);
-      }));
+      console.log('data not null');
       set_data_array({...data_array, loading: true, data: JSON.parse(data)});
   } 
 

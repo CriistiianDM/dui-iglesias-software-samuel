@@ -342,7 +342,7 @@ export function CreateUserForm(props) {
 
             <Button onClick={handleSubmit} disabled={data_array.diabled_submit} className={state_user_form['cls-12']}>
                 {
-                    (data_array.diabled_submit) ? 'Desativado' :
+                    (data_array.diabled_submit) ? 'Desactivado' :
                         (data_array.loading_submit) ? 'Guardar' : (<CircularProgress
                             size={24}
                             color="inherit"
