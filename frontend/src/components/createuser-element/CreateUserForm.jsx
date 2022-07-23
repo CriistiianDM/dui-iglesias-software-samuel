@@ -707,27 +707,20 @@ function get_id_inputs_form() {
     let id_inputs_form = {
         '0': 'i-p-0-0',
         '1': 'first-name-1-1',
-        '2': 'first_last_name',
-        '3': 'second_last_name',
-        '4': 'email',
-        '5': 'phone_1',
-        '6': 'phone_2',
-        '7': 'id_church_now',
-        '8': 'id_church_now_2',
-        '9': 'id_church_now_3',
-        '10': 'id_church_now_4',
-        '11': 'id_church_now_5',
-        '12': 'id_church_now_6',
-        '13': 'id_church_now_7',
-        '14': 'id_church_now_8',
-        '15': 'id_church_now_9',
-        '16': 'id_church_now_10',
-        '17': 'id_church_now_11',
-        '18': 'id_church_now_12',
-        '19': 'id_church_now_13',
-        '20': 'id_church_now_14',
-        '21': 'id_church_now_15'
-
+        '2': 'second-name-1-2',
+        '3': 'last-name-1-3',
+        '4': 'second-name-1-4',
+        '5': 'tipo-identificacion-2-5',
+        '6': 'date-f-3-6',
+        '7': 'tipo-email-4-7',
+        '8': 'tipo-tel1-0-8',
+        '9': 'tipo-tel2-0-9',
+        '10': 'tipo-genero-5-10',
+        '11': 'tipo-cali1-7-14',
+        '12': 'date-bautizo-3-15',
+        '13': 'date-iglesia-3-16',
+        '14': 'date-santo-3-17',
+        '15': 'tipo-cuidad2-7-21'
     }
        
 
