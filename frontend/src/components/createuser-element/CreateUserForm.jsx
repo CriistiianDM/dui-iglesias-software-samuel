@@ -284,16 +284,6 @@ export function CreateUserForm(props) {
                             shrink: true,
                         }}
                     />
-                    <TextField
-                        disabled={data_array.disabled_all}
-                        id="date-fQQ-8-18"
-                        onChange={handleChange}
-                        label="Habilidades - JSON"
-                        error={data_array.error_band_18}
-                        helperText={(data_array.error_band_18) ? data_array.message_band_18 : ''}
-                        type='text'
-                        className={classes.textField}
-                    />
                 </form>
 
                 <div className={state_user_form['cls-7']}>
@@ -609,7 +599,7 @@ function validate_button_register(e, data_array, setdata_array) {
     }
    
     console.log('campos validos llenos', campos_validos_llenos);
-    if (campos_validos_llenos === 16) {
+    if (campos_validos_llenos >= 16) {
         console.log('entro a con 18');
         setdata_array({ ...data_array, diabled_submit: false });
         campos_validos_llenos = null;
