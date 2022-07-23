@@ -10,6 +10,8 @@ import {
     CircularProgress,
     Dialog, DialogActions, DialogTitle, DialogContent, DialogContentText
 } from '@material-ui/core';
+import $ from 'jquery';
+
 
 //estilos de material-ui
 const useStyles = makeStyles((theme) => ({
@@ -90,7 +92,7 @@ export function CreateUserForm(props) {
         region_band_1: true, //20
         city_band_0: true,//14
         city_band_1: true,//21
-        diabled_submit: true,
+        diabled_submit: false,
         permit_submit: false,
         country_data: '',
         region_data_0: '',
@@ -114,6 +116,7 @@ export function CreateUserForm(props) {
 
     React.useEffect(() => {
         timer_consult_verify(data_array, setdata_array)
+        //validar_on_off_button()
     }, []);
 
     //handle change
@@ -122,7 +125,8 @@ export function CreateUserForm(props) {
     }
 
     const handleSubmit = (event) => {
-        submit_form(event, data_array, setdata_array)
+        console.log('data actual', $('#tipo-identificacion-2-5').val());
+        //submit_form(event, data_array, setdata_array)
     }
 
     let handle_dialog_open = () => {
@@ -145,7 +149,8 @@ export function CreateUserForm(props) {
                 <div className={state_user_form['cls-7']}>
                     <Typography className={state_user_form['cls-8']}> Informacion Personal </Typography>
                 </div>
-
+                
+                
                 <form className={state_user_form['cls-2']} noValidate autoComplete="off">
                     <TextField disabled={data_array.disabled_0} error={data_array.error_band_0} helperText={(data_array.error_band_0) ? data_array.message_band_0 : ''} onBlur={handleChange} id='i-p-0-0' type='number' label="Identificacion" variant="filled" />
                     <TextField disabled={data_array.disabled_all} error={data_array.error_band_1} helperText={(data_array.error_band_1) ? data_array.message_band_1 : ''} onChange={handleChange} id='first-name-1-1' type='text' label="Primer Nombre" variant="filled" />
@@ -383,19 +388,21 @@ function validateForm(e, data_array, setdata_array) {
 
     let type = (e.target.id).split('-')[2];
     let error = `error_band_${(e.target.id).split('-')[3]}`;
-    console.log(data_array, 'data_array');
+    //console.log(data_array, 'data_array');
     //expresssion regular 
-    console.log(e.target.value, e.target.id, validateFormate(e, type));
+   // console.log(e.target.value, e.target.id, validateFormate(e, type));
 
     if ((e.target.value) === null || (e.target.value).length === 0) {
         setdata_array({ ...data_array, [error]: false });
     }
     else if (validateFormate(e, type)) {
-        console.log('valido help',getNameState((e.target.id).split('-')[3]), e.target.value);
+        //console.log('valido help',getNameState((e.target.id).split('-')[3]), e.target.value);
+        console.log('data vija', data_array);
         setdata_array({
             ...data_array, [error]: false,
             [getNameState((e.target.id).split('-')[3])]: e.target.value
         });
+        console.log('data nueva', data_array);
         validateDocument(e, data_array, setdata_array, error);
         validate_country_region_city(e, data_array, setdata_array);
         validate_button_register(e, data_array, setdata_array);
@@ -569,6 +576,7 @@ async function validate_country_region_city(e, data_array, setdata_array) {
 
 /**
   *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
+  *  TODO : No funciona
   *  @decs  : Validar si puede dar click en el boton de registrar
 */
 function validate_button_register(e, data_array, setdata_array) {
@@ -663,6 +671,69 @@ async function submit_form(e, data_array, setdata_array) {
     }
 
 }
+
+
+/**
+  *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
+  *  @author : Juan Sebastian Camino Muñoz<juan.camino@correounivalle.edu.co>
+  *  @author : Juan Felipe osorio <juan.felipe.osorio@correounivalle.edu.co>
+  *  @decs  : Validar si puede dar click en el boton de registrar
+*/
+function validar_on_off_button() {
+
+    //timer del otro
+    let timer_on_off = setInterval(() => {
+
+     //alert('hola');
+      
+    } , 6000);
+
+
+    return timer_on_off;
+
+
+}
+
+
+
+/**
+  *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
+  *  @author : Juan Sebastian Camino Muñoz<juan.camino@correounivalle.edu.co>
+  *  @author : Juan Felipe osorio <juan.felipe.osorio@correounivalle.edu.co>
+  *  @decs  : retonar un json con los id de los input del formulario
+*/
+function get_id_inputs_form() {
+    
+    let id_inputs_form = {
+        '0': 'i-p-0-0',
+        '1': 'first-name-1-1',
+        '2': 'first_last_name',
+        '3': 'second_last_name',
+        '4': 'email',
+        '5': 'phone_1',
+        '6': 'phone_2',
+        '7': 'id_church_now',
+        '8': 'id_church_now_2',
+        '9': 'id_church_now_3',
+        '10': 'id_church_now_4',
+        '11': 'id_church_now_5',
+        '12': 'id_church_now_6',
+        '13': 'id_church_now_7',
+        '14': 'id_church_now_8',
+        '15': 'id_church_now_9',
+        '16': 'id_church_now_10',
+        '17': 'id_church_now_11',
+        '18': 'id_church_now_12',
+        '19': 'id_church_now_13',
+        '20': 'id_church_now_14',
+        '21': 'id_church_now_15'
+
+    }
+       
+
+}
+
+
 
 
 
