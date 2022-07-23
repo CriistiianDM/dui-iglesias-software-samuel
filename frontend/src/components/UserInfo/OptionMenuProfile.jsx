@@ -28,6 +28,7 @@ export function OptionMenuProfile(props) {
 
     const [openCargos,setOpenCargos] = useState(false);
     const [openConfig,setOpenConfig] = useState(false);
+    const [openBorrar,setOpenBorrar] = useState(false);
     const [vectorCargos,setCargos] = useState([])
 
     let handleCargos = (event) => {
@@ -124,7 +125,7 @@ async function fetch_all_cargos(){
 
                 </Button>
 
-                <Button className={state_option_menu_profile['cls-3']}>
+                <Button onClick={() => setOpenBorrar(true)}className={state_option_menu_profile['cls-3']}>
 
                     <div className={state_option_menu_profile['cls-4']}>
                         <Icon className={state_option_menu_profile['cls-6']}>delete</Icon>
@@ -168,6 +169,29 @@ async function fetch_all_cargos(){
                         <Button onClick={() =>setOpenCargos(false)} color="primary">
                         Cerrar
                         </Button>
+                    </DialogActions>
+                </Dialog>
+            </div>
+            <div>
+                <Dialog
+                open={openBorrar}
+                onClose={() =>setOpenBorrar(false)}
+                aria-labelledby="dialog-title"
+                aria-describedby="dialog-description"
+                >
+                    <DialogTitle id="dialog-title">{"Gestion de Cargos"}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="dialog-description">
+                            ¿Esta seguro que quiere borrar el Usuario?
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                    <Button onClick={() =>setOpenBorrar(false)} color="primary">
+                     Aceptar
+                    </Button>
+                    <Button onClick={() =>setOpenBorrar(false)} color="primary">
+                     Cancelar
+                    </Button>
                     </DialogActions>
                 </Dialog>
             </div>
