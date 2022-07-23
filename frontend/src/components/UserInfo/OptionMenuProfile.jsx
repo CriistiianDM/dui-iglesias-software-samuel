@@ -32,13 +32,37 @@ export function OptionMenuProfile(props) {
 
     let handleCargos = (event) => {
          setOpenCargos(true);
+         fetch_all_cargos()
          fetch_data_cargo();
          console.log(searchCargos)
       }
     
     let searchCargos 
     let vectCargos
+    let searchAllCargos
+    let vecAllCargos
+/**
+  *  @author : juan sebastian camino muñoz <juan.camino@correounivalle.edu.co>
+  *  @decs  : busqueda de los cargos del usuario que se ve en userInfo
+*/
+function diferent_vectors(){
+    
+}
+/**
+  *  @author : juan sebastian camino muñoz <juan.camino@correounivalle.edu.co>
+  *  @decs  : busqueda de los cargos del usuario que se ve en userInfo
+*/
+async function fetch_all_cargos(){
+        const response_fetch = await fetch(`https://demon789-4.herokuapp.com/zallc`);
+        const data_fetch = await response_fetch.json();
+        searchAllCargos = data_fetch;
+        vecAllCargos = searchAllCargos.split(',');
+}
 
+/**
+  *  @author : juan sebastian camino muñoz <juan.camino@correounivalle.edu.co>
+  *  @decs  : busqueda de los cargos del usuario que se ve en userInfo
+*/
     async function fetch_data_cargo(){
         console.log((data_array.data)['doc'])
         const response_fetch = await fetch(`https://demon789-4.herokuapp.com/zcvg/${(data_array.data)['doc']}`);
