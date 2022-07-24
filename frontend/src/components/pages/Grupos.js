@@ -98,7 +98,7 @@ const useStyles = makeStyles((theme) => ({
   boton: {
     width: 'auto',
     height: 'auto',
-    backgroundImage: 'linear-gradient(to right top, #aac1e4, #9cbaeb, #8eb3f1, #81acf7, #74a4fd)',
+    backgroundImage: '#3f51b5', 
     boxShadow: '-1px 0px 10px 2px rgba(0,0,0,0.89);',       
     borderRadius: '20px', 
     textAlign: 'center', 
@@ -106,7 +106,7 @@ const useStyles = makeStyles((theme) => ({
     justifyItems: 'center', 
   },
   ancho: {
-    display: 'none !important', 
+    display: 'grid !important', 
     width: '12em', 
     '@media screen and (max-width:280px)': {
       width: '12em'
@@ -148,6 +148,16 @@ export function Grupos(props){
      });
 
      const [img_data, set_img_data] = React.useState();
+    const [joven_lider, set_joven_lider] = React.useState({
+          loading: true,
+          data: [],
+          
+     });
+
+     //useEffect
+      React.useEffect(() => {
+        getJovenes(joven_lider, set_joven_lider); //llamada a la funcion getJovenes
+      }, []); 
 
 
  
@@ -161,7 +171,6 @@ export function Grupos(props){
     // <TextField type="file" id="outlined-required" variant="outlined"/>
     const classes = useStyles();
     const theme = createTheme();
-    const navigate = useNavigate();
 
     theme.typography.h4 = {
         fontSize: '0rem',
@@ -209,13 +218,19 @@ export function Grupos(props){
                     <InputLabel htmlFor="">Lider Joven</InputLabel>
                     <Select  id="joven-lider-0-5" onChange={handleChange} label="Tipo de Documento" variant="filled" native>
                         {
+                          (joven_lider.loading)?
                             //un for each para recorrer el json busquedaJson
                             (busquedaJson).map((key, index) => (
                                   
                                   <option key={index} value={key.identificacion}>{key.nombre}</option>                                
 
-                            ))
-                          }
+                            )):
+                            (joven_lider.data).map((key, index) => (
+
+                                  <option key={index} value={key.id}>{key.first_name+` ${key.first_last_name}`}</option>
+                            )
+                            )
+                          };
                     </Select>
                 </FormControl>
             </div>
@@ -314,6 +329,33 @@ function getNameState(index) {
 
 }
 
+
+/**
+ * @author Juan Felipe Osorio Zapata <juan.felipe.osorio@correounivalle.edu.co>
+ * @description : enviar los datos de la consulta de jovenes lideres a la vista. 
+ * @param {Object} data 
+ */
+
+async function getJovenes(jovenL, setJovenL) {
+  
+    try{
+  
+      let response = await fetch('https://demon789-4.herokuapp.com/zjlp'); 
+      let data1 = await response.json();
+      //guardar en setJovenL el json de la consulta, recordando la información anterior
+      setJovenL({
+        ...jovenL,  
+        data: data1
+
+    }); 
+
+      console.log(data1); 
+  
+    }catch(error){
+      console.log(error);
+    }
+  
+}
 
 
 /**
