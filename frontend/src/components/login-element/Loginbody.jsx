@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom';
 export function Loginbody(props) {
 
   localStorage.setItem('user_name', `admin`);
-  console.log(localStorage.getItem('user_name'));
+  //console.log(localStorage.getItem('user_name'));
   
   //estados boleanos para validar los campos
   const [user_valid_data, setUserValid] = React.useState({
