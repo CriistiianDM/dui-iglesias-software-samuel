@@ -37,9 +37,9 @@ const petitions_get_login = async (req, res) => {
   *  @decs  : verificar cuantos cargos existen en la Base de datos
 */
 
-const petitions_get_all_NameCargos = async (req, res)=>{
+const petitions_get_cargoFaltantesUser = async (req, res)=>{
     try {
-        const answer = await pool.query('SELECT name FROM position_librarian WHERE logical_erase =false')
+        const answer = await pool.query('SELECT id,name FROM position_librarian WHERE id NOT IN(SELECT position_id FROM person_position WHERE person_id IN (SELECT id FROM person WHERE doc = 123456729 AND logical_erase = false))')
         res.json(answer.rows);
     } catch (error) {
      console.log(error, 'error'); 
@@ -250,7 +250,7 @@ module.exports = {
     petitions_put_periodo,
     petitions_get_user,
     petitions_get_all_user_active,
-    petitions_get_all_NameCargos
+    petitions_get_cargoFaltantesUser 
 }
 
 
