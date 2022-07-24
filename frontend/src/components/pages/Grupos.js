@@ -351,8 +351,8 @@ async function getJovenes(jovenL, setJovenL) {
       //guardar en setJovenL el json de la consulta, recordando la información anterior
       setJovenL({
         ...jovenL,  
-        data: data1
-
+        data: data1,
+        loading: false
     }); 
 
       console.log(data1); 
