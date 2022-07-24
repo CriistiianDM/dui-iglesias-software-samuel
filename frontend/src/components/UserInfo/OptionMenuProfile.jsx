@@ -162,10 +162,10 @@ export function OptionMenuProfile(props) {
                     <DialogContent>       
                             <SimpleDialog></SimpleDialog>   
                             <FormControl  className={(data_array.disabled_form)?  classes.ayudad : classes.formControl} variant="filled" >
-                        <InputLabel htmlFor="wer">Cargos Disponibles</InputLabel>
+                        <InputLabel  value="#" htmlFor="wer">Cargos Disponibles</InputLabel>
                         <Select onChange={handleSubmit} id='tipo-region1-7-13' label="Tipo de Documento" variant="filled" native labelId="w66666er">
                             <option aria-label="None" value="" />
-                            <option value={4}>Joven Lider</option> 
+                            <option value="4">Joven Lider</option> 
                         </Select>
                         </FormControl>
                     <DialogActions>
@@ -209,10 +209,10 @@ export function OptionMenuProfile(props) {
                 <div className={state_option_menu_profile['cls-10']}>
 
                     {   (!data_array.loading)?
-                        (state_option_menu_profile['info-personal']).map((value) => (
+                        (state_option_menu_profile['info-personal']).map((value,index) => (
                             <div key={value.title} className={state_option_menu_profile['cls-8']}>
                                 <Typography className={state_option_menu_profile['cls-5']}>{value.title}</Typography>
-                                <input value={value.content} disabled className={state_option_menu_profile['cls-9']} />
+                                <input value="" disabled className={state_option_menu_profile['cls-9']} />
                             </div>
                         ))
                         :
@@ -220,7 +220,7 @@ export function OptionMenuProfile(props) {
                             (index !== 0 && index <= 12)? (
                             <div key={index} className={state_option_menu_profile['cls-8']}>
                                 <Typography className={state_option_menu_profile['cls-5']}>{value[0]}</Typography>
-                                <input value={value[1]} disabled className={state_option_menu_profile['cls-9']} />
+                                <input value={ (value[1] === null)? "" :  value[1]} disabled className={state_option_menu_profile['cls-9']} />
                             </div>
                             ) : null
                         ))
@@ -234,10 +234,10 @@ export function OptionMenuProfile(props) {
 
                     {
                         (!data_array.loading)? 
-                        (state_option_menu_profile['info-eclesiastica']).map((value) => (
+                        (state_option_menu_profile['info-eclesiastica']).map((value,index) => (
                             <div key={value.title} className={state_option_menu_profile['cls-8']}>
                                 <Typography className={state_option_menu_profile['cls-5']}>{value.title}</Typography>
-                                <input value={value.content} disabled className={state_option_menu_profile['cls-9']} />
+                                <input value="" disabled className={state_option_menu_profile['cls-9']} />
                             </div>
                         ))
                         :
@@ -245,7 +245,7 @@ export function OptionMenuProfile(props) {
                             (index > 14 && index !== 24 && index !== 18 && index !== 16)? (
                             <div key={index} className={state_option_menu_profile['cls-8']}>
                                 <Typography className={state_option_menu_profile['cls-5']}>{value[0]}</Typography>
-                                <input value={value[1]} disabled className={state_option_menu_profile['cls-9']} />
+                                <input value={(value[1] === null)? "" :  value[1]} disabled className={state_option_menu_profile['cls-9']} />
                             </div>
                             ) : null
                         ))
@@ -256,10 +256,10 @@ export function OptionMenuProfile(props) {
                 <div className={state_option_menu_profile['cls-10']}>
 
                     {
-                        (state_option_menu_profile['info-ocupacional']).map((value) => (
-                            <div key={value.title} className={state_option_menu_profile['cls-8']}>
+                        (state_option_menu_profile['info-ocupacional']).map((value,index) => (
+                            <div key={index} className={state_option_menu_profile['cls-8']}>
                                 <Typography className={state_option_menu_profile['cls-5']}>{value.title}</Typography>
-                                <input value={value.content} disabled className={state_option_menu_profile['cls-9']} />
+                                <input value="" disabled className={state_option_menu_profile['cls-9']} />
                             </div>
                         ))
                     }
