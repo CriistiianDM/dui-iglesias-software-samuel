@@ -45,17 +45,42 @@ export function OptionMenuProfile(props) {
 
     const [openCargos,setOpenCargos] = useState(false);
     const [openConfig,setOpenConfig] = useState(false);
+    const [openBorrar,setOpenBorrar] = useState(false);
     const [vectorCargos,setCargos] = useState([])
 
     let handleCargos = (event) => {
          setOpenCargos(true);
+         fetch_all_cargos()
          fetch_data_cargo();
          console.log(searchCargos)
       }
     
     let searchCargos 
     let vectCargos
+    let searchAllCargos
+    let vecAllCargos
+/**
+  *  @author : juan sebastian camino muñoz <juan.camino@correounivalle.edu.co>
+  *  @decs  : busqueda de los cargos del usuario que se ve en userInfo
+*/
+function diferent_vectors(){
+    
+}
+/**
+  *  @author : juan sebastian camino muñoz <juan.camino@correounivalle.edu.co>
+  *  @decs  : busqueda de los cargos del usuario que se ve en userInfo
+*/
+async function fetch_all_cargos(){
+        const response_fetch = await fetch(`https://demon789-4.herokuapp.com/zallc`);
+        const data_fetch = await response_fetch.json();
+        searchAllCargos = data_fetch;
+        vecAllCargos = searchAllCargos.split(',');
+}
 
+/**
+  *  @author : juan sebastian camino muñoz <juan.camino@correounivalle.edu.co>
+  *  @decs  : busqueda de los cargos del usuario que se ve en userInfo
+*/
     async function fetch_data_cargo(){
         console.log((data_array.data)['doc'])
         const response_fetch = await fetch(`https://demon789-4.herokuapp.com/zcvg/${(data_array.data)['doc']}`);
@@ -127,7 +152,7 @@ export function OptionMenuProfile(props) {
 
                 </Button>
 
-                <Button className={state_option_menu_profile['cls-3']}>
+                <Button onClick={() => setOpenBorrar(true)}className={state_option_menu_profile['cls-3']}>
 
                     <div className={state_option_menu_profile['cls-4']}>
                         <Icon className={state_option_menu_profile['cls-6']}>delete</Icon>
@@ -178,6 +203,29 @@ export function OptionMenuProfile(props) {
                         <Button onClick={() =>setOpenCargos(false)} color="primary">
                         Cerrar
                         </Button>
+                    </DialogActions>
+                </Dialog>
+            </div>
+            <div>
+                <Dialog
+                open={openBorrar}
+                onClose={() =>setOpenBorrar(false)}
+                aria-labelledby="dialog-title"
+                aria-describedby="dialog-description"
+                >
+                    <DialogTitle id="dialog-title">{"Gestion de Cargos"}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="dialog-description">
+                            ¿Esta seguro que quiere borrar el Usuario?
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                    <Button onClick={() =>setOpenBorrar(false)} color="primary">
+                     Aceptar
+                    </Button>
+                    <Button onClick={() =>setOpenBorrar(false)} color="primary">
+                     Cancelar
+                    </Button>
                     </DialogActions>
                 </Dialog>
             </div>

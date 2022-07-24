@@ -39,7 +39,8 @@ const petitions_get_login = async (req, res) => {
 
 const petitions_get_all_NameCargos = async (req, res)=>{
     try {
-        const answer = await pool.query('Select name from position_librarian where logical_erase =false')
+        const answer = await pool.query('SELECT name FROM position_librarian WHERE logical_erase =false')
+        res.json(answer.rows);
     } catch (error) {
      console.log(error, 'error'); 
     }
@@ -248,7 +249,8 @@ module.exports = {
     petitions_get_cargo_vigigentes,
     petitions_put_periodo,
     petitions_get_user,
-    petitions_get_all_user_active
+    petitions_get_all_user_active,
+    petitions_get_all_NameCargos
 }
 
 

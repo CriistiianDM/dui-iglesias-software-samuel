@@ -22,12 +22,15 @@ export function Header(props) {
                 <img className={state_header['cls-3']} alt="" src={logoIglesia} /> 
             </Button>
            
-            <IconButton  className={state_header['cls-4']} aria-label="menu">
-                <MenuIcon fontSize="large"  />
-            </IconButton>
-
          </header>
 
         </>
     )
 }
+/**boton de las tres lineas inavilitado
+ * 
+ *            <IconButton  className={state_header['cls-4']} aria-label="menu">
+                <MenuIcon fontSize="large"  />
+            </IconButton>
+ * 
+ */
