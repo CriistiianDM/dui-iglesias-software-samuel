@@ -301,7 +301,7 @@ export function CreateUserForm(props) {
                 </form>
 
                 <div className={state_user_form['cls-7']}>
-                    <Typography className={state_user_form['cls-8']}> Lugar de Bautizmo </Typography>
+                    <Typography className={state_user_form['cls-8']}> Lugar de Bautismo </Typography>
                 </div>
 
                 <form className={state_user_form['cls-2']} noValidate autoComplete="off">
