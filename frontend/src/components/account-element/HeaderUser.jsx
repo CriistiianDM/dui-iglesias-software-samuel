@@ -3,8 +3,9 @@ import React from 'react';
 import logoIglesia from '../../images/imagesHome/logo_iglesia.png';
 import headerUserAccounts from '../../css/header-user-account.css';
 import { useState } from 'react';
-import { Avatar, Button, Menu, MenuItem } from '@material-ui/core'
 import { Navigate, useNavigate } from "react-router-dom";
+import { Avatar, Button, Menu , MenuItem, ListItemIcon, Divider } from '@material-ui/core';
+
 
 
 /**
@@ -47,9 +48,9 @@ export function HeaderUser(props) {
  let handleClose = () => {
    navigate("/", { replace: true })
    setAnchorEl(null);
-   alert("Ojo");
    
  };
+
   return (
 
     <div className={state_header_user['cls-1']}>
@@ -57,6 +58,7 @@ export function HeaderUser(props) {
       <div target="_blank" href="https://ipuc.org.co" className={state_header_user['cls-2']}>
         <img className={state_header_user['cls-3']} alt="" src={logoIglesia} />
       </div>
+
 
       <Button
       id="basic-button"
@@ -78,6 +80,7 @@ export function HeaderUser(props) {
         <MenuItem onClick={handleClose}>My account</MenuItem>
         <MenuItem onClick={handleClose}>Logout</MenuItem>
       </Menu>
+
     </div>
 
   );
