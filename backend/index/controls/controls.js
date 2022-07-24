@@ -34,7 +34,7 @@ const petitions_get_login = async (req, res) => {
 }
 /**
   *  @author : Juan Sebastian Camino Muñoz <juan.camino@correounivalle.edu.co>
-  *  @decs  : verificar cuantos cargos existen en la Base de datos
+  *  @decs  : verificar cuantos cargos existen en la Base de datos que no tiene el usuario
 */
 
 const petitions_get_cargoFaltantesUser = async (req, res)=>{
