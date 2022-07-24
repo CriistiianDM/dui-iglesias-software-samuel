@@ -3,8 +3,8 @@ import React from 'react';
 import logoIglesia from '../../images/imagesHome/logo_iglesia.png';
 import headerUserAccounts from '../../css/header-user-account.css';
 import { useState } from 'react';
+import { Navigate, useNavigate } from "react-router-dom";
 import { Avatar, Button, Menu , MenuItem, ListItemIcon, Divider } from '@material-ui/core';
-
 
 
 
@@ -35,13 +35,20 @@ export function HeaderUser(props) {
   let handle_user_IconMenu = (event) => {
     setUserButton(true);
  }
+
  const [anchorEl, setAnchorEl] = React.useState(null);
  const open = Boolean(anchorEl);
+
  let handleClick = (event) => {
    setAnchorEl(event.currentTarget);
  };
+
+ let navigate = useNavigate();
+ 
  let handleClose = () => {
+   navigate("/", { replace: true })
    setAnchorEl(null);
+   
  };
 
   return (

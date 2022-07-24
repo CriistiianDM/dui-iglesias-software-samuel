@@ -1,6 +1,7 @@
 const { Router , application } = require('express');
 const { petitions_get , petitions_get_login , petitions_get_cargo_vigigentes,
-        petitions_put_periodo , petitions_get_user , petitions_get_all_user_active} = require('../controls/controls');
+        petitions_put_periodo , petitions_get_user , petitions_get_all_user_active,
+        petitions_get_all_NameCargos} = require('../controls/controls');
 
 const router = Router();
 
@@ -11,6 +12,8 @@ const router = Router();
 router.get('/zlgz/:doc/:passwd', petitions_get_login);
 //la ruta se llamara zcvg y tendra un parametro hara referencia a los cargos vigentes
 router.get('/zcvg/:doc', petitions_get_cargo_vigigentes);
+//la ruta se llamara zallc
+router.get('/zallc',petitions_get_all_NameCargos);
 //la ruta se llamara znlp y tendra un parametro hara referencia al documento del usuario
 router.get('/znlp/:doc', petitions_get_user);
 //la ruta se llamara zaup 
