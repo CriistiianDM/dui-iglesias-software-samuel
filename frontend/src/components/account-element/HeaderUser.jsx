@@ -47,7 +47,6 @@ export function HeaderUser(props) {
  let handleClose = () => {
    navigate("/", { replace: true })
    setAnchorEl(null);
-   alert("Ojo");
    
  };
   return (
