@@ -11,7 +11,7 @@ import {
     Dialog, DialogActions, DialogTitle, DialogContent, DialogContentText
 } from '@material-ui/core';
 import $ from 'jquery';
-
+import { useNavigate } from 'react-router-dom';
 
 //estilos de material-ui
 const useStyles = makeStyles((theme) => ({
@@ -37,6 +37,7 @@ export function CreateUserForm(props) {
 
     //variables
     let state_user_form = props.properties;
+    let navigate = useNavigate();
 
 
     const [data_array, setdata_array] = React.useState({
@@ -122,7 +123,7 @@ export function CreateUserForm(props) {
 
     React.useEffect(() => {
         timer_consult_verify(data_array, setdata_array)
-        validar_on_off_button(data_array_1, setdata_array_1)
+        validar_on_off_button(data_array_1, setdata_array_1,navigate)
         //get_id_inputs_form() 
     }, []);
 
@@ -138,6 +139,7 @@ export function CreateUserForm(props) {
 
     let handle_dialog_open = () => {
         setdata_array({ ...data_array, dialog_open: false });
+        navigate('/account');
     }
 
 
@@ -691,14 +693,7 @@ async function submit_form(e, data_array, setdata_array,data_array_1, setdata_ar
                 disabled_submit: true 
             });
 
-            let id_inputs_form = get_id_inputs_form();
-
-            for (const key in id_inputs_form) {
-              
-             //insert value to ''
-             document.getElementById(id_inputs_form[key]).value = '';
-            }  
-
+            localStorage.setItem('kill_timer_cr', 'true');
            
         }
     }
@@ -750,8 +745,14 @@ function validar_on_off_button(data_array_1, setdata_array_1) {
     }
 
     index = 0
+
+    if (localStorage.getItem('kill_timer_cr') === 'true') {
+        //enviar falso
+        localStorage.setItem('kill_timer_cr', 'false');
+        clearInterval(timer_on_off);
+    }
       
-    } , 6000);
+    } , 500);
 
 
     return timer_on_off;
