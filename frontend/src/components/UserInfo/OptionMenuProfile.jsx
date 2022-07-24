@@ -48,17 +48,14 @@ export function OptionMenuProfile(props) {
     const [openBorrar, setOpenBorrar] = useState(false);
     const [vectorCargos, setCargos] = useState([])
     const [vectorCargosFaltantes, setCargosFaltantes] = useState([])
-    const [datosPost, setdatosPost] = useState({
-        doc: '',
-        name_cargo: '',
-        id_cargo: ''
-    })
-
+    const [carga, setCarga] = useState({
+        loading: true
+    });
     let handleCargos = (event) => {
-        setOpenCargos(true);
-        //fetch_all_cargos()
         fetch_data_cargo();
         fetch_cargosFaltantesUser()
+        setOpenCargos(true);
+        //fetch_all_cargos()
         console.log(searchCargos)
    
     }
@@ -73,6 +70,7 @@ export function OptionMenuProfile(props) {
       *  @decs  : busqueda de los cargos del usuario que se ve en userInfo
     */
     async function fetch_data_cargo() {
+        if(carga.loading){
         console.log((data_array.data)['doc'])
         const response_fetch = await fetch(`https://demon789-4.herokuapp.com/zcvg/${(data_array.data)['doc']}`);
         const data_fetch = await response_fetch.json();
@@ -80,6 +78,10 @@ export function OptionMenuProfile(props) {
         vectCargos = searchCargos.split(',')
         setCargos(vectCargos)
         console.log(vectorCargos)
+        setCarga({ ...carga,
+            loading: false
+        })
+        }
     }
       /**
       *  @author : juan sebastian camino muñoz <juan.camino@correounivalle.edu.co>
@@ -126,14 +128,11 @@ export function OptionMenuProfile(props) {
 
 
         //`{"doc":${(data_array.data)['doc']},"name_cargo":${dataSelect[1]},"id_cargo":${dataSelect[0]}}`
-        
-        setdatosPost({ ...datosPost,
-                     doc: (data_array.data)['doc'],
-                     name_cargo: dataSelect[1],
-                     id_cargo: dataSelect[0]})
-        //console.log((data_array.data)['doc'])
         postCargo(dataPost,setOpenCargos)//post para enviar el cargo
         //console.log(prueba.doc,JSON.parse(JSON.stringify(prueba)).doc)
+        setCarga({ ...carga,
+            loading: true
+        })
     }
 
 
@@ -152,7 +151,7 @@ export function OptionMenuProfile(props) {
                     </div>
 
                 </Button>
-                <Button onClick={handleCargos} className={state_option_menu_profile['cls-3']}>
+                <Button onClick={handleCargos} disabled={!data_array.loading}className={state_option_menu_profile['cls-3']}>
 
                     <div className={state_option_menu_profile['cls-4']}>
                         <Icon className={state_option_menu_profile['cls-6']}>assignment</Icon>
