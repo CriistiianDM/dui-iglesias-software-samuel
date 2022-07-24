@@ -117,7 +117,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-
+/**
+ * @author Juan Felipe Osorio Zapata <juan.felipe.osorio@correounivalle.edu.co>
+ *
+ * The above function is a React component that is used to create a form to create a group.
+ * @param props - This is the props object that is passed to the component.
+ * @returns A component with a form to create a group.
+ */
 export function Grupos(props){
 
      //variables
