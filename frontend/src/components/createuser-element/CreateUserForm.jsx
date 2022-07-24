@@ -563,7 +563,7 @@ async function validate_country_region_city(e, data_array, setdata_array) {
         console.log('validar', data);
         setdata_array({
             ...data_array,
-            [(e.target.id === 'tipo-pais1-7-12') ? 'doc_from' : 'doc_from_aux']: (data_array.country_data[(e.target.value) - 1]).name,
+            /*[(e.target.id === 'tipo-pais1-7-12') ? 'doc_from' : 'doc_from_aux']: (data_array.country_data[(e.target.value) ]).name,*/
             [(e.target.id === 'tipo-pais1-7-12') ? 'region_data_0' : 'region_data_1']: data,
             [(e.target.id === 'tipo-pais1-7-12') ? 'region_band_0' : 'region_band_1']: false
         });
