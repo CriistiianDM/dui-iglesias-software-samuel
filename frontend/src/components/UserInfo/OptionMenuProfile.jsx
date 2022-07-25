@@ -47,49 +47,52 @@ export function OptionMenuProfile(props) {
     const [openConfig, setOpenConfig] = useState(false);
     const [openBorrar, setOpenBorrar] = useState(false);
     const [vectorCargos, setCargos] = useState([])
-
+    const [vectorCargosFaltantes, setCargosFaltantes] = useState([])
+    const [carga, setCarga] = useState({
+        loading: true
+    });
     let handleCargos = (event) => {
+        fetch_data_cargo();
+        fetch_cargosFaltantesUser()
         setOpenCargos(true);
         //fetch_all_cargos()
-        fetch_data_cargo();
         console.log(searchCargos)
+   
     }
 
     let searchCargos
     let vectCargos
-    let searchAllCargos
-    let vecAllCargos
-    /**
-      *  @author : juan sebastian camino muñoz <juan.camino@correounivalle.edu.co>
-      *  @decs  : busqueda de los cargos del usuario que se ve en userInfo
-    */
-    function diferent_vectors() {
-
-    }
-
-    /**
-      *  @author : juan sebastian camino muñoz <juan.camino@correounivalle.edu.co>
-      *  @decs  : busqueda de los cargos del usuario que se ve en userInfo
-    */
-    /*
-    async function fetch_all_cargos(){
-            const response_fetch = await fetch(`https://demon789-4.herokuapp.com/zallc`);
-            const data_fetch = await response_fetch.json();
-            searchAllCargos = data_fetch;
-            vecAllCargos = searchAllCargos.split(',');
-    }*/
+    let vectCargosFaltantes
+    let cFaltanteSeleccionado
 
     /**
       *  @author : juan sebastian camino muñoz <juan.camino@correounivalle.edu.co>
       *  @decs  : busqueda de los cargos del usuario que se ve en userInfo
     */
     async function fetch_data_cargo() {
+        if(carga.loading){
         console.log((data_array.data)['doc'])
         const response_fetch = await fetch(`https://demon789-4.herokuapp.com/zcvg/${(data_array.data)['doc']}`);
         const data_fetch = await response_fetch.json();
         searchCargos = data_fetch;
         vectCargos = searchCargos.split(',')
         setCargos(vectCargos)
+        console.log(vectorCargos)
+        setCarga({ ...carga,
+            loading: false
+        })
+        }
+    }
+      /**
+      *  @author : juan sebastian camino muñoz <juan.camino@correounivalle.edu.co>
+      *  @decs  : busqueda de los cargos del usuario que se ve en userInfo
+    */
+       async function fetch_cargosFaltantesUser() {
+        console.log((data_array.data)['doc'])
+        const response_fetch = await fetch(`https://demon789-4.herokuapp.com/zallcf/${(data_array.data)['doc']}`);
+        const data_fetch = await response_fetch.json();
+        vectCargosFaltantes = data_fetch;
+        setCargosFaltantes(vectCargosFaltantes)
     }
 
     function SimpleDialog(props) {
@@ -115,8 +118,21 @@ export function OptionMenuProfile(props) {
     }
 
     //handle para enviar datos
-    const handleSubmit = (event) => {
-        postCargo(data_array, set_data_array, setOpenCargos) //post para enviar el cargo
+    const handleSubmit = async (event) => {
+        
+        const dataSelect = (event.target.value).split(',')
+        let dataPost = new Object();
+            dataPost.doc = (data_array.data)['doc'];
+            dataPost.name_cargo = dataSelect[1];
+            dataPost.id_cargo = dataSelect[0]
+
+
+        //`{"doc":${(data_array.data)['doc']},"name_cargo":${dataSelect[1]},"id_cargo":${dataSelect[0]}}`
+        postCargo(dataPost,setOpenCargos)//post para enviar el cargo
+        //console.log(prueba.doc,JSON.parse(JSON.stringify(prueba)).doc)
+        setCarga({ ...carga,
+            loading: true
+        })
     }
 
 
@@ -135,7 +151,7 @@ export function OptionMenuProfile(props) {
                     </div>
 
                 </Button>
-                <Button onClick={handleCargos} className={state_option_menu_profile['cls-3']}>
+                <Button onClick={handleCargos} disabled={!data_array.loading}className={state_option_menu_profile['cls-3']}>
 
                     <div className={state_option_menu_profile['cls-4']}>
                         <Icon className={state_option_menu_profile['cls-6']}>assignment</Icon>
@@ -193,7 +209,14 @@ export function OptionMenuProfile(props) {
                             <InputLabel value="#" htmlFor="wer">Cargos Disponibles</InputLabel>
                             <Select onChange={handleSubmit} id='tipo-region1-7-13' label="Tipo de Documento" variant="filled" native labelId="w66666er">
                                 <option aria-label="None" value="" />
-                                <option value="4">Joven Lider</option>
+                                {
+                                    (vectorCargosFaltantes).map(
+                                        (element,index)=>(
+                                          <option  aria-label="None" value={`${element.id},${element.name}`} key={index}>{element.name}</option> 
+                                        )
+                                    )
+                                }
+
                             </Select>
                         </FormControl>
                         <DialogActions>
@@ -216,7 +239,7 @@ export function OptionMenuProfile(props) {
                     aria-labelledby="dialog-title"
                     aria-describedby="dialog-description"
                 >
-                    <DialogTitle id="dialog-title">{"Gestion de Cargos"}</DialogTitle>
+                    <DialogTitle id="dialog-title">{"Borrado de usuarios"}</DialogTitle>
                     <DialogContent>
                         <DialogContentText id="dialog-description">
                             ¿Esta seguro que quiere borrar el Usuario?
@@ -239,7 +262,7 @@ export function OptionMenuProfile(props) {
                     aria-labelledby="dialog-title"
                     aria-describedby="dialog-description"
                 >
-                    <DialogTitle id="dialog-title">{"Gestion de Cargos"}</DialogTitle>
+                    <DialogTitle id="dialog-title">{"Configuracion"}</DialogTitle>
                     <DialogContent>
                         <DialogContentText id="dialog-description">
                             Configuraciones
@@ -340,9 +363,6 @@ function getData(data_array, set_data_array) {
 
         if (data != null) {
             clearInterval(timer);
-            console.log(Object.entries(JSON.parse(data)).forEach((value) => {
-                console.log(value);
-            }));
             set_data_array({ ...data_array, loading: true, data: JSON.parse(data) });
         }
 
@@ -357,7 +377,8 @@ function getData(data_array, set_data_array) {
   *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
   *  @decs  : post para enviar el cargo
 */
-async function postCargo(data_array, set_data_array, setOpenCargos) {
+
+async function postCargo(data_array,setOpenCargos) {
 
     let response = await fetch(`https://demon789-4.herokuapp.com/zagcat`, {
         method: 'POST',
@@ -366,7 +387,7 @@ async function postCargo(data_array, set_data_array, setOpenCargos) {
             'Accept': 'application/json'
         },
         mode: 'cors',
-        body: JSON.stringify(data_array.data)
+        body: JSON.stringify(data_array)
     });
     alert('Cargo Registrado');
     setOpenCargos(false)

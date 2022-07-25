@@ -637,7 +637,9 @@ INSERT INTO person_eclesial (id, person_id, baptism_date , baptism_place_id , ho
 -- function
 
 
-
+-- insert to table person_group
+INSERT INTO person_group (id, person_id, groups_id ,position_id ,status,logical_erase) VALUES
+(nextval('person_group_seq'), $1, $2, 4 ,'A', false),
 
 -- triggers, constraints and other objects
 

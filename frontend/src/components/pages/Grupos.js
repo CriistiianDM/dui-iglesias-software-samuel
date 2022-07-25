@@ -2,6 +2,10 @@ import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import { useNavigate } from 'react-router-dom';
 import { Button, TextField, Select, Input, InputLabel, FormHelperText, createTheme, Grid, FormControl } from '@material-ui/core';
+import $ from 'jquery';
+import  { Dialog, DialogActions, DialogTitle, DialogContent, DialogContentText
+} from '@material-ui/core';
+
 
 
 const theme = createTheme({
@@ -130,16 +134,20 @@ export function Grupos(props){
      let state_user_form = props.properties;
      //hacer un console.log para ver que esta pasando con el state_user_form
      let busquedaJson = Object.values((state_user_form)["jovenLider"])[0]["identificacion"]; //busquedaJson es el json que se va a buscar en el backend
+     let navigate = useNavigate();
+
 
      //useStates
      const [data_array, setdata_array] = React.useState({
          name: "",
          description: "",
          img_data: "",
+         id_person: "",
          error_band_0: false,
          error_band_1: false,
          error_band_2: false,
          error_band_3: false,
+         dialog_open: false,
          message_band_0: 'solo Numeros de 9 a 15 caracteres',
          message_band_1: 'solo Letras de 3 a 50 caracteres',
          message_band_2: 'solo Letras de 3 a 50 caracteres',
@@ -153,16 +161,20 @@ export function Grupos(props){
          message_band_18: 'formato json incorrecto'
      });
 
-     const [img_data, set_img_data] = React.useState();
+    const [img_data, set_img_data] = React.useState();
     const [joven_lider, set_joven_lider] = React.useState({
           loading: true,
           data: [],
           
      });
+     const [data_array_1, setdata_array_1] = React.useState({
+          disabled_submit: false,
+     });
 
      //useEffect
       React.useEffect(() => {
         getJovenes(joven_lider, set_joven_lider); //llamada a la funcion getJovenes
+        validar_on_off_button(data_array_1, setdata_array_1); //llamada a la funcion validar_on_off_button
       }, []); 
 
 
@@ -171,6 +183,11 @@ export function Grupos(props){
      const handleChange = (event) => {
          validateForm(event, data_array , setdata_array, set_img_data);
      }
+
+     let handle_dialog_open = () => {
+      setdata_array({ ...data_array, dialog_open: false });
+      navigate('/account');
+   }
 
 
     //Styles. 
@@ -190,7 +207,7 @@ export function Grupos(props){
 
     //función evento para navegar posterior a rellenar datos de grupo. 
     const onClickk = () => {
-        console.log(data_array);
+        console.log(data_array,'data_array');
         postGrupo(data_array,img_data, setdata_array);
     }
 
@@ -222,7 +239,7 @@ export function Grupos(props){
             <div>
             <FormControl className={classes.ancho} variant="filled">
                     <InputLabel htmlFor="">Lider Joven</InputLabel>
-                    <Select  id="joven-lider-0-5" onChange={handleChange} label="Tipo de Documento" variant="filled" native>
+                    <Select  id="joven-lider-7-3" onChange={handleChange} label="Tipo de Documento" variant="filled" native>
                         {
                           (joven_lider.loading)?
                             //un for each para recorrer el json busquedaJson
@@ -244,12 +261,29 @@ export function Grupos(props){
         </div>
 
             <div className={classes.divBoton}>
-            <Button onClick={onClickk} className={classes.boton} variant="contained" color="primary">
+            <Button onClick={onClickk} disabled={data_array_1.disabled_submit} className={classes.boton} variant="contained" color="primary">
             Enviar
             </Button>
             </div>
 
             <br></br>
+            <Dialog
+                open={data_array.dialog_open}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">{"Grupo Registrado"}</DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        El Grupo se ha registrado correctamente.
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handle_dialog_open} color="primary">
+                        Cerrar
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </>
 
 
@@ -268,9 +302,9 @@ function validateForm(e, data_array , setdata_array, set_img_data) {
   console.log(e.target.value, e.target.id ,validateFormate(e, type));
 
    if ( (e.target.value) === null || (e.target.value).length === 0 ) {
-       setdata_array({...data_array, [error]: false});
+       setdata_array({ ...data_array, [error]: false});
    }
-   else if(validateFormate(e, type)){
+   else if(validateFormate(e.target.value, type)){
 
        if (e.target.id === "outlined-file-10-2") {
             const fileData = new FormData();
@@ -278,14 +312,14 @@ function validateForm(e, data_array , setdata_array, set_img_data) {
             set_img_data(fileData);
        }
 
-       console.log('valido papa');
-       setdata_array({...data_array, 
+       console.log('valido papa',data_array);
+       setdata_array({ ...data_array, 
                       [error]: false,
                       [getNameState((e.target.id).split('-')[3])]: e.target.value
                     });
    }
    else {
-       setdata_array({...data_array, [error]: true});
+       setdata_array({ ...data_array, [error]: true});
    }
 
 }
@@ -309,7 +343,7 @@ function validateFormate(e, type) {
   }         
  
   //validar el formato
-  if ((regex[type]).exec(e.target.value) != null) {
+  if ((regex[type]).exec(e) != null) {
        return true;
   }
   else {
@@ -328,7 +362,8 @@ function getNameState(index) {
   const state = {
       '0': 'name',
       '1': 'description',
-      '2': 'img_data'
+      '2': 'img_data',
+      '3': 'id_person',
   }
 
   return state[index];
@@ -340,8 +375,7 @@ function getNameState(index) {
  * @author Juan Felipe Osorio Zapata <juan.felipe.osorio@correounivalle.edu.co>
  * @description : enviar los datos de la consulta de jovenes lideres a la vista. 
  * @param {Object} data 
- */
-
+*/
 async function getJovenes(jovenL, setJovenL) {
   
     try{
@@ -351,8 +385,8 @@ async function getJovenes(jovenL, setJovenL) {
       //guardar en setJovenL el json de la consulta, recordando la información anterior
       setJovenL({
         ...jovenL,  
-        data: data1
-
+        data: data1,
+        loading: false
     }); 
 
       console.log(data1); 
@@ -388,9 +422,86 @@ async function postGrupo(data_array, img_data, setdata_array) {
         body: JSON.stringify(data_array)
       });
       console.log(post_response);
-      
+      localStorage.setItem('kill_timer_cr', 'true');
+      setdata_array({ ...data_array, dialog_open: true});
     } catch (error) {
       console.log(error);
     }
+
+}
+
+
+
+/**
+  *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
+  *  @author : Juan Sebastian Camino Muñoz<juan.camino@correounivalle.edu.co>
+  *  @author : Juan Felipe osorio <juan.felipe.osorio@correounivalle.edu.co>
+  *  @decs  : Validar si puede dar click en el boton de registrar
+*/
+function validar_on_off_button(data_array_1, setdata_array_1) {
+
+  let array_id = get_id_inputs_form()
+  let index = 0
+  //console.log(array_id,'array')
+
+
+  //timer del otro
+  let timer_on_off = setInterval(() => {
+
+   //alert('hola');
+  for (const key in array_id) {
+    
+      if ((array_id[key]).split(',')[1] === 'true' && validateFormate($(`#${(array_id[key]).split(',')[0]}`).val(), ((array_id[key]).split(',')[0]).split('-')[2]) && $(`#${(array_id[key]).split(',')[0]}`).attr('aria-invalid') === 'false' ) {
+        index++;
+        //console.log(array_id[key],'mercesde true',index, $(`#${(array_id[key]).split(',')[0]}`).val() !== '','salida',validateFormate($(`#${(array_id[key]).split(',')[0]}`).val(), ((array_id[key]).split(',')[0]).split('-')[2]));
+      }
+      //console.log(key,array_id[key],validateFormate($(`#${(array_id[key]).split(',')[0]}`).val(), ((array_id[key]).split(',')[0]).split('-')[2]))
+  } 
+
+  if (index === 2) {
+      setdata_array_1({
+          ...data_array_1,
+          disabled_submit: false,  
+      });
+  }
+  else {
+      setdata_array_1({
+          ...data_array_1,
+          disabled_submit: true,  
+      });
+  }
+
+  index = 0
+
+  if (localStorage.getItem('kill_timer_cr') === 'true') {
+      //enviar falso
+      localStorage.setItem('kill_timer_cr', 'false');
+      clearInterval(timer_on_off);
+  }
+    
+  } , 500);
+
+
+  return timer_on_off;
+
+
+}
+
+
+
+/**
+  *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
+  *  @author : Juan Sebastian Camino Muñoz<juan.camino@correounivalle.edu.co>
+  *  @author : Juan Felipe osorio <juan.felipe.osorio@correounivalle.edu.co>
+  *  @decs  : retonar un json con los id de los input del formulario
+*/
+function get_id_inputs_form() {
+    
+  let id_inputs_form = {
+      '0':  'outlined-required-9-0,true',
+      '1':  'joven-lider-7-3,true'
+  }
+
+  return id_inputs_form;
 
 }
