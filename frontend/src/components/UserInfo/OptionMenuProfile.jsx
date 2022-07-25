@@ -239,7 +239,7 @@ export function OptionMenuProfile(props) {
                     aria-labelledby="dialog-title"
                     aria-describedby="dialog-description"
                 >
-                    <DialogTitle id="dialog-title">{"Gestion de Cargos"}</DialogTitle>
+                    <DialogTitle id="dialog-title">{"Borrado de usuarios"}</DialogTitle>
                     <DialogContent>
                         <DialogContentText id="dialog-description">
                             ¿Esta seguro que quiere borrar el Usuario?
@@ -262,7 +262,7 @@ export function OptionMenuProfile(props) {
                     aria-labelledby="dialog-title"
                     aria-describedby="dialog-description"
                 >
-                    <DialogTitle id="dialog-title">{"Gestion de Cargos"}</DialogTitle>
+                    <DialogTitle id="dialog-title">{"Configuracion"}</DialogTitle>
                     <DialogContent>
                         <DialogContentText id="dialog-description">
                             Configuraciones

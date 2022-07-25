@@ -26,13 +26,13 @@ export function Groups(props) {
                 <div  className={state_group['cls-5']}>
 
                     <div className={state_group['cls-8']}>
-                    <Typography  className={state_group['cls-6']}>Titulo De Grupo</Typography>
+                    <Typography  className={state_group['cls-6']}>Perteneces a Un grupo</Typography>
                     </div>
 
                     <div className={state_group['cls-8']} id="descrision-grupo">
                     <Typography  className={state_group['cls-7']}>{
                         //generar una descripcion del grupo de cualquier cosa
-                        "Descripcion del grupo"
+                        ""
                     }</Typography>
                     </div>
 
