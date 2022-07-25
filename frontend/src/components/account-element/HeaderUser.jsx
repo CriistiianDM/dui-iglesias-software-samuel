@@ -54,9 +54,6 @@ export function HeaderUser(props) {
      navigate('/userinfo');
      
   }
-
-
-
 }
 
  const [anchorEl, setAnchorEl] = React.useState(null);
@@ -98,7 +95,7 @@ export function HeaderUser(props) {
         }}
       >
         <MenuItem onClick={handleClickProfile}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
+        <MenuItem>My account</MenuItem>
         <MenuItem onClick={handleClose}>Logout</MenuItem>
       </Menu>
 
