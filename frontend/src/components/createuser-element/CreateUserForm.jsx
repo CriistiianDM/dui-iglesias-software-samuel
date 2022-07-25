@@ -190,8 +190,8 @@ export function CreateUserForm(props) {
                         }}
                     />
                     <TextField disabled={data_array.disabled_1} error={data_array.error_band_7} helperText={(data_array.error_band_7) ? data_array.message_band_7 : ''} onBlur={handleChange} id='tipo-email-4-7' type='email' label="Email" variant="filled" />
-                    <TextField disabled={data_array.disabled_all} error={data_array.error_band_8} helperText={(data_array.error_band_8) ? data_array.message_band_8 : ''} onChange={handleChange} id='tipo-tel1-0-8' type='number' label="Telefono 1" variant="filled" />
-                    <TextField disabled={data_array.disabled_all} error={data_array.error_band_9} helperText={(data_array.error_band_9) ? data_array.message_band_9 : ''} onChange={handleChange} id='tipo-tel2-0-9' type='number' label="Telefono 2" variant="filled" />
+                    <TextField disabled={data_array.disabled_all} error={data_array.error_band_8} helperText={(data_array.error_band_8) ? data_array.message_band_8 : ''} onChange={handleChange} id='tipo-tel1-9-8' type='number' label="Telefono 1" variant="filled" />
+                    <TextField disabled={data_array.disabled_all} error={data_array.error_band_9} helperText={(data_array.error_band_9) ? data_array.message_band_9 : ''} onChange={handleChange} id='tipo-tel2-9-9' type='number' label="Telefono 2" variant="filled" />
                     <FormControl disabled={data_array.disabled_all} error={data_array.error_band_10} variant="filled" className={classes.formControl}>
                         <InputLabel htmlFor="wer">Genero</InputLabel>
                         <Select onClick={handleChange} id='tipo-genero-5-10' label="Tipo de Documento" variant="filled" native labelId="wer77777888js">
@@ -439,6 +439,7 @@ function validateFormate(e, type) {
         '6': /^[0-9-a-zA-Z\s#\-]{10,255}$/,
         '7': /^[0-9]{1,5}$/,
         '8': /^{[0-9-aA-zZ:,"\s{}]*}$/,
+        '9': /^[0-9]{7,15}$/,
     }
 
     //validar el formato
@@ -779,8 +780,8 @@ function get_id_inputs_form() {
         '5':  'tipo-identificacion-2-5,true',
         '6':  'date-f-3-6,true',
         '7':  'tipo-email-4-7,true',
-        '8':  'tipo-tel1-0-8,true',
-        '9':  'tipo-tel2-0-9,false',
+        '8':  'tipo-tel1-9-8,true',
+        '9':  'tipo-tel2-9-9,false',
         '10': 'tipo-genero-5-10,true',
         '11': 'tipo-cali1-7-14,true',
         '12': 'date-bautizo-3-15,true',
