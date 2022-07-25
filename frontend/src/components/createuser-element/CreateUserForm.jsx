@@ -416,7 +416,7 @@ function validateForm(e, data_array, setdata_array) {
         validate_country_region_city(e, data_array, setdata_array);
     }
     else {
-        setdata_array({ ...data_array, [error]: true });
+        setdata_array({ ...data_array, [error]: true, [getNameState((e.target.id).split('-')[3])]: '' });
     }
 
 }
@@ -479,7 +479,7 @@ async function validateDocument(e, data_array, setdata_array, error) {
             }
             else {
                 $(`#${e.target.id}`).addClass('error_11');
-                setdata_array({ ...data_array, [`${(e.target.id === 'i-p-0-0') ? 'disabled_0' : 'disabled_1'}`]: false, [error]: true , [getNameState((e.target.id).split('-')[3])]: ''});
+                setdata_array({ ...data_array, [`${(e.target.id === 'i-p-0-0') ? 'disabled_0' : 'disabled_1'}`]: false, [error]: true});
             }
             //alert('validar');
 
