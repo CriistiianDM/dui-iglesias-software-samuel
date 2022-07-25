@@ -108,8 +108,8 @@ export function CreateUserForm(props) {
         message_band_4: 'solo Letras de 3 a 50 caracteres',
         message_band_5: 'seleciona una opcion',
         message_band_7: 'verificar si email esta bien escrito',
-        message_band_8: 'solo numeros de 9 a 15 caracteres',
-        message_band_9: 'solo numeros de 9 a 15 caracteres',
+        message_band_8: 'solo numeros de 7 a 15 caracteres',
+        message_band_9: 'solo numeros de 7 a 15 caracteres',
         message_band_11: 'verificar si la direccion esta bien escrita',
         message_band_18: 'formato json incorrecto',
         doc_from_aux: ''
@@ -479,7 +479,7 @@ async function validateDocument(e, data_array, setdata_array, error) {
             }
             else {
                 $(`#${e.target.id}`).addClass('error_11');
-                setdata_array({ ...data_array, [`${(e.target.id === 'i-p-0-0') ? 'disabled_0' : 'disabled_1'}`]: false, [error]: true });
+                setdata_array({ ...data_array, [`${(e.target.id === 'i-p-0-0') ? 'disabled_0' : 'disabled_1'}`]: false, [error]: true , [getNameState((e.target.id).split('-')[3])]: ''});
             }
             //alert('validar');
 
