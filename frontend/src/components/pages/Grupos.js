@@ -422,6 +422,7 @@ async function postGrupo(data_array, img_data, setdata_array) {
         body: JSON.stringify(data_array)
       });
       console.log(post_response);
+      localStorage.setItem('kill_timer_cr', 'true');
       setdata_array({ ...data_array, dialog_open: true});
     } catch (error) {
       console.log(error);
