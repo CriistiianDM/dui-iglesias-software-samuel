@@ -15,7 +15,7 @@ import { Avatar, Button, Menu , MenuItem, ListItemIcon, Divider } from '@materia
 export function HeaderUser(props) {
 
   let state_header_user = (props.properties).state_header_user;
-
+  let navigate = useNavigate();
   
 
   let [user, setUser] = React.useState({
@@ -35,6 +35,29 @@ export function HeaderUser(props) {
   let handle_user_IconMenu = (event) => {
     setUserButton(true);
  }
+ async function handleClickProfile(e) {
+  //let id = e.target.className;
+  //console.log(id);
+
+  let id_profileUser = localStorage.getItem('user_login');
+
+  console.log(id_profileUser);
+
+  //send id to user_info
+  let response = await fetch(`https://demon789-4.herokuapp.com/zadtus/${id_profileUser}`);
+  let data = await response.json();
+
+  console.log(data)
+
+  if (data[0] !== undefined) {
+     localStorage.setItem('user_info_eye', JSON.stringify(data[0]));
+     navigate('/userinfo');
+     
+  }
+
+
+
+}
 
  const [anchorEl, setAnchorEl] = React.useState(null);
  const open = Boolean(anchorEl);
@@ -43,8 +66,6 @@ export function HeaderUser(props) {
    setAnchorEl(event.currentTarget);
  };
 
- let navigate = useNavigate();
- 
  let handleClose = () => {
    navigate("/", { replace: true })
    setAnchorEl(null);
@@ -76,7 +97,7 @@ export function HeaderUser(props) {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <MenuItem onClick={handleClickProfile}>Profile</MenuItem>
         <MenuItem onClick={handleClose}>My account</MenuItem>
         <MenuItem onClick={handleClose}>Logout</MenuItem>
       </Menu>
