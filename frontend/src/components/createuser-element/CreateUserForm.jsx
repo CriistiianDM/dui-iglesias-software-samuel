@@ -193,7 +193,7 @@ export function CreateUserForm(props) {
                     <TextField disabled={data_array.disabled_all} error={data_array.error_band_8} helperText={(data_array.error_band_8) ? data_array.message_band_8 : ''} onChange={handleChange} id='tipo-tel1-9-8' type='number' label="Telefono 1" variant="filled" />
                     <TextField disabled={data_array.disabled_all} error={data_array.error_band_9} helperText={(data_array.error_band_9) ? data_array.message_band_9 : ''} onChange={handleChange} id='tipo-tel2-9-9' type='number' label="Telefono 2" variant="filled" />
                     <FormControl disabled={data_array.disabled_all} error={data_array.error_band_10} variant="filled" className={classes.formControl}>
-                        <InputLabel htmlFor="wer">Genero</InputLabel>
+                        <InputLabel htmlFor="wer77777888js">Genero</InputLabel>
                         <Select onClick={handleChange} id='tipo-genero-5-10' label="Tipo de Documento" variant="filled" native labelId="wer77777888js">
                             <option aria-label="None" value="" />
                             <option value="M">Masculino</option>
