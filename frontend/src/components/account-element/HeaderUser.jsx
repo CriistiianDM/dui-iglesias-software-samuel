@@ -64,9 +64,13 @@ export function HeaderUser(props) {
  };
 
  let handleClose = () => {
-   navigate("/", { replace: true })
    setAnchorEl(null);
    
+ };
+ 
+ let handleClickLogout = () => {
+   setAnchorEl(null);
+   navigate("/", { replace: true })
  };
 
   return (
@@ -96,7 +100,7 @@ export function HeaderUser(props) {
       >
         <MenuItem onClick={handleClickProfile}>Profile</MenuItem>
         <MenuItem>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem onClick={handleClickLogout}>Logout</MenuItem>
       </Menu>
 
     </div>
