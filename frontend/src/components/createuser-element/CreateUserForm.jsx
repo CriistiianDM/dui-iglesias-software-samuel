@@ -52,7 +52,7 @@ export function CreateUserForm(props) {
         email: '',
         phone_1: '',
         phone_2: '',
-        gender: '',
+        gender: 'M',
         address: '',
         type_person: 'normal',
         place_birth: '',
