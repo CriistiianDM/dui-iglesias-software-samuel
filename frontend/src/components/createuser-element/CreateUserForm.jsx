@@ -52,7 +52,7 @@ export function CreateUserForm(props) {
         email: '',
         phone_1: '',
         phone_2: '',
-        gender: '',
+        gender: 'M',
         address: '',
         type_person: 'normal',
         place_birth: '',
@@ -108,8 +108,8 @@ export function CreateUserForm(props) {
         message_band_4: 'solo Letras de 3 a 50 caracteres',
         message_band_5: 'seleciona una opcion',
         message_band_7: 'verificar si email esta bien escrito',
-        message_band_8: 'solo numeros de 9 a 15 caracteres',
-        message_band_9: 'solo numeros de 9 a 15 caracteres',
+        message_band_8: 'solo numeros de 7 a 15 caracteres',
+        message_band_9: 'solo numeros de 7 a 15 caracteres',
         message_band_11: 'verificar si la direccion esta bien escrita',
         message_band_18: 'formato json incorrecto',
         doc_from_aux: ''
@@ -190,10 +190,10 @@ export function CreateUserForm(props) {
                         }}
                     />
                     <TextField disabled={data_array.disabled_1} error={data_array.error_band_7} helperText={(data_array.error_band_7) ? data_array.message_band_7 : ''} onBlur={handleChange} id='tipo-email-4-7' type='email' label="Email" variant="filled" />
-                    <TextField disabled={data_array.disabled_all} error={data_array.error_band_8} helperText={(data_array.error_band_8) ? data_array.message_band_8 : ''} onChange={handleChange} id='tipo-tel1-0-8' type='number' label="Telefono 1" variant="filled" />
-                    <TextField disabled={data_array.disabled_all} error={data_array.error_band_9} helperText={(data_array.error_band_9) ? data_array.message_band_9 : ''} onChange={handleChange} id='tipo-tel2-0-9' type='number' label="Telefono 2" variant="filled" />
+                    <TextField disabled={data_array.disabled_all} error={data_array.error_band_8} helperText={(data_array.error_band_8) ? data_array.message_band_8 : ''} onChange={handleChange} id='tipo-tel1-9-8' type='number' label="Telefono 1" variant="filled" />
+                    <TextField disabled={data_array.disabled_all} error={data_array.error_band_9} helperText={(data_array.error_band_9) ? data_array.message_band_9 : ''} onChange={handleChange} id='tipo-tel2-9-9' type='number' label="Telefono 2" variant="filled" />
                     <FormControl disabled={data_array.disabled_all} error={data_array.error_band_10} variant="filled" className={classes.formControl}>
-                        <InputLabel htmlFor="wer">Genero</InputLabel>
+                        <InputLabel htmlFor="wer77777888js">Genero</InputLabel>
                         <Select onClick={handleChange} id='tipo-genero-5-10' label="Tipo de Documento" variant="filled" native labelId="wer77777888js">
                             <option aria-label="None" value="" />
                             <option value="M">Masculino</option>
@@ -416,7 +416,7 @@ function validateForm(e, data_array, setdata_array) {
         validate_country_region_city(e, data_array, setdata_array);
     }
     else {
-        setdata_array({ ...data_array, [error]: true });
+        setdata_array({ ...data_array, [error]: true, [getNameState((e.target.id).split('-')[3])]: '' });
     }
 
 }
@@ -439,6 +439,7 @@ function validateFormate(e, type) {
         '6': /^[0-9-a-zA-Z\s#\-]{10,255}$/,
         '7': /^[0-9]{1,5}$/,
         '8': /^{[0-9-aA-zZ:,"\s{}]*}$/,
+        '9': /^[0-9]{7,15}$/,
     }
 
     //validar el formato
@@ -478,7 +479,7 @@ async function validateDocument(e, data_array, setdata_array, error) {
             }
             else {
                 $(`#${e.target.id}`).addClass('error_11');
-                setdata_array({ ...data_array, [`${(e.target.id === 'i-p-0-0') ? 'disabled_0' : 'disabled_1'}`]: false, [error]: true });
+                setdata_array({ ...data_array, [`${(e.target.id === 'i-p-0-0') ? 'disabled_0' : 'disabled_1'}`]: false, [error]: true});
             }
             //alert('validar');
 
@@ -779,8 +780,8 @@ function get_id_inputs_form() {
         '5':  'tipo-identificacion-2-5,true',
         '6':  'date-f-3-6,true',
         '7':  'tipo-email-4-7,true',
-        '8':  'tipo-tel1-0-8,true',
-        '9':  'tipo-tel2-0-9,false',
+        '8':  'tipo-tel1-9-8,true',
+        '9':  'tipo-tel2-9-9,false',
         '10': 'tipo-genero-5-10,true',
         '11': 'tipo-cali1-7-14,true',
         '12': 'date-bautizo-3-15,true',
