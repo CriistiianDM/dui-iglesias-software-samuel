@@ -101,6 +101,7 @@ export function CreateUserForm(props) {
         city_data_0: '',
         city_data_1: '',
         dialog_open: false,
+        dialog_open_error: false,
         message_band_0: 'solo Numeros de 9 a 15 caracteres',
         message_band_1: 'solo Letras de 3 a 50 caracteres',
         message_band_2: 'solo Letras de 3 a 50 caracteres',
@@ -116,7 +117,7 @@ export function CreateUserForm(props) {
     });
 
     const [data_array_1, setdata_array_1] = React.useState({
-        disabled_submit: true,
+        disabled_submit: false,
         loading_submit: true,
         permit_submit: true,
     })
@@ -133,13 +134,23 @@ export function CreateUserForm(props) {
     }
 
     const handleSubmit = (event) => {
-        //console.log('data actual', $('#i-p-0-0').attr('aria-invalid') === 'true',$('#i-p-0-0'));
+        console.log('data actual', data_array);
         submit_form(event, data_array, setdata_array,data_array_1, setdata_array_1)
     }
 
     let handle_dialog_open = () => {
-        setdata_array({ ...data_array, dialog_open: false });
+        setdata_array({ ...data_array, dialog_open: false  });
         navigate('/account');
+    }
+
+    let handle_dialog_open_error = () => {
+        setdata_array({ ...data_array, dialog_open_error: false });
+        setdata_array_1({
+            ...data_array_1,
+            loading_submit: true,
+            permit_submit: true,
+            disabled_submit: true 
+        });
     }
 
 
@@ -161,7 +172,7 @@ export function CreateUserForm(props) {
                 
                 
                 <form className={state_user_form['cls-2']} noValidate autoComplete="off">
-                    <TextField disabled={data_array.disabled_0} error={data_array.error_band_0} helperText={(data_array.error_band_0) ? data_array.message_band_0 : ''} onBlur={handleChange} id='i-p-0-0' type='number' label="Identificacion" variant="filled" />
+                    <TextField disabled={data_array.disabled_0} error={data_array.error_band_0} helperText={(data_array.error_band_0) ? data_array.message_band_0 : ''} onBlur={handleChange} id='i-p-0-0' type='number' label="Identificacion"  variant="filled" />
                     <TextField disabled={data_array.disabled_all} error={data_array.error_band_1} helperText={(data_array.error_band_1) ? data_array.message_band_1 : ''} onChange={handleChange} id='first-name-1-1' type='text' label="Primer Nombre" variant="filled" />
                     <TextField disabled={data_array.disabled_all} error={data_array.error_band_2} helperText={(data_array.error_band_2) ? data_array.message_band_2 : ''} onChange={handleChange} id='second-name-1-2' label="Segundo Nombre" variant="filled" />
                     <TextField disabled={data_array.disabled_all} error={data_array.error_band_3} helperText={(data_array.error_band_3) ? data_array.message_band_3 : ''} onChange={handleChange} id='last-name-1-3' label="Primer Apellido" variant="filled" />
@@ -383,6 +394,26 @@ export function CreateUserForm(props) {
                 </DialogActions>
             </Dialog>
 
+            <Dialog
+                open={data_array.dialog_open_error}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">{"Error Al Crear Usuario"}</DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        Upp paso un Error al insertar el usuario.
+                        Verificar si el documento o email no estan registrados.
+                        Verificar la conexion a Internet.
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handle_dialog_open_error} color="primary">
+                        Cerrar
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
         </div>
     );
 
@@ -397,9 +428,6 @@ function validateForm(e, data_array, setdata_array) {
 
     let type = (e.target.id).split('-')[2];
     let error = `error_band_${(e.target.id).split('-')[3]}`;
-    //console.log(data_array, 'data_array');
-    //expresssion regular 
-   // console.log(e.target.value, e.target.id, validateFormate(e, type));
 
     if ((e.target.value) === null || (e.target.value).length === 0) {
         setdata_array({ ...data_array, [error]: false });
@@ -670,8 +698,12 @@ async function submit_form(e, data_array, setdata_array,data_array_1, setdata_ar
                 mode: 'cors',
                 body: JSON.stringify(data_array)
             });
+
             let data = await response.json();
-            console.log('submit', data);
+            console.log('submit', data.message , data.message === undefined);
+
+            if (data.message === 'ok') {
+
             setdata_array({
                 ...data_array,
                 loading_submit: true,
@@ -695,11 +727,27 @@ async function submit_form(e, data_array, setdata_array,data_array_1, setdata_ar
             });
 
             localStorage.setItem('kill_timer_cr', 'true');
+
+          }
+          else {
+
+            setdata_array({
+                ...data_array,
+                dialog_open_error: true
+            });
+            
+          }
+
+        
            
         }
     }
     catch (error) {
-        console.log(error);
+        setdata_array({
+            ...data_array,
+            dialog_open_error: true
+        });
+        console.log(error,'que pasara ohhh');
     }
 
 }
@@ -727,7 +775,7 @@ function validar_on_off_button(data_array_1, setdata_array_1) {
       
         if ((array_id[key]).split(',')[1] === 'true' && validateFormate($(`#${(array_id[key]).split(',')[0]}`).val(), ((array_id[key]).split(',')[0]).split('-')[2]) && $(`#${(array_id[key]).split(',')[0]}`).attr('aria-invalid') === 'false' ) {
           index++;
-          console.log(array_id[key],'mercesde true',index, $(`#${(array_id[key]).split(',')[0]}`).val() !== '','salida',validateFormate($(`#${(array_id[key]).split(',')[0]}`).val(), ((array_id[key]).split(',')[0]).split('-')[2]));
+          //console.log(array_id[key],'mercesde true',index, $(`#${(array_id[key]).split(',')[0]}`).val() !== '','salida',validateFormate($(`#${(array_id[key]).split(',')[0]}`).val(), ((array_id[key]).split(',')[0]).split('-')[2]));
         }
         
     } 
@@ -804,8 +852,25 @@ function get_id_inputs_form() {
 
 }
 
+/**
+  *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
+  *  @decs  : verificar cuando se usa ctrl c
+*/  
+document.oncopy = function(e) {
+    e.preventDefault();
+    e.clipboardData.setData("text/plain", "No copiar");
+}
 
 
+/**
+  *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
+  *  @decs  : verificar cuando se usa paste
+*/
+/* 
+document.onpaste = function(e) {
+    e.preventDefault();
+    e.clipboardData.setData("text/plain", "Primer abvertencia");
+}*/
 
 
 /*
