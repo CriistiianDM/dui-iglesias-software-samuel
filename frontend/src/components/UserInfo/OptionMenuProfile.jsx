@@ -21,7 +21,8 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-//18 personal information
+
+
 
 /**
   *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
@@ -29,20 +30,21 @@ const useStyles = makeStyles((theme) => ({
 */
 export function OptionMenuProfile(props) {
 
+
+    //definicion de variables
     let state_option_menu_profile = props.properties;
+    let searchCargos
+    let vectCargos
+    let vectCargosFaltantes
+    let cFaltanteSeleccionado
     const classes = useStyles();
 
-    //set data to view
-    let [data_array, set_data_array] = React.useState({
+    //use states
+    const [data_array, set_data_array] = React.useState({
         loading: false,
         disabled_form: true,
         data: []
     });
-
-    React.useEffect(() => {
-        getData(data_array, set_data_array);
-    }, []);
-
     const [openCargos, setOpenCargos] = useState(false);
     const [openConfig, setOpenConfig] = useState(false);
     const [openBorrar, setOpenBorrar] = useState(false);
@@ -51,49 +53,44 @@ export function OptionMenuProfile(props) {
     const [carga, setCarga] = useState({
         loading: true
     });
-    let handleCargos = (event) => {
-        fetch_data_cargo();
-        fetch_cargosFaltantesUser()
-        setOpenCargos(true);
-        //fetch_all_cargos()
-        console.log(searchCargos)
-   
-    }
 
-    let searchCargos
-    let vectCargos
-    let vectCargosFaltantes
-    let cFaltanteSeleccionado
+
+    /* ---------- funciones  ---------- */
+
 
     /**
       *  @author : juan sebastian camino muñoz <juan.camino@correounivalle.edu.co>
       *  @decs  : busqueda de los cargos del usuario que se ve en userInfo
     */
     async function fetch_data_cargo() {
-        if(carga.loading){
-        console.log((data_array.data)['doc'])
-        const response_fetch = await fetch(`https://demon789-4.herokuapp.com/zcvg/${(data_array.data)['doc']}`);
-        const data_fetch = await response_fetch.json();
-        searchCargos = data_fetch;
-        vectCargos = searchCargos.split(',')
-        setCargos(vectCargos)
-        console.log(vectorCargos)
-        setCarga({ ...carga,
-            loading: false
-        })
+        if (carga.loading) {
+            //console.log((data_array.data)['doc'])
+            const response_fetch = await fetch(`https://demon789-4.herokuapp.com/zcvg/${(data_array.data)['doc']}`);
+            const data_fetch = await response_fetch.json();
+            searchCargos = data_fetch;
+            vectCargos = searchCargos.split(',')
+            setCargos(vectCargos)
+            //console.log(vectorCargos)
+            setCarga({
+                ...carga,
+                loading: false
+            })
         }
     }
-      /**
-      *  @author : juan sebastian camino muñoz <juan.camino@correounivalle.edu.co>
-      *  @decs  : busqueda de los cargos del usuario que se ve en userInfo
+
+
+    /**
+    *  @author : juan sebastian camino muñoz <juan.camino@correounivalle.edu.co>
+    *  @decs  : busqueda de los cargos del usuario que se ve en userInfo
     */
-       async function fetch_cargosFaltantesUser() {
-        console.log((data_array.data)['doc'])
+    async function fetch_cargosFaltantesUser() {
+        //console.log((data_array.data)['doc'])
         const response_fetch = await fetch(`https://demon789-4.herokuapp.com/zallcf/${(data_array.data)['doc']}`);
         const data_fetch = await response_fetch.json();
         vectCargosFaltantes = data_fetch;
         setCargosFaltantes(vectCargosFaltantes)
     }
+
 
     function SimpleDialog(props) {
 
@@ -101,7 +98,7 @@ export function OptionMenuProfile(props) {
 
             <List sx={{ pt: 0 }}>
                 {vectorCargos ? vectorCargos.map((vectCargo) => {
-                    console.log(vectCargo)
+                    //console.log(vectCargo)
                     return (
                         <ListItem button key={vectCargo}>
                             <ListItemText primary={vectCargo} />
@@ -112,28 +109,40 @@ export function OptionMenuProfile(props) {
         );
     }
 
-    //handel open dialog
+    /*- -------------- funciones tipo handle -------------- -*/
+
     const handleOpenCargos = () => {
         set_data_array({ ...data_array, disabled_form: false });
     }
 
+    let handleCargos = (event) => {
+        fetch_data_cargo();
+        fetch_cargosFaltantesUser()
+        setOpenCargos(true);
+    }
+
     //handle para enviar datos
     const handleSubmit = async (event) => {
-        
+
         const dataSelect = (event.target.value).split(',')
         let dataPost = new Object();
-            dataPost.doc = (data_array.data)['doc'];
-            dataPost.name_cargo = dataSelect[1];
-            dataPost.id_cargo = dataSelect[0]
+        dataPost.doc = (data_array.data)['doc'];
+        dataPost.name_cargo = dataSelect[1];
+        dataPost.id_cargo = dataSelect[0]
 
-
-        //`{"doc":${(data_array.data)['doc']},"name_cargo":${dataSelect[1]},"id_cargo":${dataSelect[0]}}`
-        postCargo(dataPost,setOpenCargos)//post para enviar el cargo
-        //console.log(prueba.doc,JSON.parse(JSON.stringify(prueba)).doc)
-        setCarga({ ...carga,
+        postCargo(dataPost, setOpenCargos)//post para enviar el cargo
+        
+        setCarga({
+            ...carga,
             loading: true
         })
     }
+
+    /* ---------- use effect  ---------- */
+    
+    React.useEffect(() => {
+        getData(data_array, set_data_array);
+    }, []);
 
 
     return (
@@ -151,7 +160,7 @@ export function OptionMenuProfile(props) {
                     </div>
 
                 </Button>
-                <Button onClick={handleCargos} disabled={!data_array.loading}className={state_option_menu_profile['cls-3']}>
+                <Button onClick={handleCargos} disabled={!data_array.loading} className={state_option_menu_profile['cls-3']}>
 
                     <div className={state_option_menu_profile['cls-4']}>
                         <Icon className={state_option_menu_profile['cls-6']}>assignment</Icon>
@@ -211,8 +220,8 @@ export function OptionMenuProfile(props) {
                                 <option aria-label="None" value="" />
                                 {
                                     (vectorCargosFaltantes).map(
-                                        (element,index)=>(
-                                          <option  aria-label="None" value={`${element.id},${element.name}`} key={index}>{element.name}</option> 
+                                        (element, index) => (
+                                            <option aria-label="None" value={`${element.id},${element.name}`} key={index}>{element.name}</option>
                                         )
                                     )
                                 }
@@ -366,7 +375,7 @@ function getData(data_array, set_data_array) {
             set_data_array({ ...data_array, loading: true, data: JSON.parse(data) });
         }
 
-        console.log('get data');
+        //console.log('get data');
     }, 1000);
 
     return timer;
@@ -378,7 +387,7 @@ function getData(data_array, set_data_array) {
   *  @decs  : post para enviar el cargo
 */
 
-async function postCargo(data_array,setOpenCargos) {
+async function postCargo(data_array, setOpenCargos) {
 
     let response = await fetch(`https://demon789-4.herokuapp.com/zagcat`, {
         method: 'POST',
