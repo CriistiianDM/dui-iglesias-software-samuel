@@ -21,7 +21,8 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-//18 personal information
+
+
 
 /**
   *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
@@ -29,20 +30,26 @@ const useStyles = makeStyles((theme) => ({
 */
 export function OptionMenuProfile(props) {
 
+
+    //definicion de variables
     let state_option_menu_profile = props.properties;
+    let searchCargos
+    let vectCargos
+    let vectCargosFaltantes
+    let cFaltanteSeleccionado
     const classes = useStyles();
 
-    //set data to view
-    let [data_array, set_data_array] = React.useState({
+    //use states
+    const [data_array, set_data_array] = React.useState({
         loading: false,
         disabled_form: true,
         data: []
     });
-
-    React.useEffect(() => {
-        getData(data_array, set_data_array);
-    }, []);
-
+    const [checked_cargo, set_checked_cargo] = React.useState({
+        disabled_cargo: false,
+        open_cargo: false,
+        message_error: false
+    });
     const [openCargos, setOpenCargos] = useState(false);
     const [openConfig, setOpenConfig] = useState(false);
     const [openBorrar, setOpenBorrar] = useState(false);
@@ -51,89 +58,117 @@ export function OptionMenuProfile(props) {
     const [carga, setCarga] = useState({
         loading: true
     });
-    let handleCargos = (event) => {
-        fetch_data_cargo();
-        fetch_cargosFaltantesUser()
-        setOpenCargos(true);
-        //fetch_all_cargos()
-        console.log(searchCargos)
-   
-    }
 
-    let searchCargos
-    let vectCargos
-    let vectCargosFaltantes
-    let cFaltanteSeleccionado
+
+    /* ---------- funciones  ---------- */
+
 
     /**
       *  @author : juan sebastian camino muñoz <juan.camino@correounivalle.edu.co>
       *  @decs  : busqueda de los cargos del usuario que se ve en userInfo
     */
     async function fetch_data_cargo() {
-        if(carga.loading){
-        console.log((data_array.data)['doc'])
-        const response_fetch = await fetch(`https://demon789-4.herokuapp.com/zcvg/${(data_array.data)['doc']}`);
-        const data_fetch = await response_fetch.json();
-        searchCargos = data_fetch;
-        vectCargos = searchCargos.split(',')
-        setCargos(vectCargos)
-        console.log(vectorCargos)
-        setCarga({ ...carga,
-            loading: false
-        })
+
+        try {
+
+        if (carga.loading) {
+           
+            set_checked_cargo({ ...checked_cargo, disabled_cargo: true });
+            const response_fetch = await fetch(`https://demon789-4.herokuapp.com/zcvg/${(data_array.data)['doc']}`);
+            const data_fetch = await response_fetch.json();
+            searchCargos = data_fetch;
+            vectCargos = searchCargos.split(',')
+            setCargos(vectCargos)
+            
+            set_checked_cargo({ ...checked_cargo, disabled_cargo: false });
+            setCarga({
+                ...carga,
+                loading: false
+            })
+        }
+
+        } catch (error) {
+            console.log(error)
         }
     }
-      /**
-      *  @author : juan sebastian camino muñoz <juan.camino@correounivalle.edu.co>
-      *  @decs  : busqueda de los cargos del usuario que se ve en userInfo
+
+
+    /**
+    *  @author : juan sebastian camino muñoz <juan.camino@correounivalle.edu.co>
+    *  @decs  : busqueda de los cargos del usuario que se ve en userInfo
     */
-       async function fetch_cargosFaltantesUser() {
-        console.log((data_array.data)['doc'])
+    async function fetch_cargosFaltantesUser() {
+
+        try {
+            
         const response_fetch = await fetch(`https://demon789-4.herokuapp.com/zallcf/${(data_array.data)['doc']}`);
         const data_fetch = await response_fetch.json();
         vectCargosFaltantes = data_fetch;
         setCargosFaltantes(vectCargosFaltantes)
+
+        } catch (error) {
+            console.log(error)
+        }
     }
 
-    function SimpleDialog(props) {
+
+    function SimpleDialog() {
 
         return (
 
             <List sx={{ pt: 0 }}>
                 {vectorCargos ? vectorCargos.map((vectCargo) => {
-                    console.log(vectCargo)
+
                     return (
                         <ListItem button key={vectCargo}>
                             <ListItemText primary={vectCargo} />
                         </ListItem>
                     );
+
                 }) : 'vector vacio'}
             </List>
         );
     }
 
-    //handel open dialog
+    /*- -------------- funciones tipo handle -------------- -*/
+
     const handleOpenCargos = () => {
         set_data_array({ ...data_array, disabled_form: false });
     }
 
+    let handleCargos = (event) => {
+        fetch_data_cargo();
+        fetch_cargosFaltantesUser()
+        setOpenCargos(true);
+    }
+
+    //handle para cerrar el dialog de cargos y cerrrar el mensaje de cargos
+    const handle_close_cargos = () => {
+        set_checked_cargo({ ...checked_cargo, open_cargo: false });
+    }
+
     //handle para enviar datos
     const handleSubmit = async (event) => {
-        
+
         const dataSelect = (event.target.value).split(',')
         let dataPost = new Object();
-            dataPost.doc = (data_array.data)['doc'];
-            dataPost.name_cargo = dataSelect[1];
-            dataPost.id_cargo = dataSelect[0]
+        dataPost.doc = (data_array.data)['doc'];
+        dataPost.name_cargo = dataSelect[1];
+        dataPost.id_cargo = dataSelect[0]
 
+        postCargo(dataPost, setOpenCargos, checked_cargo, set_checked_cargo)//post para enviar el cargo
 
-        //`{"doc":${(data_array.data)['doc']},"name_cargo":${dataSelect[1]},"id_cargo":${dataSelect[0]}}`
-        postCargo(dataPost,setOpenCargos)//post para enviar el cargo
-        //console.log(prueba.doc,JSON.parse(JSON.stringify(prueba)).doc)
-        setCarga({ ...carga,
+        setCarga({
+            ...carga,
             loading: true
         })
     }
+
+    /* ---------- use effect  ---------- */
+
+    React.useEffect(() => {
+        getData(data_array, set_data_array);
+    }, []);
 
 
     return (
@@ -151,7 +186,7 @@ export function OptionMenuProfile(props) {
                     </div>
 
                 </Button>
-                <Button onClick={handleCargos} disabled={!data_array.loading}className={state_option_menu_profile['cls-3']}>
+                <Button onClick={handleCargos} disabled={!data_array.loading} className={state_option_menu_profile['cls-3']}>
 
                     <div className={state_option_menu_profile['cls-4']}>
                         <Icon className={state_option_menu_profile['cls-6']}>assignment</Icon>
@@ -207,12 +242,13 @@ export function OptionMenuProfile(props) {
                         <SimpleDialog></SimpleDialog>
                         <FormControl className={(data_array.disabled_form) ? classes.ayudad : classes.formControl} variant="filled" >
                             <InputLabel value="#" htmlFor="wer">Cargos Disponibles</InputLabel>
-                            <Select onChange={handleSubmit} id='tipo-region1-7-13' label="Tipo de Documento" variant="filled" native labelId="w66666er">
+                            <Select disabled={checked_cargo.disabled_cargo} onChange={handleSubmit} id='tipo-region1-7-13' label="Tipo de Documento" variant="filled" native labelId="w66666er">
                                 <option aria-label="None" value="" />
                                 {
+                                   
                                     (vectorCargosFaltantes).map(
-                                        (element,index)=>(
-                                          <option  aria-label="None" value={`${element.id},${element.name}`} key={index}>{element.name}</option> 
+                                        (element, index) => (
+                                            <option aria-label="None" value={`${element.id},${element.name}`} key={index}>{element.name}</option>
                                         )
                                     )
                                 }
@@ -251,6 +287,26 @@ export function OptionMenuProfile(props) {
                         </Button>
                         <Button onClick={() => setOpenBorrar(false)} color="primary">
                             Cancelar
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+                <Dialog
+                    open={checked_cargo.open_cargo}
+                    onClose={() => setOpenBorrar(false)}
+                    aria-labelledby="dialog-title"
+                    aria-describedby="dialog-description"
+                >
+                    <DialogTitle id="dialog-title">{`${(checked_cargo.message_error)? 'Error Al insertar Cargo' : 'Cargo Asginado'}`}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="dialog-description">
+                            {
+                               `${(checked_cargo.message_error)? 'Upps!!, paso un error al insertar el cargo, porfavor revise su conexion o recarge la pagina' : 'Cargo Asignado Correctamente'}`
+                            }
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handle_close_cargos} color="primary">
+                            cerrar
                         </Button>
                     </DialogActions>
                 </Dialog>
@@ -354,7 +410,7 @@ export function OptionMenuProfile(props) {
   *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
   *  @decs  : get data from local storage
 */
-function getData(data_array, set_data_array) {
+function getData(data_array, set_data_array, checked_cargo, set_checked_cargo) {
 
 
     const timer = setInterval(() => {
@@ -366,7 +422,7 @@ function getData(data_array, set_data_array) {
             set_data_array({ ...data_array, loading: true, data: JSON.parse(data) });
         }
 
-        console.log('get data');
+        //console.log('get data');
     }, 1000);
 
     return timer;
@@ -377,19 +433,38 @@ function getData(data_array, set_data_array) {
   *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
   *  @decs  : post para enviar el cargo
 */
+async function postCargo(data_array, setOpenCargos, checked_cargo, set_checked_cargo) {
 
-async function postCargo(data_array,setOpenCargos) {
+    try {
 
-    let response = await fetch(`https://demon789-4.herokuapp.com/zagcat`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
-        mode: 'cors',
-        body: JSON.stringify(data_array)
-    });
-    alert('Cargo Registrado');
-    setOpenCargos(false)
+        set_checked_cargo({ ...checked_cargo, disabled_cargo: true });
+        let response = await fetch(`https://demon789-4.herokuapp.com/zagcat`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            mode: 'cors',
+            body: JSON.stringify(data_array)
+        });
+
+        let data = await response.json();
+
+        
+        if (data.message === 'ok') {
+            //alert('Cargo Registrado');
+            setOpenCargos(false)
+            set_checked_cargo({ ...checked_cargo, disabled_cargo: false , open_cargo: true , message_error: false });
+        }
+        else {
+            set_checked_cargo({ ...checked_cargo, disabled_cargo: false , open_cargo: true , message_error: true });
+        }
+
+    } catch (error) {
+
+        //manejo de errores
+        set_checked_cargo({ ...checked_cargo, disabled_cargo: false , open_cargo: true , message_error: true });
+        console.log(error);
+    }
 
 }
