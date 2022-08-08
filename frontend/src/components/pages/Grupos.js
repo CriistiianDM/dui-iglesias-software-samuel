@@ -149,7 +149,9 @@ export function Grupos(props) {
     error_band_2: false,
     error_band_3: false,
     disabled_name: false,
+    disabled_all: false,
     dialog_open: false,
+    dialog_error: false,
     message_band_0: 'solo Numeros de 9 a 15 caracteres',
     message_band_1: 'solo Letras de 3 a 50 caracteres',
     message_band_2: 'solo Letras de 3 a 50 caracteres',
@@ -191,6 +193,11 @@ export function Grupos(props) {
     navigate('/account');
   }
 
+  let handle_dialog_error = () => {
+    setdata_array({ ...data_array, dialog_error: false });
+    
+  }
+
 
   //Styles. 
   // <TextField type="file" id="outlined-required" variant="outlined"/>
@@ -230,11 +237,11 @@ export function Grupos(props) {
         </div>
 
         <div className={classes.root}>
-          <TextField error={data_array.error_band_1} onChange={handleChange} id="outlined-multiline-9-1" required={true} fullWidth={true} maxRows={3} multiline={true} label="Descripción" variant="outlined" />
+          <TextField disabled={data_array.disabled_all} error={data_array.error_band_1} onChange={handleChange} id="outlined-multiline-9-1" required={true} fullWidth={true} maxRows={3} multiline={true} label="Descripción" variant="outlined" />
         </div>
 
         <div className={classes.root}>
-          <Input className={classes.archivo} onChange={handleChange} id="outlined-file-10-2" accept="image/*" type="file" variant="filled" />
+          <Input disabled={data_array.disabled_all} className={classes.archivo} onChange={handleChange} id="outlined-file-10-2" accept="image/*" type="file" variant="filled" />
         </div>
 
 
@@ -269,7 +276,6 @@ export function Grupos(props) {
         </Button>
       </div>
 
-      <br></br>
       <Dialog
         open={data_array.dialog_open}
         aria-labelledby="alert-dialog-title"
@@ -279,6 +285,24 @@ export function Grupos(props) {
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             El Grupo se ha registrado correctamente.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handle_dialog_open} color="primary">
+            Cerrar
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog
+        open={data_array.dialog_error}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Error Al Registrar"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            El Grupo no se ha podido crear, porfavor revise su conexion a internet.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -418,12 +442,23 @@ async function postGrupo(data_array, img_data, setdata_array) {
 
   try {
 
+    setdata_array({ ...data_array, 
+                   disabled_all: true,
+                   disabled_name: true
+                   });
+    
+
+    if (img_data !== null) {
+
     let response = await fetch(`https://demon789-4.herokuapp.com/zfiles`, {
       method: 'POST',
       body: img_data,
       mode: 'cors',
     });
-    console.log(response);
+    
+   } 
+    
+
     let post_response = await fetch(`https://demon789-4.herokuapp.com/zcrgppipe`, {
       method: 'POST',
       headers: {
@@ -433,10 +468,35 @@ async function postGrupo(data_array, img_data, setdata_array) {
       mode: 'cors',
       body: JSON.stringify(data_array)
     });
-    console.log(post_response);
-    localStorage.setItem('kill_timer_cr', 'true');
-    setdata_array({ ...data_array, dialog_open: true });
+  
+    let data = await post_response.json();
+
+    if (data.message === "ok") {
+
+      localStorage.setItem('kill_timer_cr', 'true');
+      setdata_array({ ...data_array, dialog_open: true });
+
+    }
+    else {
+
+      setdata_array({ ...data_array, 
+        disabled_all: false,
+        disabled_name: false,
+        dialog_error: true
+      });  
+      
+    }
+
+
   } catch (error) {
+   
+    //manejar el error
+    setdata_array({ ...data_array, 
+      disabled_all: false,
+      disabled_name: false,
+      dialog_error: true
+    });
+
     console.log(error);
   }
 
