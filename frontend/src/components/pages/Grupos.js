@@ -306,7 +306,7 @@ export function Grupos(props) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handle_dialog_open} color="primary">
+          <Button onClick={handle_dialog_error} color="primary">
             Cerrar
           </Button>
         </DialogActions>
@@ -484,7 +484,7 @@ async function postGrupo(data_array, img_data, setdata_array) {
         disabled_name: false,
         dialog_error: true
       });  
-      
+
     }
 
 
