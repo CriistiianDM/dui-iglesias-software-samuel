@@ -45,6 +45,11 @@ export function OptionMenuProfile(props) {
         disabled_form: true,
         data: []
     });
+    const [checked_cargo, set_checked_cargo] = React.useState({
+        disabled_cargo: false,
+        open_cargo: false,
+        message_error: false
+    });
     const [openCargos, setOpenCargos] = useState(false);
     const [openConfig, setOpenConfig] = useState(false);
     const [openBorrar, setOpenBorrar] = useState(false);
@@ -63,18 +68,27 @@ export function OptionMenuProfile(props) {
       *  @decs  : busqueda de los cargos del usuario que se ve en userInfo
     */
     async function fetch_data_cargo() {
+
+        try {
+
         if (carga.loading) {
-            //console.log((data_array.data)['doc'])
+           
+            set_checked_cargo({ ...checked_cargo, disabled_cargo: true });
             const response_fetch = await fetch(`https://demon789-4.herokuapp.com/zcvg/${(data_array.data)['doc']}`);
             const data_fetch = await response_fetch.json();
             searchCargos = data_fetch;
             vectCargos = searchCargos.split(',')
             setCargos(vectCargos)
-            //console.log(vectorCargos)
+            
+            set_checked_cargo({ ...checked_cargo, disabled_cargo: false });
             setCarga({
                 ...carga,
                 loading: false
             })
+        }
+
+        } catch (error) {
+            console.log(error)
         }
     }
 
@@ -84,26 +98,33 @@ export function OptionMenuProfile(props) {
     *  @decs  : busqueda de los cargos del usuario que se ve en userInfo
     */
     async function fetch_cargosFaltantesUser() {
-        //console.log((data_array.data)['doc'])
+
+        try {
+            
         const response_fetch = await fetch(`https://demon789-4.herokuapp.com/zallcf/${(data_array.data)['doc']}`);
         const data_fetch = await response_fetch.json();
         vectCargosFaltantes = data_fetch;
         setCargosFaltantes(vectCargosFaltantes)
+
+        } catch (error) {
+            console.log(error)
+        }
     }
 
 
-    function SimpleDialog(props) {
+    function SimpleDialog() {
 
         return (
 
             <List sx={{ pt: 0 }}>
                 {vectorCargos ? vectorCargos.map((vectCargo) => {
-                    //console.log(vectCargo)
+
                     return (
                         <ListItem button key={vectCargo}>
                             <ListItemText primary={vectCargo} />
                         </ListItem>
                     );
+
                 }) : 'vector vacio'}
             </List>
         );
@@ -121,6 +142,11 @@ export function OptionMenuProfile(props) {
         setOpenCargos(true);
     }
 
+    //handle para cerrar el dialog de cargos y cerrrar el mensaje de cargos
+    const handle_close_cargos = () => {
+        set_checked_cargo({ ...checked_cargo, open_cargo: false });
+    }
+
     //handle para enviar datos
     const handleSubmit = async (event) => {
 
@@ -130,8 +156,8 @@ export function OptionMenuProfile(props) {
         dataPost.name_cargo = dataSelect[1];
         dataPost.id_cargo = dataSelect[0]
 
-        postCargo(dataPost, setOpenCargos)//post para enviar el cargo
-        
+        postCargo(dataPost, setOpenCargos, checked_cargo, set_checked_cargo)//post para enviar el cargo
+
         setCarga({
             ...carga,
             loading: true
@@ -139,7 +165,7 @@ export function OptionMenuProfile(props) {
     }
 
     /* ---------- use effect  ---------- */
-    
+
     React.useEffect(() => {
         getData(data_array, set_data_array);
     }, []);
@@ -216,9 +242,10 @@ export function OptionMenuProfile(props) {
                         <SimpleDialog></SimpleDialog>
                         <FormControl className={(data_array.disabled_form) ? classes.ayudad : classes.formControl} variant="filled" >
                             <InputLabel value="#" htmlFor="wer">Cargos Disponibles</InputLabel>
-                            <Select onChange={handleSubmit} id='tipo-region1-7-13' label="Tipo de Documento" variant="filled" native labelId="w66666er">
+                            <Select disabled={checked_cargo.disabled_cargo} onChange={handleSubmit} id='tipo-region1-7-13' label="Tipo de Documento" variant="filled" native labelId="w66666er">
                                 <option aria-label="None" value="" />
                                 {
+                                   
                                     (vectorCargosFaltantes).map(
                                         (element, index) => (
                                             <option aria-label="None" value={`${element.id},${element.name}`} key={index}>{element.name}</option>
@@ -260,6 +287,26 @@ export function OptionMenuProfile(props) {
                         </Button>
                         <Button onClick={() => setOpenBorrar(false)} color="primary">
                             Cancelar
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+                <Dialog
+                    open={checked_cargo.open_cargo}
+                    onClose={() => setOpenBorrar(false)}
+                    aria-labelledby="dialog-title"
+                    aria-describedby="dialog-description"
+                >
+                    <DialogTitle id="dialog-title">{`${(checked_cargo.message_error)? 'Error Al insertar Cargo' : 'Cargo Asginado'}`}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="dialog-description">
+                            {
+                               `${(checked_cargo.message_error)? 'Upps!!, paso un error al insertar el cargo, porfavor revise su conexion o recarge la pagina' : 'Cargo Asignado Correctamente'}`
+                            }
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handle_close_cargos} color="primary">
+                            cerrar
                         </Button>
                     </DialogActions>
                 </Dialog>
@@ -363,7 +410,7 @@ export function OptionMenuProfile(props) {
   *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
   *  @decs  : get data from local storage
 */
-function getData(data_array, set_data_array) {
+function getData(data_array, set_data_array, checked_cargo, set_checked_cargo) {
 
 
     const timer = setInterval(() => {
@@ -386,19 +433,38 @@ function getData(data_array, set_data_array) {
   *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
   *  @decs  : post para enviar el cargo
 */
+async function postCargo(data_array, setOpenCargos, checked_cargo, set_checked_cargo) {
 
-async function postCargo(data_array, setOpenCargos) {
+    try {
 
-    let response = await fetch(`https://demon789-4.herokuapp.com/zagcat`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
-        mode: 'cors',
-        body: JSON.stringify(data_array)
-    });
-    alert('Cargo Registrado');
-    setOpenCargos(false)
+        set_checked_cargo({ ...checked_cargo, disabled_cargo: true });
+        let response = await fetch(`https://demon789-4.herokuapp.com/zagcat`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            mode: 'cors',
+            body: JSON.stringify(data_array)
+        });
+
+        let data = await response.json();
+
+        
+        if (data.message === 'ok') {
+            //alert('Cargo Registrado');
+            setOpenCargos(false)
+            set_checked_cargo({ ...checked_cargo, disabled_cargo: false , open_cargo: true , message_error: false });
+        }
+        else {
+            set_checked_cargo({ ...checked_cargo, disabled_cargo: false , open_cargo: true , message_error: true });
+        }
+
+    } catch (error) {
+
+        //manejo de errores
+        set_checked_cargo({ ...checked_cargo, disabled_cargo: false , open_cargo: true , message_error: true });
+        console.log(error);
+    }
 
 }
