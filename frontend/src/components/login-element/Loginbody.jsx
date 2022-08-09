@@ -5,7 +5,8 @@ import TextField from '@material-ui/core/TextField';
 import { CircularProgress, Typography, Dialog, DialogActions, DialogTitle, DialogContent, DialogContentText } from "@material-ui/core";
 import { Button } from "@material-ui/core";
 import { useNavigate } from 'react-router-dom';
-
+//token de autenticacion
+const { generateToken } = require('../_____/_____');
 
 
 /**
@@ -17,7 +18,7 @@ export function Loginbody(props) {
 
   localStorage.setItem('user_name', `admin`);
   //console.log(localStorage.getItem('user_name'));
-  
+
   //estados boleanos para validar los campos
   const [user_valid_data, setUserValid] = React.useState({
     user_login: '',
@@ -185,8 +186,16 @@ function validate_data_all(user_valid_data, setUserValid, navigate) {
 async function fetch_data_login(user_valid_data, setUserValid, navigate) {
 
   try {
+
     setUserValid({ ...user_valid_data, loading: true });
-    const response = await fetch(`https://demon789-4.herokuapp.com/zlgz/${user_valid_data.user_login}/${user_valid_data.password_login}`);
+    const response = await fetch(`https://demon789-4.herokuapp.com/zlgz/${user_valid_data.user_login}/${user_valid_data.password_login}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': generateToken()
+      }
+    });
+
     const data = await response.json();
 
 
@@ -194,7 +203,13 @@ async function fetch_data_login(user_valid_data, setUserValid, navigate) {
       console.log(data, 'el usuario existe');
 
       //fetch
-      const response_fetch = await fetch(`https://demon789-4.herokuapp.com/zcvg/${user_valid_data.user_login}`);
+      const response_fetch = await fetch(`https://demon789-4.herokuapp.com/zcvg/${user_valid_data.user_login}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': generateToken()
+        }
+      });
       const data_fetch = await response_fetch.json();
 
       // guardar el usuario en el localstorage

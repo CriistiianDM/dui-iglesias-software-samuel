@@ -7,6 +7,9 @@ import { SettingAccounts } from '../account-element/SettingAccounts';
 import { UserList } from '../account-element/UserList';
 import { FooterAccount } from '../account-element/FooterAccount';
 
+//token de autenticacion
+const { generateToken } = require('../_____/_____')
+
 /**
   *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
   *  @decs  : Account de la aplicacion /account
@@ -60,9 +63,16 @@ async function get_user_name(user_id,header_user, setHeaderUser) {
 
     //fetch de la ruta znlp/:doc
     localStorage.setItem('consult_refresh', 'false');
-    let response = await fetch(`https://demon789-4.herokuapp.com/znlp/${user_id}`);
+    let response = await fetch(`https://demon789-4.herokuapp.com/znlp/${user_id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': generateToken()
+      }
+    });
+
     let data = await response.json();
-    console.log(data, 'data');
+    //console.log(data, 'data');
     localStorage.setItem('user_name', `${data[0].first_name} ${data[0].first_last_name}`);
     setHeaderUser({...header_user, nombre_persona: localStorage.getItem('user_name')});
     localStorage.setItem('consult_refresh', 'true');
