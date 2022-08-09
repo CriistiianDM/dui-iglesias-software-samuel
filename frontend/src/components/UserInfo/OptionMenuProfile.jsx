@@ -4,6 +4,8 @@ import React from 'react';
 import { useState } from 'react';
 import option_menu_profile from '../../css/option_menu_profile.css';
 import { makeStyles } from '@material-ui/core/styles';
+//token de autenticacion
+const { generateToken } = require('../_____/_____');
 
 //estilos de material-ui
 const useStyles = makeStyles((theme) => ({
@@ -74,7 +76,13 @@ export function OptionMenuProfile(props) {
         if (carga.loading) {
            
             set_checked_cargo({ ...checked_cargo, disabled_cargo: true });
-            const response_fetch = await fetch(`https://demon789-4.herokuapp.com/zcvg/${(data_array.data)['doc']}`);
+            const response_fetch = await fetch(`https://demon789-4.herokuapp.com/zcvg/${(data_array.data)['doc']}`, {
+                method: 'GET',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': generateToken()
+                }
+              });
             const data_fetch = await response_fetch.json();
             searchCargos = data_fetch;
             vectCargos = searchCargos.split(',')
@@ -100,8 +108,14 @@ export function OptionMenuProfile(props) {
     async function fetch_cargosFaltantesUser() {
 
         try {
-            
-        const response_fetch = await fetch(`https://demon789-4.herokuapp.com/zallcf/${(data_array.data)['doc']}`);
+
+        const response_fetch = await fetch(`https://demon789-4.herokuapp.com/zallcf/${(data_array.data)['doc']}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': generateToken()
+            }
+          });
         const data_fetch = await response_fetch.json();
         vectCargosFaltantes = data_fetch;
         setCargosFaltantes(vectCargosFaltantes)
@@ -442,7 +456,8 @@ async function postCargo(data_array, setOpenCargos, checked_cargo, set_checked_c
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Accept': 'application/json'
+                'Accept': 'application/json',
+                'Authorization': generateToken()
             },
             mode: 'cors',
             body: JSON.stringify(data_array)

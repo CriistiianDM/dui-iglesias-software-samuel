@@ -7,7 +7,6 @@ import {
 } from 'react-router-dom';
 
 
-
 //librery or import of components
 import { Home } from './components/pages/Home';
 import { Cargo } from './components/pages/Cargo.js'; 
@@ -26,6 +25,10 @@ import home_style from './css/home_style.css';
 
 import json from './json/state_components.json';
 
+//token de autenticacion
+const { generateToken } = require('./components/_____/_____')
+
+
 
 /**
   *  @author : juan sebastian camino <juan.camino@correounivalle.edu.co>
@@ -34,9 +37,9 @@ import json from './json/state_components.json';
 */
 export function App() {
 
-  
+  console.log('tokennnn',generateToken(), 'token', typeof(generateToken()));
   React.useEffect(() => {
-    getCountries();
+    getCountries(); 
   }, []);
   
   //return the component
@@ -65,11 +68,18 @@ export function App() {
   *  @decs  : consulta para traer los nombres de los paises
 */
 async function getCountries() {
+
    try {
-    console.log('entro', localStorage.getItem('countries_band'));
+
     if (localStorage.getItem('countries_band') === null) {
 
-    const response = await fetch(`https://demon789-4.herokuapp.com/zcrcp/1/xd`);
+    const response = await fetch(`https://demon789-4.herokuapp.com/zcrcp/1/''`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': generateToken()
+      }
+    });
     const data = await response.json();
     localStorage.setItem('countries', JSON.stringify(data));
     //return data;
@@ -78,7 +88,7 @@ async function getCountries() {
     }
 
    } catch (error) {
-     console.log(error);
-    
+     console.log(error); 
    }
+
 }

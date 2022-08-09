@@ -5,7 +5,8 @@ import headerUserAccounts from '../../css/header-user-account.css';
 import { useState } from 'react';
 import { Navigate, useNavigate } from "react-router-dom";
 import { Avatar, Button, Menu , MenuItem, ListItemIcon, Divider } from '@material-ui/core';
-
+//token de autenticacion
+const { generateToken } = require('../_____/_____');
 
 
 /**
@@ -44,7 +45,14 @@ export function HeaderUser(props) {
   console.log(id_profileUser);
 
   //send id to user_info
-  let response = await fetch(`https://demon789-4.herokuapp.com/zadtus/${id_profileUser}`);
+  let response = await fetch(`https://demon789-4.herokuapp.com/zadtus/${id_profileUser}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': generateToken()
+    }
+  });
+
   let data = await response.json();
 
   console.log(data)
