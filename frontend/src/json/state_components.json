@@ -317,5 +317,10 @@
                 }
             ]
         }
+    },
+    "cargo_style": {
+       "0": {
+           "cls-1": "box-cargo-style-element"
+       }
     }
 }

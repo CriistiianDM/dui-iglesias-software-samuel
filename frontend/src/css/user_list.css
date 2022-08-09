@@ -102,7 +102,7 @@
 
 .box-footer-account-element {
     display: grid;
-    grid-auto-rows: 4em;
+    grid-template-rows: 4em;
     grid-template-columns: repeat(auto-fit, minmax( min(100%, 25em), 1fr));
     grid-gap: 0.5em;
     width: 100%;
