@@ -98,8 +98,8 @@ export function NewLogin(props) {
             <div className={properties['cls-4']}>
                 <Typography className={classes.titleSection}>Iniciar sesión</Typography>
                 <div className={classes.formControlBox} noValidate autoComplete="off">
-                    <TextField InputProps={{ className: classes.input }} className={classes.textField} id='user_loginbody' type='number' label="Usuario" variant="outlined" />
-                    <TextField InputProps={{ className: classes.input }} className={classes.textField} id='passwd_loginbody' type='password' label="Contraseña" variant="outlined" />
+                    <TextField InputProps={{ className: classes.input }} className={classes.textField}  type='number' label="Usuario" variant="outlined" />
+                    <TextField InputProps={{ className: classes.input }} className={classes.textField} type='password' label="Contraseña" variant="outlined" />
                     <Button className={classes.buttonSubmit} type="submit" color="primary" variant="contained">
                         Iniciar
                     </Button>
