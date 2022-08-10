@@ -33,7 +33,9 @@
 }
 
 .box-button-element {
-   background:  linear-gradient(90deg, rgb(233, 233, 238), rgb(136, 153, 228));
+   height: 3em !important;
+   color: white !important;
+   background-color: #3f51b5 !important;
 }
 
 
