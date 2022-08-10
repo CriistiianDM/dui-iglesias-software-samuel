@@ -193,6 +193,7 @@ export function Grupos(props) {
     navigate('/account');
   }
 
+
   let handle_dialog_error = () => {
     setdata_array({ ...data_array, dialog_error: false });
     
@@ -430,7 +431,6 @@ async function getJovenes(jovenL, setJovenL) {
   } catch (error) {
     console.log(error);
   }
-
 }
 
 
