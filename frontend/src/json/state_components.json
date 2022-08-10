@@ -15,6 +15,12 @@
             "cls-4": "box-img-account-header",
             "cls-5": "box-avatar-style",
             "cls-6": "box-aux-header"
+        },
+        "2": {
+            "cls-1": "box-new-body-home",
+            "cls-2": "box-new-body-home-content",
+            "cls-3": "box-new-login-home-content",
+            "cls-4": "box-content-login-home"
         }
     },
     "state_footer": {
@@ -317,5 +323,10 @@
                 }
             ]
         }
+    },
+    "cargo_style": {
+       "0": {
+           "cls-1": "box-cargo-style-element"
+       }
     }
 }

@@ -7,7 +7,8 @@ import {
   Dialog, DialogActions, DialogTitle, DialogContent, DialogContentText
 } from '@material-ui/core';
 
-
+//token de autenticacion
+const { generateToken } = require('../_____/_____')
 
 const theme = createTheme({
   typography: {
@@ -417,7 +418,14 @@ async function getJovenes(jovenL, setJovenL) {
 
   try {
 
-    let response = await fetch('https://demon789-4.herokuapp.com/zjlp');
+    let response = await fetch('https://demon789-4.herokuapp.com/zjlp', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': generateToken()
+      }
+    });
+
     let data1 = await response.json();
     //guardar en setJovenL el json de la consulta, recordando la información anterior
     setJovenL({
@@ -453,6 +461,11 @@ async function postGrupo(data_array, img_data, setdata_array) {
     let response = await fetch(`https://demon789-4.herokuapp.com/zfiles`, {
       method: 'POST',
       body: img_data,
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': generateToken()
+      },
       mode: 'cors',
     });
     
@@ -463,7 +476,8 @@ async function postGrupo(data_array, img_data, setdata_array) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        'Accept': 'application/json',
+        'Authorization': generateToken()
       },
       mode: 'cors',
       body: JSON.stringify(data_array)
@@ -589,7 +603,14 @@ async function get_name_group(data_array, setdata_array,e,error) {
     });
 
     //fetcher para la consulta de grupos
-    let response = await fetch(`https://demon789-4.herokuapp.com/znmgr/${e.target.value}`);
+    let response = await fetch(`https://demon789-4.herokuapp.com/znmgr/${e.target.value}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': generateToken()
+      }
+    });
+
     let data = await response.json();
     
     if (data[0] === undefined) {
