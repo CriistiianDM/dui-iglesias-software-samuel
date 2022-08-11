@@ -5,7 +5,8 @@ import headerUserAccounts from '../../css/header-user-account.css';
 import { useState } from 'react';
 import { Navigate, useNavigate } from "react-router-dom";
 import { Avatar, Button, Menu , MenuItem, ListItemIcon, Divider } from '@material-ui/core';
-
+//token de autenticacion
+const { generateToken } = require('../_____/_____');
 
 
 /**
@@ -44,7 +45,14 @@ export function HeaderUser(props) {
   console.log(id_profileUser);
 
   //send id to user_info
-  let response = await fetch(`https://demon789-4.herokuapp.com/zadtus/${id_profileUser}`);
+  let response = await fetch(`https://demon789-4.herokuapp.com/zadtus/${id_profileUser}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': generateToken()
+    }
+  });
+
   let data = await response.json();
 
   console.log(data)
@@ -64,9 +72,13 @@ export function HeaderUser(props) {
  };
 
  let handleClose = () => {
-   navigate("/", { replace: true })
    setAnchorEl(null);
    
+ };
+ 
+ let handleClickLogout = () => {
+   setAnchorEl(null);
+   navigate("/", { replace: true })
  };
 
   return (
@@ -96,7 +108,7 @@ export function HeaderUser(props) {
       >
         <MenuItem onClick={handleClickProfile}>Profile</MenuItem>
         <MenuItem>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem onClick={handleClickLogout}>Logout</MenuItem>
       </Menu>
 
     </div>
