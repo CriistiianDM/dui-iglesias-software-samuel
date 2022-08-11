@@ -191,13 +191,13 @@ async function fetch_data_login(user_valid_data, setUserValid, navigate) {
     const response = await fetch(`https://demon789-4.herokuapp.com/zlgz/${user_valid_data.user_login}/${user_valid_data.password_login}`, {
       method: 'GET',
       headers: {
-        'Content-Type': 'text/plain',
+        'Content-Type': 'application/json',
         'Authorization': generateToken()
       }
     });
-
+    
     const data = await response.json();
-
+    console.log(data,'teste',generateToken(),'teste');
 
     if (data[0] !== undefined) {
       console.log(data, 'el usuario existe');
