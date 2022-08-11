@@ -206,7 +206,7 @@ async function fetch_data_login(user_valid_data, setUserValid, navigate) {
       const response_fetch = await fetch(`https://demon789-4.herokuapp.com/zcvg/${user_valid_data.user_login}`, {
         method: 'GET',
         headers: {
-          'Content-Type': 'text/plain',
+          'Content-Type': 'application/json',
           'Authorization': generateToken()
         }
       });
