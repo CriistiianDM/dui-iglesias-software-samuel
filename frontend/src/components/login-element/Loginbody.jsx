@@ -195,9 +195,9 @@ async function fetch_data_login(user_valid_data, setUserValid, navigate) {
         'Authorization': generateToken()
       }
     });
-
+    
     const data = await response.json();
-
+    console.log(data,'teste',generateToken(),'teste');
 
     if (data[0] !== undefined) {
       console.log(data, 'el usuario existe');

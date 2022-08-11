@@ -1,0 +1,105 @@
+
+
+.box-new-body-home {
+    display: grid;
+    grid-auto-rows: auto;
+    grid-template-columns: repeat(auto-fit, minmax( min(100%, 40em), 1fr));
+    grid-gap: 20px;
+    justify-items: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    backdrop-filter: blur(20px);
+    opacity: 0.8;
+    background-image: url('../images/imagesHome/low-angle-greyscale-shot-of-an-airplane-flying-above-high-rise-buildings.jpg');
+    width: 100%;
+    overflow: hidden;
+}
+
+
+.box-new-body-home-content {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+
+.box-new-login-home-content {
+    justify-self: end;
+    display: grid;
+    width: 50%;
+    height: 80%;
+    background-color: #fafafa;
+    box-shadow: 0 0 0.3em rgba(0, 0, 0, 0.5);
+    border-radius: 0.7em;
+    margin-top: 9em;
+    margin-left: 7em;
+    margin-right: 5em;
+    margin-bottom: 9em;
+    overflow: hidden;
+}
+
+.box-content-login-home {
+    display: grid;
+    grid-auto-rows: auto;
+    grid-template-columns: 100%;
+    justify-items: center;
+    grid-gap: 0.3em;
+    width: 86%;
+    height: 93%;
+    padding: 1em;
+    overflow: hidden;
+}
+
+
+.box-content-title-home-app {
+    display: grid;
+    grid-auto-rows: auto;
+    grid-template-columns: 100%;
+    justify-items: center;
+    grid-gap: 0.3em;
+    width: 90%;
+    height: 80%;
+}
+
+
+.box-content-title-new-home-app-text {
+    display: grid;
+    grid-auto-rows: auto;
+    grid-template-columns: 100%;
+    align-items: flex-start;
+    width: 100%;
+    height: 9.6em;
+    padding: 4em 1em;
+    margin-left: 5em;
+    overflow: hidden;
+}
+
+
+.box-content-title-new-home-app-text-2 {
+    display: grid;
+    grid-auto-rows: auto;
+    grid-template-columns: repeat(auto-fit, minmax( min(100%, 16em), 1fr));;
+    align-items: flex-start;
+    justify-items: flex-end;
+    width: 90%;
+    height: auto;
+    margin-left: 30em;
+    margin-bottom: 7em;
+    padding: 1em 1em;
+}
+
+
+.box-title-mision-vision-home {
+    display: grid;
+    grid-auto-rows: auto;
+    grid-template-columns: 100%;
+    width: 100%;
+    height: auto;
+    padding: 1em 1em;
+}
