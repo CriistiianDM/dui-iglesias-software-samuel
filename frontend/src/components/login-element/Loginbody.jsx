@@ -191,7 +191,6 @@ async function fetch_data_login(user_valid_data, setUserValid, navigate) {
     const response = await fetch(`https://demon789-4.herokuapp.com/zlgz/${user_valid_data.user_login}/${user_valid_data.password_login}`, {
       method: 'GET',
       headers: {
-        'Content-Type': 'application/json',
         'Authorization': generateToken()
       }
     });
@@ -206,7 +205,6 @@ async function fetch_data_login(user_valid_data, setUserValid, navigate) {
       const response_fetch = await fetch(`https://demon789-4.herokuapp.com/zcvg/${user_valid_data.user_login}`, {
         method: 'GET',
         headers: {
-          'Content-Type': 'application/json',
           'Authorization': generateToken()
         }
       });
