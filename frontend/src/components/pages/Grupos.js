@@ -7,7 +7,8 @@ import {
   Dialog, DialogActions, DialogTitle, DialogContent, DialogContentText
 } from '@material-ui/core';
 
-
+//token de autenticacion
+const { generateToken } = require('../_____/_____')
 
 const theme = createTheme({
   typography: {
@@ -152,17 +153,8 @@ export function Grupos(props) {
     disabled_all: false,
     dialog_open: false,
     dialog_error: false,
-    message_band_0: 'solo Numeros de 9 a 15 caracteres',
-    message_band_1: 'solo Letras de 3 a 50 caracteres',
-    message_band_2: 'solo Letras de 3 a 50 caracteres',
-    message_band_3: 'solo Letras de 3 a 50 caracteres',
-    message_band_4: 'solo Letras de 3 a 50 caracteres',
-    message_band_5: 'seleciona una opcion',
-    message_band_7: 'verificar si email esta bien escrito',
-    message_band_8: 'solo numeros de 9 a 15 caracteres',
-    message_band_9: 'solo numeros de 9 a 15 caracteres',
-    message_band_11: 'verificar si la direccion esta bien escrita',
-    message_band_18: 'formato json incorrecto'
+    message_error_name_0: 'El nombre ya esta en uso o se colocaron numeros',
+    message_error_description_1: 'En el campo no se admiten caracteres especiales'
   });
 
   const [img_data, set_img_data] = React.useState();
@@ -192,6 +184,7 @@ export function Grupos(props) {
     setdata_array({ ...data_array, dialog_open: false });
     navigate('/account');
   }
+
 
   let handle_dialog_error = () => {
     setdata_array({ ...data_array, dialog_error: false });
@@ -233,11 +226,11 @@ export function Grupos(props) {
 
         <div className={classes.root}>
 
-          <TextField disabled={data_array.disabled_name} error={data_array.error_band_0} onBlur={handleChange} id="outlined-required-9-0" label="Nombre" variant="outlined" />
+          <TextField disabled={data_array.disabled_name} error={data_array.error_band_0} helperText={(data_array.error_band_0) ? data_array.message_error_name_0 : ''} onBlur={handleChange} id="outlined-required-9-0" label="Nombre" variant="outlined" />
         </div>
 
         <div className={classes.root}>
-          <TextField disabled={data_array.disabled_all} error={data_array.error_band_1} onChange={handleChange} id="outlined-multiline-9-1" required={true} fullWidth={true} maxRows={3} multiline={true} label="Descripción" variant="outlined" />
+          <TextField disabled={data_array.disabled_all} error={data_array.error_band_1} helperText={(data_array.error_band_1) ? data_array.message_error_description_1 : ''} onChange={handleChange} id="outlined-multiline-9-1" required={true} fullWidth={true} maxRows={3} multiline={true} label="Descripción" variant="outlined" />
         </div>
 
         <div className={classes.root}>
@@ -416,7 +409,14 @@ async function getJovenes(jovenL, setJovenL) {
 
   try {
 
-    let response = await fetch('https://demon789-4.herokuapp.com/zjlp');
+    let response = await fetch('https://demon789-4.herokuapp.com/zjlp', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': generateToken()
+      }
+    });
+
     let data1 = await response.json();
     //guardar en setJovenL el json de la consulta, recordando la información anterior
     setJovenL({
@@ -430,7 +430,6 @@ async function getJovenes(jovenL, setJovenL) {
   } catch (error) {
     console.log(error);
   }
-
 }
 
 
@@ -453,6 +452,11 @@ async function postGrupo(data_array, img_data, setdata_array) {
     let response = await fetch(`https://demon789-4.herokuapp.com/zfiles`, {
       method: 'POST',
       body: img_data,
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': generateToken()
+      },
       mode: 'cors',
     });
     
@@ -463,7 +467,8 @@ async function postGrupo(data_array, img_data, setdata_array) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        'Accept': 'application/json',
+        'Authorization': generateToken()
       },
       mode: 'cors',
       body: JSON.stringify(data_array)
@@ -589,7 +594,14 @@ async function get_name_group(data_array, setdata_array,e,error) {
     });
 
     //fetcher para la consulta de grupos
-    let response = await fetch(`https://demon789-4.herokuapp.com/znmgr/${e.target.value}`);
+    let response = await fetch(`https://demon789-4.herokuapp.com/znmgr/${e.target.value}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': generateToken()
+      }
+    });
+
     let data = await response.json();
     
     if (data[0] === undefined) {

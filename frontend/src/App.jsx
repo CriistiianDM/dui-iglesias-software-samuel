@@ -11,7 +11,6 @@ import {
 import { Home } from './components/pages/Home';
 import { Cargo } from './components/pages/Cargo.js'; 
 import { Account } from './components/pages/Account';
-import { Login } from './components/pages/Login';
 import { UserInfo } from './components/pages/UserInfo';
 import { PersonNormal } from './components/pages/PersonNormal';
 import { A404 } from './components/pages/A404';
@@ -22,6 +21,7 @@ import { Grupos } from './components/pages/Grupos.js';
 
 //librery or import of styles of css
 import home_style from './css/home_style.css';
+import re_factorizacion from './css/re_factorizacion_interfaces.css';
 
 import json from './json/state_components.json';
 
@@ -37,7 +37,6 @@ const { generateToken } = require('./components/_____/_____')
 */
 export function App() {
 
-  console.log('tokennnn',generateToken(), 'token', typeof(generateToken()));
   React.useEffect(() => {
     getCountries(); 
   }, []);
@@ -50,7 +49,6 @@ export function App() {
         <Route path="/" element={<Home properties={json} />} />
         <Route path= "/cargo" element={<Cargo properties={json}/>} />
         <Route path="/account" element={<Account properties={json} />} />
-        <Route path="/login" element = {<Login properties={json} />} />
         <Route path="/userinfo" element = {<UserInfo properties={json} />} />
         <Route path="/creyente" element = {<PersonNormal properties={json} />} />
         <Route path="/createuser" element = {<CreateUser properties={json} />} />
@@ -80,6 +78,7 @@ async function getCountries() {
         'Authorization': generateToken()
       }
     });
+
     const data = await response.json();
     localStorage.setItem('countries', JSON.stringify(data));
     //return data;
