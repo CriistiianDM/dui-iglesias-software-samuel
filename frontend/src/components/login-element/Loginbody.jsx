@@ -16,8 +16,7 @@ const { generateToken } = require('../_____/_____');
 */
 export function Loginbody(props) {
 
-  localStorage.setItem('user_name', `admin`);
-  //console.log(localStorage.getItem('user_name'));
+  localStorage.setItem('user_name', `Cargando...`);
 
   //estados boleanos para validar los campos
   const [user_valid_data, setUserValid] = React.useState({
@@ -54,8 +53,8 @@ export function Loginbody(props) {
         Inicio de Sesion
       </Typography>
       <form noValidate autoComplete="off" className={state_textboxs['cls-4']}>
-        <TextField id='user_loginbody' error={user_valid_data.error_user} helperText={(user_valid_data.error_message_band_user) ? user_valid_data.error_message_user : ''} onChange={handleChange} type='number' className={state_textboxs['cls-5']} label="Usuario" variant="outlined" />
-        <TextField id='passwd_loginbody' error={user_valid_data.error_password} helperText={(user_valid_data.error_message_band_password) ? user_valid_data.error_message_password : ''} onChange={handleChange} className={state_textboxs['cls-5']} type='password' label="contraseña" variant="outlined" />
+        <TextField  error={user_valid_data.error_user} helperText={(user_valid_data.error_message_band_user) ? user_valid_data.error_message_user : ''} onChange={handleChange} type='number' className={state_textboxs['cls-5']} label="Usuario" variant="outlined" />
+        <TextField error={user_valid_data.error_password} helperText={(user_valid_data.error_message_band_password) ? user_valid_data.error_message_password : ''} onChange={handleChange} className={state_textboxs['cls-5']} type='password' label="contraseña" variant="outlined" />
       </form>
       <Button onClick={handleSubmit} className={state_textboxs['cls-7']} type="submit" color="primary" variant="contained">
         {(user_valid_data.loading) ?

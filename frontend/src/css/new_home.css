@@ -11,9 +11,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    backdrop-filter: blur(20px);
-    opacity: 0.8;
-    background-image: url('../images/imagesHome/low-angle-greyscale-shot-of-an-airplane-flying-above-high-rise-buildings.jpg');
+    background-image: url('../images/imagesHome/WhatsApp\ Image\ 2022-08-11\ at\ 9.59.41\ AM.jpeg');
     width: 100%;
     overflow: hidden;
 }
@@ -102,4 +100,82 @@
     width: 100%;
     height: auto;
     padding: 1em 1em;
+}
+
+
+/* 
+    Media Queries :3
+*/
+@media screen and (max-width: 1290px) {
+
+    .box-content-title-new-home-app-text-2 {
+        margin-left: 0em;
+        margin-bottom: 2em;
+    }
+    .box-new-login-home-content {
+        justify-self: center;
+        width: 29%;
+    }
+    .box-content-login-home {
+        width: 90%;
+    }
+}
+
+/* 
+    Media Queries Tablets :3
+*/
+@media screen and (max-width: 930px) {
+
+    .box-content-title-new-home-app-text-2 {
+        margin-left: 2.3em;
+        margin-bottom: 2em;
+    }
+    .box-new-login-home-content {
+        width: 40%;
+    }
+  
+}
+
+
+/* 
+    Media Queries Mobile Grande :3
+*/
+@media screen and (max-width: 540px) {
+
+    .box-content-title-new-home-app-text {
+        height: 12em;
+        padding: 0.4em 0.4em;
+        margin-left: 0em;
+    }
+    .box-content-title-new-home-app-text-2 {
+        margin-left: 0em;
+    }
+    .box-new-login-home-content {
+        width: 85%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .box-content-login-home {
+        width: 90%;
+    }
+  
+}
+
+
+/* 
+    Media Queries Mobile Grande :3
+*/
+@media screen and (max-width: 300px) {
+
+    .box-content-title-new-home-app-text-2 {
+        margin-left: 1em;
+    }
+    .box-new-login-home-content {
+        width: 89%;
+    }
+    .box-content-login-home {
+        width: 88%;
+    }
+    
+
 }

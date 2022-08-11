@@ -11,7 +11,6 @@ import {
 import { Home } from './components/pages/Home';
 import { Cargo } from './components/pages/Cargo.js'; 
 import { Account } from './components/pages/Account';
-import { Login } from './components/pages/Login';
 import { UserInfo } from './components/pages/UserInfo';
 import { PersonNormal } from './components/pages/PersonNormal';
 import { A404 } from './components/pages/A404';
@@ -50,7 +49,6 @@ export function App() {
         <Route path="/" element={<Home properties={json} />} />
         <Route path= "/cargo" element={<Cargo properties={json}/>} />
         <Route path="/account" element={<Account properties={json} />} />
-        <Route path="/login" element = {<Login properties={json} />} />
         <Route path="/userinfo" element = {<UserInfo properties={json} />} />
         <Route path="/creyente" element = {<PersonNormal properties={json} />} />
         <Route path="/createuser" element = {<CreateUser properties={json} />} />
