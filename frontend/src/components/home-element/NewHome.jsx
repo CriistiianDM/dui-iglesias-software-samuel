@@ -1,6 +1,8 @@
 //importar librerias
 import React from 'react';
 import { NewLogin } from './NewLogin';
+import { TitleApp } from './TitleApp'; 
+import { VisionMision } from './VisionMision';
 
 
 /**
@@ -14,10 +16,16 @@ export function NewHome(props) {
     return (
 
           <div  className={properties['cls-1']}>
-            <div></div>
+
+            <div className={properties['cls-5']}>
+                <TitleApp properties={props} />
+                <VisionMision properties={props} />
+            </div>
+
             <div className={properties['cls-2']}>
                 <NewLogin properties={props} />
             </div>
+
           </div>
     );
 
