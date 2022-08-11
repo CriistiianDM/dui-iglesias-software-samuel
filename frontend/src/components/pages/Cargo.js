@@ -137,7 +137,6 @@ export function Cargo(props) {
 
   return (
     <>
-      <Headerlogin properties={state_headerlogin} />
       <div className={state_cargo['cls-1']}>
       <Typography className={classes.styleTextChoose}>Elige el cargo por el cual deseas ingresar:</Typography>
         <FormControl className={classes.formControl}>
@@ -160,7 +159,6 @@ export function Cargo(props) {
           <FormHelperText className={classes.labelFormTextHelp} id="my-helper-text">Seleciona el cargo</FormHelperText>
         </FormControl>
       </div>
-      <FooterAccount properties={state_footer_accounts} />
     </>
   );
 }

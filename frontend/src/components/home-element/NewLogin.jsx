@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 //token de autenticacion
 const { generateToken } = require('../_____/_____');
 
+
 //estilos de los componentes
 const useStyles = makeStyles((theme) => ({
 
@@ -58,11 +59,11 @@ const useStyles = makeStyles((theme) => ({
         fontFamily: Montserrat_ExtraBold,
         //cambiar el color del borde cuando se selecciona el input
         '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-            borderColor: 'hsl(198deg 32% 16%) !important'
+            borderColor: 'hsl(198deg 32% 16%)'
         },
         //cambiar el color de la letra del label
         '& .MuiFormLabel-root.Mui-focused': {
-            color: 'hsl(198deg 32% 16%) !important'
+            color: 'hsl(198deg 32% 16%) '
         }
 
     },
