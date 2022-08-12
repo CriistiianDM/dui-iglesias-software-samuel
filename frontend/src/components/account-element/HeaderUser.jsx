@@ -5,6 +5,8 @@ import headerUserAccounts from '../../css/header-user-account.css';
 import { useState } from 'react';
 import { Navigate, useNavigate } from "react-router-dom";
 import { Avatar, Button, Menu , MenuItem, ListItemIcon, Divider } from '@material-ui/core';
+import { Headerlogin } from '../login-element/Headerlogin';
+import { FooterAccount } from '../account-element/FooterAccount';
 //token de autenticacion
 const { generateToken } = require('../_____/_____');
 
@@ -16,8 +18,7 @@ const { generateToken } = require('../_____/_____');
 export function HeaderUser(props) {
 
   let state_header_user = (props.properties).state_header_user;
-  let navigate = useNavigate();
-  
+  let navigate = useNavigate(); 
 
   let [user, setUser] = React.useState({
     first_letter: (props.properties).nombre_persona,
@@ -36,6 +37,7 @@ export function HeaderUser(props) {
   let handle_user_IconMenu = (event) => {
     setUserButton(true);
  }
+
  async function handleClickProfile(e) {
   //let id = e.target.className;
   //console.log(id);
