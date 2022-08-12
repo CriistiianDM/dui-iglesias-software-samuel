@@ -8,7 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import FormHelperText from '@material-ui/core/FormHelperText';
 import { useNavigate } from 'react-router-dom';
 import Montserrat_ExtraBold from '../../static/Montserrat-ExtraBold.ttf';
-import imageBackground from '../../images/imagesHome/WhatsApp\ Image\ 2022-08-11\ at\ 9.59.41\ AM.jpeg'
+
 
 
 const theme = createTheme({
@@ -95,6 +95,7 @@ export function Cargo(props) {
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
 
+
   //capturar el valor del cargo del localStorage
   const cargo = localStorage.getItem('cargo').split(',');
 
@@ -112,7 +113,7 @@ export function Cargo(props) {
     const name = event.target.value;
 
     if (name === 'Administrador') {
-      navigate('/account');
+      //navigate('/account');
     }
     else if (name === 'creyente') {
       navigate('/creyente');
