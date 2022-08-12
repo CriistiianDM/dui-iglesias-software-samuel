@@ -288,7 +288,8 @@
             "cls-6": "box-personal-group-info-title",
             "cls-7": "box-personal-group-info-content",
             "cls-8": "box-text-group-botton",
-            "cls-9": "box-no-found-group"
+            "cls-9": "box-no-found-group",
+            "cls-10": "box-groups-found"
         }
     },
     "createuser": {

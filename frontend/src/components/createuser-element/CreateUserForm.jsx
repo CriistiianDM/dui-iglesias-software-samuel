@@ -878,10 +878,11 @@ function get_id_inputs_form() {
   *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
   *  @decs  : verificar cuando se usa ctrl c
 */
+/*
 document.oncopy = function (e) {
     e.preventDefault();
     e.clipboardData.setData("text/plain", "No copiar");
-}
+}*/
 
 
 /**
