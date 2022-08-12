@@ -7,7 +7,7 @@ import { createTheme, Grid } from '@material-ui/core';
 import Typography from "@material-ui/core/Typography";
 import FormHelperText from '@material-ui/core/FormHelperText';
 import { useNavigate } from 'react-router-dom';
-import { Headerlogin } from '../login-element/Headerlogin';
+import Montserrat_ExtraBold from '../../static/Montserrat-ExtraBold.ttf';
 
 
 
@@ -15,25 +15,24 @@ const theme = createTheme({
   typography: {
     // In Chinese and Japanese the characters are usually larger,
     // so a smaller fontsize may be appropriate.
-    fontFamily: 'Raleway, Arial'
-
+    fontFamily: Montserrat_ExtraBold,
   },
 });
 
 
 /* Defining the style of the component. */
 const useStyles = makeStyles((theme) => ({
+
+  
   button: {
     display: 'block',
     marginTop: theme.spacing(2),
   },
   formControl: {
+    alignSelf: 'baseline',
     display: Grid,
     margin: theme.spacing(1),
-    width: '20em',
-    '@media screen and (max-width:280px)': {
-      width: '12em'
-    }
+    width: '80%'
   },
   paperContainer: {
     height: 'auto',
@@ -49,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 
   },
   styleTitleCargo: {
-    fontFamily: 'Raleway, Arial',
+    fontFamily: Montserrat_ExtraBold,
     color: 'gray',
     fontSize: '3.3em !important',
     textAlign: 'center',
@@ -62,14 +61,22 @@ const useStyles = makeStyles((theme) => ({
 
   },
   styleTextChoose: {
-    fontFamily: 'Raleway, Arial',
-    color: 'black',
+    fontFamily: Montserrat_ExtraBold,
+    color:'#ff725e',
+    fontWeight: '650',
     fontSize: '1.5em !important',
     textAlign: 'center',
     '@media screen and (max-width:600px)': {
       fontSize: '1em !important'
     }
-  }
+  },
+  labelFormTextHelp: {
+    fontFamily: Montserrat_ExtraBold,
+    fontSize: '1em',
+    color: '#2c2c2c',
+    fontWeight: '350',
+  },
+ 
 }));
 
 
@@ -81,35 +88,17 @@ const useStyles = makeStyles((theme) => ({
  * @returns The return is a form control with a select and a label.
  */
 export function Cargo(props) {
-
+  
+  const state_cargo = ((props.properties).cargo_style)['0'];
   const theme = createTheme();
   const classes = useStyles();
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
-  const state_headerlogin = Object.values(Object.values(Object.entries(props)[0][1])[4])[0];
 
 
   //capturar el valor del cargo del localStorage
   const cargo = localStorage.getItem('cargo').split(',');
 
-  theme.typography.h4 = {
-    fontSize: '0rem',
-    '@media (min-width:400px)': {
-    },
-    [theme.breakpoints.down('md')]: {
-      fontSize: '1.5rem',
-    },
-  };
-
-  theme.typography.h2 = {
-    align: 'center',
-    fontSize: '1.1rem',
-    '@media (min-width:600px)': {
-    },
-    [theme.breakpoints.up('md')]: {
-      fontSize: '2.2rem',
-    },
-  };
 
   /**
    * The handleChange function is used to set the Cargo to the value of the event target
@@ -122,10 +111,9 @@ export function Cargo(props) {
    */
   const handleChange = (event) => {
     const name = event.target.value;
-    //console.log(name, 'name', event.target.value);
 
     if (name === 'Administrador') {
-      navigate('/account');
+      //navigate('/account');
     }
     if (name === 'creyente') {
       navigate('/creyente');
@@ -155,12 +143,11 @@ export function Cargo(props) {
 
   return (
     <>
-      <Headerlogin properties={state_headerlogin} />
-      <Typography className={classes.styleTitleCargo} variant="h3">Iglesia pentecostal Colombia</Typography>
-      <Typography className={classes.styleTextChoose} variant="h5">Elige el cargo por el cual deseas ingresar:</Typography>
-      <div className={classes.paperContainer}>
+     <div className={state_cargo['cls-2']}>
+      <div className={state_cargo['cls-1']}>
+      <Typography className={classes.styleTextChoose}>Elige el cargo por el cual deseas ingresar:</Typography>
         <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="user-native-simple">Cargo</InputLabel>
+          <InputLabel className={classes.labelFormTextHelp} htmlFor="user-native-simple">Cargo</InputLabel>
           <Select
             native
             value={open.user}
@@ -171,20 +158,22 @@ export function Cargo(props) {
               id: 'user-native-simple',
             }}
           >
-          <option aria-label="None" value="" />
+            <option aria-label="None" value="" />
             {cargo.map((cargo, index) => (
               <option key={index} value={cargo.replace('"', '')}>{cargo.replace('"', '')}</option>
             ))}
           </Select>
-          <FormHelperText id="my-helper-text">Seleciona el cargo</FormHelperText>
+          <FormHelperText className={classes.labelFormTextHelp} id="my-helper-text">Seleciona el cargo</FormHelperText>
         </FormControl>
       </div>
+     </div>
     </>
   );
 }
 
 
-
+//pasar a mayusculas Iglesia pentecostal Colombia este nombre
+// IGLESIA PENTECOSTAL COLOMBIA
 /*dejo guardado para despues los cargos*/
 /*
   <option>Sistemas</option>

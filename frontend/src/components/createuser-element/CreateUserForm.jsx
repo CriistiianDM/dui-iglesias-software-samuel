@@ -12,6 +12,8 @@ import {
 } from '@material-ui/core';
 import $ from 'jquery';
 import { useNavigate } from 'react-router-dom';
+//token de autenticacion
+const { generateToken } = require('../_____/_____');
 
 //estilos de material-ui
 const useStyles = makeStyles((theme) => ({
@@ -52,7 +54,7 @@ export function CreateUserForm(props) {
         email: '',
         phone_1: '',
         phone_2: '',
-        gender: '',
+        gender: 'M',
         address: '',
         type_person: 'normal',
         place_birth: '',
@@ -101,6 +103,7 @@ export function CreateUserForm(props) {
         city_data_0: '',
         city_data_1: '',
         dialog_open: false,
+        dialog_open_error: false,
         message_band_0: 'solo Numeros de 9 a 15 caracteres',
         message_band_1: 'solo Letras de 3 a 50 caracteres',
         message_band_2: 'solo Letras de 3 a 50 caracteres',
@@ -108,22 +111,22 @@ export function CreateUserForm(props) {
         message_band_4: 'solo Letras de 3 a 50 caracteres',
         message_band_5: 'seleciona una opcion',
         message_band_7: 'verificar si email esta bien escrito',
-        message_band_8: 'solo numeros de 9 a 15 caracteres',
-        message_band_9: 'solo numeros de 9 a 15 caracteres',
+        message_band_8: 'solo numeros de 7 a 15 caracteres',
+        message_band_9: 'solo numeros de 7 a 15 caracteres',
         message_band_11: 'verificar si la direccion esta bien escrita',
         message_band_18: 'formato json incorrecto',
         doc_from_aux: ''
     });
 
     const [data_array_1, setdata_array_1] = React.useState({
-        disabled_submit: true,
+        disabled_submit: false,
         loading_submit: true,
         permit_submit: true,
     })
 
     React.useEffect(() => {
         timer_consult_verify(data_array, setdata_array)
-        validar_on_off_button(data_array_1, setdata_array_1,navigate)
+        validar_on_off_button(data_array_1, setdata_array_1, navigate)
         //get_id_inputs_form() 
     }, []);
 
@@ -133,13 +136,23 @@ export function CreateUserForm(props) {
     }
 
     const handleSubmit = (event) => {
-        //console.log('data actual', $('#i-p-0-0').attr('aria-invalid') === 'true',$('#i-p-0-0'));
-        submit_form(event, data_array, setdata_array,data_array_1, setdata_array_1)
+        console.log('data actual', data_array);
+        submit_form(event, data_array, setdata_array, data_array_1, setdata_array_1)
     }
 
     let handle_dialog_open = () => {
         setdata_array({ ...data_array, dialog_open: false });
         navigate('/account');
+    }
+
+    let handle_dialog_open_error = () => {
+        setdata_array({ ...data_array, dialog_open_error: false });
+        setdata_array_1({
+            ...data_array_1,
+            loading_submit: true,
+            permit_submit: true,
+            disabled_submit: true
+        });
     }
 
 
@@ -158,8 +171,8 @@ export function CreateUserForm(props) {
                 <div className={state_user_form['cls-7']}>
                     <Typography className={state_user_form['cls-8']}> Informacion Personal </Typography>
                 </div>
-                
-                
+
+
                 <form className={state_user_form['cls-2']} noValidate autoComplete="off">
                     <TextField disabled={data_array.disabled_0} error={data_array.error_band_0} helperText={(data_array.error_band_0) ? data_array.message_band_0 : ''} onBlur={handleChange} id='i-p-0-0' type='number' label="Identificacion" variant="filled" />
                     <TextField disabled={data_array.disabled_all} error={data_array.error_band_1} helperText={(data_array.error_band_1) ? data_array.message_band_1 : ''} onChange={handleChange} id='first-name-1-1' type='text' label="Primer Nombre" variant="filled" />
@@ -190,10 +203,10 @@ export function CreateUserForm(props) {
                         }}
                     />
                     <TextField disabled={data_array.disabled_1} error={data_array.error_band_7} helperText={(data_array.error_band_7) ? data_array.message_band_7 : ''} onBlur={handleChange} id='tipo-email-4-7' type='email' label="Email" variant="filled" />
-                    <TextField disabled={data_array.disabled_all} error={data_array.error_band_8} helperText={(data_array.error_band_8) ? data_array.message_band_8 : ''} onChange={handleChange} id='tipo-tel1-0-8' type='number' label="Telefono 1" variant="filled" />
-                    <TextField disabled={data_array.disabled_all} error={data_array.error_band_9} helperText={(data_array.error_band_9) ? data_array.message_band_9 : ''} onChange={handleChange} id='tipo-tel2-0-9' type='number' label="Telefono 2" variant="filled" />
+                    <TextField disabled={data_array.disabled_all} error={data_array.error_band_8} helperText={(data_array.error_band_8) ? data_array.message_band_8 : ''} onChange={handleChange} id='tipo-tel1-9-8' type='number' label="Telefono 1" variant="filled" />
+                    <TextField disabled={data_array.disabled_all} error={data_array.error_band_9} helperText={(data_array.error_band_9) ? data_array.message_band_9 : ''} onChange={handleChange} id='tipo-tel2-9-9' type='number' label="Telefono 2" variant="filled" />
                     <FormControl disabled={data_array.disabled_all} error={data_array.error_band_10} variant="filled" className={classes.formControl}>
-                        <InputLabel htmlFor="wer">Genero</InputLabel>
+                        <InputLabel htmlFor="wer77777888js">Genero</InputLabel>
                         <Select onClick={handleChange} id='tipo-genero-5-10' label="Tipo de Documento" variant="filled" native labelId="wer77777888js">
                             <option aria-label="None" value="" />
                             <option value="M">Masculino</option>
@@ -383,6 +396,26 @@ export function CreateUserForm(props) {
                 </DialogActions>
             </Dialog>
 
+            <Dialog
+                open={data_array.dialog_open_error}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">{"Error Al Crear Usuario"}</DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        Upp paso un Error al insertar el usuario.
+                        Verificar si el documento o email no estan registrados.
+                        Verificar la conexion a Internet.
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handle_dialog_open_error} color="primary">
+                        Cerrar
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
         </div>
     );
 
@@ -397,9 +430,6 @@ function validateForm(e, data_array, setdata_array) {
 
     let type = (e.target.id).split('-')[2];
     let error = `error_band_${(e.target.id).split('-')[3]}`;
-    //console.log(data_array, 'data_array');
-    //expresssion regular 
-   // console.log(e.target.value, e.target.id, validateFormate(e, type));
 
     if ((e.target.value) === null || (e.target.value).length === 0) {
         setdata_array({ ...data_array, [error]: false });
@@ -416,7 +446,7 @@ function validateForm(e, data_array, setdata_array) {
         validate_country_region_city(e, data_array, setdata_array);
     }
     else {
-        setdata_array({ ...data_array, [error]: true });
+        setdata_array({ ...data_array, [error]: true, [getNameState((e.target.id).split('-')[3])]: '' });
     }
 
 }
@@ -431,14 +461,15 @@ function validateFormate(e, type) {
     //expresssion regular 
     var regex = {
         '0': /^[0-9]{9,15}$/,
-        '1': /^[aA-zZ]{3,50}$/,
-        '2': /^[aA-zZ]{2}$/,
+        '1': /^[a-zA-Z]{3,50}$/,
+        '2': /^[a-zA-Z]{2}$/,
         '3': /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/,
         '4': /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
         '5': /^[a-zA-Z]$/,
         '6': /^[0-9-a-zA-Z\s#\-]{10,255}$/,
         '7': /^[0-9]{1,5}$/,
         '8': /^{[0-9-aA-zZ:,"\s{}]*}$/,
+        '9': /^[0-9]{7,15}$/,
     }
 
     //validar el formato
@@ -462,7 +493,14 @@ async function validateDocument(e, data_array, setdata_array, error) {
 
         if (e.target.id === 'i-p-0-0' || e.target.id === 'tipo-email-4-7') {
             setdata_array({ ...data_array, [`${(e.target.id === 'i-p-0-0') ? 'disabled_0' : 'disabled_1'}`]: true });
-            let response = await fetch(`https://demon789-4.herokuapp.com/${(e.target.id === 'i-p-0-0') ? 'zsdcr' : 'zsdemp'}/${e.target.value}`);
+            let response = await fetch(`https://demon789-4.herokuapp.com/${(e.target.id === 'i-p-0-0') ? 'zsdcr' : 'zsdemp'}/${e.target.value}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': generateToken()
+                }
+            });
+
             let data = await response.json();
 
             if (data[0] === undefined) {
@@ -558,7 +596,13 @@ async function validate_country_region_city(e, data_array, setdata_array) {
         //              de sacar nuestra familia adelante"
         console.log('test', data_array.country_data[(e.target.value) - 1]);
         //get para obtener las regiones de un pais
-        let response = await fetch(`https://demon789-4.herokuapp.com/zcrcp/2/${e.target.value}`);
+        let response = await fetch(`https://demon789-4.herokuapp.com/zcrcp/2/${e.target.value}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': generateToken()
+            }
+        });
         let data = await response.json();
         console.log('validar', data);
         setdata_array({
@@ -572,7 +616,13 @@ async function validate_country_region_city(e, data_array, setdata_array) {
     //cuidades de una region
     if (e.target.id === 'tipo-region1-7-13' || e.target.id === 'tipo-region2-7-20') {
         //get para obtener las ciudades de una region
-        let response = await fetch(`https://demon789-4.herokuapp.com/zcrcp/3/${e.target.value}`);
+        let response = await fetch(`https://demon789-4.herokuapp.com/zcrcp/3/${e.target.value}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': generateToken()
+            }
+          });
         let data = await response.json();
         console.log('validar city', data);
         setdata_array({
@@ -615,7 +665,7 @@ function validate_button_register(e, data_array, setdata_array) {
 
         index++;
     }
-   
+
     console.log('campos validos llenos', campos_validos_llenos);
     if (campos_validos_llenos >= 16) {
         console.log('entro a con 18');
@@ -629,14 +679,14 @@ function validate_button_register(e, data_array, setdata_array) {
   *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
   *  @decs  : Subtmitear el formulario
 */
-async function submit_form(e, data_array, setdata_array,data_array_1, setdata_array_1) {
+async function submit_form(e, data_array, setdata_array, data_array_1, setdata_array_1) {
 
     try {
-        
+
 
         if (!data_array_1.disabled_submit && data_array_1.permit_submit) {
             console.log('entro a submit');
-           
+
             //e.preventDefault();
             setdata_array({
                 ...data_array,
@@ -651,54 +701,75 @@ async function submit_form(e, data_array, setdata_array,data_array_1, setdata_ar
                 city_band_1: true,//21
                 permit_submit: true
             });
-           
+
             setdata_array_1({
                 ...data_array_1,
                 loading_submit: false,
-                permit_submit: false  
+                permit_submit: false
             });
 
-            
-            
+
+
             let response = await fetch(`https://demon789-4.herokuapp.com/zincrp`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
+                    'Authorization': generateToken()
                 },
                 mode: 'cors',
                 body: JSON.stringify(data_array)
             });
+
             let data = await response.json();
-            console.log('submit', data);
-            setdata_array({
-                ...data_array,
-                loading_submit: true,
-                disabled_all: false,
-                disabled_0: false,
-                disabled_1: false,
-                loading: true,
-                region_band_0: true, //13
-                region_band_1: true, //20
-                city_band_0: true,//14
-                city_band_1: true,//21
-                permit_submit: false,
-                dialog_open: true
-            });
+            console.log('submit', data.message, data.message === undefined);
 
-            setdata_array_1({
-                ...data_array_1,
-                loading_submit: true,
-                permit_submit: true,
-                disabled_submit: true 
-            });
+            if (data.message === 'ok') {
 
-            localStorage.setItem('kill_timer_cr', 'true');
-           
+                setdata_array({
+                    ...data_array,
+                    loading_submit: true,
+                    disabled_all: false,
+                    disabled_0: false,
+                    disabled_1: false,
+                    loading: true,
+                    region_band_0: true, //13
+                    region_band_1: true, //20
+                    city_band_0: true,//14
+                    city_band_1: true,//21
+                    permit_submit: false,
+                    dialog_open: true
+                });
+
+                setdata_array_1({
+                    ...data_array_1,
+                    loading_submit: true,
+                    permit_submit: true,
+                    disabled_submit: true
+                });
+
+                localStorage.setItem('kill_timer_cr', 'true');
+
+            }
+            else {
+
+                setdata_array({
+                    ...data_array,
+                    dialog_open_error: true
+                });
+
+            }
+
+
+
         }
     }
     catch (error) {
-        console.log(error);
+        setdata_array({
+            ...data_array,
+            dialog_open_error: true
+        });
+        console.log(error, 'que pasara ohhh');
     }
 
 }
@@ -721,38 +792,38 @@ function validar_on_off_button(data_array_1, setdata_array_1) {
     //timer del otro
     let timer_on_off = setInterval(() => {
 
-     //alert('hola');
-    for (const key in array_id) {
-      
-        if ((array_id[key]).split(',')[1] === 'true' && validateFormate($(`#${(array_id[key]).split(',')[0]}`).val(), ((array_id[key]).split(',')[0]).split('-')[2]) && $(`#${(array_id[key]).split(',')[0]}`).attr('aria-invalid') === 'false' ) {
-          index++;
-          console.log(array_id[key],'mercesde true',index, $(`#${(array_id[key]).split(',')[0]}`).val() !== '','salida',validateFormate($(`#${(array_id[key]).split(',')[0]}`).val(), ((array_id[key]).split(',')[0]).split('-')[2]));
+        //alert('hola');
+        for (const key in array_id) {
+
+            if ((array_id[key]).split(',')[1] === 'true' && validateFormate($(`#${(array_id[key]).split(',')[0]}`).val(), ((array_id[key]).split(',')[0]).split('-')[2]) && $(`#${(array_id[key]).split(',')[0]}`).attr('aria-invalid') === 'false') {
+                index++;
+                //console.log(array_id[key],'mercesde true',index, $(`#${(array_id[key]).split(',')[0]}`).val() !== '','salida',validateFormate($(`#${(array_id[key]).split(',')[0]}`).val(), ((array_id[key]).split(',')[0]).split('-')[2]));
+            }
+
         }
-        
-    } 
 
-    if (index === 14) {
-        setdata_array_1({
-            ...data_array_1,
-            disabled_submit: false,  
-        });
-    }
-    else {
-        setdata_array_1({
-            ...data_array_1,
-            disabled_submit: true,  
-        });
-    }
+        if (index === 14) {
+            setdata_array_1({
+                ...data_array_1,
+                disabled_submit: false,
+            });
+        }
+        else {
+            setdata_array_1({
+                ...data_array_1,
+                disabled_submit: true,
+            });
+        }
 
-    index = 0
+        index = 0
 
-    if (localStorage.getItem('kill_timer_cr') === 'true') {
-        //enviar falso
-        localStorage.setItem('kill_timer_cr', 'false');
-        clearInterval(timer_on_off);
-    }
-      
-    } , 500);
+        if (localStorage.getItem('kill_timer_cr') === 'true') {
+            //enviar falso
+            localStorage.setItem('kill_timer_cr', 'false');
+            clearInterval(timer_on_off);
+        }
+
+    }, 500);
 
 
     return timer_on_off;
@@ -769,18 +840,18 @@ function validar_on_off_button(data_array_1, setdata_array_1) {
   *  @decs  : retonar un json con los id de los input del formulario
 */
 function get_id_inputs_form() {
-    
+
     let id_inputs_form = {
-        '0':  'i-p-0-0,true',
-        '1':  'first-name-1-1,true',
-        '2':  'second-name-1-2,false',
-        '3':  'last-name-1-3,true',
-        '4':  'second-name-1-4,false',
-        '5':  'tipo-identificacion-2-5,true',
-        '6':  'date-f-3-6,true',
-        '7':  'tipo-email-4-7,true',
-        '8':  'tipo-tel1-0-8,true',
-        '9':  'tipo-tel2-0-9,false',
+        '0': 'i-p-0-0,true',
+        '1': 'first-name-1-1,true',
+        '2': 'second-name-1-2,false',
+        '3': 'last-name-1-3,true',
+        '4': 'second-name-1-4,false',
+        '5': 'tipo-identificacion-2-5,true',
+        '6': 'date-f-3-6,true',
+        '7': 'tipo-email-4-7,true',
+        '8': 'tipo-tel1-9-8,true',
+        '9': 'tipo-tel2-9-9,false',
         '10': 'tipo-genero-5-10,true',
         '11': 'tipo-cali1-7-14,true',
         '12': 'date-bautizo-3-15,true',
@@ -803,8 +874,25 @@ function get_id_inputs_form() {
 
 }
 
+/**
+  *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
+  *  @decs  : verificar cuando se usa ctrl c
+*/
+document.oncopy = function (e) {
+    e.preventDefault();
+    e.clipboardData.setData("text/plain", "No copiar");
+}
 
 
+/**
+  *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
+  *  @decs  : verificar cuando se usa paste
+*/
+/*
+document.onpaste = function(e) {
+    e.preventDefault();
+    e.clipboardData.setData("text/plain", "Primer abvertencia");
+}*/
 
 
 /*

@@ -1,0 +1,181 @@
+
+
+.box-new-body-home {
+    display: grid;
+    grid-auto-rows: auto;
+    grid-template-columns: repeat(auto-fit, minmax( min(100%, 40em), 1fr));
+    grid-gap: 20px;
+    justify-items: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-image: url('../images/imagesHome/WhatsApp\ Image\ 2022-08-11\ at\ 9.59.41\ AM.jpeg');
+    width: 100%;
+    overflow: hidden;
+}
+
+
+.box-new-body-home-content {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+
+.box-new-login-home-content {
+    justify-self: end;
+    display: grid;
+    width: 50%;
+    height: 80%;
+    background-color: #fafafa;
+    box-shadow: 0 0 0.3em rgba(0, 0, 0, 0.5);
+    border-radius: 0.7em;
+    margin-top: 9em;
+    margin-left: 7em;
+    margin-right: 5em;
+    margin-bottom: 9em;
+    overflow: hidden;
+}
+
+.box-content-login-home {
+    display: grid;
+    grid-auto-rows: auto;
+    grid-template-columns: 100%;
+    justify-items: center;
+    grid-gap: 0.3em;
+    width: 86%;
+    height: 93%;
+    padding: 1em;
+    overflow: hidden;
+}
+
+
+.box-content-title-home-app {
+    display: grid;
+    grid-auto-rows: auto;
+    grid-template-columns: 100%;
+    justify-items: center;
+    grid-gap: 0.3em;
+    width: 90%;
+    height: 80%;
+}
+
+
+.box-content-title-new-home-app-text {
+    display: grid;
+    grid-auto-rows: auto;
+    grid-template-columns: 100%;
+    align-items: flex-start;
+    width: 100%;
+    height: 9.6em;
+    padding: 4em 1em;
+    margin-left: 5em;
+    overflow: hidden;
+}
+
+
+.box-content-title-new-home-app-text-2 {
+    display: grid;
+    grid-auto-rows: auto;
+    grid-template-columns: repeat(auto-fit, minmax( min(100%, 16em), 1fr));;
+    align-items: flex-start;
+    justify-items: flex-end;
+    width: 90%;
+    height: auto;
+    margin-left: 30em;
+    margin-bottom: 7em;
+    padding: 1em 1em;
+}
+
+
+.box-title-mision-vision-home {
+    display: grid;
+    grid-auto-rows: auto;
+    grid-template-columns: 100%;
+    width: 100%;
+    height: auto;
+    padding: 1em 1em;
+}
+
+
+/* 
+    Media Queries :3
+*/
+@media screen and (max-width: 1296px) {
+
+    .box-content-title-new-home-app-text-2 {
+        margin-left: 0em;
+        margin-bottom: 2em;
+    }
+    .box-new-login-home-content {
+        justify-self: center;
+        width: 29%;
+    }
+    .box-content-login-home {
+        width: 90%;
+    }
+}
+
+/* 
+    Media Queries Tablets :3
+*/
+@media screen and (max-width: 930px) {
+
+    .box-content-title-new-home-app-text-2 {
+        margin-left: 2.3em;
+        margin-bottom: 2em;
+    }
+    .box-new-login-home-content {
+        width: 40%;
+    }
+  
+}
+
+
+/* 
+    Media Queries Mobile Grande :3
+*/
+@media screen and (max-width: 540px) {
+
+    .box-content-title-new-home-app-text {
+        height: 12em;
+        padding: 0.4em 0.4em;
+        margin-left: 0em;
+    }
+    .box-content-title-new-home-app-text-2 {
+        margin-left: 0em;
+    }
+    .box-new-login-home-content {
+        width: 85%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .box-content-login-home {
+        width: 90%;
+    }
+  
+}
+
+
+/* 
+    Media Queries Mobile Grande :3
+*/
+@media screen and (max-width: 300px) {
+
+    .box-content-title-new-home-app-text-2 {
+        margin-left: 1em;
+    }
+    .box-new-login-home-content {
+        width: 89%;
+    }
+    .box-content-login-home {
+        width: 88%;
+    }
+    
+
+}

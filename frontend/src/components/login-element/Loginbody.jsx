@@ -5,7 +5,8 @@ import TextField from '@material-ui/core/TextField';
 import { CircularProgress, Typography, Dialog, DialogActions, DialogTitle, DialogContent, DialogContentText } from "@material-ui/core";
 import { Button } from "@material-ui/core";
 import { useNavigate } from 'react-router-dom';
-
+//token de autenticacion
+const { generateToken } = require('../_____/_____');
 
 
 /**
@@ -15,9 +16,8 @@ import { useNavigate } from 'react-router-dom';
 */
 export function Loginbody(props) {
 
-  localStorage.setItem('user_name', `admin`);
-  //console.log(localStorage.getItem('user_name'));
-  
+  localStorage.setItem('user_name', `Cargando...`);
+
   //estados boleanos para validar los campos
   const [user_valid_data, setUserValid] = React.useState({
     user_login: '',
@@ -53,8 +53,8 @@ export function Loginbody(props) {
         Inicio de Sesion
       </Typography>
       <form noValidate autoComplete="off" className={state_textboxs['cls-4']}>
-        <TextField id='user_loginbody' error={user_valid_data.error_user} helperText={(user_valid_data.error_message_band_user) ? user_valid_data.error_message_user : ''} onChange={handleChange} type='number' className={state_textboxs['cls-5']} label="Usuario" variant="outlined" />
-        <TextField id='passwd_loginbody' error={user_valid_data.error_password} helperText={(user_valid_data.error_message_band_password) ? user_valid_data.error_message_password : ''} onChange={handleChange} className={state_textboxs['cls-5']} type='password' label="contraseña" variant="outlined" />
+        <TextField  error={user_valid_data.error_user} helperText={(user_valid_data.error_message_band_user) ? user_valid_data.error_message_user : ''} onChange={handleChange} type='number' className={state_textboxs['cls-5']} label="Usuario" variant="outlined" />
+        <TextField error={user_valid_data.error_password} helperText={(user_valid_data.error_message_band_password) ? user_valid_data.error_message_password : ''} onChange={handleChange} className={state_textboxs['cls-5']} type='password' label="contraseña" variant="outlined" />
       </form>
       <Button onClick={handleSubmit} className={state_textboxs['cls-7']} type="submit" color="primary" variant="contained">
         {(user_valid_data.loading) ?
@@ -185,16 +185,30 @@ function validate_data_all(user_valid_data, setUserValid, navigate) {
 async function fetch_data_login(user_valid_data, setUserValid, navigate) {
 
   try {
-    setUserValid({ ...user_valid_data, loading: true });
-    const response = await fetch(`https://demon789-4.herokuapp.com/zlgz/${user_valid_data.user_login}/${user_valid_data.password_login}`);
-    const data = await response.json();
 
+    setUserValid({ ...user_valid_data, loading: true });
+    const response = await fetch(`https://demon789-4.herokuapp.com/zlgz/${user_valid_data.user_login}/${user_valid_data.password_login}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': generateToken()
+      }
+    });
+    
+    const data = await response.json();
+    console.log(data,'teste',generateToken(),'teste');
 
     if (data[0] !== undefined) {
       console.log(data, 'el usuario existe');
 
       //fetch
-      const response_fetch = await fetch(`https://demon789-4.herokuapp.com/zcvg/${user_valid_data.user_login}`);
+      const response_fetch = await fetch(`https://demon789-4.herokuapp.com/zcvg/${user_valid_data.user_login}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': generateToken()
+        }
+      });
       const data_fetch = await response_fetch.json();
 
       // guardar el usuario en el localstorage

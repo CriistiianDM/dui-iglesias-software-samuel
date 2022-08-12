@@ -5,7 +5,10 @@ import headerUserAccounts from '../../css/header-user-account.css';
 import { useState } from 'react';
 import { Navigate, useNavigate } from "react-router-dom";
 import { Avatar, Button, Menu , MenuItem, ListItemIcon, Divider } from '@material-ui/core';
-
+import { Headerlogin } from '../login-element/Headerlogin';
+import { FooterAccount } from '../account-element/FooterAccount';
+//token de autenticacion
+const { generateToken } = require('../_____/_____');
 
 
 /**
@@ -15,8 +18,7 @@ import { Avatar, Button, Menu , MenuItem, ListItemIcon, Divider } from '@materia
 export function HeaderUser(props) {
 
   let state_header_user = (props.properties).state_header_user;
-  let navigate = useNavigate();
-  
+  let navigate = useNavigate(); 
 
   let [user, setUser] = React.useState({
     first_letter: (props.properties).nombre_persona,
@@ -35,6 +37,7 @@ export function HeaderUser(props) {
   let handle_user_IconMenu = (event) => {
     setUserButton(true);
  }
+
  async function handleClickProfile(e) {
   //let id = e.target.className;
   //console.log(id);
@@ -44,7 +47,14 @@ export function HeaderUser(props) {
   console.log(id_profileUser);
 
   //send id to user_info
-  let response = await fetch(`https://demon789-4.herokuapp.com/zadtus/${id_profileUser}`);
+  let response = await fetch(`https://demon789-4.herokuapp.com/zadtus/${id_profileUser}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': generateToken()
+    }
+  });
+
   let data = await response.json();
 
   console.log(data)

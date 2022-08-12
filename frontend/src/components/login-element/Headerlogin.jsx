@@ -1,8 +1,7 @@
 //libreary or imports
 import React from "react";
 import logoIglesia  from '../../images/imagesHome/logo_iglesia.png';
-import login_style from '../../css/login_style.css';
-import header_home from '../../css/header_home.css';
+
 
 /**
   *  @author : Juan Sebastian Camino <juan.camino@correounivalle.edu.co>

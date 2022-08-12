@@ -5,6 +5,8 @@ import { Icon, IconButton, TextField, CircularProgress } from '@material-ui/core
 import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEye';
 import $ from 'jquery';
 import { useNavigate } from 'react-router-dom';
+//token de autenticacion
+const { generateToken } = require('../_____/_____');
 
 
 /**
@@ -104,7 +106,14 @@ async function create_data_user(data, setData, data_array, setdata_array) {
 
     try {
         //fetch data from server
-        let response = await fetch('https://demon789-4.herokuapp.com/zaup');
+        let response = await fetch('https://demon789-4.herokuapp.com/zaup', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': generateToken()
+            }
+          });
+
         let data = await response.json();
 
         console.log(data);
@@ -147,7 +156,14 @@ async function handleClickEye(e,navigate) {
     console.log(id_eye);
 
     //send id to user_info
-    let response = await fetch(`https://demon789-4.herokuapp.com/zadtus/${(id_eye).split('-')[1]}`);
+    let response = await fetch(`https://demon789-4.herokuapp.com/zadtus/${(id_eye).split('-')[1]}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': generateToken()
+        }
+      });
+
     let data = await response.json();
 
     if (data[0] !== undefined) {

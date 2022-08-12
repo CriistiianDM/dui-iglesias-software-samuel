@@ -63,13 +63,13 @@ function getData(data_array, set_data_array) {
 
     if (data != null) {
         clearInterval(timer);
-        console.log( Object.entries(JSON.parse(data)).forEach((value) => {
-            console.log(value);
-        }));
+        //console.log( Object.entries(JSON.parse(data)).forEach((value) => {
+          //  console.log(value);
+        //}));
         set_data_array({...data_array, loading: true, data: JSON.parse(data)});
     } 
 
-    console.log('get data');
+    //console.log('get data');
     }, 1000);
 
     return timer;
