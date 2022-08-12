@@ -7,8 +7,7 @@ import { createTheme, Grid } from '@material-ui/core';
 import Typography from "@material-ui/core/Typography";
 import FormHelperText from '@material-ui/core/FormHelperText';
 import { useNavigate } from 'react-router-dom';
-import { Headerlogin } from '../login-element/Headerlogin';
-import { FooterAccount } from '../account-element/FooterAccount';
+
 
 
 const theme = createTheme({

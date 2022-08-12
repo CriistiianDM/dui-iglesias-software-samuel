@@ -3,6 +3,8 @@ import React from 'react';
 import { Typography, TextField, Button, IconButton } from "@material-ui/core/";
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Montserrat_ExtraBold from '../../static/Montserrat-ExtraBold.ttf';
+import login_style from '../../css/login_style.css';
+import header_home from '../../css/header_home.css';
 
 
 //estilos de los componentes
