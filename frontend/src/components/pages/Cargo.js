@@ -7,22 +7,22 @@ import { createTheme, Grid } from '@material-ui/core';
 import Typography from "@material-ui/core/Typography";
 import FormHelperText from '@material-ui/core/FormHelperText';
 import { useNavigate } from 'react-router-dom';
-import { Headerlogin } from '../login-element/Headerlogin';
-import { FooterAccount } from '../account-element/FooterAccount';
-
+import Montserrat_ExtraBold from '../../static/Montserrat-ExtraBold.ttf';
+import imageBackground from '../../images/imagesHome/WhatsApp\ Image\ 2022-08-11\ at\ 9.59.41\ AM.jpeg'
 
 const theme = createTheme({
   typography: {
     // In Chinese and Japanese the characters are usually larger,
     // so a smaller fontsize may be appropriate.
-    fontFamily: 'Raleway, Arial'
-
+    fontFamily: Montserrat_ExtraBold,
   },
 });
 
 
 /* Defining the style of the component. */
 const useStyles = makeStyles((theme) => ({
+
+  
   button: {
     display: 'block',
     marginTop: theme.spacing(2),
@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
 
   },
   styleTitleCargo: {
-    fontFamily: 'Raleway, Arial',
+    fontFamily: Montserrat_ExtraBold,
     color: 'gray',
     fontSize: '3.3em !important',
     textAlign: 'center',
@@ -60,9 +60,9 @@ const useStyles = makeStyles((theme) => ({
 
   },
   styleTextChoose: {
-    fontFamily: 'Raleway, Arial',
-    color: '#2c2c2c',
-    fontWeight: '350',
+    fontFamily: Montserrat_ExtraBold,
+    color:'#ff725e',
+    fontWeight: '650',
     fontSize: '1.5em !important',
     textAlign: 'center',
     '@media screen and (max-width:600px)': {
@@ -70,11 +70,12 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   labelFormTextHelp: {
-    fontFamily: 'Raleway, Arial',
+    fontFamily: Montserrat_ExtraBold,
     fontSize: '1em',
     color: '#2c2c2c',
     fontWeight: '350',
-  }
+  },
+ 
 }));
 
 
@@ -92,8 +93,6 @@ export function Cargo(props) {
   const classes = useStyles();
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
-  const state_headerlogin = Object.values(Object.values(Object.entries(props)[0][1])[4])[0];
-  const state_footer_accounts = Object.values(Object.values(Object.entries(props)[0][1])[5])[4];
 
   //capturar el valor del cargo del localStorage
   const cargo = localStorage.getItem('cargo').split(',');
@@ -137,7 +136,7 @@ export function Cargo(props) {
 
   return (
     <>
-      <Headerlogin properties={state_headerlogin} />
+     <div className={state_cargo['cls-2']}>
       <div className={state_cargo['cls-1']}>
       <Typography className={classes.styleTextChoose}>Elige el cargo por el cual deseas ingresar:</Typography>
         <FormControl className={classes.formControl}>
@@ -160,7 +159,7 @@ export function Cargo(props) {
           <FormHelperText className={classes.labelFormTextHelp} id="my-helper-text">Seleciona el cargo</FormHelperText>
         </FormControl>
       </div>
-      <FooterAccount properties={state_footer_accounts} />
+     </div>
     </>
   );
 }

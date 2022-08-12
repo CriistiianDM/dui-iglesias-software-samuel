@@ -13,6 +13,18 @@ const useStyles = makeStyles((theme) => ({
         fontFamily: Montserrat_ExtraBold,
         color: 'hsl(198deg 32% 16%)',
         textAlign: 'start',
+        //media query para que se adapte a dispositivos moviles
+        '@media (max-width:1290px)': {
+            fontSize: '7em',
+        },
+        //media query para que se adapte a dispositivos moviles
+        '@media (max-width:540px)': {
+            fontSize: '4em',
+        },
+        //media query para que se adapte a dispositivos moviles
+        '@media (max-width:360px)': {
+            fontSize: '3em',
+        }
     },
     textDescription: {
         alingSelf: 'start',

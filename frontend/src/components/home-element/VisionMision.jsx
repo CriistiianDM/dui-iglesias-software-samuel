@@ -13,12 +13,25 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '1.4em',
         fontWeight: '600',
         fontFamily: Montserrat_ExtraBold,
+        //media query para que se adapte a dispositivos moviles
+        '@media (max-width:1290px)': {
+            fontSize: '1.6em',
+            fontWeight: '800',
+        }
     },
     textDescriptionAux: {
         color: 'hsl(198deg 32% 16%)',
         fontSize: '1em',
         fontWeight: '500',
         fontFamily: Montserrat_ExtraBold,
+        //media query para que se adapte a dispositivos moviles
+        '@media (max-width:1290px)': {
+            fontSize: '1.3em',
+        },
+        //media query para que se adapte a dispositivos moviles
+        '@media (max-width:930px)': {
+            fontSize: '1.2em',
+        }
     }
 
 }));
