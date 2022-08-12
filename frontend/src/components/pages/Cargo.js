@@ -92,8 +92,7 @@ export function Cargo(props) {
   const classes = useStyles();
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
-  const state_headerlogin = Object.values(Object.values(Object.entries(props)[0][1])[4])[0];
-  const state_footer_accounts = Object.values(Object.values(Object.entries(props)[0][1])[5])[4];
+ 
 
   //capturar el valor del cargo del localStorage
   const cargo = localStorage.getItem('cargo').split(',');
@@ -112,7 +111,7 @@ export function Cargo(props) {
     const name = event.target.value;
 
     if (name === 'Administrador') {
-      navigate('/account');
+      //navigate('/account');
     }
     else if (name === 'creyente') {
       navigate('/creyente');

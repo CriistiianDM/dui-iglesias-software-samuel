@@ -16,8 +16,7 @@ const { generateToken } = require('../_____/_____');
 export function HeaderUser(props) {
 
   let state_header_user = (props.properties).state_header_user;
-  let navigate = useNavigate();
-  
+  let navigate = useNavigate(); 
 
   let [user, setUser] = React.useState({
     first_letter: (props.properties).nombre_persona,
@@ -36,6 +35,7 @@ export function HeaderUser(props) {
   let handle_user_IconMenu = (event) => {
     setUserButton(true);
  }
+
  async function handleClickProfile(e) {
   //let id = e.target.className;
   //console.log(id);
