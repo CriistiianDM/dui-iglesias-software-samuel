@@ -71,6 +71,7 @@
     grid-area: element_2;
     width: 8.3em !important;
     height: 8.3em !important;
+    background-color: hsl(198deg 32% 16%) !important;
 }
 
 .box-title-element-avatar-account {
