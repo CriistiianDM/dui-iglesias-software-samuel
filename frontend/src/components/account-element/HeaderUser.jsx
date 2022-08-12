@@ -5,6 +5,8 @@ import headerUserAccounts from '../../css/header-user-account.css';
 import { useState } from 'react';
 import { Navigate, useNavigate } from "react-router-dom";
 import { Avatar, Button, Menu , MenuItem, ListItemIcon, Divider } from '@material-ui/core';
+import { Headerlogin } from '../login-element/Headerlogin';
+import { FooterAccount } from '../account-element/FooterAccount';
 //token de autenticacion
 const { generateToken } = require('../_____/_____');
 
