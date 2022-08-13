@@ -107,13 +107,6 @@
                     "content": "Esta opcion permite crear un nuevo grupo"
                 },
                 {
-                    "id": "btn-4",
-                    "icon": "newspaper",
-                    "title": "Banner Noticias",
-                    "to": "/account",
-                    "content": "Esta opcion permite modificar el banner"
-                },
-                {
                     "id": "btn-5",
                     "icon": "celebration",
                     "title": "Cumpleaños",

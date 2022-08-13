@@ -23,6 +23,7 @@ export function Account(props) {
   let state_Setting_accounts = Object.values(Object.values(Object.entries(props)[0][1])[5])[2];
   let state_user_accounts = Object.values(Object.values(Object.entries(props)[0][1])[5])[3];
   let state_footer_accounts = Object.values(Object.values(Object.entries(props)[0][1])[5])[4];
+  let state_group = ((props.properties)['personal-information'])['0'];
 
   //useEstado
   const [header_user, setHeaderUser] = React.useState({
@@ -40,9 +41,11 @@ export function Account(props) {
     <>
       <HeaderUser properties={header_user} />
       <div className={state_header_user['cls-6']}></div>
+      <div className={state_group['cls-1']}>
       <AvatarAccount properties={state_avatar_account} />
       <WelcomeAccount properties={state_Welcome_account} />
       <SettingAccounts properties={state_Setting_accounts} />
+      </div>
       <UserList properties={state_user_accounts} />
       <FooterAccount properties={state_footer_accounts} />
     </>
