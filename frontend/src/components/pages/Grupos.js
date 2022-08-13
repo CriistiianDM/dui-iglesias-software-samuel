@@ -240,7 +240,7 @@ export function Grupos(props) {
 
         <div>
           <FormControl className={classes.ancho} variant="filled">
-            <InputLabel htmlFor="">Lider Joven</InputLabel>
+            <InputLabel htmlFor="">Lider</InputLabel>
             <Select id="joven-lider-7-3" onChange={handleChange} label="Tipo de Documento" variant="filled" native>
               <option value="" />
               {
