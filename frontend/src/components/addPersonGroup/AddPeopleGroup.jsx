@@ -98,7 +98,7 @@ export function AddPeopleGroup(props) {
 
   //handle para seleccionar un grupo
   const handleChange = (e) => {
-    fetch_add_user_group(data_array, set_data_array,e,data_array_1, set_data_array_1)
+    fetch_add_user_group(data_array, set_data_array,e,data_array_1, set_data_array_1,data_array_2, set_data_array_2)
   }
 
   //use effect para traer los usuarios que no estan en el grupo seleccionado
@@ -141,9 +141,9 @@ export function AddPeopleGroup(props) {
             size={24}
             color="inherit"
           />) :
-            (data_array_2.data).map((user) => (
+            (data_array_2.data).map((user,index) => (
 
-              <div key={user.id} className={state_user_list['cls-6']}>
+              <div key={index} className={state_user_list['cls-6']}>
                 <div className={state_user_list['cls-7']}>{user.first_name}</div>
                 <div className={state_user_list['cls-7']}>{user.first_last_name}</div>
                 <div className={state_user_list['cls-7']}>{user.doc}</div>
@@ -251,7 +251,7 @@ async function fetch_data_user_group(data_array, set_data_array) {
   *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
   *  @decs  : Fetch para enviar al usuario al grupo seleccionado
 */
-async function fetch_add_user_group(data_array, set_data_array,e,data_array_1, set_data_array_1) {
+async function fetch_add_user_group(data_array, set_data_array,e,data_array_1, set_data_array_1,data_array_2, set_data_array_2) {
 
     try {
 
@@ -283,6 +283,7 @@ async function fetch_add_user_group(data_array, set_data_array,e,data_array_1, s
       if (data.message === 'ok') {
         set_data_array_1({ ...data_array_1, dialog_open: false , error_dialog: false ,dialog_open_error: true});
         fetch_data_user_group(data_array, set_data_array)
+        fetch_data_user_group_selected(data_array_2, set_data_array_2)
       }
       else {
         set_data_array_1({ ...data_array_1, dialog_open: false , error_dialog: true ,dialog_open_error: true});
