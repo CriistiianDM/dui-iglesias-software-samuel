@@ -453,8 +453,6 @@ async function postGrupo(data_array, img_data, setdata_array) {
       method: 'POST',
       body: img_data,
       headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
         'Authorization': generateToken()
       },
       mode: 'cors',

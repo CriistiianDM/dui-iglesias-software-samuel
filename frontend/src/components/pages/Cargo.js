@@ -113,7 +113,7 @@ export function Cargo(props) {
     const name = event.target.value;
 
     if (name === 'Administrador') {
-      //navigate('/account');
+      navigate('/account');
     }
     else if (name === 'creyente') {
       navigate('/creyente');
