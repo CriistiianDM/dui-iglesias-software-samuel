@@ -96,7 +96,7 @@
                     "id": "btn-2",
                     "icon": "calendar_today",
                     "title": "Asistencia",
-                    "to": "/account",
+                    "to": "/asistencia",
                     "content": "Esta opcion permite registrar la asistencia de los usuarios"
                 },
                 {
