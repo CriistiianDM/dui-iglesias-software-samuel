@@ -2,7 +2,7 @@
 .box-avatar-setting {
     display: grid;
     grid-auto-rows: auto;
-    grid-template-columns: repeat(auto-fit, minmax( min(100%, 25em), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax( min(100%, 20em), 1fr));
     grid-gap: 0.5em;
     grid-auto-flow: dense;
     justify-items: center;

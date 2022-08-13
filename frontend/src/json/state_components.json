@@ -107,13 +107,6 @@
                     "content": "Esta opcion permite crear un nuevo grupo"
                 },
                 {
-                    "id": "btn-4",
-                    "icon": "newspaper",
-                    "title": "Banner Noticias",
-                    "to": "/account",
-                    "content": "Esta opcion permite modificar el banner"
-                },
-                {
                     "id": "btn-5",
                     "icon": "celebration",
                     "title": "Cumpleaños",
@@ -288,7 +281,8 @@
             "cls-6": "box-personal-group-info-title",
             "cls-7": "box-personal-group-info-content",
             "cls-8": "box-text-group-botton",
-            "cls-9": "box-no-found-group"
+            "cls-9": "box-no-found-group",
+            "cls-10": "box-groups-found"
         }
     },
     "createuser": {
@@ -334,5 +328,10 @@
            "cls-1": "box-cargo-style-element",
            "cls-2": "conteiner-cargo"
        }
+    },
+    "addpeoplegroup": {
+        "0": {
+            "cls-1": "box-add-people-group-element"
+        }
     }
 }
