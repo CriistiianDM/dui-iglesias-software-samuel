@@ -4,7 +4,13 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Montserrat_ExtraBold from '../../static/Montserrat-ExtraBold.ttf';
 import styleGroup from '../../css/style_peoplegroup.css';
 import { Typography, Button } from '@material-ui/core';
-import { Icon, IconButton, CircularProgress } from '@material-ui/core';
+import { Icon, IconButton, CircularProgress, Dialog, DialogActions, DialogTitle, DialogContent, DialogContentText,
+        Select, InputLabel, FormControl } from '@material-ui/core';
+
+
+//token de autenticacion
+const { generateToken } = require('../_____/_____')
+
 
 //estilos de los componentes
 const useStyles = makeStyles((theme) => ({
@@ -28,8 +34,12 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: 'hsl(198deg 32% 16%)',
       color: '#fff',
     }
+  },
+  formtDataUser: {
+    display: 'grid',
+    width: '100%',
+    height: '100%',
   }
-
 }));
 
 
@@ -46,20 +56,54 @@ export function AddPeopleGroup(props) {
   let state_user_list = (((props.properties).properties).avatarStyle)['3']
   const data_group_array = JSON.parse(localStorage.getItem('group_selected'))
   const classes = useStyles();
-  const data = JSON.parse(localStorage.getItem('data_user')); 
+  const data = JSON.parse(localStorage.getItem('data_user'));
 
   console.log(state_group, 'state_group', data_group_array);
 
   //use state
   const [data_array, set_data_array] = React.useState({
-      loading: true,
+    loading: true,
+    dialog_open: false,
+    enable_button: true,
+    data_user: [],
+    group_selected: data_group_array.id,
   });
+
+  //use state
+  const [data_array_1, set_data_array_1] = React.useState({
+    loading: true,
+    dialog_open: false,
+    enable_button: true,
+    error_dialog: false,
+    dialog_open_error: false,
+  });
+
+  //handle para cerrar el dialogo
+  const handleClose = () => {
+    set_data_array_1({ ...data_array_1, dialog_open: false, dialog_open_error: false });
+
+  }
+
+  //handle para abrir el dialogo
+  const handleOpen = () => {
+    set_data_array_1({ ...data_array_1, dialog_open: true });
+  }
+
+  //handle para seleccionar un grupo
+  const handleChange = (e) => {
+    fetch_add_user_group(data_array, set_data_array,e,data_array_1, set_data_array_1)
+  }
+
+  //use effect para traer los usuarios que no estan en el grupo seleccionado
+  React.useEffect(() => {
+    fetch_data_user_group(data_array, set_data_array)
+  }, []);
 
   return (
     <>
       <Typography className={classes.titleNameGroup}>{(data_group_array['nombre_grupo']).toUpperCase()}</Typography>
       <div className={state_group['cls-1']}>
-        <Button className={classes.buttonAddPeopleGroup}>Añadir Persona</Button>
+        <Button disabled={data_array.enable_button} onClick={handleOpen} className={classes.buttonAddPeopleGroup}>Añadir Persona</Button>
       </div>
       <div className={state_user_list['cls-1']}>
 
@@ -109,6 +153,136 @@ export function AddPeopleGroup(props) {
         </div>
 
       </div>
+      <Dialog
+        open={data_array_1.dialog_open}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Añadir Personas Al Grupo"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Por favor seleccione las personas que desea añadir al grupo.
+            Nota: Al seleccionar una persona, se agregara automaticamente a la lista de miembros del grupo.
+          </DialogContentText>
+          <FormControl className={classes.formtDataUser} variant="filled" >
+            <InputLabel value="#" htmlFor="wer">Añadir Personas</InputLabel>
+            <Select disabled={data_array.enable_button} onChange={handleChange} label="Tipo de Documento" variant="filled" native labelId="w66666er">
+              <option aria-label="None" value="" />
+              {
+
+                (data_array.data_user).map(
+                  (element, index) => (
+                    <option aria-label="None" value={`${element.id}`} key={index}>{`${element['first_name']} ${element['first_last_name']}`}</option>
+                  )
+                )
+              }
+
+            </Select>
+          </FormControl>
+        </DialogContent>
+        <DialogActions>
+          <Button disabled={data_array.enable_button} onClick={handleClose} color="primary">
+            Cerrar
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={data_array_1.dialog_open_error}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{`${(data_array_1.error_dialog)? "Error Al Añadir la Persona":"Persona añadida con Exito"}`}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {(data_array_1.error_dialog)? "No se pudo añadir la persona al grupo":"La persona se añadio con exito al grupo"}	
+          </DialogContentText>
+      
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cerrar
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   )
+}
+
+
+/**
+  *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
+  *  @decs  : Fetch para traer a los usuarios que no estan el grupo seleccionado
+*/
+async function fetch_data_user_group(data_array, set_data_array) {
+
+  try {
+
+    const response = await fetch(`https://demon789-4.herokuapp.com/zdpsg/${data_array.group_selected}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': generateToken()
+      }
+    });
+
+    const data = await response.json();
+    console.log(data, 'data11');
+    if (data[0] !== undefined) {
+      set_data_array({ ...data_array, enable_button: false, data_user: data });
+    }
+
+  } catch (error) {
+    set_data_array({ ...data_array, enable_button: true, data_user: [] });
+    console.log(error);
+  }
+
+}
+
+
+/**
+  *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
+  *  @decs  : Fetch para enviar al usuario al grupo seleccionado
+*/
+async function fetch_add_user_group(data_array, set_data_array,e,data_array_1, set_data_array_1) {
+
+    try {
+
+
+      let object = new Object();
+      object.person_id = e.target.value
+      object.group_id = data_array.group_selected
+      object.position_id = 1
+      object.status = 'miembro'
+      object.logical_erase = false
+      console.log(object, 'object');
+
+      //desabilitar boton
+      set_data_array({ ...data_array, enable_button: true });
+
+      const response = await fetch(`https://demon789-4.herokuapp.com/zipg`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': generateToken()
+        },
+        mode: 'cors',
+        body: JSON.stringify(object)
+      });
+
+      const data = await response.json();
+
+      if (data.message === 'ok') {
+        set_data_array_1({ ...data_array_1, dialog_open: false , error_dialog: false ,dialog_open_error: true});
+        fetch_data_user_group(data_array, set_data_array)
+      }
+      else {
+        set_data_array_1({ ...data_array_1, dialog_open: false , error_dialog: true ,dialog_open_error: true});
+      }
+
+
+    } catch (error) {
+      set_data_array_1({ ...data_array_1, dialog_open: false , error_dialog: true ,dialog_open_error: true});
+      console.log(error);
+    }
 }
