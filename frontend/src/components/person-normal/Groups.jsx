@@ -6,7 +6,7 @@ import logoIglesia from '../../images/imagesHome/logo_iglesia.png';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Montserrat_ExtraBold from '../../static/Montserrat-ExtraBold.ttf';
 import { useNavigate } from 'react-router-dom';
-
+import $ from 'jquery';
 
 //token de autenticacion
 const { generateToken } = require('../_____/_____')
@@ -101,8 +101,8 @@ export function Groups(props) {
 
     //handle para obtener los datos del json
     const handle_get_group = (e) => {
-        console.log('handle_get_group',e.target.id);
-        
+        console.log('handle_get_group',e);
+   
         (data_array.groups).map((item, index) => {
 
             if (item.id == (e.target.id).split('-')[1]) {
@@ -138,8 +138,8 @@ export function Groups(props) {
                         {
                             (data_array.groups).map((item, index) => (
                                 <Button onClick={handle_get_group} id={`groupInique-${item.id}`} className={classes.buttonGroupAux} key={index}>
-                                    <Typography className={classes.titlteGroupAux}> {item['nombre_grupo']} </Typography>
-                                    <Typography className={classes.textGroupAux2}> {item['descripcion']} </Typography>
+                                    <Typography id={`groupInique1-${item.id}`}className={classes.titlteGroupAux}> {item['nombre_grupo']} </Typography>
+                                    <Typography id={`groupInique2-${item.id}`}className={classes.textGroupAux2}> {item['descripcion']} </Typography>
                                 </Button>
                             ))
                         }
