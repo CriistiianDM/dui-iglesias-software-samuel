@@ -40,8 +40,10 @@ export function PersonNormal(props) {
     <>
       <HeaderUser properties={header_user} />
       <div className={state_header_user['cls-6']}></div>
+      <div className={state_group['cls-1']}>
       <AvatarAccount properties={state_avatar_account} />
       <WelcomeAccount properties={state_Welcome_account} />
+      </div>
       <Groups properties={state_group} />
       <FooterAccount properties={state_footer_accounts} />
     </>

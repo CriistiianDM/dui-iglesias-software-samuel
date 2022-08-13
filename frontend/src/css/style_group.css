@@ -2,14 +2,19 @@
 
 
 .box-personal-information-group {
+   justify-self: center;
    display: grid;
-   grid-auto-rows: 30em;
-   grid-template-columns: repeat(auto-fit, minmax( min(100%, 20em), 1fr));
+   grid-auto-rows: auto;
+   grid-template-columns: 100%;
    grid-gap: 0.5em;
    justify-items: center;
    align-items: center;
-   width: 100%;
+   width: 90%;
    height: auto;
+   background-color: #fff;
+   border-radius: 0.2em;
+   box-shadow: 0 0 0.7em rgba(43, 73, 73, 0.616);
+   padding: 1em;
    overflow: hidden;
 }
 
@@ -90,4 +95,27 @@
 
 #descrision-grupo {
     align-self: flex-start;
+}
+
+.box-no-found-group {
+    display: grid;
+    grid-auto-rows: auto;
+    grid-template-columns: 100%;
+    justify-items: center;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+.box-groups-found {
+    display: grid;
+    grid-auto-rows: auto;
+    grid-template-columns: repeat(auto-fit, minmax( min(100%, 22em), 1fr));
+    justify-items: center;
+    align-items: center;
+    gap: 0.5em;
+    width: 100%;
+    height: auto;
+    padding-bottom: 3em;
+    overflow: hidden;
 }
