@@ -16,6 +16,7 @@ import { PersonNormal } from './components/pages/PersonNormal';
 import { A404 } from './components/pages/A404';
 import { CreateUser } from './components/pages/CreateUser';
 import { Grupos } from './components/pages/Grupos.js'; 
+import { AddPersonGroup } from './components/pages/AddPersonGroup';
 
 
 
@@ -53,6 +54,7 @@ export function App() {
         <Route path="/creyente" element = {<PersonNormal properties={json} />} />
         <Route path="/createuser" element = {<CreateUser properties={json} />} />
         <Route path="/grupo" element={<Grupos properties={json}/>}/>
+        <Route path="/addpersongroup" element={<AddPersonGroup properties={json}/>}/>
         <Route path="*" element = {<A404 />} />
       </Routes>
     </Router>

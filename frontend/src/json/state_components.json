@@ -335,5 +335,10 @@
            "cls-1": "box-cargo-style-element",
            "cls-2": "conteiner-cargo"
        }
+    },
+    "addpeoplegroup": {
+        "0": {
+            "cls-1": "box-add-people-group-element"
+        }
     }
 }

@@ -5,6 +5,8 @@ import styleGroup from "../../css/style_group.css";
 import logoIglesia from '../../images/imagesHome/logo_iglesia.png';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Montserrat_ExtraBold from '../../static/Montserrat-ExtraBold.ttf';
+import { useNavigate } from 'react-router-dom';
+
 
 //token de autenticacion
 const { generateToken } = require('../_____/_____')
@@ -44,8 +46,9 @@ const useStyles = makeStyles((theme) => ({
     },
     textGroupAux2: {
         color: '#fff',
-        fontSize: '1.5em',
+        fontSize: '1em',
         fontWeight: '500',
+        textAline: 'italic',
         fontFamily: Montserrat_ExtraBold,
     },
     buttonGroupAux: {
@@ -80,6 +83,7 @@ export function Groups(props) {
     //variable de estado
     let state_group = props.properties;
     const classes = useStyles();
+    const navigate = useNavigate();
 
     //use state para obtener los datos del json
     const [data_array, set_data_array] = React.useState({
@@ -92,10 +96,30 @@ export function Groups(props) {
         ]
     });
 
+    localStorage.setItem('group_selected', JSON.stringify(data_array.groups));
+
+
+    //handle para obtener los datos del json
+    const handle_get_group = (e) => {
+        console.log('handle_get_group',e.target.id);
+        
+        (data_array.groups).map((item, index) => {
+
+            if (item.id == (e.target.id).split('-')[1]) {
+                localStorage.setItem('group_selected', JSON.stringify(item));
+                navigate('/addpersongroup');
+            }
+
+        })
+        
+    }
+    
     //use effect para obtener los datos del json
     React.useEffect(() => {
         get_group_person(data_array, set_data_array)
     }, [])
+
+
 
     //como un fressby va y vuelve - es una cansion githubcopilot
     return (
@@ -113,7 +137,7 @@ export function Groups(props) {
                     <div className={state_group['cls-10']}>
                         {
                             (data_array.groups).map((item, index) => (
-                                <Button className={classes.buttonGroupAux} key={index}>
+                                <Button onClick={handle_get_group} id={`groupInique-${item.id}`} className={classes.buttonGroupAux} key={index}>
                                     <Typography className={classes.titlteGroupAux}> {item['nombre_grupo']} </Typography>
                                     <Typography className={classes.textGroupAux2}> {item['descripcion']} </Typography>
                                 </Button>
@@ -170,7 +194,7 @@ async function get_group_person(data_array, set_data_array) {
             loading: false,
             groups: []
         })
-        
+
         console.log(error);
     }
 }
