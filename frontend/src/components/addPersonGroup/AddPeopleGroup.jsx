@@ -78,6 +78,13 @@ export function AddPeopleGroup(props) {
     dialog_open_error: false,
   });
 
+  //use state
+  const [data_array_2, set_data_array_2] = React.useState({
+    loading: true,
+    data: [],
+    group_selected: data_group_array.id, 
+  });
+
   //handle para cerrar el dialogo
   const handleClose = () => {
     set_data_array_1({ ...data_array_1, dialog_open: false, dialog_open_error: false });
@@ -96,6 +103,7 @@ export function AddPeopleGroup(props) {
 
   //use effect para traer los usuarios que no estan en el grupo seleccionado
   React.useEffect(() => {
+    fetch_data_user_group_selected(data_array_2, set_data_array_2)
     fetch_data_user_group(data_array, set_data_array)
   }, []);
 
@@ -129,17 +137,17 @@ export function AddPeopleGroup(props) {
 
 
         {
-          (data_array.loading) ? (<CircularProgress
+          (data_array_2.loading) ? (<CircularProgress
             size={24}
             color="inherit"
           />) :
-            (data).map((user) => (
+            (data_array_2.data).map((user) => (
 
               <div key={user.id} className={state_user_list['cls-6']}>
                 <div className={state_user_list['cls-7']}>{user.first_name}</div>
                 <div className={state_user_list['cls-7']}>{user.first_last_name}</div>
                 <div className={state_user_list['cls-7']}>{user.doc}</div>
-                <div className={state_user_list['cls-7']}>{user.position}</div>
+                <div className={state_user_list['cls-7']}>{user.status}</div>
               </div>
 
             ))
@@ -285,4 +293,35 @@ async function fetch_add_user_group(data_array, set_data_array,e,data_array_1, s
       set_data_array_1({ ...data_array_1, dialog_open: false , error_dialog: true ,dialog_open_error: true});
       console.log(error);
     }
+}
+
+/**
+  *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
+  *  @decs  : Fetch para traer a los usuarios que estan en el grupo seleccionado
+*/
+async function fetch_data_user_group_selected(data_array, set_data_array) {
+
+   try {
+
+    const response = await fetch(`https://demon789-4.herokuapp.com/zgallpg/${data_array.group_selected}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': generateToken()
+      }
+    });
+
+    const data1 = await response.json();
+
+    if (data1[0] !== undefined) {
+      set_data_array({ ...data_array, loading: false, data: data1 });
+    }
+    else {
+      set_data_array({ ...data_array, loading: true , data: [] });
+    }
+    
+   } catch (error) {
+     console.log(error);
+   }
+
 }
