@@ -197,61 +197,66 @@ export function Asistencia(props) {
   return (
 
     <>
-      <HeaderUser properties={header_user} />
-      <div className={state_header_user['cls-6']}>
-      </div>
-      <div className={classes.styleTitle}>Registro Asistencia</div>
-      <div className={classes.paperContainer}>
-        <div className={classes.root}>
-          <TextField
-            onChange={handleChange}
-            id="kid" label="Niños" type="number"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="outlined"
-          />
-        </div>
+      {
+        (localStorage.getItem('permiso_cargo') === 'Administrador' ||
+          localStorage.getItem('permiso_cargo') === 'pastor') ?
+          <>
+            <HeaderUser properties={header_user} />
+            <div className={state_header_user['cls-6']}>
+            </div>
+            <div className={classes.styleTitle}>Registro Asistencia</div>
+            <div className={classes.paperContainer}>
+              <div className={classes.root}>
+                <TextField
+                  onChange={handleChange}
+                  id="kid" label="Niños" type="number"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  variant="outlined"
+                />
+              </div>
 
-        <div className={classes.root}>
-          <TextField
-            onChange={handleChange}
-            id="men" label="Hombres" type="number"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="outlined"
-          />
-        </div>
+              <div className={classes.root}>
+                <TextField
+                  onChange={handleChange}
+                  id="men" label="Hombres" type="number"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  variant="outlined"
+                />
+              </div>
 
-        <div className={classes.root}>
-          <TextField
-            onChange={handleChange}
-            id="woman" label="Mujeres" type="number"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="outlined"
-          />
-        </div>
+              <div className={classes.root}>
+                <TextField
+                  onChange={handleChange}
+                  id="woman" label="Mujeres" type="number"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  variant="outlined"
+                />
+              </div>
 
-        <div className={classes.root}>
-          <TextField
-            onChange={handleChange}
-            id="vist" label="Visitantes" type="number"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="outlined"
-          />
-        </div>
-        <Button onClick={handleSubmit} className={classes.styleButton} variant="contained" color="secondary">
-          Enviar
-        </Button>
-      </div>
+              <div className={classes.root}>
+                <TextField
+                  onChange={handleChange}
+                  id="vist" label="Visitantes" type="number"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  variant="outlined"
+                />
+              </div>
+              <Button onClick={handleSubmit} className={classes.styleButton} variant="contained" color="secondary">
+                Enviar
+              </Button>
+            </div>
 
-      <FooterAccount properties={state_footer_accounts} />
-
+            <FooterAccount properties={state_footer_accounts} />
+          </> : null
+      }
     </>
 
 
