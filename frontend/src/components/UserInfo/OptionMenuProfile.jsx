@@ -189,6 +189,8 @@ export function OptionMenuProfile(props) {
 
         <div className={state_option_menu_profile['cls-1']}>
 
+          {
+             (localStorage.getItem('permiso_cargo') === 'Administrador') ?  
             <div className={state_option_menu_profile['cls-2']}>
 
                 <Button  disabled={true} className={state_option_menu_profile['cls-3']}>
@@ -241,8 +243,8 @@ export function OptionMenuProfile(props) {
                 </Button>
 
 
-            </div>
-
+            </div> : null
+          }
             <div>
                 <Dialog
                     open={openCargos}
