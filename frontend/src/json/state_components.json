@@ -117,7 +117,7 @@
                     "id": "btn-6",
                     "icon": "church",
                     "title": "Congregacion",
-                    "to": "/account",
+                    "to": "/congregacion",
                     "content": "Esta opcion permite modificar la informacion de la congregacion"
                 }
             ],

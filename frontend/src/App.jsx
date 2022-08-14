@@ -18,7 +18,7 @@ import { CreateUser } from './components/pages/CreateUser';
 import { Grupos } from './components/pages/Grupos.js'; 
 import { Asistencia } from './components/pages/Asistencia';
 import { AddPersonGroup } from './components/pages/AddPersonGroup';
-
+import { Congregacion } from './components/pages/Congregacion';
 
 
 //librery or import of styles of css
@@ -57,6 +57,7 @@ export function App() {
         <Route path="/grupo" element={<Grupos properties={json}/>}/>
         <Route path="asistencia" element={<Asistencia properties={json}/>} />
         <Route path="/addpersongroup" element={<AddPersonGroup properties={json}/>}/>
+        <Route path="/congregacion" element={<Congregacion properties={json}/>}/>
         <Route path="*" element = {<A404 />} />
       </Routes>
     </Router>

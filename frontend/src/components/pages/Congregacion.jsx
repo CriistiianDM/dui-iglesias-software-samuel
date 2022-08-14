@@ -8,9 +8,9 @@ import React from 'react';
   *  @decs  : Vista para ver la informacion de la iglesia
   *
 */
-export function UserInfo(props) {
+export function Congregacion(props) {
 
     return (
-        <h1>Hola mundo</h1>
+        <h1>Hello word</h1>
     )
 }
