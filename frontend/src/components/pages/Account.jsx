@@ -38,7 +38,11 @@ export function Account(props) {
   }, []);
 
   return (
-    <>
+    <> 
+      {
+      (localStorage.getItem('permiso_cargo') === 'pastor' ||
+      localStorage.getItem('permiso_cargo') === 'Administrador')?
+      <> 
       <HeaderUser properties={header_user} />
       <div className={state_header_user['cls-6']}></div>
       <div className={state_group['cls-1']}>
@@ -48,6 +52,9 @@ export function Account(props) {
       </div>
       <UserList properties={state_user_accounts} />
       <FooterAccount properties={state_footer_accounts} />
+      </>
+      : null
+     }
     </>
   );
 

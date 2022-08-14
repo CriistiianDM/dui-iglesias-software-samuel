@@ -103,6 +103,9 @@ export function Groups(props) {
     const handle_get_group = (e) => {
         console.log('handle_get_group',e);
    
+      if ( localStorage.getItem('permiso_cargo') === 'Lider' ||
+           localStorage.getItem('permiso_cargo') === 'comite') {
+
         (data_array.groups).map((item, index) => {
 
             if (item.id == (e.target.id).split('-')[1]) {
@@ -111,6 +114,8 @@ export function Groups(props) {
             }
 
         })
+
+     }
         
     }
     
