@@ -31,19 +31,29 @@ export function UserInfo(props) {
 
     //useEffect para cargar la imagen de perfil
     React.useEffect(() => {
-        verificar_inicio_sesion(navigate,'/userinfo');
+        verificar_inicio_sesion(navigate, '/userinfo');
     }, []);
 
 
     return (
 
         <>
-            <HeaderUser properties={header_user} />
-            <div className={state_header_user['cls-6']}></div>
-            <ChangePhotoProfile properties={state_avatar_account} />
-            <WelcomeAccount properties={state_Welcome_account} />
-            <OptionMenuProfile properties={state_Setting_accounts} />
-            <FooterAccount properties={state_footer_accounts} />
+            {
+                (localStorage.getItem('permiso_cargo') === 'creyente' ||
+                    localStorage.getItem('permiso_cargo') === 'Lider' ||
+                    localStorage.getItem('permiso_cargo') === 'comite' ||
+                    localStorage.getItem('permiso_cargo') === 'pastor' ||
+                    localStorage.getItem('permiso_cargo') === 'Administrador' ||
+                    localStorage.getItem('permiso_cargo') === 'asistente administrativo') ?
+                    <>
+                        <HeaderUser properties={header_user} />
+                        <div className={state_header_user['cls-6']}></div>
+                        <ChangePhotoProfile properties={state_avatar_account} />
+                        <WelcomeAccount properties={state_Welcome_account} />
+                        <OptionMenuProfile properties={state_Setting_accounts} />
+                        <FooterAccount properties={state_footer_accounts} />
+                    </> : null
+            }
         </>
     )
 

@@ -22,7 +22,7 @@ export function PersonNormal(props) {
   //useEffect para obtener el nombre y apellido del usuario
   React.useEffect(() => {
     get_user_name(localStorage.getItem('user_login'));
-    verificar_inicio_sesion(navigate,'/creyente');
+    verificar_inicio_sesion(navigate, '/creyente');
   }, []);
 
   //variable de estado
@@ -43,14 +43,21 @@ export function PersonNormal(props) {
   return (
 
     <>
-      <HeaderUser properties={header_user} />
-      <div className={state_header_user['cls-6']}></div>
-      <div className={state_group['cls-1']}>
-        <AvatarAccount properties={state_avatar_account} />
-        <WelcomeAccount properties={state_Welcome_account} />
-      </div>
-      <Groups properties={state_group} />
-      <FooterAccount properties={state_footer_accounts} />
+      {
+        (localStorage.getItem('permiso_cargo') === 'creyente' ||
+          localStorage.getItem('permiso_cargo') === 'Lider' ||
+          localStorage.getItem('permiso_cargo') === 'comite') ?
+          <>
+            <HeaderUser properties={header_user} />
+            <div className={state_header_user['cls-6']}></div>
+            <div className={state_group['cls-1']}>
+              <AvatarAccount properties={state_avatar_account} />
+              <WelcomeAccount properties={state_Welcome_account} />
+            </div>
+            <Groups properties={state_group} />
+            <FooterAccount properties={state_footer_accounts} />
+          </> : null
+      }
     </>
 
   )

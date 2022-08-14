@@ -33,12 +33,8 @@ function verificar_inicio_sesion(navigate,rute) {
             clearInterval(timer);
         }
 
-        //mostrar la ruta de donde estoy
-        console.log(window.location.pathname);
 
-        console.log(localStorage.getItem('user_login'));
-
-    }, 1000);
+    }, 100);
 
     return timer;
 
