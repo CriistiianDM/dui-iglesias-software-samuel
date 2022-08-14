@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import { createTheme, Grid } from '@material-ui/core';
 import { HeaderUser } from '../account-element/HeaderUser';
 import { FooterAccount } from '../account-element/FooterAccount';
+import Montserrat_ExtraBold from '../../static/Montserrat-ExtraBold.ttf';
 import Button from '@material-ui/core/Button';
 import { useNavigate } from 'react-router-dom';
 
@@ -52,15 +53,14 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   styleTitle: {
-    fontFamily: 'Raleway, Arial',
-    color: 'black',
-    fontSize: '3.9em !important',
+    color: 'hsl(198deg 32% 16%)',
+    fontSize: '5em !important',
     textAlign: 'center',
     padding: '0.3em 0.3em', /* para centrar profundizar los textos, reduciendo los espacios. */
     /*hyphens: 'auto', */
     /* wordBreak: 'break-all' esta es para responsive pero con las letras quedando a la mitad y lo demás se pone en la siguiente linea, como un salto.  */
     '@media screen and (max-width:600px)': {
-      fontSize: '1em !important'
+      fontSize: '3em !important'
     }
   },
   formControl: {
@@ -101,15 +101,39 @@ const useStyles = makeStyles((theme) => ({
     //disminuir el alto del boton
     height: '3em',
     color: 'white',
-    fontFamily: 'Raleway, Arial',
     fontSize: '1.2em',
     fontWeight: 'bold',
     padding: '0.5em 0.5em',
     margin: '0.5em 0.5em',
+    //hover
+    '&:hover': {
+      background: '#ff725e',
+    },
     '@media screen and (max-width:280px)': {
       fontSize: '0.8em'
     }
+  }, textField: {
+    height: '3em',
+    color: 'hsl(198deg 32% 16%)',
+    backgroundColor: 'hsl(0deg 0% 92%)',
+    //cambiar el color del placeholder
+    '&::placeholder': {
+      color: 'hsl(198deg 32% 16%)',
+    },
+    fontFamily: Montserrat_ExtraBold,
+    //cambiar el color del borde cuando se selecciona el input
+    '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+      borderColor: 'hsl(198deg 32% 16%)'
+    },
+    //cambiar el color de la letra del label
+    '& .MuiFormLabel-root.Mui-focused': {
+      color: 'hsl(198deg 32% 16%) '
+    }
+
   },
+  input: {
+    backgroundColor: 'hsl(0deg 0% 92%)',
+  }
 
 }));
 
@@ -198,7 +222,7 @@ export function Asistencia(props) {
 
   //useEffect para cargar la imagen de perfil
   React.useEffect(() => {
-    verificar_inicio_sesion(navigate,'/asistencia');
+    verificar_inicio_sesion(navigate, '/asistencia');
   }, []);
 
   return (
@@ -217,6 +241,8 @@ export function Asistencia(props) {
               <div className={classes.root}>
                 <TextField
                   onChange={handleChange}
+                  InputProps={{ className: classes.input }} 
+                  className={classes.textField}
                   id="kid" label="Niños" type="number"
                   InputLabelProps={{
                     shrink: true,
@@ -227,6 +253,8 @@ export function Asistencia(props) {
 
               <div className={classes.root}>
                 <TextField
+                  InputProps={{ className: classes.input }} 
+                  className={classes.textField}
                   onChange={handleChange}
                   id="men" label="Hombres" type="number"
                   InputLabelProps={{
@@ -238,6 +266,8 @@ export function Asistencia(props) {
 
               <div className={classes.root}>
                 <TextField
+                  InputProps={{ className: classes.input }} 
+                  className={classes.textField}
                   onChange={handleChange}
                   id="woman" label="Mujeres" type="number"
                   InputLabelProps={{
@@ -249,6 +279,8 @@ export function Asistencia(props) {
 
               <div className={classes.root}>
                 <TextField
+                  InputProps={{ className: classes.input }} 
+                  className={classes.textField}
                   onChange={handleChange}
                   id="vist" label="Visitantes" type="number"
                   InputLabelProps={{
