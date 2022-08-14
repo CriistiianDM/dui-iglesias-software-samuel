@@ -44,9 +44,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   styleTitleSistemas: {
-    fontFamily: 'Raleway, Arial',
-    color: 'black',
-    fontSize: '3.3em !important',
+    color: 'hsl(198deg 32% 16%)',
+    fontSize: '5em !important',
     textAlign: 'center',
     padding: '0.4em 0.4em', /* para centrar profundizar los textos, reduciendo los espacios. */
     /*hyphens: 'auto', */
