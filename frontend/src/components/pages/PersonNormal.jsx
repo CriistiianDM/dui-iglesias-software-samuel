@@ -22,7 +22,7 @@ export function PersonNormal(props) {
   //useEffect para obtener el nombre y apellido del usuario
   React.useEffect(() => {
     get_user_name(localStorage.getItem('user_login'));
-    verificar_inicio_sesion(navigate);
+    //verificar_inicio_sesion(navigate);
   }, []);
 
   //variable de estado
@@ -86,32 +86,3 @@ async function get_user_name(user_id) {
 
 }
 
-/**
-  *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
-  *  TODO: para una version futura no olvidar verificar si el usuario existe en la base de datos.
-  *  @decs  : timer para verficar si inicio sesion o no
-*/
-function verificar_inicio_sesion(navigate) {
-
-  //expresion regular para verificar numeros
-  const regex = /^[0-9]{9,15}$/;
-
-  const timer = setInterval(() => {
-
-    if (localStorage.getItem('user_login') === null) {
-      navigate('/');
-    }
-    else {
-
-      if (!regex.exec(localStorage.getItem('user_login'))) {
-        navigate('/');
-      }
-
-    }
-
-
-  }, 100);
-
-  return timer;
-
-}

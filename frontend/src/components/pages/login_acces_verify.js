@@ -1,6 +1,5 @@
 
 
-
 /**
   *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
   *  TODO: para una version futura no olvidar verificar si el usuario existe en la base de datos.
@@ -23,7 +22,8 @@ function verificar_inicio_sesion(navigate) {
             }
 
         }
-
+    
+         console.log(localStorage.getItem('user_login'));
 
     }, 100);
 
