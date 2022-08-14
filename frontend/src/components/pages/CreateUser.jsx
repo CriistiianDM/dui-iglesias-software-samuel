@@ -26,7 +26,8 @@ export function CreateUser(props) {
     return (
         <>
             {
-                (localStorage.getItem('permiso_cargo') === 'Administrador')?
+                (localStorage.getItem('permiso_cargo') === 'Administrador' ||
+                 localStorage.getItem('permiso_cargo') === 'asistente administrativo')?
                     <>
                         <HeaderUser properties={header_user} />
                         <div className={header_user.state_header_user['cls-6']}></div>

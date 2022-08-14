@@ -190,7 +190,8 @@ export function OptionMenuProfile(props) {
         <div className={state_option_menu_profile['cls-1']}>
 
           {
-             (localStorage.getItem('permiso_cargo') === 'Administrador') ?  
+             (localStorage.getItem('permiso_cargo') === 'Administrador' ||
+              localStorage.getItem('permiso_cargo') === 'asistente administrativo') ?  
             <div className={state_option_menu_profile['cls-2']}>
 
                 <Button  disabled={true} className={state_option_menu_profile['cls-3']}>
@@ -264,7 +265,9 @@ export function OptionMenuProfile(props) {
                                    
                                     (vectorCargosFaltantes).map(
                                         (element, index) => (
-                                            <option aria-label="None" value={`${element.id},${element.name}`} key={index}>{element.name}</option>
+                                            (localStorage.getItem('permiso_cargo') === 'asistente administrativo' && element.name !== 'Administrador' ||
+                                             localStorage.getItem('permiso_cargo') === 'Administrador')?
+                                            <option aria-label="None" value={`${element.id},${element.name}`} key={index}>{element.name}</option> : null
                                         )
                                     )
                                 }

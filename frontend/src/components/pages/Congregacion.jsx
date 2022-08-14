@@ -25,13 +25,20 @@ export function Congregacion(props) {
     });
 
     return (
-        <>
+        <> 
+            {
+             (localStorage.getItem('permiso_cargo') === 'Administrador' ||
+              localStorage.getItem('permiso_cargo') === 'pastor' ||
+              localStorage.getItem('permiso_cargo') === 'asistente administrativo')?
+             <>
             <HeaderUser properties={header_user} />
             <div className={state_header_user['cls-6']}></div>
             <div className={state_group['cls-1']}>
             <PageCongrecasion  properties={props} />
             </div>
-            <FooterAccount properties={state_footer_accounts} />
+            <FooterAccount properties={state_footer_accounts} /> 
+            </> : null
+           }
         </>
     )
 
