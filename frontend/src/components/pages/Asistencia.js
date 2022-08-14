@@ -5,8 +5,10 @@ import { createTheme, Grid } from '@material-ui/core';
 import { HeaderUser } from '../account-element/HeaderUser';
 import { FooterAccount } from '../account-element/FooterAccount';
 import Button from '@material-ui/core/Button';
-const { generateToken } = require('../_____/_____');
+import { useNavigate } from 'react-router-dom';
 
+const { generateToken } = require('../_____/_____');
+const { verificar_inicio_sesion } = require('./login_acces_verify');
 
 
 const theme = createTheme({
@@ -130,7 +132,7 @@ export function Asistencia(props) {
   const classes = useStyles();
   const theme = createTheme();
   const date = new Date();
-
+  const navigate = useNavigate();
 
   let state_header_user = Object.values(Object.values(Object.entries(props)[0][1])[0])[1];
   let state_footer_accounts = Object.values(Object.values(Object.entries(props)[0][1])[5])[4];
@@ -194,11 +196,16 @@ export function Asistencia(props) {
     },
   };
 
+  //useEffect para cargar la imagen de perfil
+  React.useEffect(() => {
+    verificar_inicio_sesion(navigate);
+  }, []);
+
   return (
 
     <>
       {
-        ( localStorage.getItem('permiso_cargo') === 'Administrador' ||
+        (localStorage.getItem('permiso_cargo') === 'Administrador' ||
           localStorage.getItem('permiso_cargo') === 'pastor' ||
           localStorage.getItem('permiso_cargo') === 'asistente administrativo') ?
           <>
@@ -295,33 +302,3 @@ async function postAsistencia(data_array) {
 }
 
 
-
-/**
-  *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
-  *  TODO: para una version futura no olvidar verificar si el usuario existe en la base de datos.
-  *  @decs  : timer para verficar si inicio sesion o no
-*/
-function verificar_inicio_sesion(navigate) {
-
-  //expresion regular para verificar numeros
-  const regex = /^[0-9]{9,15}$/;
-
-  const timer = setInterval(() => {
-
-    if (localStorage.getItem('user_login') === null) {
-      navigate('/');
-    }
-    else {
-
-      if (!regex.exec(localStorage.getItem('user_login'))) {
-        navigate('/');
-      }
-
-    }
-
-
-  }, 100);
-
-  return timer;
-
-}
