@@ -115,10 +115,15 @@ export function Cargo(props) {
     if (name === 'Administrador') {
       navigate('/account');
     }
-    else if (name === 'creyente') {
+    if (name === 'creyente') {
       navigate('/creyente');
     }
-
+    if (name === 'joven lider') {
+      navigate('/creyente');
+    }
+    if (name === 'pastor') {
+      navigate('/creyente');
+    }
   };
 
   /**

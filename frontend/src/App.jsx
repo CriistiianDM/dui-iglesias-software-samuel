@@ -21,7 +21,6 @@ import { AddPersonGroup } from './components/pages/AddPersonGroup';
 
 
 
-
 //librery or import of styles of css
 import home_style from './css/home_style.css';
 import re_factorizacion from './css/re_factorizacion_interfaces.css';
