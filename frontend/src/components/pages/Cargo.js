@@ -142,36 +142,39 @@ export function Cargo(props) {
 
   //use Effect para verificar si inicio sesion o no
   React.useEffect(() => {
-    verificar_inicio_sesion(navigate,'/cargo');
+    verificar_inicio_sesion(navigate, '/cargo');
   }, []);
 
 
   return (
     <>
-      <div className={state_cargo['cls-2']}>
-        <div className={state_cargo['cls-1']}>
-          <Typography className={classes.styleTextChoose}>Elige el cargo por el cual deseas ingresar:</Typography>
-          <FormControl className={classes.formControl}>
-            <InputLabel className={classes.labelFormTextHelp} htmlFor="user-native-simple">Cargo</InputLabel>
-            <Select
-              native
-              value={open.user}
-              onChange={handleChange}
-              onOpen={handleOpen}
-              inputProps={{
-                name: 'user',
-                id: 'user-native-simple',
-              }}
-            >
-              <option aria-label="None" value="" />
-              {cargo.map((cargo, index) => (
-                <option key={index} value={cargo.replace('"', '')}>{cargo.replace('"', '')}</option>
-              ))}
-            </Select>
-            <FormHelperText className={classes.labelFormTextHelp} id="my-helper-text">Seleciona el cargo</FormHelperText>
-          </FormControl>
-        </div>
-      </div>
+      {
+        (localStorage.getItem('user_login') !== 'null') ?
+          <div className={state_cargo['cls-2']}>
+            <div className={state_cargo['cls-1']}>
+              <Typography className={classes.styleTextChoose}>Elige el cargo por el cual deseas ingresar:</Typography>
+              <FormControl className={classes.formControl}>
+                <InputLabel className={classes.labelFormTextHelp} htmlFor="user-native-simple">Cargo</InputLabel>
+                <Select
+                  native
+                  value={open.user}
+                  onChange={handleChange}
+                  onOpen={handleOpen}
+                  inputProps={{
+                    name: 'user',
+                    id: 'user-native-simple',
+                  }}
+                >
+                  <option aria-label="None" value="" />
+                  {cargo.map((cargo, index) => (
+                    <option key={index} value={cargo.replace('"', '')}>{cargo.replace('"', '')}</option>
+                  ))}
+                </Select>
+                <FormHelperText className={classes.labelFormTextHelp} id="my-helper-text">Seleciona el cargo</FormHelperText>
+              </FormControl>
+            </div>
+          </div> : null
+      }
     </>
   );
 }
