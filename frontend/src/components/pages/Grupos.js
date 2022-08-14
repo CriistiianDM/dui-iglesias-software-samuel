@@ -23,7 +23,7 @@ const theme = createTheme({
 });
 
 const useStyles = makeStyles((theme) => ({
- 
+
   archivo: {
     '& > *': {
       margin: theme.spacing(1.5),
@@ -217,96 +217,100 @@ export function Grupos(props) {
   return (
 
     <>
-      <HeaderUser properties={header_user} />
-      <div className={state_header_user['cls-6']} />
-      <Typography className={classes.styleTitleSistemas}>Grupos</Typography>
-   
-
-      <div className={classes.paperContainer}>
-
-        <div className={classes.root}>
-
-          <TextField disabled={data_array.disabled_name} error={data_array.error_band_0} helperText={(data_array.error_band_0) ? data_array.message_error_name_0 : ''} onBlur={handleChange} id="outlined-required-9-0" label="Nombre" variant="outlined" />
-        </div>
-
-        <div className={classes.root}>
-          <TextField disabled={data_array.disabled_all} error={data_array.error_band_1} helperText={(data_array.error_band_1) ? data_array.message_error_description_1 : ''} onChange={handleChange} id="outlined-multiline-9-1" required={true} fullWidth={true} maxRows={3} multiline={true} label="Descripción" variant="outlined" />
-        </div>
-
-        <div className={classes.root}>
-          <Input disabled={data_array.disabled_all} className={classes.archivo} onChange={handleChange} id="outlined-file-10-2" accept="image/*" type="file" variant="filled" />
-        </div>
+      {
+        (localStorage.getItem('permiso_cargo') === 'Administrador') ?
+          <>
+            <HeaderUser properties={header_user} />
+            <div className={state_header_user['cls-6']} />
+            <Typography className={classes.styleTitleSistemas}>Grupos</Typography>
 
 
-        <div>
-          <FormControl className={classes.ancho} variant="filled">
-            <InputLabel htmlFor="">Lider</InputLabel>
-            <Select id="joven-lider-7-3" onChange={handleChange} label="Tipo de Documento" variant="filled" native>
-              <option value="" />
-              {
-                (joven_lider.loading) ?
-                  //un for each para recorrer el json busquedaJson
-                  (busquedaJson).map((key, index) => (
+            <div className={classes.paperContainer}>
 
-                    <option key={index} value={key.identificacion}>{key.nombre}</option>
+              <div className={classes.root}>
 
-                  )) :
-                  (joven_lider.data).map((key, index) => (
+                <TextField disabled={data_array.disabled_name} error={data_array.error_band_0} helperText={(data_array.error_band_0) ? data_array.message_error_name_0 : ''} onBlur={handleChange} id="outlined-required-9-0" label="Nombre" variant="outlined" />
+              </div>
 
-                    <option key={index} value={key.id}>{key.first_name + ` ${key.first_last_name}`}</option>
-                  )
-                  )
-              };
-            </Select>
-          </FormControl>
-        </div>
+              <div className={classes.root}>
+                <TextField disabled={data_array.disabled_all} error={data_array.error_band_1} helperText={(data_array.error_band_1) ? data_array.message_error_description_1 : ''} onChange={handleChange} id="outlined-multiline-9-1" required={true} fullWidth={true} maxRows={3} multiline={true} label="Descripción" variant="outlined" />
+              </div>
 
-      </div>
+              <div className={classes.root}>
+                <Input disabled={data_array.disabled_all} className={classes.archivo} onChange={handleChange} id="outlined-file-10-2" accept="image/*" type="file" variant="filled" />
+              </div>
 
-      <div className={classes.divBoton}>
-        <Button onClick={onClickk} disabled={data_array_1.disabled_submit} className={classes.boton} variant="contained" color="primary">
-          Enviar
-        </Button>
-      </div>
 
-      <Dialog
-        open={data_array.dialog_open}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">{"Grupo Registrado"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            El Grupo se ha registrado correctamente.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handle_dialog_open} color="primary">
-            Cerrar
-          </Button>
-        </DialogActions>
-      </Dialog>
+              <div>
+                <FormControl className={classes.ancho} variant="filled">
+                  <InputLabel htmlFor="">Lider</InputLabel>
+                  <Select id="joven-lider-7-3" onChange={handleChange} label="Tipo de Documento" variant="filled" native>
+                    <option value="" />
+                    {
+                      (joven_lider.loading) ?
+                        //un for each para recorrer el json busquedaJson
+                        (busquedaJson).map((key, index) => (
 
-      <Dialog
-        open={data_array.dialog_error}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">{"Error Al Registrar"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            El Grupo no se ha podido crear, porfavor revise su conexion a internet.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handle_dialog_error} color="primary">
-            Cerrar
-          </Button>
-        </DialogActions>
-      </Dialog>
-      <FooterAccount properties={state_footer_accounts} />
+                          <option key={index} value={key.identificacion}>{key.nombre}</option>
+
+                        )) :
+                        (joven_lider.data).map((key, index) => (
+
+                          <option key={index} value={key.id}>{key.first_name + ` ${key.first_last_name}`}</option>
+                        )
+                        )
+                    };
+                  </Select>
+                </FormControl>
+              </div>
+
+            </div>
+
+            <div className={classes.divBoton}>
+              <Button onClick={onClickk} disabled={data_array_1.disabled_submit} className={classes.boton} variant="contained" color="primary">
+                Enviar
+              </Button>
+            </div>
+
+            <Dialog
+              open={data_array.dialog_open}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              <DialogTitle id="alert-dialog-title">{"Grupo Registrado"}</DialogTitle>
+              <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                  El Grupo se ha registrado correctamente.
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handle_dialog_open} color="primary">
+                  Cerrar
+                </Button>
+              </DialogActions>
+            </Dialog>
+
+            <Dialog
+              open={data_array.dialog_error}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              <DialogTitle id="alert-dialog-title">{"Error Al Registrar"}</DialogTitle>
+              <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                  El Grupo no se ha podido crear, porfavor revise su conexion a internet.
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handle_dialog_error} color="primary">
+                  Cerrar
+                </Button>
+              </DialogActions>
+            </Dialog>
+            <FooterAccount properties={state_footer_accounts} />
+          </> : null
+      }
     </>
-
 
   );
 
