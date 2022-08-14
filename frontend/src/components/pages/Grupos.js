@@ -1,11 +1,14 @@
 import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import { useNavigate } from 'react-router-dom';
-import { Button, TextField, Select, Input, InputLabel, FormHelperText, createTheme, Grid, FormControl } from '@material-ui/core';
+import { Button, TextField, Select, Input, InputLabel, FormHelperText, createTheme, Grid, FormControl, Typography } from '@material-ui/core';
 import $ from 'jquery';
 import {
   Dialog, DialogActions, DialogTitle, DialogContent, DialogContentText
 } from '@material-ui/core';
+import { HeaderUser } from '../account-element/HeaderUser';
+import { FooterAccount } from '../account-element/FooterAccount';
+
 
 //token de autenticacion
 const { generateToken } = require('../_____/_____')
@@ -20,21 +23,7 @@ const theme = createTheme({
 });
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    '& > *': {
-      /*margin: theme.spacing(1),*/
-      background: "white",
-      color: "white",
-      width: '90%',
-      flex: "none",
-      marginBottom: "2vh",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      position: '100px',
-      justifyItems: 'center',
-    },
-  },
+ 
   archivo: {
     '& > *': {
       margin: theme.spacing(1.5),
@@ -45,13 +34,13 @@ const useStyles = makeStyles((theme) => ({
   },
   styleTitleSistemas: {
     color: 'hsl(198deg 32% 16%)',
-    fontSize: '5em !important',
+    fontSize: '6em !important',
     textAlign: 'center',
     padding: '0.4em 0.4em', /* para centrar profundizar los textos, reduciendo los espacios. */
     /*hyphens: 'auto', */
     /* wordBreak: 'break-all' esta es para responsive pero con las letras quedando a la mitad y lo demás se pone en la siguiente linea, como un salto.  */
     '@media screen and (max-width:600px)': {
-      fontSize: '2em !important'
+      fontSize: '3.5em !important'
     }
   },
   styleTitle: {
@@ -103,12 +92,16 @@ const useStyles = makeStyles((theme) => ({
   boton: {
     width: 'auto',
     height: 'auto',
-    backgroundImage: '#3f51b5',
+    backgroundColor: '#ff725e',
     boxShadow: '-1px 0px 10px 2px rgba(0,0,0,0.89);',
     borderRadius: '20px',
     textAlign: 'center',
     justifyContent: 'center',
     justifyItems: 'center',
+    //hover
+    '&:hover': {
+      backgroundColor: '#ff725e',
+    }
   },
   ancho: {
     display: 'grid !important',
@@ -137,6 +130,8 @@ export function Grupos(props) {
   let busquedaJson = Object.values((state_user_form)["jovenLider"])[0]["identificacion"]; //busquedaJson es el json que se va a buscar en el backend
   let navigate = useNavigate();
 
+  let state_header_user = Object.values(Object.values(Object.entries(props)[0][1])[0])[1];
+  let state_footer_accounts = Object.values(Object.values(Object.entries(props)[0][1])[5])[4];
 
   //useStates
   const [data_array, setdata_array] = React.useState({
@@ -166,6 +161,12 @@ export function Grupos(props) {
     disabled_submit: false,
   });
 
+  //useEstado
+  const [header_user, setHeaderUser] = React.useState({
+    state_header_user: Object.values(Object.values(Object.entries(props)[0][1])[0])[1],
+    nombre_persona: localStorage.getItem('user_name'),
+  });
+
   //useEffect
   React.useEffect(() => {
     getJovenes(joven_lider, set_joven_lider); //llamada a la funcion getJovenes
@@ -187,7 +188,7 @@ export function Grupos(props) {
 
   let handle_dialog_error = () => {
     setdata_array({ ...data_array, dialog_error: false });
-    
+
   }
 
 
@@ -216,10 +217,10 @@ export function Grupos(props) {
   return (
 
     <>
-
-      <FormControl className={classes.FormControl}>
-        <h1 className={classes.styleTitleSistemas}>Grupos</h1>
-      </FormControl>
+      <HeaderUser properties={header_user} />
+      <div className={state_header_user['cls-6']} />
+      <Typography className={classes.styleTitleSistemas}>Grupos</Typography>
+   
 
       <div className={classes.paperContainer}>
 
@@ -303,6 +304,7 @@ export function Grupos(props) {
           </Button>
         </DialogActions>
       </Dialog>
+      <FooterAccount properties={state_footer_accounts} />
     </>
 
 
@@ -339,10 +341,10 @@ function validateForm(e, data_array, setdata_array, set_img_data) {
       [getNameState((e.target.id).split('-')[3])]: e.target.value
     });
 
-    
+
     //validar si el nombre no esta en la base de datos
     if (e.target.id === "outlined-required-9-0") {
-      get_name_group(data_array, setdata_array,e,error)
+      get_name_group(data_array, setdata_array, e, error)
     }
 
   }
@@ -440,25 +442,26 @@ async function postGrupo(data_array, img_data, setdata_array) {
 
   try {
 
-    setdata_array({ ...data_array, 
-                   disabled_all: true,
-                   disabled_name: true
-                   });
-    
+    setdata_array({
+      ...data_array,
+      disabled_all: true,
+      disabled_name: true
+    });
+
 
     if (img_data !== null) {
 
-    let response = await fetch(`https://demon789-4.herokuapp.com/zfiles`, {
-      method: 'POST',
-      body: img_data,
-      headers: {
-        'Authorization': generateToken()
-      },
-      mode: 'cors',
-    });
-    
-   } 
-    
+      let response = await fetch(`https://demon789-4.herokuapp.com/zfiles`, {
+        method: 'POST',
+        body: img_data,
+        headers: {
+          'Authorization': generateToken()
+        },
+        mode: 'cors',
+      });
+
+    }
+
 
     let post_response = await fetch(`https://demon789-4.herokuapp.com/zcrgppipe`, {
       method: 'POST',
@@ -470,7 +473,7 @@ async function postGrupo(data_array, img_data, setdata_array) {
       mode: 'cors',
       body: JSON.stringify(data_array)
     });
-  
+
     let data = await post_response.json();
 
     if (data.message === "ok") {
@@ -481,19 +484,21 @@ async function postGrupo(data_array, img_data, setdata_array) {
     }
     else {
 
-      setdata_array({ ...data_array, 
+      setdata_array({
+        ...data_array,
         disabled_all: false,
         disabled_name: false,
         dialog_error: true
-      });  
+      });
 
     }
 
 
   } catch (error) {
-   
+
     //manejar el error
-    setdata_array({ ...data_array, 
+    setdata_array({
+      ...data_array,
       disabled_all: false,
       disabled_name: false,
       dialog_error: true
@@ -525,7 +530,7 @@ function validar_on_off_button(data_array_1, setdata_array_1) {
       if ((array_id[key]).split(',')[1] === 'true' && validateFormate($(`#${(array_id[key]).split(',')[0]}`).val(), ((array_id[key]).split(',')[0]).split('-')[2]) && $(`#${(array_id[key]).split(',')[0]}`).attr('aria-invalid') === 'false') {
         index++;
       }
-  
+
     }
 
     if (index === 2) {
@@ -581,13 +586,13 @@ function get_id_inputs_form() {
   *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
   *  @decs  : get para validar que el nombre del grupo no este repetido
 */
-async function get_name_group(data_array, setdata_array,e,error) {
+async function get_name_group(data_array, setdata_array, e, error) {
 
   try {
 
     setdata_array({
       ...data_array,
-     disabled_name: true
+      disabled_name: true
     });
 
     //fetcher para la consulta de grupos
@@ -600,21 +605,22 @@ async function get_name_group(data_array, setdata_array,e,error) {
     });
 
     let data = await response.json();
-    
+
     if (data[0] === undefined) {
       setdata_array({
         ...data_array,
         [error]: false,
         [getNameState((e.target.id).split('-')[3])]: e.target.value,
-        disabled_name: false 
+        disabled_name: false
       });
     }
     else {
-      setdata_array({ ...data_array, 
-                      [error]: true,
-                      [getNameState((e.target.id).split('-')[3])]: '',
-                      disabled_name: false 
-                    });
+      setdata_array({
+        ...data_array,
+        [error]: true,
+        [getNameState((e.target.id).split('-')[3])]: '',
+        disabled_name: false
+      });
     }
 
 

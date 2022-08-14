@@ -140,7 +140,7 @@ export function Asistencia(props) {
     date_attendence: date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate(),
     kid: 0,
     men: 0,
-    vist: 0, 
+    vist: 0,
     woman: 0,
   });
 
@@ -157,24 +157,24 @@ export function Asistencia(props) {
     console.log(form);
   }
 
-const handleChange = (event) => {
-  //expresion regular para validar numeros con validación de numeros exec 
-  //muestrame por un console.log la fecha de hoy 
-  //dame la fecha de hoy
+  const handleChange = (event) => {
+    //expresion regular para validar numeros con validación de numeros exec 
+    //muestrame por un console.log la fecha de hoy 
+    //dame la fecha de hoy
 
-  //imprimir los id de los campos del formulario
-  console.log(event.target.id);
+    //imprimir los id de los campos del formulario
+    console.log(event.target.id);
 
-  //expresion regular para validar numeros con validación de numeros exec
-  const regex = /^[0-9]*$/;
-  if (regex.test(event.target.value)) {
-    console.log("event", event.target.value);
-    setForm({
-      ...form,
-      [event.target.id]: event.target.value
-    });
+    //expresion regular para validar numeros con validación de numeros exec
+    const regex = /^[0-9]*$/;
+    if (regex.test(event.target.value)) {
+      console.log("event", event.target.value);
+      setForm({
+        ...form,
+        [event.target.id]: event.target.value
+      });
+    }
   }
-}
 
   theme.typography.h4 = {
     fontSize: '0rem',
@@ -197,60 +197,60 @@ const handleChange = (event) => {
   return (
 
     <>
- <HeaderUser properties={header_user} />
- <div className={state_header_user['cls-6']}> 
- </div>
- <div className={classes.styleTitle}>Registro Asistencia</div>
- <div className={classes.paperContainer}> 
-    <div className={classes.root}>
-      <TextField
-          onChange={handleChange}
-          id="kid" label="Niños" type="number"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          variant="outlined"
-      />        
-    </div>
-
-    <div className={classes.root}>
-        <TextField
-          onChange={handleChange}
-          id="men" label="Hombres" type="number"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          variant="outlined"
-      />        
-    </div>    
+      <HeaderUser properties={header_user} />
+      <div className={state_header_user['cls-6']}>
+      </div>
+      <div className={classes.styleTitle}>Registro Asistencia</div>
+      <div className={classes.paperContainer}>
+        <div className={classes.root}>
+          <TextField
+            onChange={handleChange}
+            id="kid" label="Niños" type="number"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            variant="outlined"
+          />
+        </div>
 
         <div className={classes.root}>
-        <TextField
-          onChange={handleChange}
-          id="woman" label="Mujeres" type="number"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          variant="outlined"
-      />        
-    </div>
+          <TextField
+            onChange={handleChange}
+            id="men" label="Hombres" type="number"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            variant="outlined"
+          />
+        </div>
 
         <div className={classes.root}>
-        <TextField
-          onChange={handleChange}
-          id="vist" label="Visitantes" type="number"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          variant="outlined"
-      />        
-    </div>
-    <Button onClick={handleSubmit} className={classes.styleButton} variant="contained" color="secondary">
-        Enviar
-  </Button>
-  </div>      
- 
- <FooterAccount properties={state_footer_accounts} />
+          <TextField
+            onChange={handleChange}
+            id="woman" label="Mujeres" type="number"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            variant="outlined"
+          />
+        </div>
+
+        <div className={classes.root}>
+          <TextField
+            onChange={handleChange}
+            id="vist" label="Visitantes" type="number"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            variant="outlined"
+          />
+        </div>
+        <Button onClick={handleSubmit} className={classes.styleButton} variant="contained" color="secondary">
+          Enviar
+        </Button>
+      </div>
+
+      <FooterAccount properties={state_footer_accounts} />
 
     </>
 
@@ -268,23 +268,23 @@ const handleChange = (event) => {
 */
 async function postAsistencia(data_array) {
 
-try {
-  const response = await fetch('https://demon789-4.herokuapp.com/api', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json', 
-      'Accept': 'application/json',
-      'Authorization': generateToken()
+  try {
+    const response = await fetch('https://demon789-4.herokuapp.com/api', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': generateToken()
 
-    },
-    body: JSON.stringify(data_array)
-  });
-  const json = await response.json();
-  if(json.message === 'ok'){
-    alert('Registro exitoso');
-  }
-}catch(error) {
-  console.log(error);
+      },
+      body: JSON.stringify(data_array)
+    });
+    const json = await response.json();
+    if (json.message === 'ok') {
+      alert('Registro exitoso');
+    }
+  } catch (error) {
+    console.log(error);
   }
 }
 
