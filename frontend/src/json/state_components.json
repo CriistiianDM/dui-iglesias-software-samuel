@@ -121,6 +121,29 @@
                     "content": "Esta opcion permite modificar la informacion de la congregacion"
                 }
             ],
+            "pastor": [
+                {
+                    "id": "btn-6",
+                    "icon": "church",
+                    "title": "Congregacion",
+                    "to": "/congregacion",
+                    "content": "Esta opcion permite modificar la informacion de la congregacion"
+                },
+                {
+                    "id": "btn-2",
+                    "icon": "calendar_today",
+                    "title": "Asistencia",
+                    "to": "/asistencia",
+                    "content": "Esta opcion permite registrar la asistencia de los usuarios"
+                },
+                {
+                    "id": "btn-5",
+                    "icon": "celebration",
+                    "title": "Cumpleaños",
+                    "to": "/account",
+                    "content": "Esta opcion muestra los cumpleaños de los usuarios de este mes"
+                }
+            ],
             "cls-1": "box-avatar-setting",
             "cls-2": "box-setting-element-account",
             "cls-3": "box-icon-element-avatar",
