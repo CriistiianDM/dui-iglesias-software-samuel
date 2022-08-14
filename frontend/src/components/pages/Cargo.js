@@ -94,7 +94,7 @@ export function Cargo(props) {
   const classes = useStyles();
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
-
+ 
 
   //capturar el valor del cargo del localStorage
   const cargo = localStorage.getItem('cargo').split(',');
@@ -140,6 +140,12 @@ export function Cargo(props) {
     setOpen(true);
   };
 
+  //use Effect para verificar si inicio sesion o no
+  React.useEffect(() => {
+    verificar_inicio_sesion(navigate);
+  }, []);
+
+
   return (
     <>
      <div className={state_cargo['cls-2']}>
@@ -168,6 +174,37 @@ export function Cargo(props) {
      </div>
     </>
   );
+}
+
+
+/**
+  *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
+  *  @decs  : timer para verficar si inicio sesion o no
+*/
+function verificar_inicio_sesion(navigate) {
+
+  //expresion regular para verificar numeros
+  const regex = /^[0-9]{9,15}$/;
+
+  const timer = setInterval(() => {
+      
+     if (localStorage.getItem('user_login') === null) {
+        navigate('/');
+     }
+     else {
+
+        if (!regex.exec(localStorage.getItem('user_login'))) {
+          navigate('/');
+        }
+
+        }
+
+
+     
+  } , 100);
+
+  return timer;
+
 }
 
 

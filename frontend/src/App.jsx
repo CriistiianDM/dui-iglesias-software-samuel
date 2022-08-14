@@ -3,7 +3,8 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Routes,
-  Route
+  Route,
+  useNavigate
 } from 'react-router-dom';
 
 
@@ -39,9 +40,11 @@ const { generateToken } = require('./components/_____/_____')
 */
 export function App() {
 
+
   React.useEffect(() => {
     getCountries(); 
   }, []);
+
   
   //return the component
   return (
@@ -97,3 +100,4 @@ async function getCountries() {
    }
 
 }
+
