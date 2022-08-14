@@ -15,5 +15,6 @@
 .box-avatar-style {
     height: 2.5em !important;
     width: 2.5em !important;
+    background-color: hsl(198deg 32% 16%) !important;
 }
 

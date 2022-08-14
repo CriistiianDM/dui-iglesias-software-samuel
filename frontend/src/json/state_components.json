@@ -96,7 +96,7 @@
                     "id": "btn-2",
                     "icon": "calendar_today",
                     "title": "Asistencia",
-                    "to": "/account",
+                    "to": "/asistencia",
                     "content": "Esta opcion permite registrar la asistencia de los usuarios"
                 },
                 {
@@ -105,13 +105,6 @@
                     "title": "Grupos",
                     "to": "/grupo",
                     "content": "Esta opcion permite crear un nuevo grupo"
-                },
-                {
-                    "id": "btn-4",
-                    "icon": "newspaper",
-                    "title": "Banner Noticias",
-                    "to": "/account",
-                    "content": "Esta opcion permite modificar el banner"
                 },
                 {
                     "id": "btn-5",
@@ -275,7 +268,8 @@
             "cls-7": "box-setting-element-account-profile box-contend-element-profile",
             "cls-8": "box-icon-items-profile box-input-element-profile",
             "cls-9": "box-style-input-element-profile",
-            "cls-10": "box-setting-element-account-profile aux-box-setting-element-profile"
+            "cls-10": "box-setting-element-account-profile aux-box-setting-element-profile",
+            "cls-11": "box-title-profile-user-element"
         }
     },
     "personal-information": {
@@ -287,7 +281,9 @@
             "cls-5": "box-personal-group-info",
             "cls-6": "box-personal-group-info-title",
             "cls-7": "box-personal-group-info-content",
-            "cls-8": "box-text-group-botton"
+            "cls-8": "box-text-group-botton",
+            "cls-9": "box-no-found-group",
+            "cls-10": "box-groups-found"
         }
     },
     "createuser": {
@@ -333,5 +329,10 @@
            "cls-1": "box-cargo-style-element",
            "cls-2": "conteiner-cargo"
        }
+    },
+    "addpeoplegroup": {
+        "0": {
+            "cls-1": "box-add-people-group-element"
+        }
     }
 }

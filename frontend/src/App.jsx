@@ -16,8 +16,9 @@ import { PersonNormal } from './components/pages/PersonNormal';
 import { A404 } from './components/pages/A404';
 import { CreateUser } from './components/pages/CreateUser';
 import { Grupos } from './components/pages/Grupos.js'; 
-import { JovenLider } from './components/pages/JovenLider.js';
-import { Pastor } from './components/pages/Pastor.js';
+import { Asistencia } from './components/pages/Asistencia';
+import { AddPersonGroup } from './components/pages/AddPersonGroup';
+
 
 
 //librery or import of styles of css
@@ -54,8 +55,8 @@ export function App() {
         <Route path="/creyente" element = {<PersonNormal properties={json} />} />
         <Route path="/createuser" element = {<CreateUser properties={json} />} />
         <Route path="/grupo" element={<Grupos properties={json}/>}/>
-        <Route path="/JovenLider" element={<JovenLider properties={json}/>}/>
-        <Route path="/Pastor" element={<Pastor properties={json}/>}/>
+        <Route path="asistencia" element={<Asistencia properties={json}/>} />
+        <Route path="/addpersongroup" element={<AddPersonGroup properties={json}/>}/>
         <Route path="*" element = {<A404 />} />
       </Routes>
     </Router>

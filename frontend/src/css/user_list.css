@@ -1,5 +1,6 @@
 
 
+
 .box-user-content-element {
     justify-self: center;
     align-self: center;
@@ -31,7 +32,6 @@
 .title-table-element-header {
     justify-self: flex-start !important;
     font-size: 1.3em !important;
-
 }
 
 .box-search-element-user {

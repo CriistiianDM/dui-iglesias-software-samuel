@@ -24,6 +24,7 @@
 .box-aux-bottom-element {
     width: 8.3em !important;
     height: 8.3em !important;
+    background-color: hsl(198deg 32% 16%) !important;
 }
 
 .box-aux-change-avatar {
@@ -50,9 +51,16 @@
 }
 
 .box-title-element-profile {
-    color: gray;
-    font-size: 1.2em !important;
+    color: hsl(198deg 32% 16%);
+    font-size: 1.4em !important;
     font-weight: 500;
+    text-align: center;
+}
+
+.box-title-profile-user-element {
+    color: hsl(198deg 32% 16%);
+    font-size: 3em !important;
+    font-weight: 800;
     text-align: center;
 }
 
@@ -61,6 +69,9 @@
 
     .box-title-element-profile {
         font-size: 1em !important;
+    }
+    .box-title-profile-user-element {
+        font-size: 2em !important;
     }
 
 }
@@ -71,6 +82,7 @@
     grid-area: element_2;
     width: 8.3em !important;
     height: 8.3em !important;
+    background-color: hsl(198deg 32% 16%) !important;
 }
 
 .box-title-element-avatar-account {
