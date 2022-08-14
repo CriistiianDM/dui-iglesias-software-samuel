@@ -20,6 +20,7 @@ const theme = createTheme({
 });
 
 
+
 /* Defining the style of the component. */
 const useStyles = makeStyles((theme) => ({
 
