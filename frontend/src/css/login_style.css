@@ -11,10 +11,12 @@
     overflow: hidden;
     z-index: 4;
 }
+
 .title-style{
     justify-self: center;
     text-align: center;
 }
+
 .conteiner-textBox {
     display: grid;
     display: grid;
