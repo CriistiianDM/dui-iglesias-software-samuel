@@ -198,7 +198,7 @@ export function Asistencia(props) {
 
   //useEffect para cargar la imagen de perfil
   React.useEffect(() => {
-    verificar_inicio_sesion(navigate);
+    verificar_inicio_sesion(navigate,'/asistencia');
   }, []);
 
   return (
