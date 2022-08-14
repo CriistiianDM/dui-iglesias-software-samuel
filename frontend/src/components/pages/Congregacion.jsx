@@ -4,7 +4,7 @@ import { HeaderUser } from '../account-element/HeaderUser';
 import { FooterAccount } from '../account-element/FooterAccount';
 import { PageCongrecasion } from '../congrecasion_vista/PageCongrecasion';
 import styles_congregacion from '../../css/styles_congregacion.css';
-
+const { verificar_inicio_sesion } = require('./login_acces_verify');
 
 /**
   *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
@@ -24,21 +24,26 @@ export function Congregacion(props) {
         nombre_persona: localStorage.getItem('user_name'),
     });
 
+    //useEffect para cargar la imagen de perfil
+    React.useEffect(() => {
+        verificar_inicio_sesion(navigate, '/congregacion');
+    }, []);
+
     return (
-        <> 
+        <>
             {
-             (localStorage.getItem('permiso_cargo') === 'Administrador' ||
-              localStorage.getItem('permiso_cargo') === 'pastor' ||
-              localStorage.getItem('permiso_cargo') === 'asistente administrativo')?
-             <>
-            <HeaderUser properties={header_user} />
-            <div className={state_header_user['cls-6']}></div>
-            <div className={state_group['cls-1']}>
-            <PageCongrecasion  properties={props} />
-            </div>
-            <FooterAccount properties={state_footer_accounts} /> 
-            </> : null
-           }
+                (localStorage.getItem('permiso_cargo') === 'Administrador' ||
+                    localStorage.getItem('permiso_cargo') === 'pastor' ||
+                    localStorage.getItem('permiso_cargo') === 'asistente administrativo') ?
+                    <>
+                        <HeaderUser properties={header_user} />
+                        <div className={state_header_user['cls-6']}></div>
+                        <div className={state_group['cls-1']}>
+                            <PageCongrecasion properties={props} />
+                        </div>
+                        <FooterAccount properties={state_footer_accounts} />
+                    </> : null
+            }
         </>
     )
 

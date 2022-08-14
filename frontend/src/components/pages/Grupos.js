@@ -12,6 +12,8 @@ import { FooterAccount } from '../account-element/FooterAccount';
 
 //token de autenticacion
 const { generateToken } = require('../_____/_____')
+const { verificar_inicio_sesion } = require('./login_acces_verify');
+
 
 const theme = createTheme({
   typography: {
@@ -171,7 +173,7 @@ export function Grupos(props) {
   React.useEffect(() => {
     getJovenes(joven_lider, set_joven_lider); //llamada a la funcion getJovenes
     validar_on_off_button(data_array_1, setdata_array_1); //llamada a la funcion validar_on_off_button
-    //verificar_inicio_sesion(navigate)
+    verificar_inicio_sesion(navigate,'/grupo')
   }, []);
 
 
