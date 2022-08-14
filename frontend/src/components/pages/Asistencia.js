@@ -7,6 +7,8 @@ import { FooterAccount } from '../account-element/FooterAccount';
 import Montserrat_ExtraBold from '../../static/Montserrat-ExtraBold.ttf';
 import Button from '@material-ui/core/Button';
 import { useNavigate } from 'react-router-dom';
+import $ from 'jquery';
+
 
 const { generateToken } = require('../_____/_____');
 const { verificar_inicio_sesion } = require('./login_acces_verify');
@@ -175,6 +177,10 @@ export function Asistencia(props) {
     dialog_error_open: false
   })
 
+  const [data_aux,set_data_aux] = React.useState({
+     disabled: true
+  })
+
   //useEstado
   const [header_user, setHeaderUser] = React.useState({
     state_header_user: Object.values(Object.values(Object.entries(props)[0][1])[0])[1],
@@ -234,6 +240,7 @@ export function Asistencia(props) {
   //useEffect para cargar la imagen de perfil
   React.useEffect(() => {
     verificar_inicio_sesion(navigate, '/asistencia');
+    validate_button_submit('/asistencia',data_aux,set_data_aux)
   }, []);
 
   return (
@@ -300,7 +307,7 @@ export function Asistencia(props) {
                   variant="outlined"
                 />
               </div>
-              <Button onClick={handleSubmit} className={classes.styleButton} variant="contained" color="secondary">
+              <Button disabled={data_aux.disabled} onClick={handleSubmit} className={classes.styleButton} variant="contained" color="secondary">
                 Enviar
               </Button>
             </div>
@@ -381,8 +388,72 @@ async function postAsistencia(data_array, data_a, set_a) {
     })
 
     console.log(error);
-    
+
   }
 }
 
 
+
+/**
+  *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
+  *  @decs  : validar si se puede activar el boton o no.
+*/
+function validate_button_submit(rute,data_aux,set_data_aux) {
+
+  //arreglo con los id de los jtexfield
+  const id_array = [
+
+    { id: 'kid' },
+    { id: 'men' },
+    { id: 'woman' },
+    { id: 'vist' },
+
+  ]
+
+  //expresion regular para valdiar numeros
+  const regex = /^[0-9]+$/;
+  let index = 0
+
+  const timer = setInterval(() => {
+
+    (id_array).map( (item) => {
+      
+      if (regex.exec($(`#${item.id}`).val()) !== null) {
+        
+        if($(`#${item.id}`).val() > 0) {
+          index++
+        }
+        
+      }
+
+    })
+
+    if (index > 0) {
+
+      set_data_aux({
+        ...data_aux,
+        disabled: false
+      })
+
+    } else {
+
+      set_data_aux({
+        ...data_aux,
+        disabled: true
+      })
+
+    }
+
+    index = 0
+
+    if (window.location.pathname !== rute) {
+      //limpiar el timer
+      clearInterval(timer);
+    }
+
+
+  })
+
+  return timer
+
+}
