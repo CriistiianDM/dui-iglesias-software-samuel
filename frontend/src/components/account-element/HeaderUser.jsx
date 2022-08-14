@@ -83,6 +83,11 @@ export function HeaderUser(props) {
    navigate("/", { replace: true })
  };
 
+ let handleClickTucargo = () => {
+  setAnchorEl(null);
+  navigate("/cargo", { replace: true })
+};
+
   return (
 
     <div className={state_header_user['cls-1']}>
@@ -108,8 +113,8 @@ export function HeaderUser(props) {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={handleClickProfile}>Profile</MenuItem>
-        <MenuItem>My account</MenuItem>
+        <MenuItem onClick={handleClickProfile}>Info Usuario</MenuItem>
+        <MenuItem onClick={handleClickTucargo}>Tus Cargos</MenuItem>
         <MenuItem onClick={handleClickLogout}>Logout</MenuItem>
       </Menu>
 
