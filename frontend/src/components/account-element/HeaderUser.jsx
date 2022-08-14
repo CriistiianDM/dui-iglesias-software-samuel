@@ -80,6 +80,8 @@ export function HeaderUser(props) {
  
  let handleClickLogout = () => {
    setAnchorEl(null);
+   localStorage.setItem('permiso_cargo',null);
+   localStorage.setItem('user_login',null)
    navigate("/", { replace: true })
  };
 
