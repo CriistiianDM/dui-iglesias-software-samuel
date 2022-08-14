@@ -334,5 +334,10 @@
         "0": {
             "cls-1": "box-add-people-group-element"
         }
+    },
+    "vistaCongracion": {
+        "0": {
+            "cls-1": "box-vista-congracion-element"
+        }
     }
 }
