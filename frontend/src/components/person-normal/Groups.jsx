@@ -101,22 +101,33 @@ export function Groups(props) {
 
     //handle para obtener los datos del json
     const handle_get_group = (e) => {
-        console.log('handle_get_group',e);
-   
-        (data_array.groups).map((item, index) => {
+        console.log('handle_get_group', e);
 
-            if (item.id == (e.target.id).split('-')[1]) {
-                localStorage.setItem('group_selected', JSON.stringify(item));
-                navigate('/addpersongroup');
-            }
+        if (localStorage.getItem('permiso_cargo') === 'Lider' ||
+            localStorage.getItem('permiso_cargo') === 'comite') {
 
-        })
-        
+            (data_array.groups).map((item, index) => {
+
+                if (item.id == (e.target.id).split('-')[1]) {
+                    localStorage.setItem('group_selected', JSON.stringify(item));
+                    navigate('/addpersongroup');
+                }
+
+            })
+
+        }
+
     }
-    
+
     //use effect para obtener los datos del json
     React.useEffect(() => {
-        get_group_person(data_array, set_data_array)
+
+        if (localStorage.getItem('permiso_cargo') === 'Lider') {
+            get_group_person(data_array, set_data_array, 1)
+        } else {
+            get_group_person(data_array, set_data_array, 0)
+        }
+
     }, [])
 
 
@@ -138,8 +149,8 @@ export function Groups(props) {
                         {
                             (data_array.groups).map((item, index) => (
                                 <Button onClick={handle_get_group} id={`groupInique-${item.id}`} className={classes.buttonGroupAux} key={index}>
-                                    <Typography id={`groupInique1-${item.id}`}className={classes.titlteGroupAux}> {item['nombre_grupo']} </Typography>
-                                    <Typography id={`groupInique2-${item.id}`}className={classes.textGroupAux2}> {item['descripcion']} </Typography>
+                                    <Typography id={`groupInique1-${item.id}`} className={classes.titlteGroupAux}> {item['nombre_grupo']} </Typography>
+                                    <Typography id={`groupInique2-${item.id}`} className={classes.textGroupAux2}> {item['descripcion']} </Typography>
                                 </Button>
                             ))
                         }
@@ -157,11 +168,11 @@ export function Groups(props) {
   *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
   *  @decs  : Fetch tipo get para trer los grupos de las personas
 */
-async function get_group_person(data_array, set_data_array) {
+async function get_group_person(data_array, set_data_array, type) {
     try {
 
         const doc = localStorage.getItem('user_login');
-        const response = await fetch(`https://demon789-4.herokuapp.com/gpi/${doc}`, {
+        const response = await fetch(`https://demon789-4.herokuapp.com/${(type === 0) ? 'gpi' : 'zggl'}/${doc}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -185,7 +196,7 @@ async function get_group_person(data_array, set_data_array) {
             })
         }
 
-        console.log(data,'salidad bombom');
+        console.log(data, 'salidad bombom');
 
     } catch (error) {
 

@@ -8,7 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import FormHelperText from '@material-ui/core/FormHelperText';
 import { useNavigate } from 'react-router-dom';
 import Montserrat_ExtraBold from '../../static/Montserrat-ExtraBold.ttf';
-
+const { verificar_inicio_sesion } = require('./login_acces_verify');
 
 
 const theme = createTheme({
@@ -23,7 +23,7 @@ const theme = createTheme({
 /* Defining the style of the component. */
 const useStyles = makeStyles((theme) => ({
 
-  
+
   button: {
     display: 'block',
     marginTop: theme.spacing(2),
@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
   },
   styleTextChoose: {
     fontFamily: Montserrat_ExtraBold,
-    color:'#ff725e',
+    color: '#ff725e',
     fontWeight: '650',
     fontSize: '1.5em !important',
     textAlign: 'center',
@@ -76,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
     color: '#2c2c2c',
     fontWeight: '350',
   },
- 
+
 }));
 
 
@@ -88,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
  * @returns The return is a form control with a select and a label.
  */
 export function Cargo(props) {
-  
+
   const state_cargo = ((props.properties).cargo_style)['0'];
   const theme = createTheme();
   const classes = useStyles();
@@ -111,19 +111,18 @@ export function Cargo(props) {
    */
   const handleChange = (event) => {
     const name = event.target.value;
+    localStorage.setItem('permiso_cargo', name);
 
-    if (name === 'Administrador') {
+    if (name === 'Administrador' || name === 'pastor' || name === 'asistente administrativo') {
       navigate('/account');
     }
-    if (name === 'creyente') {
+
+    if (name === 'creyente' || name === 'Lider' || name === 'comite') {
+      //siiiii mi amorrrr ufffff
       navigate('/creyente');
     }
-    if (name === 'joven lider') {
-      navigate('/creyente');
-    }
-    if (name === 'pastor') {
-      navigate('/creyente');
-    }
+
+
   };
 
   /**
@@ -141,45 +140,40 @@ export function Cargo(props) {
     setOpen(true);
   };
 
+  //use Effect para verificar si inicio sesion o no
+  React.useEffect(() => {
+    verificar_inicio_sesion(navigate,'/cargo');
+  }, []);
+
+
   return (
     <>
-     <div className={state_cargo['cls-2']}>
-      <div className={state_cargo['cls-1']}>
-      <Typography className={classes.styleTextChoose}>Elige el cargo por el cual deseas ingresar:</Typography>
-        <FormControl className={classes.formControl}>
-          <InputLabel className={classes.labelFormTextHelp} htmlFor="user-native-simple">Cargo</InputLabel>
-          <Select
-            native
-            value={open.user}
-            onChange={handleChange}
-            onOpen={handleOpen}
-            inputProps={{
-              name: 'user',
-              id: 'user-native-simple',
-            }}
-          >
-            <option aria-label="None" value="" />
-            {cargo.map((cargo, index) => (
-              <option key={index} value={cargo.replace('"', '')}>{cargo.replace('"', '')}</option>
-            ))}
-          </Select>
-          <FormHelperText className={classes.labelFormTextHelp} id="my-helper-text">Seleciona el cargo</FormHelperText>
-        </FormControl>
+      <div className={state_cargo['cls-2']}>
+        <div className={state_cargo['cls-1']}>
+          <Typography className={classes.styleTextChoose}>Elige el cargo por el cual deseas ingresar:</Typography>
+          <FormControl className={classes.formControl}>
+            <InputLabel className={classes.labelFormTextHelp} htmlFor="user-native-simple">Cargo</InputLabel>
+            <Select
+              native
+              value={open.user}
+              onChange={handleChange}
+              onOpen={handleOpen}
+              inputProps={{
+                name: 'user',
+                id: 'user-native-simple',
+              }}
+            >
+              <option aria-label="None" value="" />
+              {cargo.map((cargo, index) => (
+                <option key={index} value={cargo.replace('"', '')}>{cargo.replace('"', '')}</option>
+              ))}
+            </Select>
+            <FormHelperText className={classes.labelFormTextHelp} id="my-helper-text">Seleciona el cargo</FormHelperText>
+          </FormControl>
+        </div>
       </div>
-     </div>
     </>
   );
 }
 
 
-//pasar a mayusculas Iglesia pentecostal Colombia este nombre
-// IGLESIA PENTECOSTAL COLOMBIA
-/*dejo guardado para despues los cargos*/
-/*
-  <option>Sistemas</option>
-          <option>Administrativo</option>
-          <option>Asistente Administrativo</option>
-          <option>Pastor local</option>
-          <option>Cómite</option>
-          <option>Creyente</option>
-*/

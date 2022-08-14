@@ -6,9 +6,12 @@ import { WelcomeAccount } from '../account-element/WelcomeAccount';
 import { SettingAccounts } from '../account-element/SettingAccounts';
 import { UserList } from '../account-element/UserList';
 import { FooterAccount } from '../account-element/FooterAccount';
+import { useNavigate } from 'react-router-dom';
 
 //token de autenticacion
 const { generateToken } = require('../_____/_____')
+const { verificar_inicio_sesion } = require('./login_acces_verify');
+
 
 /**
   *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
@@ -24,6 +27,7 @@ export function Account(props) {
   let state_user_accounts = Object.values(Object.values(Object.entries(props)[0][1])[5])[3];
   let state_footer_accounts = Object.values(Object.values(Object.entries(props)[0][1])[5])[4];
   let state_group = ((props.properties)['personal-information'])['0'];
+  const navigate = useNavigate();
 
   //useEstado
   const [header_user, setHeaderUser] = React.useState({
@@ -35,10 +39,16 @@ export function Account(props) {
   //useEffect para cargar la imagen de perfil
   React.useEffect(() => {
     get_user_name(localStorage.getItem('user_login'),header_user, setHeaderUser);
+    verificar_inicio_sesion(navigate,'/account');
   }, []);
 
   return (
-    <>
+    <> 
+      {
+      (localStorage.getItem('permiso_cargo') === 'pastor' ||
+      localStorage.getItem('permiso_cargo') === 'Administrador' ||
+      localStorage.getItem('permiso_cargo') === 'asistente administrativo')?
+      <> 
       <HeaderUser properties={header_user} />
       <div className={state_header_user['cls-6']}></div>
       <div className={state_group['cls-1']}>
@@ -48,6 +58,9 @@ export function Account(props) {
       </div>
       <UserList properties={state_user_accounts} />
       <FooterAccount properties={state_footer_accounts} />
+      </>
+      : null
+     }
     </>
   );
 
@@ -84,3 +97,6 @@ async function get_user_name(user_id,header_user, setHeaderUser) {
   }
 
 }
+
+
+

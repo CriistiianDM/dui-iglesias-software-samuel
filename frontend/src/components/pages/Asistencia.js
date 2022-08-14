@@ -5,8 +5,10 @@ import { createTheme, Grid } from '@material-ui/core';
 import { HeaderUser } from '../account-element/HeaderUser';
 import { FooterAccount } from '../account-element/FooterAccount';
 import Button from '@material-ui/core/Button';
-const { generateToken } = require('../_____/_____');
+import { useNavigate } from 'react-router-dom';
 
+const { generateToken } = require('../_____/_____');
+const { verificar_inicio_sesion } = require('./login_acces_verify');
 
 
 const theme = createTheme({
@@ -130,7 +132,7 @@ export function Asistencia(props) {
   const classes = useStyles();
   const theme = createTheme();
   const date = new Date();
-
+  const navigate = useNavigate();
 
   let state_header_user = Object.values(Object.values(Object.entries(props)[0][1])[0])[1];
   let state_footer_accounts = Object.values(Object.values(Object.entries(props)[0][1])[5])[4];
@@ -140,7 +142,7 @@ export function Asistencia(props) {
     date_attendence: date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate(),
     kid: 0,
     men: 0,
-    vist: 0, 
+    vist: 0,
     woman: 0,
   });
 
@@ -157,24 +159,24 @@ export function Asistencia(props) {
     console.log(form);
   }
 
-const handleChange = (event) => {
-  //expresion regular para validar numeros con validación de numeros exec 
-  //muestrame por un console.log la fecha de hoy 
-  //dame la fecha de hoy
+  const handleChange = (event) => {
+    //expresion regular para validar numeros con validación de numeros exec 
+    //muestrame por un console.log la fecha de hoy 
+    //dame la fecha de hoy
 
-  //imprimir los id de los campos del formulario
-  console.log(event.target.id);
+    //imprimir los id de los campos del formulario
+    console.log(event.target.id);
 
-  //expresion regular para validar numeros con validación de numeros exec
-  const regex = /^[0-9]*$/;
-  if (regex.test(event.target.value)) {
-    console.log("event", event.target.value);
-    setForm({
-      ...form,
-      [event.target.id]: event.target.value
-    });
+    //expresion regular para validar numeros con validación de numeros exec
+    const regex = /^[0-9]*$/;
+    if (regex.test(event.target.value)) {
+      console.log("event", event.target.value);
+      setForm({
+        ...form,
+        [event.target.id]: event.target.value
+      });
+    }
   }
-}
 
   theme.typography.h4 = {
     fontSize: '0rem',
@@ -194,64 +196,75 @@ const handleChange = (event) => {
     },
   };
 
+  //useEffect para cargar la imagen de perfil
+  React.useEffect(() => {
+    verificar_inicio_sesion(navigate,'/asistencia');
+  }, []);
+
   return (
 
     <>
- <HeaderUser properties={header_user} />
- <div className={state_header_user['cls-6']}> 
- </div>
- <div className={classes.styleTitle}>Registro Asistencia</div>
- <div className={classes.paperContainer}> 
-    <div className={classes.root}>
-      <TextField
-          onChange={handleChange}
-          id="kid" label="Niños" type="number"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          variant="outlined"
-      />        
-    </div>
+      {
+        (localStorage.getItem('permiso_cargo') === 'Administrador' ||
+          localStorage.getItem('permiso_cargo') === 'pastor' ||
+          localStorage.getItem('permiso_cargo') === 'asistente administrativo') ?
+          <>
+            <HeaderUser properties={header_user} />
+            <div className={state_header_user['cls-6']}>
+            </div>
+            <div className={classes.styleTitle}>Registro Asistencia</div>
+            <div className={classes.paperContainer}>
+              <div className={classes.root}>
+                <TextField
+                  onChange={handleChange}
+                  id="kid" label="Niños" type="number"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  variant="outlined"
+                />
+              </div>
 
-    <div className={classes.root}>
-        <TextField
-          onChange={handleChange}
-          id="men" label="Hombres" type="number"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          variant="outlined"
-      />        
-    </div>    
+              <div className={classes.root}>
+                <TextField
+                  onChange={handleChange}
+                  id="men" label="Hombres" type="number"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  variant="outlined"
+                />
+              </div>
 
-        <div className={classes.root}>
-        <TextField
-          onChange={handleChange}
-          id="woman" label="Mujeres" type="number"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          variant="outlined"
-      />        
-    </div>
+              <div className={classes.root}>
+                <TextField
+                  onChange={handleChange}
+                  id="woman" label="Mujeres" type="number"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  variant="outlined"
+                />
+              </div>
 
-        <div className={classes.root}>
-        <TextField
-          onChange={handleChange}
-          id="vist" label="Visitantes" type="number"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          variant="outlined"
-      />        
-    </div>
-    <Button onClick={handleSubmit} className={classes.styleButton} variant="contained" color="secondary">
-        Enviar
-  </Button>
-  </div>      
- 
- <FooterAccount properties={state_footer_accounts} />
+              <div className={classes.root}>
+                <TextField
+                  onChange={handleChange}
+                  id="vist" label="Visitantes" type="number"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  variant="outlined"
+                />
+              </div>
+              <Button onClick={handleSubmit} className={classes.styleButton} variant="contained" color="secondary">
+                Enviar
+              </Button>
+            </div>
 
+            <FooterAccount properties={state_footer_accounts} />
+          </> : null
+      }
     </>
 
 
@@ -268,25 +281,24 @@ const handleChange = (event) => {
 */
 async function postAsistencia(data_array) {
 
-try {
-  const response = await fetch('https://demon789-4.herokuapp.com/api', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json', 
-      'Accept': 'application/json',
-      'Authorization': generateToken()
+  try {
+    const response = await fetch('https://demon789-4.herokuapp.com/api', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': generateToken()
 
-    },
-    body: JSON.stringify(data_array)
-  });
-  const json = await response.json();
-  if(json.message === 'ok'){
-    alert('Registro exitoso');
-  }
-}catch(error) {
-  console.log(error);
+      },
+      body: JSON.stringify(data_array)
+    });
+    const json = await response.json();
+    if (json.message === 'ok') {
+      alert('Registro exitoso');
+    }
+  } catch (error) {
+    console.log(error);
   }
 }
-
 
 

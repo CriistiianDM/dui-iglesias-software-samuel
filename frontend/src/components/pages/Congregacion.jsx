@@ -2,22 +2,24 @@
 import React from 'react';
 import { HeaderUser } from '../account-element/HeaderUser';
 import { FooterAccount } from '../account-element/FooterAccount';
-import { AddPeopleGroup } from '../addPersonGroup/AddPeopleGroup';
+import { PageCongrecasion } from '../congrecasion_vista/PageCongrecasion';
+import styles_congregacion from '../../css/styles_congregacion.css';
 import { useNavigate } from 'react-router-dom';
+
 
 const { verificar_inicio_sesion } = require('./login_acces_verify');
 
 /**
- * @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
- * @des page para añadir personas a un grupo
- * @param {json} props 
- */
-export function AddPersonGroup(props) {
+  *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
+  *  @decs  : Vista para ver la informacion de la iglesia
+  *
+*/
+export function Congregacion(props) {
 
-    //variable de estado
+    //variables  
     let state_header_user = Object.values(Object.values(Object.entries(props)[0][1])[0])[1];
     let state_footer_accounts = Object.values(Object.values(Object.entries(props)[0][1])[5])[4];
-    let state_group = Object.values(Object.values(Object.entries(props)[0][1])[7])[0];
+    let state_group = ((props.properties)['personal-information'])['0'];
     const navigate = useNavigate();
 
     //useEstado
@@ -28,24 +30,26 @@ export function AddPersonGroup(props) {
 
     //useEffect para cargar la imagen de perfil
     React.useEffect(() => {
-        verificar_inicio_sesion(navigate, '/addpersongroup');
+        verificar_inicio_sesion(navigate, '/congregacion');
     }, []);
 
     return (
         <>
             {
-                (localStorage.getItem('permiso_cargo') === 'Lider' ||
-                    localStorage.getItem('permiso_cargo') === 'comite') ?
+                (localStorage.getItem('permiso_cargo') === 'Administrador' ||
+                    localStorage.getItem('permiso_cargo') === 'pastor' ||
+                    localStorage.getItem('permiso_cargo') === 'asistente administrativo') ?
                     <>
                         <HeaderUser properties={header_user} />
                         <div className={state_header_user['cls-6']}></div>
                         <div className={state_group['cls-1']}>
-                            <AddPeopleGroup properties={props} />
+                            <PageCongrecasion properties={props} />
                         </div>
                         <FooterAccount properties={state_footer_accounts} />
                     </> : null
             }
         </>
     )
+
 
 }
