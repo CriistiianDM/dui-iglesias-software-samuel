@@ -113,7 +113,7 @@ export function Cargo(props) {
     const name = event.target.value;
     localStorage.setItem('permiso_cargo', name);
 
-    if (name === 'Administrador' || name === 'pastor') {
+    if (name === 'Administrador' || name === 'pastor' || name === 'asistente administrativo') {
       navigate('/account');
     }
 

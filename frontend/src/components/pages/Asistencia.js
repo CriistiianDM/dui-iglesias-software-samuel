@@ -198,8 +198,9 @@ export function Asistencia(props) {
 
     <>
       {
-        (localStorage.getItem('permiso_cargo') === 'Administrador' ||
-          localStorage.getItem('permiso_cargo') === 'pastor') ?
+        ( localStorage.getItem('permiso_cargo') === 'Administrador' ||
+          localStorage.getItem('permiso_cargo') === 'pastor' ||
+          localStorage.getItem('permiso_cargo') === 'asistente administrativo') ?
           <>
             <HeaderUser properties={header_user} />
             <div className={state_header_user['cls-6']}>
