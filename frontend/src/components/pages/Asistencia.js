@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
+import { TextField, Dialog, DialogActions, DialogTitle, DialogContent, DialogContentText } from '@material-ui/core';
 import { createTheme, Grid } from '@material-ui/core';
 import { HeaderUser } from '../account-element/HeaderUser';
 import { FooterAccount } from '../account-element/FooterAccount';
@@ -170,6 +170,11 @@ export function Asistencia(props) {
     woman: 0,
   });
 
+  const [data_array, set_data_array] = React.useState({
+    dialog_open: false,
+    dialog_error_open: false
+  })
+
   //useEstado
   const [header_user, setHeaderUser] = React.useState({
     state_header_user: Object.values(Object.values(Object.entries(props)[0][1])[0])[1],
@@ -179,8 +184,7 @@ export function Asistencia(props) {
   //handle para el submit
   const handleSubmit = (e) => {
     //llamar la funcion de postAsistencia
-    postAsistencia(form);
-    console.log(form);
+    postAsistencia(form, data_array, set_data_array);
   }
 
   const handleChange = (event) => {
@@ -220,6 +224,13 @@ export function Asistencia(props) {
     },
   };
 
+  const handle_dialog_open = () => {
+    set_data_array({
+      ...data_array,
+      dialog_open: false
+    })
+  }
+
   //useEffect para cargar la imagen de perfil
   React.useEffect(() => {
     verificar_inicio_sesion(navigate, '/asistencia');
@@ -241,7 +252,7 @@ export function Asistencia(props) {
               <div className={classes.root}>
                 <TextField
                   onChange={handleChange}
-                  InputProps={{ className: classes.input }} 
+                  InputProps={{ className: classes.input }}
                   className={classes.textField}
                   id="kid" label="Niños" type="number"
                   InputLabelProps={{
@@ -253,7 +264,7 @@ export function Asistencia(props) {
 
               <div className={classes.root}>
                 <TextField
-                  InputProps={{ className: classes.input }} 
+                  InputProps={{ className: classes.input }}
                   className={classes.textField}
                   onChange={handleChange}
                   id="men" label="Hombres" type="number"
@@ -266,7 +277,7 @@ export function Asistencia(props) {
 
               <div className={classes.root}>
                 <TextField
-                  InputProps={{ className: classes.input }} 
+                  InputProps={{ className: classes.input }}
                   className={classes.textField}
                   onChange={handleChange}
                   id="woman" label="Mujeres" type="number"
@@ -279,7 +290,7 @@ export function Asistencia(props) {
 
               <div className={classes.root}>
                 <TextField
-                  InputProps={{ className: classes.input }} 
+                  InputProps={{ className: classes.input }}
                   className={classes.textField}
                   onChange={handleChange}
                   id="vist" label="Visitantes" type="number"
@@ -293,6 +304,23 @@ export function Asistencia(props) {
                 Enviar
               </Button>
             </div>
+            <Dialog
+              open={data_array.dialog_open}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              <DialogTitle id="alert-dialog-title">{`${(!data_array.dialog_error_open) ? 'Registro Exitoso' : 'Error Al Insertar'}`}</DialogTitle>
+              <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                  {(!data_array.dialog_error_open) ? 'El registro se ha realizado exitosamente' : 'Error al insertar el registro'}
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handle_dialog_open} color="primary">
+                  Cerrar
+                </Button>
+              </DialogActions>
+            </Dialog>
 
             <FooterAccount properties={state_footer_accounts} />
           </> : null
@@ -306,14 +334,16 @@ export function Asistencia(props) {
 
 }
 
+
 /**
   *  @author : Juan Felipe Osorio Zapata <juan.felipe.osorio@correounivalle.edu.co>
   *  @decs  : post para enviar los datos de asistencia. 
   * 
 */
-async function postAsistencia(data_array) {
+async function postAsistencia(data_array, data_a, set_a) {
 
   try {
+
     const response = await fetch('https://demon789-4.herokuapp.com/api', {
       method: 'POST',
       headers: {
@@ -324,12 +354,34 @@ async function postAsistencia(data_array) {
       },
       body: JSON.stringify(data_array)
     });
+
     const json = await response.json();
+
     if (json.message === 'ok') {
-      alert('Registro exitoso');
+
+      set_a({
+        ...data_a,
+        dialog_open: true
+      })
+
     }
+    else {
+      set_a({
+        ...data_a,
+        dialog_open: true,
+        dialog_error_open: true
+      })
+    }
+
   } catch (error) {
+    set_a({
+      ...data_a,
+      dialog_open: true,
+      dialog_error_open: true
+    })
+
     console.log(error);
+    
   }
 }
 
