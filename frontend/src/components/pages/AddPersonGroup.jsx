@@ -3,7 +3,7 @@ import React from 'react';
 import { HeaderUser } from '../account-element/HeaderUser';
 import { FooterAccount } from '../account-element/FooterAccount';
 import { AddPeopleGroup } from '../addPersonGroup/AddPeopleGroup';
-
+const { verificar_inicio_sesion } = require('./login_acces_verify');
 
 
 /**
@@ -24,6 +24,11 @@ export function AddPersonGroup(props) {
         state_header_user: Object.values(Object.values(Object.entries(props)[0][1])[0])[1],
         nombre_persona: localStorage.getItem('user_name'),
     });
+
+    //useEffect para cargar la imagen de perfil
+    React.useEffect(() => {
+        verificar_inicio_sesion(navigate, '/addpersongroup');
+    }, []);
 
     return (
         <>

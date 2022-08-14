@@ -4,6 +4,7 @@ import { HeaderUser } from '../account-element/HeaderUser';
 import { CreateUserForm } from '../createuser-element/CreateUserForm';
 import { FooterAccount } from '../account-element/FooterAccount';
 import { useNavigate } from 'react-router-dom';
+const { verificar_inicio_sesion } = require('./login_acces_verify');
 
 /**
   *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
@@ -24,7 +25,7 @@ export function CreateUser(props) {
 
     //useEffect para cargar la imagen de perfil
     React.useEffect(() => {
-        //verificar_inicio_sesion(navigate);
+        verificar_inicio_sesion(navigate,'/createuser');
     }, []);
 
 

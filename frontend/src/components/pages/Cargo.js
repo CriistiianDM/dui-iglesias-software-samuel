@@ -8,7 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import FormHelperText from '@material-ui/core/FormHelperText';
 import { useNavigate } from 'react-router-dom';
 import Montserrat_ExtraBold from '../../static/Montserrat-ExtraBold.ttf';
-
+const { verificar_inicio_sesion } = require('./login_acces_verify');
 
 
 const theme = createTheme({
@@ -142,7 +142,7 @@ export function Cargo(props) {
 
   //use Effect para verificar si inicio sesion o no
   React.useEffect(() => {
-    //verificar_inicio_sesion(navigate);
+    verificar_inicio_sesion(navigate,'/cargo');
   }, []);
 
 

@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 //token de autenticacion
 const { generateToken } = require('../_____/_____');
-
+const { verificar_inicio_sesion } = require('./login_acces_verify');
 
 /**
   *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
@@ -22,7 +22,7 @@ export function PersonNormal(props) {
   //useEffect para obtener el nombre y apellido del usuario
   React.useEffect(() => {
     get_user_name(localStorage.getItem('user_login'));
-    //verificar_inicio_sesion(navigate);
+    verificar_inicio_sesion(navigate,'/creyente');
   }, []);
 
   //variable de estado
