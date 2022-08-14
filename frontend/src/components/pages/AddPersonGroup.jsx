@@ -27,12 +27,18 @@ export function AddPersonGroup(props) {
 
     return (
         <>
-            <HeaderUser properties={header_user} />
-            <div className={state_header_user['cls-6']}></div>
-            <div className={state_group['cls-1']}>
-                <AddPeopleGroup properties={props} />
-            </div>
-            <FooterAccount properties={state_footer_accounts} />
+            {
+                (localStorage.getItem('permiso_cargo') === 'Lider' ||
+                    localStorage.getItem('permiso_cargo') === 'comite') ?
+                    <>
+                        <HeaderUser properties={header_user} />
+                        <div className={state_header_user['cls-6']}></div>
+                        <div className={state_group['cls-1']}>
+                            <AddPeopleGroup properties={props} />
+                        </div>
+                        <FooterAccount properties={state_footer_accounts} />
+                    </> : null
+            }
         </>
     )
 
