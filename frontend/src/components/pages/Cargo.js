@@ -23,7 +23,7 @@ const theme = createTheme({
 /* Defining the style of the component. */
 const useStyles = makeStyles((theme) => ({
 
-  
+
   button: {
     display: 'block',
     marginTop: theme.spacing(2),
@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
   },
   styleTextChoose: {
     fontFamily: Montserrat_ExtraBold,
-    color:'#ff725e',
+    color: '#ff725e',
     fontWeight: '650',
     fontSize: '1.5em !important',
     textAlign: 'center',
@@ -76,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
     color: '#2c2c2c',
     fontWeight: '350',
   },
- 
+
 }));
 
 
@@ -88,13 +88,13 @@ const useStyles = makeStyles((theme) => ({
  * @returns The return is a form control with a select and a label.
  */
 export function Cargo(props) {
-  
+
   const state_cargo = ((props.properties).cargo_style)['0'];
   const theme = createTheme();
   const classes = useStyles();
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
- 
+
 
   //capturar el valor del cargo del localStorage
   const cargo = localStorage.getItem('cargo').split(',');
@@ -148,30 +148,30 @@ export function Cargo(props) {
 
   return (
     <>
-     <div className={state_cargo['cls-2']}>
-      <div className={state_cargo['cls-1']}>
-      <Typography className={classes.styleTextChoose}>Elige el cargo por el cual deseas ingresar:</Typography>
-        <FormControl className={classes.formControl}>
-          <InputLabel className={classes.labelFormTextHelp} htmlFor="user-native-simple">Cargo</InputLabel>
-          <Select
-            native
-            value={open.user}
-            onChange={handleChange}
-            onOpen={handleOpen}
-            inputProps={{
-              name: 'user',
-              id: 'user-native-simple',
-            }}
-          >
-            <option aria-label="None" value="" />
-            {cargo.map((cargo, index) => (
-              <option key={index} value={cargo.replace('"', '')}>{cargo.replace('"', '')}</option>
-            ))}
-          </Select>
-          <FormHelperText className={classes.labelFormTextHelp} id="my-helper-text">Seleciona el cargo</FormHelperText>
-        </FormControl>
+      <div className={state_cargo['cls-2']}>
+        <div className={state_cargo['cls-1']}>
+          <Typography className={classes.styleTextChoose}>Elige el cargo por el cual deseas ingresar:</Typography>
+          <FormControl className={classes.formControl}>
+            <InputLabel className={classes.labelFormTextHelp} htmlFor="user-native-simple">Cargo</InputLabel>
+            <Select
+              native
+              value={open.user}
+              onChange={handleChange}
+              onOpen={handleOpen}
+              inputProps={{
+                name: 'user',
+                id: 'user-native-simple',
+              }}
+            >
+              <option aria-label="None" value="" />
+              {cargo.map((cargo, index) => (
+                <option key={index} value={cargo.replace('"', '')}>{cargo.replace('"', '')}</option>
+              ))}
+            </Select>
+            <FormHelperText className={classes.labelFormTextHelp} id="my-helper-text">Seleciona el cargo</FormHelperText>
+          </FormControl>
+        </div>
       </div>
-     </div>
     </>
   );
 }
@@ -179,6 +179,7 @@ export function Cargo(props) {
 
 /**
   *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
+  *  TODO: para una version futura no olvidar verificar si el usuario existe en la base de datos.
   *  @decs  : timer para verficar si inicio sesion o no
 */
 function verificar_inicio_sesion(navigate) {
@@ -187,21 +188,21 @@ function verificar_inicio_sesion(navigate) {
   const regex = /^[0-9]{9,15}$/;
 
   const timer = setInterval(() => {
-      
-     if (localStorage.getItem('user_login') === null) {
+
+    if (localStorage.getItem('user_login') === null) {
+      navigate('/');
+    }
+    else {
+
+      if (!regex.exec(localStorage.getItem('user_login'))) {
         navigate('/');
-     }
-     else {
+      }
 
-        if (!regex.exec(localStorage.getItem('user_login'))) {
-          navigate('/');
-        }
-
-        }
+    }
 
 
-     
-  } , 100);
+
+  }, 100);
 
   return timer;
 

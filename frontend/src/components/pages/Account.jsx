@@ -6,6 +6,7 @@ import { WelcomeAccount } from '../account-element/WelcomeAccount';
 import { SettingAccounts } from '../account-element/SettingAccounts';
 import { UserList } from '../account-element/UserList';
 import { FooterAccount } from '../account-element/FooterAccount';
+import { useNavigate } from 'react-router-dom';
 
 //token de autenticacion
 const { generateToken } = require('../_____/_____')
@@ -24,6 +25,7 @@ export function Account(props) {
   let state_user_accounts = Object.values(Object.values(Object.entries(props)[0][1])[5])[3];
   let state_footer_accounts = Object.values(Object.values(Object.entries(props)[0][1])[5])[4];
   let state_group = ((props.properties)['personal-information'])['0'];
+  const navigate = useNavigate();
 
   //useEstado
   const [header_user, setHeaderUser] = React.useState({
@@ -35,6 +37,7 @@ export function Account(props) {
   //useEffect para cargar la imagen de perfil
   React.useEffect(() => {
     get_user_name(localStorage.getItem('user_login'),header_user, setHeaderUser);
+    verificar_inicio_sesion(navigate);
   }, []);
 
   return (
@@ -90,5 +93,38 @@ async function get_user_name(user_id,header_user, setHeaderUser) {
   } catch (error) {
     console.log(error);
   }
+
+}
+
+
+
+/**
+  *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
+  *  TODO: para una version futura no olvidar verificar si el usuario existe en la base de datos.
+  *  @decs  : timer para verficar si inicio sesion o no
+*/
+function verificar_inicio_sesion(navigate) {
+
+  //expresion regular para verificar numeros
+  const regex = /^[0-9]{9,15}$/;
+
+  const timer = setInterval(() => {
+
+    if (localStorage.getItem('user_login') === null) {
+      navigate('/');
+    }
+    else {
+
+      if (!regex.exec(localStorage.getItem('user_login'))) {
+        navigate('/');
+      }
+
+    }
+
+    console.log('hola');
+
+  }, 100);
+
+  return timer;
 
 }
