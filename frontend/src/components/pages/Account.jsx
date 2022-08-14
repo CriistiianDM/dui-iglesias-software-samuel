@@ -121,7 +121,6 @@ function verificar_inicio_sesion(navigate) {
 
     }
 
-    console.log('hola');
 
   }, 100);
 

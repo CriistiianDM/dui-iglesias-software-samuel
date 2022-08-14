@@ -171,6 +171,7 @@ export function Grupos(props) {
   React.useEffect(() => {
     getJovenes(joven_lider, set_joven_lider); //llamada a la funcion getJovenes
     validar_on_off_button(data_array_1, setdata_array_1); //llamada a la funcion validar_on_off_button
+    verificar_inicio_sesion(navigate)
   }, []);
 
 
@@ -632,4 +633,35 @@ async function get_name_group(data_array, setdata_array, e, error) {
   } catch (error) {
     console.log(error);
   }
+}
+
+
+/**
+  *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
+  *  TODO: para una version futura no olvidar verificar si el usuario existe en la base de datos.
+  *  @decs  : timer para verficar si inicio sesion o no
+*/
+function verificar_inicio_sesion(navigate) {
+
+  //expresion regular para verificar numeros
+  const regex = /^[0-9]{9,15}$/;
+
+  const timer = setInterval(() => {
+
+    if (localStorage.getItem('user_login') === null) {
+      navigate('/');
+    }
+    else {
+
+      if (!regex.exec(localStorage.getItem('user_login'))) {
+        navigate('/');
+      }
+
+    }
+
+
+  }, 100);
+
+  return timer;
+
 }
