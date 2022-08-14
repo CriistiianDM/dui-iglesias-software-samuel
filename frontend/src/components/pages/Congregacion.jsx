@@ -4,6 +4,9 @@ import { HeaderUser } from '../account-element/HeaderUser';
 import { FooterAccount } from '../account-element/FooterAccount';
 import { PageCongrecasion } from '../congrecasion_vista/PageCongrecasion';
 import styles_congregacion from '../../css/styles_congregacion.css';
+import { useNavigate } from 'react-router-dom';
+
+
 const { verificar_inicio_sesion } = require('./login_acces_verify');
 
 /**
@@ -17,6 +20,7 @@ export function Congregacion(props) {
     let state_header_user = Object.values(Object.values(Object.entries(props)[0][1])[0])[1];
     let state_footer_accounts = Object.values(Object.values(Object.entries(props)[0][1])[5])[4];
     let state_group = ((props.properties)['personal-information'])['0'];
+    const navigate = useNavigate();
 
     //useEstado
     const [header_user, setHeaderUser] = React.useState({
