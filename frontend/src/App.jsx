@@ -58,7 +58,7 @@ export function App() {
         <Route path="/creyente" element = {<PersonNormal properties={json} />} />
         <Route path="/createuser" element = {<CreateUser properties={json} />} />
         <Route path="/grupo" element={<Grupos properties={json}/>}/>
-        <Route path="asistencia" element={<Asistencia properties={json}/>} />
+        <Route path="/asistencia" element={<Asistencia properties={json}/>} />
         <Route path="/addpersongroup" element={<AddPersonGroup properties={json}/>}/>
         <Route path="/congregacion" element={<Congregacion properties={json}/>}/>
         <Route path="*" element = {<A404 />} />
