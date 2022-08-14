@@ -191,7 +191,7 @@ export function OptionMenuProfile(props) {
 
             <div className={state_option_menu_profile['cls-2']}>
 
-                <Button className={state_option_menu_profile['cls-3']}>
+                <Button  disabled={true} className={state_option_menu_profile['cls-3']}>
 
                     <div className={state_option_menu_profile['cls-4']}>
                         <Icon className={state_option_menu_profile['cls-6']}>edit</Icon>
@@ -210,10 +210,10 @@ export function OptionMenuProfile(props) {
 
                 </Button>
 
-                <Button className={state_option_menu_profile['cls-3']}>
+                <Button disabled={true} className={state_option_menu_profile['cls-3']}>
 
                     <div className={state_option_menu_profile['cls-4']}>
-                        <Icon className={state_option_menu_profile['cls-6']}>save_as</Icon>
+                        <Icon  className={state_option_menu_profile['cls-6']}>save_as</Icon>
 
                         <Typography className={state_option_menu_profile['cls-5']}>Guardar</Typography>
                     </div>
@@ -348,7 +348,7 @@ export function OptionMenuProfile(props) {
 
             <div className={state_option_menu_profile['cls-7']}>
 
-                <Typography className={state_option_menu_profile['cls-5']}>INFORMACION PERSONAL</Typography>
+                <Typography className={state_option_menu_profile['cls-11']}>INFORMACION PERSONAL</Typography>
 
                 <div className={state_option_menu_profile['cls-10']}>
 
@@ -373,7 +373,7 @@ export function OptionMenuProfile(props) {
 
                 </div>
 
-                <Typography className={state_option_menu_profile['cls-5']}>INFORMACION ECLESIASTICA</Typography>
+                <Typography className={state_option_menu_profile['cls-11']}>INFORMACION ECLESIASTICA</Typography>
                 <div className={state_option_menu_profile['cls-10']}>
 
                     {
@@ -396,7 +396,7 @@ export function OptionMenuProfile(props) {
                     }
 
                 </div>
-                <Typography className={state_option_menu_profile['cls-5']}>PERFIL OCUPACIONAL</Typography>
+                <Typography className={state_option_menu_profile['cls-11']}>PERFIL OCUPACIONAL</Typography>
                 <div className={state_option_menu_profile['cls-10']}>
 
                     {

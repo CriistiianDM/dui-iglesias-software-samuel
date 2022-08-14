@@ -18,13 +18,14 @@ const { generateToken } = require('../_____/_____');
 //estilos de material-ui
 const useStyles = makeStyles((theme) => ({
     textField: {
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
         width: 200,
     },
     formControl: {
         margin: theme.spacing(1),
         minWidth: 200,
+    },
+    textFieldAux: {
+        width: 200,
     }
 }));
 
@@ -174,11 +175,11 @@ export function CreateUserForm(props) {
 
 
                 <form className={state_user_form['cls-2']} noValidate autoComplete="off">
-                    <TextField disabled={data_array.disabled_0} error={data_array.error_band_0} helperText={(data_array.error_band_0) ? data_array.message_band_0 : ''} onBlur={handleChange} id='i-p-0-0' type='number' label="Identificacion" variant="filled" />
-                    <TextField disabled={data_array.disabled_all} error={data_array.error_band_1} helperText={(data_array.error_band_1) ? data_array.message_band_1 : ''} onChange={handleChange} id='first-name-1-1' type='text' label="Primer Nombre" variant="filled" />
-                    <TextField disabled={data_array.disabled_all} error={data_array.error_band_2} helperText={(data_array.error_band_2) ? data_array.message_band_2 : ''} onChange={handleChange} id='second-name-1-2' label="Segundo Nombre" variant="filled" />
-                    <TextField disabled={data_array.disabled_all} error={data_array.error_band_3} helperText={(data_array.error_band_3) ? data_array.message_band_3 : ''} onChange={handleChange} id='last-name-1-3' label="Primer Apellido" variant="filled" />
-                    <TextField disabled={data_array.disabled_all} error={data_array.error_band_4} helperText={(data_array.error_band_4) ? data_array.message_band_4 : ''} onChange={handleChange} id='second-name-1-4' label="Segundo Apellido" variant="filled" />
+                    <TextField className={classes.textFieldAux} disabled={data_array.disabled_0} error={data_array.error_band_0} helperText={(data_array.error_band_0) ? data_array.message_band_0 : ''} onBlur={handleChange} id='i-p-0-0' type='number' label="Identificacion" variant="filled" />
+                    <TextField className={classes.textFieldAux} disabled={data_array.disabled_all} error={data_array.error_band_1} helperText={(data_array.error_band_1) ? data_array.message_band_1 : ''} onChange={handleChange} id='first-name-1-1' type='text' label="Primer Nombre" variant="filled" />
+                    <TextField className={classes.textFieldAux} disabled={data_array.disabled_all} error={data_array.error_band_2} helperText={(data_array.error_band_2) ? data_array.message_band_2 : ''} onChange={handleChange} id='second-name-1-2' label="Segundo Nombre" variant="filled" />
+                    <TextField className={classes.textFieldAux} disabled={data_array.disabled_all} error={data_array.error_band_3} helperText={(data_array.error_band_3) ? data_array.message_band_3 : ''} onChange={handleChange} id='last-name-1-3' label="Primer Apellido" variant="filled" />
+                    <TextField className={classes.textFieldAux} disabled={data_array.disabled_all} error={data_array.error_band_4} helperText={(data_array.error_band_4) ? data_array.message_band_4 : ''} onChange={handleChange} id='second-name-1-4' label="Segundo Apellido" variant="filled" />
                     <FormControl disabled={data_array.disabled_all} error={data_array.error_band_5} variant="filled">
                         <InputLabel htmlFor="">Tipo De Identificacion</InputLabel>
                         <Select onChange={handleChange} id='tipo-identificacion-2-5' label="Tipo de Documento" variant="filled" native>
@@ -202,9 +203,9 @@ export function CreateUserForm(props) {
                             shrink: true,
                         }}
                     />
-                    <TextField disabled={data_array.disabled_1} error={data_array.error_band_7} helperText={(data_array.error_band_7) ? data_array.message_band_7 : ''} onBlur={handleChange} id='tipo-email-4-7' type='email' label="Email" variant="filled" />
-                    <TextField disabled={data_array.disabled_all} error={data_array.error_band_8} helperText={(data_array.error_band_8) ? data_array.message_band_8 : ''} onChange={handleChange} id='tipo-tel1-9-8' type='number' label="Telefono 1" variant="filled" />
-                    <TextField disabled={data_array.disabled_all} error={data_array.error_band_9} helperText={(data_array.error_band_9) ? data_array.message_band_9 : ''} onChange={handleChange} id='tipo-tel2-9-9' type='number' label="Telefono 2" variant="filled" />
+                    <TextField className={classes.textFieldAux} disabled={data_array.disabled_1} error={data_array.error_band_7} helperText={(data_array.error_band_7) ? data_array.message_band_7 : ''} onBlur={handleChange} id='tipo-email-4-7' type='email' label="Email" variant="filled" />
+                    <TextField className={classes.textFieldAux} disabled={data_array.disabled_all} error={data_array.error_band_8} helperText={(data_array.error_band_8) ? data_array.message_band_8 : ''} onChange={handleChange} id='tipo-tel1-9-8' type='number' label="Telefono 1" variant="filled" />
+                    <TextField className={classes.textFieldAux} disabled={data_array.disabled_all} error={data_array.error_band_9} helperText={(data_array.error_band_9) ? data_array.message_band_9 : ''} onChange={handleChange} id='tipo-tel2-9-9' type='number' label="Telefono 2" variant="filled" />
                     <FormControl disabled={data_array.disabled_all} error={data_array.error_band_10} variant="filled" className={classes.formControl}>
                         <InputLabel htmlFor="wer77777888js">Genero</InputLabel>
                         <Select onClick={handleChange} id='tipo-genero-5-10' label="Tipo de Documento" variant="filled" native labelId="wer77777888js">
@@ -213,7 +214,7 @@ export function CreateUserForm(props) {
                             <option value="F">Femenino</option>
                         </Select>
                     </FormControl>
-                    <TextField disabled={data_array.disabled_all} error={data_array.error_band_11} helperText={(data_array.error_band_11) ? data_array.message_band_11 : ''} onChange={handleChange} id='tipo-direccion-6-11' type='text' label="Direccion" variant="filled" />
+                    <TextField className={classes.textFieldAux} disabled={data_array.disabled_all} error={data_array.error_band_11} helperText={(data_array.error_band_11) ? data_array.message_band_11 : ''} onChange={handleChange} id='tipo-direccion-6-11' type='text' label="Direccion" variant="filled" />
                 </form>
 
                 <div className={state_user_form['cls-7']}>
@@ -288,7 +289,7 @@ export function CreateUserForm(props) {
                     <TextField
                         disabled={data_array.disabled_all}
                         id="date-iglesia-3-16"
-                        label="Ingreso a la iglesia"
+                        label="Ingreso a la Iglesia"
                         error={data_array.error_band_16}
                         helperText={(data_array.error_band_16) ? data_array.message_band_16 : ''}
                         type="date"
@@ -301,7 +302,7 @@ export function CreateUserForm(props) {
                     <TextField
                         disabled={data_array.disabled_all}
                         id="date-santo-3-17"
-                        label="FECHA RECEPCIÓN ESPÍRITU SANTO"
+                        label="Fecha Recepción Espiritu Santo"
                         error={data_array.error_band_17}
                         helperText={(data_array.error_band_17) ? data_array.message_band_17 : ''}
                         type="date"

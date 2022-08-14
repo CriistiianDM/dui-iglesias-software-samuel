@@ -268,7 +268,8 @@
             "cls-7": "box-setting-element-account-profile box-contend-element-profile",
             "cls-8": "box-icon-items-profile box-input-element-profile",
             "cls-9": "box-style-input-element-profile",
-            "cls-10": "box-setting-element-account-profile aux-box-setting-element-profile"
+            "cls-10": "box-setting-element-account-profile aux-box-setting-element-profile",
+            "cls-11": "box-title-profile-user-element"
         }
     },
     "personal-information": {
