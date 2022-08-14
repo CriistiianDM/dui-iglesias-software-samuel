@@ -110,9 +110,11 @@ export function AddPeopleGroup(props) {
   return (
     <>
       <Typography className={classes.titleNameGroup}>{(data_group_array['nombre_grupo']).toUpperCase()}</Typography>
+      { (localStorage.getItem('permiso_cargo') === 'Lider') ?
       <div className={state_group['cls-1']}>
         <Button disabled={data_array.enable_button} onClick={handleOpen} className={classes.buttonAddPeopleGroup}>Añadir Persona</Button>
-      </div>
+      </div> : null 
+      }
       <div className={state_user_list['cls-1']}>
 
         <div className={state_user_list['cls-2']}>

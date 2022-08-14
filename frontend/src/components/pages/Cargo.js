@@ -111,19 +111,21 @@ export function Cargo(props) {
    */
   const handleChange = (event) => {
     const name = event.target.value;
+    localStorage.setItem('permiso_cargo', name);
 
     if (name === 'Administrador') {
       navigate('/account');
     }
-    if (name === 'creyente') {
+    
+    if (name === 'creyente' || name === 'Lider' || name === 'comite') {
+      //siiiii mi amorrrr ufffff
       navigate('/creyente');
     }
-    if (name === 'joven lider') {
-      navigate('/creyente');
-    }
+
     if (name === 'pastor') {
       navigate('/creyente');
     }
+
   };
 
   /**
