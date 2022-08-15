@@ -12,12 +12,11 @@
 */
 
 
-/*evento cuando se cieera la pagina
+
 window.onbeforeunload = function() {
-  //limpiar la cache de la pagina y limpiar el localStorage
-  localStorage.clear();
-  window.sessionStorage.clear();
-}*/
+  localStorage.setItem('permiso_cargo',null);
+   localStorage.setItem('user_login',null)
+}
 
 
  // create container

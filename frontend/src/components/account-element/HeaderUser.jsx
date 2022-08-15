@@ -28,7 +28,7 @@ export function HeaderUser(props) {
   //useEffect para cargar la imagen de perfil
   React.useEffect(() => {
     update_user_name(user, setUser)
-    console.log(user, 'user salidad 21');
+    //console.log(user, 'user salidad 21');
   }, []);
 
 
@@ -57,7 +57,7 @@ export function HeaderUser(props) {
 
   let data = await response.json();
 
-  console.log(data)
+  //console.log(data)
 
   if (data[0] !== undefined) {
      localStorage.setItem('user_info_eye', JSON.stringify(data[0]));

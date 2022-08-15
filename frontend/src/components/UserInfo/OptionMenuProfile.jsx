@@ -184,6 +184,7 @@ export function OptionMenuProfile(props) {
     /* ---------- use effect  ---------- */
 
     React.useEffect(() => {
+        window.scrollTo(0, 0);
         getData(data_array, set_data_array);
     }, []);
 

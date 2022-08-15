@@ -310,7 +310,7 @@ async function fetch_data_login(user_valid_data, setUserValid, navigate) {
             //console.log(data_fetch, 'data_fetch');
 
             if (JSON.stringify(data_fetch).split(',').length > 1) {
-                console.log(data_fetch, 'el usuario existe');
+                //console.log(data_fetch, 'el usuario existe');
                 localStorage.setItem('cargo', JSON.stringify(data_fetch));
                 //guardar el data_fetch en el localstorage
                 navigate('/cargo')
