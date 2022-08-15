@@ -48,6 +48,7 @@ function update_user_name(user, setUser) {
 
   let letter_before = '';
   let letter_after = '';
+  
 
   const timer = setInterval(() => {
 

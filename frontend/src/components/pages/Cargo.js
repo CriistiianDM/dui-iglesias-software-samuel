@@ -98,7 +98,7 @@ export function Cargo(props) {
 
  
   //capturar el valor del cargo del localStorage
-  const cargo = localStorage.getItem('cargo').split(',');
+  const cargo = (localStorage.getItem('cargo') !== null)? localStorage.getItem('cargo').split(',') :''
 
 
   /**

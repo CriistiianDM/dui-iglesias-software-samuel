@@ -38,7 +38,7 @@ export function Account(props) {
 
   //useEffect para cargar la imagen de perfil
   React.useEffect(() => {
-
+  
     if (localStorage.getItem('permiso_cargo') === 'pastor' ||
         localStorage.getItem('permiso_cargo') === 'Administrador' ||
         localStorage.getItem('permiso_cargo') === 'asistente administrativo') {
