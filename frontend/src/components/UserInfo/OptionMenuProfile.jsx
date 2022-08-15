@@ -20,6 +20,9 @@ const useStyles = makeStyles((theme) => ({
     },
     ayudad: {
         display: 'none !important'
+    },
+    botonColorAux: {
+      color: '#ff725e',
     }
 }));
 
@@ -275,13 +278,13 @@ export function OptionMenuProfile(props) {
                             </Select>
                         </FormControl>
                         <DialogActions>
-                            <Button onClick={handleOpenCargos} color="primary">
+                            <Button onClick={handleOpenCargos} className={classes.botonColorAux}>
                                 añadir cargo
                             </Button>
                         </DialogActions>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={() => setOpenCargos(false)} color="primary">
+                        <Button onClick={() => setOpenCargos(false)} className={classes.botonColorAux}>
                             Cerrar
                         </Button>
                     </DialogActions>
@@ -301,10 +304,10 @@ export function OptionMenuProfile(props) {
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={() => setOpenBorrar(false)} color="primary">
+                        <Button onClick={() => setOpenBorrar(false)} className={classes.botonColorAux}>
                             Aceptar
                         </Button>
-                        <Button onClick={() => setOpenBorrar(false)} color="primary">
+                        <Button onClick={() => setOpenBorrar(false)} className={classes.botonColorAux}>
                             Cancelar
                         </Button>
                     </DialogActions>
@@ -324,7 +327,7 @@ export function OptionMenuProfile(props) {
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={handle_close_cargos} color="primary">
+                        <Button onClick={handle_close_cargos} className={classes.botonColorAux}>
                             cerrar
                         </Button>
                     </DialogActions>
@@ -344,7 +347,7 @@ export function OptionMenuProfile(props) {
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={() => setOpenConfig(false)} color="primary">
+                        <Button onClick={() => setOpenConfig(false)} className={classes.botonColorAux}>
                             Cerrar
                         </Button>
                     </DialogActions>

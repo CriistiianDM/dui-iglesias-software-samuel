@@ -26,6 +26,9 @@ const useStyles = makeStyles((theme) => ({
     },
     textFieldAux: {
         width: 200,
+    },
+    botonColorAux: {
+        color: '#ff725e',
     }
 }));
 
@@ -391,7 +394,7 @@ export function CreateUserForm(props) {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handle_dialog_open} color="primary">
+                    <Button onClick={handle_dialog_open} className={classes.botonColorAux}>
                         Cerrar
                     </Button>
                 </DialogActions>
@@ -411,7 +414,7 @@ export function CreateUserForm(props) {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handle_dialog_open_error} color="primary">
+                    <Button onClick={handle_dialog_open_error} className={classes.botonColorAux}>
                         Cerrar
                     </Button>
                 </DialogActions>
@@ -620,10 +623,10 @@ async function validate_country_region_city(e, data_array, setdata_array) {
         let response = await fetch(`https://demon789-4.herokuapp.com/zcrcp/3/${e.target.value}`, {
             method: 'GET',
             headers: {
-              'Content-Type': 'application/json',
-              'Authorization': generateToken()
+                'Content-Type': 'application/json',
+                'Authorization': generateToken()
             }
-          });
+        });
         let data = await response.json();
         console.log('validar city', data);
         setdata_array({

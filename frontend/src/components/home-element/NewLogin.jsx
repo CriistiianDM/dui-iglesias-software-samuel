@@ -79,6 +79,9 @@ const useStyles = makeStyles((theme) => ({
         justifyItems: 'center',
         alignItems: 'center',
         height: '1em',
+    },
+    botonColorAux: {
+        color: '#ff725e',
     }
 
 }));
@@ -164,7 +167,7 @@ export function NewLogin(props) {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handle_dialog_open} color="primary">
+                    <Button onClick={handle_dialog_open} className={classes.botonColorAux}>
                         Cerrar
                     </Button>
                 </DialogActions>
