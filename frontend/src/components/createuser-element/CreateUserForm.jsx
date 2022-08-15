@@ -440,12 +440,12 @@ function validateForm(e, data_array, setdata_array) {
     }
     else if (validateFormate(e.target.value, type)) {
         //console.log('valido help',getNameState((e.target.id).split('-')[3]), e.target.value);
-        console.log('data vija', data_array);
+        //console.log('data vija', data_array);
         setdata_array({
             ...data_array, [error]: false,
             [getNameState((e.target.id).split('-')[3])]: e.target.value
         });
-        console.log('data nueva', data_array);
+        //console.log('data nueva', data_array);
         validateDocument(e, data_array, setdata_array, error);
         validate_country_region_city(e, data_array, setdata_array);
     }
@@ -578,7 +578,7 @@ function timer_consult_verify(data_array, setdata_array) {
     const timer = setInterval(() => {
 
         if (localStorage.getItem('countries_band') === 'false') {
-            console.log('termino');
+            //console.log('termino');
             setdata_array({ ...data_array, loading: true, country_data: JSON.parse(localStorage.getItem('countries')) });
             clearInterval(timer);
         }
@@ -598,7 +598,7 @@ async function validate_country_region_city(e, data_array, setdata_array) {
         //Cristiank -- "vamos campeon,que no son tiempos de estres, 
         //              son tiempos demostar nuestra voluntad inquenbrantable
         //              de sacar nuestra familia adelante"
-        console.log('test', data_array.country_data[(e.target.value) - 1]);
+        //console.log('test', data_array.country_data[(e.target.value) - 1]);
         //get para obtener las regiones de un pais
         let response = await fetch(`https://demon789-4.herokuapp.com/zcrcp/2/${e.target.value}`, {
             method: 'GET',
@@ -608,7 +608,7 @@ async function validate_country_region_city(e, data_array, setdata_array) {
             }
         });
         let data = await response.json();
-        console.log('validar', data);
+        //console.log('validar', data);
         setdata_array({
             ...data_array,
             /*[(e.target.id === 'tipo-pais1-7-12') ? 'doc_from' : 'doc_from_aux']: (data_array.country_data[(e.target.value) ]).name,*/
@@ -628,7 +628,7 @@ async function validate_country_region_city(e, data_array, setdata_array) {
             }
         });
         let data = await response.json();
-        console.log('validar city', data);
+        //console.log('validar city', data);
         setdata_array({
             ...data_array,
             [(e.target.id === 'tipo-region1-7-13') ? 'city_data_0' : 'city_data_1']: data,
@@ -657,7 +657,7 @@ function validate_button_register(e, data_array, setdata_array) {
 
                 if (data_array[data] !== '') {
                     campos_validos_llenos++;
-                    console.log(campos_validos_llenos, data, data_array[data]);
+                    //console.log(campos_validos_llenos, data, data_array[data]);
                 }
 
             }
@@ -670,9 +670,9 @@ function validate_button_register(e, data_array, setdata_array) {
         index++;
     }
 
-    console.log('campos validos llenos', campos_validos_llenos);
+    //console.log('campos validos llenos', campos_validos_llenos);
     if (campos_validos_llenos >= 16) {
-        console.log('entro a con 18');
+        //console.log('entro a con 18');
         setdata_array({ ...data_array, diabled_submit: false });
         campos_validos_llenos = null;
     }
@@ -689,7 +689,7 @@ async function submit_form(e, data_array, setdata_array, data_array_1, setdata_a
 
 
         if (!data_array_1.disabled_submit && data_array_1.permit_submit) {
-            console.log('entro a submit');
+            //console.log('entro a submit');
 
             //e.preventDefault();
             setdata_array({
@@ -726,7 +726,7 @@ async function submit_form(e, data_array, setdata_array, data_array_1, setdata_a
             });
 
             let data = await response.json();
-            console.log('submit', data.message, data.message === undefined);
+            //console.log('submit', data.message, data.message === undefined);
 
             if (data.message === 'ok') {
 

@@ -83,7 +83,7 @@ function event_click(navigate) {
    //console.log(event.target.id, event.target.key,'event_click 1');
    $('.box-setting-element-account').on('click', function(event) {
        event.preventDefault();      
-       console.log('event_click 2', $(this).attr('href').replace('#', ''));
+       //console.log('event_click 2', $(this).attr('href').replace('#', ''));
        navigate(`${$(this).attr('href').replace('#', '')}`);
    })
 

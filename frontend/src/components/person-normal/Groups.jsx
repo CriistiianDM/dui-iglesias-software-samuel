@@ -101,7 +101,7 @@ export function Groups(props) {
 
     //handle para obtener los datos del json
     const handle_get_group = (e) => {
-        console.log('handle_get_group', e);
+        //console.log('handle_get_group', e);
 
         if (localStorage.getItem('permiso_cargo') === 'Lider' ||
             localStorage.getItem('permiso_cargo') === 'comite') {
@@ -196,7 +196,7 @@ async function get_group_person(data_array, set_data_array, type) {
             })
         }
 
-        console.log(data, 'salidad bombom');
+        //console.log(data, 'salidad bombom');
 
     } catch (error) {
 

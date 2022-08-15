@@ -57,14 +57,14 @@ function update_user_name(user, setUser) {
 
 
     setUser({...user, user_name: localStorage.getItem('user_name')});
-    console.log(user, 'setUser 12333');
+    //console.log(user, 'setUser 12333');
     
     letter_before = (user.user_name).substring(0, 1).toUpperCase();
     letter_after = localStorage.getItem('user_name').substring(0, 1).toUpperCase();
-    console.log(letter_before, letter_after, 'salida before after welcome');
+    //console.log(letter_before, letter_after, 'salida before after welcome');
 
     if (localStorage.getItem('consult_refresh') === 'true') {
-      console.log('consult_refresh true');
+      //console.log('consult_refresh true');
       clearInterval(timer);
     }
 
@@ -89,11 +89,11 @@ function getData(data_array, set_data_array) {
 
   if (data != null) {
       clearInterval(timer);
-      console.log('data not null');
+      //console.log('data not null');
       set_data_array({...data_array, loading: true, data: JSON.parse(data)});
   } 
 
-  console.log('get data');
+  //console.log('get data');
   }, 1000);
 
   return timer;

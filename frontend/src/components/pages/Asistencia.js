@@ -202,12 +202,12 @@ export function Asistencia(props) {
     //dame la fecha de hoy
 
     //imprimir los id de los campos del formulario
-    console.log(event.target.id);
+    //(event.target.id);
 
     //expresion regular para validar numeros con validación de numeros exec
     const regex = /^[0-9]*$/;
     if (regex.test(event.target.value)) {
-      console.log("event", event.target.value);
+      //console.log("event", event.target.value);
       setForm({
         ...form,
         [event.target.id]: event.target.value

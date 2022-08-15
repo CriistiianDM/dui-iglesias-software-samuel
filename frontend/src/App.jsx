@@ -92,7 +92,7 @@ async function getCountries() {
     localStorage.setItem('countries', JSON.stringify(data));
     //return data;
     localStorage.setItem('countries_band', false);
-    console.log('entro11', localStorage.getItem('countries'));
+    //console.log('entro11', localStorage.getItem('countries'));
     }
 
    } catch (error) {

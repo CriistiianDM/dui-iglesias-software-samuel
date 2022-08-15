@@ -216,7 +216,7 @@ export function Grupos(props) {
 
   //función evento para navegar posterior a rellenar datos de grupo. 
   const onClickk = () => {
-    console.log(data_array, 'data_array');
+    //console.log(data_array, 'data_array');
     postGrupo(data_array, img_data, setdata_array);
   }
 
@@ -438,7 +438,7 @@ async function getJovenes(jovenL, setJovenL) {
       loading: false
     });
 
-    console.log(data1);
+    //console.log(data1);
 
   } catch (error) {
     console.log(error);
