@@ -21,8 +21,15 @@ export function PersonNormal(props) {
 
   //useEffect para obtener el nombre y apellido del usuario
   React.useEffect(() => {
-    get_user_name(localStorage.getItem('user_login'));
+
+    if (localStorage.getItem('permiso_cargo') === 'creyente' ||
+        localStorage.getItem('permiso_cargo') === 'Lider' ||
+        localStorage.getItem('permiso_cargo') === 'comite') {
+      get_user_name(localStorage.getItem('user_login'));
+    }
+
     verificar_inicio_sesion(navigate, '/creyente');
+    
   }, []);
 
   //variable de estado

@@ -40,7 +40,8 @@ const { generateToken } = require('./components/_____/_____')
 */
 export function App() {
 
-
+  localStorage.setItem('cargo', ',');
+  
   React.useEffect(() => {
     getCountries(); 
   }, []);

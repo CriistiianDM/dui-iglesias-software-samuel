@@ -96,7 +96,7 @@ export function Cargo(props) {
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
 
-
+ 
   //capturar el valor del cargo del localStorage
   const cargo = localStorage.getItem('cargo').split(',');
 
@@ -146,11 +146,12 @@ export function Cargo(props) {
     verificar_inicio_sesion(navigate, '/cargo');
   }, []);
 
-
+  
   return (
     <>
       {
-        (localStorage.getItem('user_login') !== 'null') ?
+        (localStorage.getItem('user_login') !== 'null' &&
+         localStorage.getItem('user_login') !== null) ?
           <div className={state_cargo['cls-2']}>
             <div className={state_cargo['cls-1']}>
               <Typography className={classes.styleTextChoose}>Elige el cargo por el cual deseas ingresar:</Typography>
