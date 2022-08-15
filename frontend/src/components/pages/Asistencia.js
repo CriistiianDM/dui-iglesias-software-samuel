@@ -135,6 +135,9 @@ const useStyles = makeStyles((theme) => ({
   },
   input: {
     backgroundColor: 'hsl(0deg 0% 92%)',
+  },
+  botonColorAux: {
+    color: '#ff725e',
   }
 
 }));
@@ -323,7 +326,7 @@ export function Asistencia(props) {
                 </DialogContentText>
               </DialogContent>
               <DialogActions>
-                <Button onClick={handle_dialog_open} color="primary">
+                <Button onClick={handle_dialog_open} className={classes.botonColorAux}>
                   Cerrar
                 </Button>
               </DialogActions>

@@ -111,7 +111,11 @@ const useStyles = makeStyles((theme) => ({
     '@media screen and (max-width:280px)': {
       width: '12em'
     }
+  },
+  botonColorAux: {
+    color: '#ff725e',
   }
+  
 
 
 }));
@@ -288,7 +292,7 @@ export function Grupos(props) {
                 </DialogContentText>
               </DialogContent>
               <DialogActions>
-                <Button onClick={handle_dialog_open} color="primary">
+                <Button onClick={handle_dialog_open} className={classes.botonColorAux}>
                   Cerrar
                 </Button>
               </DialogActions>
@@ -306,7 +310,7 @@ export function Grupos(props) {
                 </DialogContentText>
               </DialogContent>
               <DialogActions>
-                <Button onClick={handle_dialog_error} color="primary">
+                <Button onClick={handle_dialog_error} className={classes.botonColorAux}>
                   Cerrar
                 </Button>
               </DialogActions>

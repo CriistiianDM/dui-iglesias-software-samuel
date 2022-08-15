@@ -39,6 +39,9 @@ const useStyles = makeStyles((theme) => ({
     display: 'grid',
     width: '100%',
     height: '100%',
+  },
+  botonColorAux: {
+    color: '#ff725e',
   }
 }));
 
@@ -191,7 +194,7 @@ export function AddPeopleGroup(props) {
           </FormControl>
         </DialogContent>
         <DialogActions>
-          <Button disabled={data_array.enable_button} onClick={handleClose} color="primary">
+          <Button disabled={data_array.enable_button} onClick={handleClose} className={classes.botonColorAux}>
             Cerrar
           </Button>
         </DialogActions>
@@ -209,7 +212,7 @@ export function AddPeopleGroup(props) {
       
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleClose} className={classes.botonColorAux}>
             Cerrar
           </Button>
         </DialogActions>
