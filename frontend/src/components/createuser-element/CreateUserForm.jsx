@@ -140,7 +140,7 @@ export function CreateUserForm(props) {
     }
 
     const handleSubmit = (event) => {
-        console.log('data actual', data_array);
+        //console.log('data actual', data_array);
         submit_form(event, data_array, setdata_array, data_array_1, setdata_array_1)
     }
 
