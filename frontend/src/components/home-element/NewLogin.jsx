@@ -290,10 +290,10 @@ async function fetch_data_login(user_valid_data, setUserValid, navigate) {
         });
 
         const data = await response.json();
-        console.log(data, 'teste', generateToken(), 'teste');
+        //console.log(data, 'teste', generateToken(), 'teste');
 
         if (data[0] !== undefined) {
-            console.log(data, 'el usuario existe');
+            //console.log(data, 'el usuario existe');
 
             //fetch
             const response_fetch = await fetch(`https://demon789-4.herokuapp.com/zcvg/${user_valid_data.user_login}`, {
@@ -316,7 +316,7 @@ async function fetch_data_login(user_valid_data, setUserValid, navigate) {
                 navigate('/cargo')
             }
             else {
-                console.log(data_fetch, 'el usuario no existe');
+                //console.log(data_fetch, 'el usuario no existe');
                 navigate('/creyente')
             }
 
@@ -324,7 +324,7 @@ async function fetch_data_login(user_valid_data, setUserValid, navigate) {
             setUserValid({ ...user_valid_data, loading: false });
         }
         else {
-            console.log(data, 'el usuario no existe');
+            //console.log(data, 'el usuario no existe');
             setUserValid({ ...user_valid_data, loading: false, dialog_open: true });
         }
 

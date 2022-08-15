@@ -116,7 +116,7 @@ async function get_data_congregacion(data_array, set_data_array) {
 
     const data = await response.json();
 
-    console.log(data, 'data11');
+    //console.log(data, 'data11');
     if (data[0] !== undefined) {
       set_data_array({ ...data_array, loading: false, data: data });
     }

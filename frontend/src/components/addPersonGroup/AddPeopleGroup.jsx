@@ -61,7 +61,7 @@ export function AddPeopleGroup(props) {
   const classes = useStyles();
   const data = JSON.parse(localStorage.getItem('data_user'));
 
-  console.log(state_group, 'state_group', data_group_array);
+  //console.log(state_group, 'state_group', data_group_array);
 
   //use state
   const [data_array, set_data_array] = React.useState({
@@ -239,7 +239,7 @@ async function fetch_data_user_group(data_array, set_data_array) {
     });
 
     const data = await response.json();
-    console.log(data, 'data11');
+    //console.log(data, 'data11');
     if (data[0] !== undefined) {
       set_data_array({ ...data_array, enable_button: false, data_user: data });
     }
@@ -267,7 +267,7 @@ async function fetch_add_user_group(data_array, set_data_array,e,data_array_1, s
       object.position_id = 1
       object.status = 'miembro'
       object.logical_erase = false
-      console.log(object, 'object');
+      //console.log(object, 'object');
 
       //desabilitar boton
       set_data_array({ ...data_array, enable_button: true });
