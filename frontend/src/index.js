@@ -12,13 +12,6 @@
 */
 
 
-
-window.onbeforeunload = function() {
-  localStorage.setItem('permiso_cargo',null);
-   localStorage.setItem('user_login',null)
-}
-
-
  // create container
  const container = document.getElementById('root');
 
