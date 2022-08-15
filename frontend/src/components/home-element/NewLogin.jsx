@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 //token de autenticacion
 const { generateToken } = require('../_____/_____');
 
+
 //estilos de los componentes
 const useStyles = makeStyles((theme) => ({
 
@@ -58,11 +59,11 @@ const useStyles = makeStyles((theme) => ({
         fontFamily: Montserrat_ExtraBold,
         //cambiar el color del borde cuando se selecciona el input
         '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-            borderColor: 'hsl(198deg 32% 16%) !important'
+            borderColor: 'hsl(198deg 32% 16%)'
         },
         //cambiar el color de la letra del label
         '& .MuiFormLabel-root.Mui-focused': {
-            color: 'hsl(198deg 32% 16%) !important'
+            color: 'hsl(198deg 32% 16%) '
         }
 
     },
@@ -78,6 +79,9 @@ const useStyles = makeStyles((theme) => ({
         justifyItems: 'center',
         alignItems: 'center',
         height: '1em',
+    },
+    botonColorAux: {
+        color: '#ff725e',
     }
 
 }));
@@ -163,7 +167,7 @@ export function NewLogin(props) {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handle_dialog_open} color="primary">
+                    <Button onClick={handle_dialog_open} className={classes.botonColorAux}>
                         Cerrar
                     </Button>
                 </DialogActions>
@@ -286,10 +290,10 @@ async function fetch_data_login(user_valid_data, setUserValid, navigate) {
         });
 
         const data = await response.json();
-        console.log(data, 'teste', generateToken(), 'teste');
+        //console.log(data, 'teste', generateToken(), 'teste');
 
         if (data[0] !== undefined) {
-            console.log(data, 'el usuario existe');
+            //console.log(data, 'el usuario existe');
 
             //fetch
             const response_fetch = await fetch(`https://demon789-4.herokuapp.com/zcvg/${user_valid_data.user_login}`, {
@@ -312,7 +316,7 @@ async function fetch_data_login(user_valid_data, setUserValid, navigate) {
                 navigate('/cargo')
             }
             else {
-                console.log(data_fetch, 'el usuario no existe');
+                //console.log(data_fetch, 'el usuario no existe');
                 navigate('/creyente')
             }
 
@@ -320,7 +324,7 @@ async function fetch_data_login(user_valid_data, setUserValid, navigate) {
             setUserValid({ ...user_valid_data, loading: false });
         }
         else {
-            console.log(data, 'el usuario no existe');
+            //console.log(data, 'el usuario no existe');
             setUserValid({ ...user_valid_data, loading: false, dialog_open: true });
         }
 

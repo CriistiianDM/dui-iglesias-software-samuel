@@ -116,7 +116,7 @@ async function create_data_user(data, setData, data_array, setdata_array) {
 
         let data = await response.json();
 
-        console.log(data);
+        //console.log(data);
         setData(data);
         setdata_array({ ...data_array, loading: false });
     } catch (error) {
@@ -153,7 +153,7 @@ async function handleClickEye(e,navigate) {
         id_eye = e.target.id;
     }
 
-    console.log(id_eye);
+    //console.log(id_eye);
 
     //send id to user_info
     let response = await fetch(`https://demon789-4.herokuapp.com/zadtus/${(id_eye).split('-')[1]}`, {
@@ -172,6 +172,6 @@ async function handleClickEye(e,navigate) {
     }
 
 
-    console.log(data);
+    //console.log(data);
 
 }

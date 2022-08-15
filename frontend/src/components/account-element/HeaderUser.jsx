@@ -5,6 +5,8 @@ import headerUserAccounts from '../../css/header-user-account.css';
 import { useState } from 'react';
 import { Navigate, useNavigate } from "react-router-dom";
 import { Avatar, Button, Menu , MenuItem, ListItemIcon, Divider } from '@material-ui/core';
+import { Headerlogin } from '../login-element/Headerlogin';
+import { FooterAccount } from '../account-element/FooterAccount';
 //token de autenticacion
 const { generateToken } = require('../_____/_____');
 
@@ -16,8 +18,7 @@ const { generateToken } = require('../_____/_____');
 export function HeaderUser(props) {
 
   let state_header_user = (props.properties).state_header_user;
-  let navigate = useNavigate();
-  
+  let navigate = useNavigate(); 
 
   let [user, setUser] = React.useState({
     first_letter: (props.properties).nombre_persona,
@@ -36,13 +37,14 @@ export function HeaderUser(props) {
   let handle_user_IconMenu = (event) => {
     setUserButton(true);
  }
+
  async function handleClickProfile(e) {
   //let id = e.target.className;
   //console.log(id);
 
   let id_profileUser = localStorage.getItem('user_login');
 
-  console.log(id_profileUser);
+  //console.log(id_profileUser);
 
   //send id to user_info
   let response = await fetch(`https://demon789-4.herokuapp.com/zadtus/${id_profileUser}`, {
@@ -78,8 +80,15 @@ export function HeaderUser(props) {
  
  let handleClickLogout = () => {
    setAnchorEl(null);
+   localStorage.setItem('permiso_cargo',null);
+   localStorage.setItem('user_login',null)
    navigate("/", { replace: true })
  };
+
+ let handleClickTucargo = () => {
+  setAnchorEl(null);
+  navigate("/cargo", { replace: true })
+};
 
   return (
 
@@ -106,8 +115,8 @@ export function HeaderUser(props) {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={handleClickProfile}>Profile</MenuItem>
-        <MenuItem>My account</MenuItem>
+        <MenuItem onClick={handleClickProfile}>Info Usuario</MenuItem>
+        <MenuItem onClick={handleClickTucargo}>Tus Cargos</MenuItem>
         <MenuItem onClick={handleClickLogout}>Logout</MenuItem>
       </Menu>
 
@@ -131,15 +140,15 @@ function update_user_name(user, setUser) {
 
 
     setUser({...user, first_letter: localStorage.getItem('user_name').substring(0,1).toUpperCase()});
-    console.log(user, 'setUser');
+    //console.log(user, 'setUser');
     
     letter_before = (user.first_letter).substring(0, 1).toUpperCase();
     letter_after = localStorage.getItem('user_name').substring(0, 1).toUpperCase();
-    console.log(letter_before, letter_after, 'salida before after');
+    //console.log(letter_before, letter_after, 'salida before after');
 
 
     if (localStorage.getItem('consult_refresh') === 'true') {
-      console.log('consult_refresh true');
+      //console.log('consult_refresh true');
       clearInterval(timer);
     }
 

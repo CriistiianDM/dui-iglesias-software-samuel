@@ -3,7 +3,8 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Routes,
-  Route
+  Route,
+  useNavigate
 } from 'react-router-dom';
 
 
@@ -16,7 +17,9 @@ import { PersonNormal } from './components/pages/PersonNormal';
 import { A404 } from './components/pages/A404';
 import { CreateUser } from './components/pages/CreateUser';
 import { Grupos } from './components/pages/Grupos.js'; 
-
+import { Asistencia } from './components/pages/Asistencia';
+import { AddPersonGroup } from './components/pages/AddPersonGroup';
+import { Congregacion } from './components/pages/Congregacion';
 
 
 //librery or import of styles of css
@@ -37,9 +40,11 @@ const { generateToken } = require('./components/_____/_____')
 */
 export function App() {
 
+
   React.useEffect(() => {
     getCountries(); 
   }, []);
+
   
   //return the component
   return (
@@ -53,6 +58,9 @@ export function App() {
         <Route path="/creyente" element = {<PersonNormal properties={json} />} />
         <Route path="/createuser" element = {<CreateUser properties={json} />} />
         <Route path="/grupo" element={<Grupos properties={json}/>}/>
+        <Route path="/asistencia" element={<Asistencia properties={json}/>} />
+        <Route path="/addpersongroup" element={<AddPersonGroup properties={json}/>}/>
+        <Route path="/congregacion" element={<Congregacion properties={json}/>}/>
         <Route path="*" element = {<A404 />} />
       </Routes>
     </Router>
@@ -60,6 +68,7 @@ export function App() {
   );
 
 }
+
 
 /**
   *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
@@ -83,7 +92,7 @@ async function getCountries() {
     localStorage.setItem('countries', JSON.stringify(data));
     //return data;
     localStorage.setItem('countries_band', false);
-    console.log('entro11', localStorage.getItem('countries'));
+    //console.log('entro11', localStorage.getItem('countries'));
     }
 
    } catch (error) {
@@ -91,3 +100,4 @@ async function getCountries() {
    }
 
 }
+

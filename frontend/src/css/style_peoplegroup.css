@@ -1,0 +1,11 @@
+
+.box-add-people-group-element {
+     display: grid;
+     grid-template-rows: 100%;
+     grid-template-columns: 100%;
+     justify-items: flex-start;
+     align-items: center;
+     width: 95%;
+     height: 8em;
+     overflow: hidden;
+}

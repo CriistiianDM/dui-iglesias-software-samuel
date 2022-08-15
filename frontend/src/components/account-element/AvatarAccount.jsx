@@ -20,7 +20,7 @@ export function AvatarAccount(props) {
     //useEffect para cargar la imagen de perfil
     React.useEffect(() => {
       update_user_name(user, setUser)
-      console.log(user, 'user salidad 21');
+      //console.log(user, 'user salidad 21');
     } , []);
 
 
@@ -53,14 +53,14 @@ function update_user_name(user, setUser) {
 
 
     setUser({...user, first_letter: localStorage.getItem('user_name').substring(0,1).toUpperCase()});
-    console.log(user, 'setUser');
+    //console.log(user, 'setUser');
     
     letter_before = (user.first_letter).substring(0, 1).toUpperCase();
     letter_after = localStorage.getItem('user_name').substring(0, 1).toUpperCase();
-    console.log(letter_before, letter_after, 'salida before after avatar');
+    //console.log(letter_before, letter_after, 'salida before after avatar');
 
     if (localStorage.getItem('consult_refresh') === 'true') {
-      console.log('consult_refresh true');
+      //console.log('consult_refresh true');
       clearInterval(timer);
     }
 

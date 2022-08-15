@@ -5,9 +5,11 @@ import { AvatarAccount } from '../account-element/AvatarAccount';
 import { WelcomeAccount } from '../account-element/WelcomeAccount';
 import { FooterAccount } from '../account-element/FooterAccount';
 import { Groups } from '../person-normal/Groups';
+import { useNavigate } from 'react-router-dom';
+
 //token de autenticacion
 const { generateToken } = require('../_____/_____');
-
+const { verificar_inicio_sesion } = require('./login_acces_verify');
 
 /**
   *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
@@ -15,11 +17,13 @@ const { generateToken } = require('../_____/_____');
 */
 export function PersonNormal(props) {
 
+  const navigate = useNavigate();
+
   //useEffect para obtener el nombre y apellido del usuario
   React.useEffect(() => {
     get_user_name(localStorage.getItem('user_login'));
+    verificar_inicio_sesion(navigate, '/creyente');
   }, []);
-
 
   //variable de estado
   let state_header_user = Object.values(Object.values(Object.entries(props)[0][1])[0])[1];
@@ -35,15 +39,25 @@ export function PersonNormal(props) {
     nombre_persona: localStorage.getItem('user_name'),
   });
 
+
   return (
 
     <>
-      <HeaderUser properties={header_user} />
-      <div className={state_header_user['cls-6']}></div>
-      <AvatarAccount properties={state_avatar_account} />
-      <WelcomeAccount properties={state_Welcome_account} />
-      <Groups properties={state_group} />
-      <FooterAccount properties={state_footer_accounts} />
+      {
+        (localStorage.getItem('permiso_cargo') === 'creyente' ||
+          localStorage.getItem('permiso_cargo') === 'Lider' ||
+          localStorage.getItem('permiso_cargo') === 'comite') ?
+          <>
+            <HeaderUser properties={header_user} />
+            <div className={state_header_user['cls-6']}></div>
+            <div className={state_group['cls-1']}>
+              <AvatarAccount properties={state_avatar_account} />
+              <WelcomeAccount properties={state_Welcome_account} />
+            </div>
+            <Groups properties={state_group} />
+            <FooterAccount properties={state_footer_accounts} />
+          </> : null
+      }
     </>
 
   )
@@ -78,3 +92,4 @@ async function get_user_name(user_id) {
   }
 
 }
+

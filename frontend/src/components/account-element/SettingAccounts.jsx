@@ -15,6 +15,15 @@ export function SettingAccounts(props) {
 
    let state_Setting_accounts = props.properties;
    let navigate = useNavigate();
+   let data = []
+
+   if (localStorage.getItem('permiso_cargo') === 'pastor') {
+      data = state_Setting_accounts['pastor'];
+   } 
+   else { 
+      data = state_Setting_accounts['botones']
+   }
+  
 
    //useEffect 
    React.useEffect(() => {
@@ -28,7 +37,7 @@ export function SettingAccounts(props) {
       <div className={state_Setting_accounts['cls-1']}>
 
          {
-            (state_Setting_accounts['botones']).map((boton) => (
+            (data).map((boton) => (
 
                <Button key={boton.id} href={`#${boton.to}`} className={state_Setting_accounts['cls-2']} id={boton.id}>
 
@@ -74,7 +83,7 @@ function event_click(navigate) {
    //console.log(event.target.id, event.target.key,'event_click 1');
    $('.box-setting-element-account').on('click', function(event) {
        event.preventDefault();      
-       console.log('event_click 2', $(this).attr('href').replace('#', ''));
+       //console.log('event_click 2', $(this).attr('href').replace('#', ''));
        navigate(`${$(this).attr('href').replace('#', '')}`);
    })
 

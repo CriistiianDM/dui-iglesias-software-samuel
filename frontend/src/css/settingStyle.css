@@ -1,8 +1,9 @@
 
+
 .box-avatar-setting {
     display: grid;
     grid-auto-rows: auto;
-    grid-template-columns: repeat(auto-fit, minmax( min(100%, 25em), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax( min(100%, 20em), 1fr));
     grid-gap: 0.5em;
     grid-auto-flow: dense;
     justify-items: center;
@@ -15,7 +16,7 @@
     width: 80%;
     height: auto;
     max-height: 90%;
-    background-color: #817e7e !important;
+    background-color: #ff715ee7 !important;
     box-shadow: 0 0.2em 0.7em 0 rgba(0, 0, 0, 0.2);
     overflow: hidden;
 }
@@ -37,7 +38,6 @@
     align-self: center;
     font-size: 3.5em !important;
     color: white !important;
-    width: 100% !important;
 }
 
 .box-elements-setting-account {
@@ -55,14 +55,21 @@
     font-size: 1.5em !important; 
     font-weight: 500;
     text-align: center;
-    hyphens: auto;
-    word-break: break-all;
 }
 
 .box-contend-element-setting {
     color: white;
     font-size: 0.9em !important;
-    font-weight: 500;
+    font-weight: 300;
     text-align: center;
     padding: 0.5em 0.5em !important;
+}
+
+/*
+   Media query for mobile phones:
+*/
+@media screen and (max-width: 700px) {
+    .box-setting-element-account {
+        width: 70%;
+    }
 }

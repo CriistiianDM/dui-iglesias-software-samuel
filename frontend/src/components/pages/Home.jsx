@@ -2,8 +2,6 @@
 import React from 'react';
 import { NewHome } from '../home-element/NewHome';
 import new_home_css from '../../css/new_home.css';
-
-
 /**
   *  @author : cristian Duvan Machado <cristian.machado@correounivalle.edu.co>
   *  @decs  : home de la aplicacion /

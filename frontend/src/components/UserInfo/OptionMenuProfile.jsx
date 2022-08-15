@@ -20,6 +20,9 @@ const useStyles = makeStyles((theme) => ({
     },
     ayudad: {
         display: 'none !important'
+    },
+    botonColorAux: {
+      color: '#ff725e',
     }
 }));
 
@@ -189,9 +192,12 @@ export function OptionMenuProfile(props) {
 
         <div className={state_option_menu_profile['cls-1']}>
 
+          {
+             (localStorage.getItem('permiso_cargo') === 'Administrador' ||
+              localStorage.getItem('permiso_cargo') === 'asistente administrativo') ?  
             <div className={state_option_menu_profile['cls-2']}>
 
-                <Button className={state_option_menu_profile['cls-3']}>
+                <Button  disabled={true} className={state_option_menu_profile['cls-3']}>
 
                     <div className={state_option_menu_profile['cls-4']}>
                         <Icon className={state_option_menu_profile['cls-6']}>edit</Icon>
@@ -210,10 +216,10 @@ export function OptionMenuProfile(props) {
 
                 </Button>
 
-                <Button className={state_option_menu_profile['cls-3']}>
+                <Button disabled={true} className={state_option_menu_profile['cls-3']}>
 
                     <div className={state_option_menu_profile['cls-4']}>
-                        <Icon className={state_option_menu_profile['cls-6']}>save_as</Icon>
+                        <Icon  className={state_option_menu_profile['cls-6']}>save_as</Icon>
 
                         <Typography className={state_option_menu_profile['cls-5']}>Guardar</Typography>
                     </div>
@@ -241,8 +247,8 @@ export function OptionMenuProfile(props) {
                 </Button>
 
 
-            </div>
-
+            </div> : null
+          }
             <div>
                 <Dialog
                     open={openCargos}
@@ -262,7 +268,9 @@ export function OptionMenuProfile(props) {
                                    
                                     (vectorCargosFaltantes).map(
                                         (element, index) => (
-                                            <option aria-label="None" value={`${element.id},${element.name}`} key={index}>{element.name}</option>
+                                            (localStorage.getItem('permiso_cargo') === 'asistente administrativo' && element.name !== 'Administrador' ||
+                                             localStorage.getItem('permiso_cargo') === 'Administrador')?
+                                            <option aria-label="None" value={`${element.id},${element.name}`} key={index}>{element.name}</option> : null
                                         )
                                     )
                                 }
@@ -270,13 +278,13 @@ export function OptionMenuProfile(props) {
                             </Select>
                         </FormControl>
                         <DialogActions>
-                            <Button onClick={handleOpenCargos} color="primary">
+                            <Button onClick={handleOpenCargos} className={classes.botonColorAux}>
                                 añadir cargo
                             </Button>
                         </DialogActions>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={() => setOpenCargos(false)} color="primary">
+                        <Button onClick={() => setOpenCargos(false)} className={classes.botonColorAux}>
                             Cerrar
                         </Button>
                     </DialogActions>
@@ -296,10 +304,10 @@ export function OptionMenuProfile(props) {
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={() => setOpenBorrar(false)} color="primary">
+                        <Button onClick={() => setOpenBorrar(false)} className={classes.botonColorAux}>
                             Aceptar
                         </Button>
-                        <Button onClick={() => setOpenBorrar(false)} color="primary">
+                        <Button onClick={() => setOpenBorrar(false)} className={classes.botonColorAux}>
                             Cancelar
                         </Button>
                     </DialogActions>
@@ -319,7 +327,7 @@ export function OptionMenuProfile(props) {
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={handle_close_cargos} color="primary">
+                        <Button onClick={handle_close_cargos} className={classes.botonColorAux}>
                             cerrar
                         </Button>
                     </DialogActions>
@@ -339,7 +347,7 @@ export function OptionMenuProfile(props) {
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={() => setOpenConfig(false)} color="primary">
+                        <Button onClick={() => setOpenConfig(false)} className={classes.botonColorAux}>
                             Cerrar
                         </Button>
                     </DialogActions>
@@ -348,7 +356,7 @@ export function OptionMenuProfile(props) {
 
             <div className={state_option_menu_profile['cls-7']}>
 
-                <Typography className={state_option_menu_profile['cls-5']}>INFORMACION PERSONAL</Typography>
+                <Typography className={state_option_menu_profile['cls-11']}>INFORMACION PERSONAL</Typography>
 
                 <div className={state_option_menu_profile['cls-10']}>
 
@@ -373,7 +381,7 @@ export function OptionMenuProfile(props) {
 
                 </div>
 
-                <Typography className={state_option_menu_profile['cls-5']}>INFORMACION ECLESIASTICA</Typography>
+                <Typography className={state_option_menu_profile['cls-11']}>INFORMACION ECLESIASTICA</Typography>
                 <div className={state_option_menu_profile['cls-10']}>
 
                     {
@@ -396,7 +404,7 @@ export function OptionMenuProfile(props) {
                     }
 
                 </div>
-                <Typography className={state_option_menu_profile['cls-5']}>PERFIL OCUPACIONAL</Typography>
+                <Typography className={state_option_menu_profile['cls-11']}>PERFIL OCUPACIONAL</Typography>
                 <div className={state_option_menu_profile['cls-10']}>
 
                     {
